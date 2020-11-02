@@ -132,5 +132,7 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 GRAPHENE = {
-    "SCHEMA": "ideas_api.schema"
+    "SCHEMA": "ideas_api.schema.schema"
 }
+
+AUTH_USER_MODEL = "core.User"

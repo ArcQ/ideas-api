@@ -1,6 +1,18 @@
-import graphene
+from graphene import relay, ObjectType, Schema
+from graphene_django.filter import DjangoFilterConnectionField
 
-class Query(graphene.ObjectType):
-    hello = graphene.String(default_value="Hi!")
+from core.schema import LabNode, UserNode, IdeaNode
 
-schema = graphene.Schema(query=Query)
+
+class Query(ObjectType):
+    lab = relay.Node.Field(LabNode)
+    all_labs = DjangoFilterConnectionField(LabNode)
+
+    user = relay.Node.Field(UserNode)
+    all_users = DjangoFilterConnectionField(UserNode)
+
+    idea = relay.Node.Field(IdeaNode)
+    all_ideas = DjangoFilterConnectionField(IdeaNode)
+
+
+schema = Schema(query=Query)

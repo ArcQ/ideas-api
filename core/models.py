@@ -14,6 +14,10 @@ class GenericModel(models.Model):
 
 
 class User(AbstractUser):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     username = models.CharField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -26,17 +30,20 @@ class User(AbstractUser):
 
 
 class Lab(GenericModel):
-    name = models.ManyToManyField(User)
-    members = models.ManyToManyField(User)
-    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='created_by')
-    owned_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='owned_by')
+    name = models.URLField(max_length=255)
+    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image_url = models.URLField(max_length=255, default='https://source.unsplash.com/random/1000x1000')
+
+
+class LabMember(GenericModel):
+    role = models.CharField(max_length=255)
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
+    lab = models.ForeignKey(Lab, null=False, on_delete=models.CASCADE)
 
 
 class Idea(GenericModel):
     title = models.CharField(max_length=50)
     desc = models.CharField(max_length=140)
     notes = models.CharField(max_length=1000)
-    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='created_by')
-    owned_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='owned_by')
+    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)

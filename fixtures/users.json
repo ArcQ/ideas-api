@@ -1,0 +1,29 @@
+[{
+		"model": "core.user",
+		"pk": "40e6215d-b5c6-4896-987c-f30f3678f608",
+		"fields": {
+			"first_name": "eddie",
+			"created_at": "2020-10-11T16:52:11+05:00",
+			"updated_at": "2020-10-11T16:52:11+05:00",
+			"last_name": "law",
+			"email": "eddielaw296@gmail.com",
+			"auth_key": "129830df-f45a-46b3-b766-2101db28ea62",
+			"image_url": "https://images.unsplash.com/photo-1597476934600-ef660b4ce617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+			"username": "arcq"
+		}
+	},
+	{
+		"model": "core.user",
+		"pk": "1544caf8-df80-11ea-87d0-0242ac130003",
+		"fields": {
+			"created_at": "2020-10-11T16:52:11+05:00",
+			"updated_at": "2020-10-11T16:52:11+05:00",
+			"first_name": "alanna",
+			"last_name": "tai",
+			"auth_key": "5728dfb5-d089-48f1-aa9c-f1ea436fa8b1",
+			"email": "alanna.tai@gmail.com",
+			"username": "sita",
+			"image_url": "https://images.unsplash.com/photo-1597476934600-ef660b4ce617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+		}
+	}
+]
