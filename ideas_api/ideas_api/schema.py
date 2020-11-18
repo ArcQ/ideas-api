@@ -1,18 +1,12 @@
-from graphene import relay, ObjectType, Schema
-from graphene_django.filter import DjangoFilterConnectionField
+from graphene import ObjectType, Schema
 
-from core.schema import LabNode, UserNode, IdeaNode
+from core.schema import Query as CoreQuery
 
 
-class Query(ObjectType):
-    lab = relay.Node.Field(LabNode)
-    all_labs = DjangoFilterConnectionField(LabNode)
-
-    user = relay.Node.Field(UserNode)
-    all_users = DjangoFilterConnectionField(UserNode)
-
-    idea = relay.Node.Field(IdeaNode)
-    all_ideas = DjangoFilterConnectionField(IdeaNode)
+class Query(CoreQuery, ObjectType):
+    # This class will inherit from multiple Queries
+    # as we begin to add more apps to our project
+    pass
 
 
 schema = Schema(query=Query)
