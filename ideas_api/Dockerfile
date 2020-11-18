@@ -1,7 +1,7 @@
 # Dockerfile
 
 # FROM directive instructing base image to build upon
-FROM python:3.7
+FROM python:3.8
 ADD . /server
 WORKDIR /server
 ENV PIPENV_VENV_IN_PROJECT 1

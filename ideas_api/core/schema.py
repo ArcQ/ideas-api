@@ -12,7 +12,7 @@ class IdeaNode(DjangoObjectType):
             'desc': ['exact', 'icontains'],
             'notes': ['exact', 'icontains'],
         }
-        interfaces = (relay.Node, )
+        interfaces = (relay.Node,)
 
 
 class LabNode(DjangoObjectType):
@@ -21,7 +21,8 @@ class LabNode(DjangoObjectType):
         filter_fields = {
             'name': ['exact', 'icontains', 'istartswith'],
         }
-        interfaces = (relay.Node, )
+        interfaces = (relay.Node,)
+
 
 class UserNode(DjangoObjectType):
     class Meta:
@@ -30,4 +31,4 @@ class UserNode(DjangoObjectType):
             'username': ['exact', 'icontains', 'istartswith'],
             'auth_key': ['exact'],
         }
-        interfaces = (relay.Node, )
+        interfaces = (relay.Node,)

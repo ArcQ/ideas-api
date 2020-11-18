@@ -3,6 +3,8 @@
     "model": "core.lab",
     "pk": "6034f8e2-df82-11ea-87d0-0242ac130003",
     "fields": {
+      "created_at": "2020-10-10",
+      "updated_at": "2020-10-10",
       "name": "base1",
       "image_url": "https://images.unsplash.com/photo-1597476934600-ef660b4ce617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
     }
@@ -11,6 +13,8 @@
     "model": "core.lab",
     "pk": "a510a7cc-df82-11ea-87d0-0242ac130003",
     "fields": {
+      "created_at": "2020-10-10",
+      "updated_at": "2020-10-10",
       "name": "base2",
       "image_url": "https://images.unsplash.com/photo-1597476934600-ef660b4ce617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
     }
