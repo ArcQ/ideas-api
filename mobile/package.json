@@ -20,11 +20,10 @@
     "eject": "expo eject",
     "storybook": "start-storybook --ci",
     "prestorybook": "rnstl --searchDir ./src --pattern \"**/*.stories.jsx\" --outputFile ./storybook/storyLoader.js",
-    "relay": "yarn run relay-compiler --schema src/relay/schema.graphql --src ./src/ --extensions js jsx --language javascript --artifactDirectory ./src/__generated__ --watchman false $@",
-    "relay-watch": "yarn run relay-compiler --schema src/relay/schema.graphql --src ./src/ --extensions js jsx --language javascript --artifactDirectory ./src/__generated__ --watch",
-    "schema": "get-graphql-schema localhost:8000/graphql > src/relay/schema.graphql",
-    "codegen": "graphql-codegen --config codegen.yml",
-    "generate": "yarn schema && yarn codegen"
+    "relay": "yarn run relay-compiler --schema src/relay/schema.graphql --artifactDirectory ./src/__generated__ --src ./src/ --extensions js jsx --watchman false $@",
+    "relay-watch": "yarn run relay-compiler --schema src/relay/schema.graphql --artifactDirectory ./src/__generated__ --src ./src/ --extensions js jsx --watch",
+    "schema": "get-graphql-schema http://127.0.0.1:8000/schema/ > src/relay/schema.graphql",
+    "generate": "yarn schema"
   },
   "dependencies": {
     "@expo/vector-icons": "^10.2.1",
@@ -81,6 +80,12 @@
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
     "@babel/plugin-proposal-optional-chaining": "^7.10.4",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "babel-jest": "25.5.1",
+    "babel-plugin-relay": "^9.1.0",
+    "babel-preset-expo": "^8.1.0",
+    "babel-preset-react-native": "4.0.1",
     "@graphql-codegen/cli": "^1.19.2",
     "babel-eslint": "^10.1.0",
     "babel-preset-expo": "^8.2.3",

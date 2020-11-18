@@ -1,14 +1,14 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
-import { EnvironmentConfig } from 'relay-runtime/lib/store/RelayModernEnvironment';
+
+import subscribeGraphql from './subscribeGraphql';
 import cacheHandler from './cacheHandler';
 import { relayTransactionLogger } from './utils';
-import subscribeGraphQL from './subscribeGraphQL';
 
 const __DEV__ = process.env.NODE_ENV === 'development';
 
-const getRelayConfig = (): EnvironmentConfig => ({
+const getRelayConfig = () => ({
   configName: new Date().getSeconds().toString(), // temp value for testing
-  network: Network.create(cacheHandler, subscribeGraphQL),
+  network: Network.create(cacheHandler, subscribeGraphql),
   store: new Store(new RecordSource()),
   log: __DEV__ ? relayTransactionLogger : null,
 });

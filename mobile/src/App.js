@@ -8,6 +8,7 @@ import { withAuthenticator } from 'aws-amplify-react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { enableScreens } from 'react-native-screens';
 
+import relay from './relay';
 import ErrorBoundary from './ErrorBoundary';
 import SuspenseScreen from './screens/SuspenseScreen/SuspenseScreen';
 import AlertToast from './containers/AlertToast';
@@ -40,11 +41,8 @@ const defaultTheme = {
 };
 
 function RelayEnvironmentWrapper({ children }) {
-  const {
-    state: { relay },
-  } = useAuthContext();
   return (
-    <RelayEnvironmentProvider environment={relay}>
+    <RelayEnvironmentProvider environment={relay.environment}>
       <ErrorBoundary fallback={<SuspenseScreen error />}>
         <Suspense fallback={<SuspenseScreen />}>{children}</Suspense>
       </ErrorBoundary>

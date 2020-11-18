@@ -1,0 +1,96 @@
+schema {
+  query: Query
+}
+
+scalar DateTime
+
+type IdeaNode implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  desc: String!
+  notes: String!
+  createdBy: UserNode
+  lab: LabNode!
+}
+
+type IdeaNodeConnection {
+  pageInfo: PageInfo!
+  edges: [IdeaNodeEdge]!
+}
+
+type IdeaNodeEdge {
+  node: IdeaNode
+  cursor: String!
+}
+
+type LabNode implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  createdBy: UserNode
+  imageUrl: String!
+  ideaSet(before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection!
+}
+
+type LabNodeConnection {
+  pageInfo: PageInfo!
+  edges: [LabNodeEdge]!
+}
+
+type LabNodeEdge {
+  node: LabNode
+  cursor: String!
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  lab(id: ID!): LabNode
+  allLabs(before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection
+  user(id: ID!): UserNode
+  allUsers(before: String, after: String, first: Int, last: Int, username: String, username_Icontains: String, username_Istartswith: String, authKey: String): UserNodeConnection
+  idea(id: ID!): IdeaNode
+  allIdeas(before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection
+}
+
+type UserNode implements Node {
+  password: String!
+  lastLogin: DateTime
+  isSuperuser: Boolean!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: DateTime!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  username: String!
+  firstName: String!
+  lastName: String!
+  authKey: String!
+  imageUrl: String!
+  email: String!
+  labSet(before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection!
+  ideaSet(before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection!
+}
+
+type UserNodeConnection {
+  pageInfo: PageInfo!
+  edges: [UserNodeEdge]!
+}
+
+type UserNodeEdge {
+  node: UserNode
+  cursor: String!
+}

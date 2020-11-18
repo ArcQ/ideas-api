@@ -22,7 +22,7 @@ SECRET_KEY = 'trs#80a8951mm^68@a8+dk1yf!3$jt4!kk%z9zu@01k3$0g%4a'
 PROD = os.getenv('PROD')
 DEBUG = not PROD
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # Application definition
 
@@ -133,7 +133,8 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 GRAPHENE = {
-    "SCHEMA": "ideas_api.schema.schema"
+    "SCHEMA": "ideas_api.schema.schema",
+    'SCHEMA_OUTPUT': 'data/schema.graphql',  # defaults to schema.json,
 }
 
 AUTH_USER_MODEL = "core.User"

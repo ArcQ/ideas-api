@@ -23,6 +23,7 @@ module.exports = function (api) {
           },
         },
       ],
+      ['relay', { artifactDirectory: './src/__generated__' }],
       '@babel/plugin-proposal-optional-chaining',
       '@babel/plugin-proposal-nullish-coalescing-operator',
     ],

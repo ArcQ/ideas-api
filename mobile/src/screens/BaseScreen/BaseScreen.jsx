@@ -1,7 +1,9 @@
+import { QueryRenderer, graphql } from 'react-relay';
 import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import relay from '../../relay';
 import IdeasList from '../../components/IdeasList';
 import gStyle from '../../constants/gStyle';
 import BaseBottomTabNavigatorLayout from '../../layouts/BaseBottomTabNavigatorLayout';
@@ -21,18 +23,53 @@ const styles = {
 
 export default function BaseScreen(props) {
   return (
-    <BaseBottomTabNavigatorLayout disableScroll>
-      <View style={styles.container}>
-        <Text style={[styles.text]}>BaseScreen</Text>
-        <TouchableOpacity
-          style={{ padding: 20 }}
-          onPress={() => props.goToChat()}
-        >
-          <Text style={gStyle.listText}>Chats</Text>
-        </TouchableOpacity>
-        <IdeasList />
-      </View>
-    </BaseBottomTabNavigatorLayout>
+    <QueryRenderer
+      environment={relay.environment}
+      query={graphql`
+        query BaseScreenQuery {
+          allIdeas {
+            edges {
+              node {
+                id
+                createdAt
+                updatedAt
+                lab {
+                  id
+                }
+                desc
+                title
+                notes
+              }
+            }
+          }
+        }
+      `}
+      variables={{}}
+      render={({ error, props }) => {
+        console.log(error);
+        console.log(props);
+        if (error) {
+          return <Text>Error!</Text>;
+        }
+        if (!props) {
+          return <Text>Loading...</Text>;
+        }
+        return (
+          <BaseBottomTabNavigatorLayout disableScroll>
+            <View style={styles.container}>
+              <Text style={[styles.text]}>BaseScreen</Text>
+              <TouchableOpacity
+                style={{ padding: 20 }}
+                onPress={() => props.goToChat()}
+              >
+                <Text style={gStyle.listText}>Chats</Text>
+              </TouchableOpacity>
+              <IdeasList />
+            </View>
+          </BaseBottomTabNavigatorLayout>
+        );
+      }}
+    />
   );
 }
 
