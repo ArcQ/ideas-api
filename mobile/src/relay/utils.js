@@ -12,5 +12,5 @@ export const isQuery = (request) =>
 export const forceFetch = (cacheConfig) => !!(cacheConfig && cacheConfig.force);
 
 export const relayTransactionLogger = () => (event) => {
-  console.log('RELAY: ', event);
+  console.info('RELAY: ', event);
 };

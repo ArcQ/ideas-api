@@ -102,14 +102,13 @@ const apiService = {
   },
 };
 
-export async function fetchGraphql(text, variables) {
-  const response = await apiService.core.post('/graphql', {
-    query: text,
+export async function fetchGraphql(request, variables) {
+  const response = await apiService.core.post('/graphql/', {
+    query: request.text,
     variables,
   });
 
-  console.log(response);
-  return response;
+  return response.data;
 }
 
 export default apiService;

@@ -46,8 +46,6 @@ export default function BaseScreen(props) {
       `}
       variables={{}}
       render={({ error, props }) => {
-        console.log(error);
-        console.log(props);
         if (error) {
           return <Text>Error!</Text>;
         }

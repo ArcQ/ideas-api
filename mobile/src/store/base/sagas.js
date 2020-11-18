@@ -5,25 +5,6 @@ import { getCurrentChatId } from './helpers';
 import { watchActionsLatest } from '../../utils/watchActions';
 import apiService, { apiCall } from '../../services/api/apiService';
 
-/**
- * Get all chats to display
- */
-function* getBases() {
-  yield apiCall(
-    {
-      call: apiService.core.get,
-      *onSuccess(response) {
-        yield put(
-          baseActions.receiveBases({
-            bases: response.list,
-          }),
-        );
-      },
-    },
-    '/v1/base/',
-  );
-}
-
 function* getChatForBase() {
   const currentChatId = yield getCurrentChatId();
   yield apiCall(
@@ -42,13 +23,12 @@ function* getChatForBase() {
 }
 
 function* init() {
-  yield getBases();
   yield getChatForBase();
 }
 
 export default function* basesSaga() {
-  yield init();
-  yield fork(watchActionsLatest, [
-    [baseConstants.GET_CHAT_FOR_BASE, getChatForBase],
-  ]);
+  // yield init();
+  // yield fork(watchActionsLatest, [
+  //   [baseConstants.GET_CHAT_FOR_BASE, getChatForBase],
+  // ]);
 }

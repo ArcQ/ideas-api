@@ -8,7 +8,8 @@ const __DEV__ = process.env.NODE_ENV === 'development';
 
 const getRelayConfig = () => ({
   configName: new Date().getSeconds().toString(), // temp value for testing
-  network: Network.create(cacheHandler, subscribeGraphql),
+  // network: Network.create(cacheHandler, subscribeGraphql),
+  network: Network.create(cacheHandler),
   store: new Store(new RecordSource()),
   log: __DEV__ ? relayTransactionLogger : null,
 });

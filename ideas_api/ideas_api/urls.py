@@ -15,11 +15,13 @@ Including another URLconf
 from django.urls import path
 from django.contrib import admin
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+
 from common.GraphQLView import GraphQLView
 from ideas_api import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('graphql/', GraphQLView.as_view(graphiql=not settings.PROD), name='graphql'),
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=not settings.PROD)), name='graphql'),
     path("schema/", views.graphql_schema, name='graphql_schema')
 ]
