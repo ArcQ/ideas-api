@@ -5,14 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import SvgBrainstorm from '../components/icons/Svg.Brainstorm';
 import gStyle from '../constants/gStyle';
-import SvgSlackLogo from '../components/icons/Svg.SlackLogo';
 import colors from '../constants/colors';
 import { StylePropType } from '../utils/types';
 
 const styles = {
   scrollView: {
-    paddingBottom: 20,
     flex: 1,
   },
   contentContainer: {
@@ -41,7 +40,7 @@ export default function BaseBottomTabNavigatorLayout({
         props.containerStyle,
       ]}
     >
-      <SafeAreaView>
+      <SafeAreaView style={styles.contentContainer}>
         <View style={gStyle.containerNavBlocks}>
           <TouchableOpacity
             activeOpacity={gStyle.activeOpacity}
@@ -51,7 +50,7 @@ export default function BaseBottomTabNavigatorLayout({
               navigation.openDrawer();
             }}
           >
-            <SvgSlackLogo />
+            <SvgBrainstorm />
           </TouchableOpacity>
         </View>
         <View style={styles.contentContainer}>{props.children}</View>

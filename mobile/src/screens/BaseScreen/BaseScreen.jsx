@@ -1,10 +1,10 @@
-import { QueryRenderer, graphql } from 'react-relay';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Keyboard, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import relay from '../../relay';
-import IdeasList from '../../components/IdeasList';
+import { hitSlop } from '../../constants/hitslop';
+import SvgLightBulb from '../../components/icons/Svg.LightBulb';
+import IdeasList from './components/IdeasList';
 import gStyle from '../../constants/gStyle';
 import BaseBottomTabNavigatorLayout from '../../layouts/BaseBottomTabNavigatorLayout';
 import colors from '../../constants/colors';
@@ -15,62 +15,50 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
   },
+  ideaButton: {
+    width: 60,
+    height: 60,
+    backgroundColor: colors.green,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 10,
+    alignSelf: 'center',
+  },
   text: {
-    ...gStyle.textLarsBold18,
+    ...gStyle.textBold20,
     color: colors.white,
+    alignSelf: 'center',
   },
 };
 
 export default function BaseScreen(props) {
   return (
-    <QueryRenderer
-      environment={relay.environment}
-      query={graphql`
-        query BaseScreenQuery {
-          allIdeas {
-            edges {
-              node {
-                id
-                createdAt
-                updatedAt
-                lab {
-                  id
-                }
-                desc
-                title
-                notes
-              }
-            }
-          }
-        }
-      `}
-      variables={{}}
-      render={({ error, props }) => {
-        if (error) {
-          return <Text>Error!</Text>;
-        }
-        if (!props) {
-          return <Text>Loading...</Text>;
-        }
-        return (
-          <BaseBottomTabNavigatorLayout disableScroll>
-            <View style={styles.container}>
-              <Text style={[styles.text]}>BaseScreen</Text>
-              <TouchableOpacity
-                style={{ padding: 20 }}
-                onPress={() => props.goToChat()}
-              >
-                <Text style={gStyle.listText}>Chats</Text>
-              </TouchableOpacity>
-              <IdeasList />
-            </View>
-          </BaseBottomTabNavigatorLayout>
-        );
-      }}
-    />
+    <BaseBottomTabNavigatorLayout disableScroll>
+      <Text style={[styles.text]}>Base1's Ideas</Text>
+      {/* <TouchableOpacity */}
+      {/*   style={{ padding: 20 }} */}
+      {/*   onPress={() => props.goToChat()} */}
+      {/* > */}
+      {/*   <Text style={gStyle.listText}>Chats</Text> */}
+      {/* </TouchableOpacity> */}
+      <IdeasList baseQueryProps={props.baseQueryProps} />
+      <TouchableOpacity
+        style={styles.ideaButton}
+        hitSlop={hitSlop}
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <SvgLightBulb />
+      </TouchableOpacity>
+    </BaseBottomTabNavigatorLayout>
   );
 }
 
 BaseScreen.propTypes = {
   goToChat: PropTypes.func,
+  navigation: PropTypes.object,
 };

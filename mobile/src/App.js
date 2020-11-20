@@ -1,6 +1,7 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { ThemeProvider } from 'styled-components/native';
 import { RelayEnvironmentProvider } from 'relay-hooks';
 import React, { Suspense, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { AppLoading } from 'expo';
 import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -8,6 +9,7 @@ import { withAuthenticator } from 'aws-amplify-react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { enableScreens } from 'react-native-screens';
 
+import { theme } from './components/Styled';
 import relay from './relay';
 import ErrorBoundary from './ErrorBoundary';
 import SuspenseScreen from './screens/SuspenseScreen/SuspenseScreen';
@@ -27,18 +29,6 @@ awsService.init();
 apiService.init();
 
 const { store, persistor } = getStore();
-
-const defaultTheme = {
-  dark: false,
-  colors: {
-    primary: 'rgb(255, 45, 85)',
-    background: 'rgb(255, 255, 255)',
-    card: 'rgb(255, 255, 255)',
-    text: 'rgb(28, 28, 30)',
-    border: 'rgb(199, 199, 204)',
-    notification: 'rgb(255, 69, 58)',
-  },
-};
 
 function RelayEnvironmentWrapper({ children }) {
   return (
@@ -64,15 +54,17 @@ function App() {
   return (
     <RelayEnvironmentWrapper>
       <SafeAreaProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Locale />
-            <NavigationContainer theme={defaultTheme}>
-              <MainAppStack />
-            </NavigationContainer>
-            <AlertToast />
-          </PersistGate>
-        </Provider>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Locale />
+              <NavigationContainer>
+                <MainAppStack />
+              </NavigationContainer>
+              <AlertToast />
+            </PersistGate>
+          </Provider>
+        </ThemeProvider>
       </SafeAreaProvider>
     </RelayEnvironmentWrapper>
   );

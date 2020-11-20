@@ -27,7 +27,6 @@ module.exports = {
     'react/jsx-wrap-multilines': 0,
     'react/jsx-closing-tag-location': 0,
     'react/jsx-props-no-spreading': 0,
-    'max-len': [1, 80, 2],
     'import/no-named-as-default': 0,
     'no-param-reassign': ['error', { props: false }],
     'no-mixed-operators': 1,
@@ -47,6 +46,8 @@ module.exports = {
     'import/prefer-default-export': 0,
     'implicit-arrow-linebreak': 0,
     'object-curly-newline': 0,
+    'react/jsx-curly-newline': 0,
+    'max-len': 0,
     // use prettier for these
     'no-confusing-arrow': 0,
     'generator-star-spacing': 0,

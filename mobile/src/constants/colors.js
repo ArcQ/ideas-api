@@ -30,4 +30,10 @@ export default {
 
   success30: '#6FCF97',
   fail: '#EB5757',
+
+  black: '#283044',
+  pink: '#e08dac',
+  yellow: '#f8e16c',
+  green: '#0e9594',
+  blue: '#228cdb',
 };

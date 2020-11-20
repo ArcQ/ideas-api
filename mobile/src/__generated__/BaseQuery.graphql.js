@@ -8,8 +8,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type BaseScreenQueryVariables = {||};
-export type BaseScreenQueryResponse = {|
+export type BaseQueryVariables = {||};
+export type BaseQueryResponse = {|
   +allIdeas: ?{|
     +edges: $ReadOnlyArray<?{|
       +node: ?{|
@@ -26,15 +26,15 @@ export type BaseScreenQueryResponse = {|
     |}>
   |}
 |};
-export type BaseScreenQuery = {|
-  variables: BaseScreenQueryVariables,
-  response: BaseScreenQueryResponse,
+export type BaseQuery = {|
+  variables: BaseQueryVariables,
+  response: BaseQueryResponse,
 |};
 */
 
 
 /*
-query BaseScreenQuery {
+query BaseQuery {
   allIdeas {
     edges {
       node {
@@ -149,7 +149,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "BaseScreenQuery",
+    "name": "BaseQuery",
     "selections": (v1/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -158,20 +158,20 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "BaseScreenQuery",
+    "name": "BaseQuery",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "b28b7b9443bf5ce59ae96254fbbc3432",
+    "cacheID": "57d10588537680bc27c14de42a5be872",
     "id": null,
     "metadata": {},
-    "name": "BaseScreenQuery",
+    "name": "BaseQuery",
     "operationKind": "query",
-    "text": "query BaseScreenQuery {\n  allIdeas {\n    edges {\n      node {\n        id\n        createdAt\n        updatedAt\n        lab {\n          id\n        }\n        desc\n        title\n        notes\n      }\n    }\n  }\n}\n"
+    "text": "query BaseQuery {\n  allIdeas {\n    edges {\n      node {\n        id\n        createdAt\n        updatedAt\n        lab {\n          id\n        }\n        desc\n        title\n        notes\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '258a0fe8840cb8f56c23046cd365ec64';
+(node/*: any*/).hash = '70bb71df215431baec887c0605629098';
 
 module.exports = node;
