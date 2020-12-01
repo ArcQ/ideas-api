@@ -1,4 +1,4 @@
-import { FlatList } from 'react-native';
+import { Animated, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -18,6 +18,17 @@ export default function IdeasList(props) {
       data={props.baseQueryProps?.props?.allIdeas?.edges}
       keyExtractor={(item) => item.node.id}
       style={style.flatList}
+      contentContainerStyle={{
+        alignItems: 'center',
+        paddingTop: 220,
+        paddingHorizontal: 20,
+      }}
+      showsVerticalScrollIndicator={false}
+      scrollEventThrottle={16}
+      onScroll={Animated.event(
+        [{ nativeEvent: { contentOffset: { y: props.offset } } }],
+        { useNativeDriver: false },
+      )}
       renderItem={({ item }) =>
         props.isEditable ? (
           <SwipeableRow

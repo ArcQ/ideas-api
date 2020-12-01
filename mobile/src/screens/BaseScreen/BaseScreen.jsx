@@ -1,7 +1,8 @@
-import { Keyboard, Text, TouchableOpacity } from 'react-native';
+import { Animated, Keyboard, TouchableOpacity } from 'react-native';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 
+import AnimatedHeader from './components/AnimatedHeader';
 import { hitSlop } from '../../constants/hitslop';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
 import IdeasList from './components/IdeasList';
@@ -35,18 +36,19 @@ const styles = {
 };
 
 export default function BaseScreen(props) {
+  const offset = useRef(new Animated.Value(0)).current;
   return (
     <BaseBottomTabNavigatorLayout disableScroll>
-      <Text style={[styles.text]}>Base1's Ideas</Text>
+      <AnimatedHeader animatedValue={offset} />
       {/* <TouchableOpacity */}
       {/*   style={{ padding: 20 }} */}
       {/*   onPress={() => props.goToChat()} */}
       {/* > */}
       {/*   <Text style={gStyle.listText}>Chats</Text> */}
       {/* </TouchableOpacity> */}
-      <IdeasList baseQueryProps={props.baseQueryProps} />
+      <IdeasList offset={offset} baseQueryProps={props.baseQueryProps} />
       <TouchableOpacity
-        style={styles.ideaButton}
+        style={{ ...styles.ideaButton, marginLeft: 10 }}
         hitSlop={hitSlop}
         onPress={() => {
           Keyboard.dismiss();
