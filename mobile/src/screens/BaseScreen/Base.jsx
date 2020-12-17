@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'react-relay';
 import { useQuery } from 'relay-hooks';
 
+import { CREATE_IDEA_ROUTE } from '../../constants/routes';
 import BaseScreen from './BaseScreen';
 import { NavigationPropType } from '../../utils/types';
 
@@ -31,7 +32,7 @@ function BaseScreenContainer(props) {
   const _props = { baseQueryProps };
 
   const methods = {
-    goToChat: () => props.navigation.jumpTo('Chat'),
+    goToCreateRoute: () => props.navigation.navigate(CREATE_IDEA_ROUTE),
   };
 
   return <BaseScreen {...{ ..._props, ...methods }} />;

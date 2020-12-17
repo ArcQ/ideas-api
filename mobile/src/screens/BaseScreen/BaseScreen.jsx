@@ -2,6 +2,7 @@ import { Animated, Keyboard, TouchableOpacity } from 'react-native';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { CREATE_IDEA_ROUTE } from '../../constants/routes';
 import AnimatedHeader from './components/AnimatedHeader';
 import { hitSlop } from '../../constants/hitslop';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
@@ -51,6 +52,7 @@ export default function BaseScreen(props) {
         style={{ ...styles.ideaButton, marginLeft: 10 }}
         hitSlop={hitSlop}
         onPress={() => {
+          props.goToCreateRoute();
           Keyboard.dismiss();
         }}
       >
@@ -61,6 +63,5 @@ export default function BaseScreen(props) {
 }
 
 BaseScreen.propTypes = {
-  goToChat: PropTypes.func,
-  navigation: PropTypes.object,
+  goToCreateRoute: PropTypes.func,
 };

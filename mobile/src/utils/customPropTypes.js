@@ -4,6 +4,7 @@ const objectOfString = PropTypes.objectOf(PropTypes.string);
 
 const CustomPropTypes = {
   navigation: PropTypes.object,
+  style: PropTypes.object,
   errors: PropTypes.object,
   items: PropTypes.arrayOf(
     PropTypes.shape({

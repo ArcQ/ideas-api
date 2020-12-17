@@ -2,6 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
+import {
+  CHAT_ACTIONS_ROUTE,
+  CREATE_IDEA_ROUTE,
+  HOME_ROUTE,
+  NOTIFICATIONS_ROUTE,
+} from '../constants/routes';
+import CreateIdea from '../screens/CreateIdeaScreen/CreateIdea';
 import BaseChatSwipeNavigator from './BaseChatSwipeNavigator';
 import ChatActions from '../screens/ChatActionsScreen/ChatActions';
 import { baseSelectors } from '../store/base/ducks';
@@ -23,20 +30,26 @@ export default function MainAppStack() {
       transitionConfig={ModalRoutes}
     >
       <Stack.Screen
-        name="ChatActions"
+        name={CHAT_ACTIONS_ROUTE}
         title="ChatActions"
         component={ChatActions}
         options={{ stackPresentation: 'modal' }}
       />
       <Stack.Screen
-        name="Notifications"
+        name={NOTIFICATIONS_ROUTE}
         title="Notifications"
         component={Notifications}
       />
       <Stack.Screen
-        name="Home"
+        name={HOME_ROUTE}
         title="Home"
         component={BaseChatSwipeNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={CREATE_IDEA_ROUTE}
+        title="Create"
+        component={CreateIdea}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
