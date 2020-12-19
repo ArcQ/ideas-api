@@ -2,16 +2,10 @@ import PropTypes from 'prop-types';
 import { Text } from 'react-native';
 import React from 'react';
 
-import colors from 'themes/colors.json';
-import intlService from 'services/intl/intlService';
-import CustomPropTypes from 'utils/customPropTypes';
+import colors from '../constants/colors';
+import CustomPropTypes from '../utils/customPropTypes';
 
-const trans = intlService.translate('validationErrors', true);
-
-const getErrorMessage = (error) =>
-  trans(`${error.ref.name}-${error.type}`) ||
-  trans(`field-${error.type}`) ||
-  `missing ${error.ref.name}-${error.type} translation`;
+const getErrorMessage = (error) => 'an error occured';
 
 const style = {
   formErrorText: {

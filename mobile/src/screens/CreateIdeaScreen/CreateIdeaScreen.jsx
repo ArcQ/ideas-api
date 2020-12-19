@@ -38,7 +38,6 @@ export default function CreateIdeaScreen(props) {
     <ScrollableAvoidKeyboard>
       <SafeAreaView style={styles.container}>
         <Text>Create</Text>
-
         <FormLayout formConfig={props.formConfig} />
       </SafeAreaView>
     </ScrollableAvoidKeyboard>

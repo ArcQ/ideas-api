@@ -1,15 +1,14 @@
-import { ScrollView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { Component } from 'react';
-import useKeyboard from '@rnhooks/keyboard';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
+import useKeyboard from '@rnhooks/keyboard';
 
-import Button from 'components/Button';
-import ScrollableAvoidKeyboard from 'components/ScrollableAvoidKeyboard';
-import CustomPropTypes from 'utils/customPropTypes';
-import BasicInput from 'components/BasicInput';
-import textStyle from 'textStyle';
+import Button from '../components/Button';
+import CustomPropTypes from '../utils/customPropTypes';
+import ScrollableAvoidKeyboard from '../components/ScrollableAvoidKeyboard';
+import BasicInput from '../components/BasicInput';
 
 const style = {
   container: {
@@ -18,11 +17,9 @@ const style = {
     flexDirection: 'column',
   },
   title: {
-    ...textStyle.title,
     marginTop: 12,
   },
   desc: {
-    ...textStyle.paragraph,
     marginTop: 14,
   },
   formFields: {
@@ -75,7 +72,6 @@ function FormsLayout(props) {
         <View style={{ paddingHorizontal: 20 }}>
           <Button
             style={style.submitButton}
-            textStyle={textStyle.button}
             size="giant"
             isLoading={props.isSubmitting}
             onPress={handleSubmit(props.onSubmit)}
@@ -85,7 +81,6 @@ function FormsLayout(props) {
           {props.altActionMsg && (
             <Button
               style={style.submitButton}
-              textStyle={textStyle.button}
               type="ghost"
               size="giant"
               onPress={props.onAltActionPress}

@@ -56,8 +56,8 @@ CreateIdeaContainer.propTypes = {
   navigation: CustomPropTypes.navigation,
   createMortgageReferral: PropTypes.func,
   isLoading: PropTypes.bool,
-  dynamicProps: PropTypes.object,
   requestRvpList: PropTypes.func,
+  createIdea: PropTypes.func,
 };
 
 export default CreateIdeaContainer;
