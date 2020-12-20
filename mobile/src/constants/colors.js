@@ -1,5 +1,6 @@
 export default {
   black: '#000',
+  black10: 'rgba(0, 0, 0, 0.08)',
   black20: 'rgba(0, 0, 0, 0.2)',
   black30: 'rgba(0, 0, 0, 0.3)',
   black40: 'rgba(0, 0, 0, 0.4)',

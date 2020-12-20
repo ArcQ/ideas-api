@@ -9,15 +9,19 @@ import BasicInputError from './BasicInputError';
 
 export const style = {
   inputContainer: {
-    marginBottom: 2,
-    marginTop: 2,
+    marginBottom: 10,
+    marginTop: 10,
     color: colors.black80,
-    borderBottomColor: colors.basic,
-    borderBottomWidth: 1,
+    backgroundColor: colors.black10,
+    borderRadius: 20,
+    width: 300,
+    overflow: 'hidden',
   },
   input: {
-    paddingTop: 20,
-    paddingBottom: 10,
+    padding: 15,
+    paddingTop: 16,
+    borderRadius: 10,
+    overflow: 'hidden',
     color: colors.black80,
   },
   placeholder: {

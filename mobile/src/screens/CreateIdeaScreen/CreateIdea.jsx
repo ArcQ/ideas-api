@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, FormContext } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import envService from '../../services/env/envService';
@@ -21,7 +21,7 @@ const formConfig = {
   },
 };
 
-function CreateIdeaContainer(props) {
+export default function CreateIdeaContainer(props) {
   const [formValues, setFormValues] = useState({});
 
   const formMethods = useForm({});
@@ -42,13 +42,13 @@ function CreateIdeaContainer(props) {
   };
 
   return (
-    <FormContext {...formMethods}>
+    <FormProvider {...formMethods}>
       <CreateIdeaScreen
         {...methods}
         formConfig={formConfig}
         initialFormState={initialFormState}
       />
-    </FormContext>
+    </FormProvider>
   );
 }
 
@@ -59,5 +59,3 @@ CreateIdeaContainer.propTypes = {
   requestRvpList: PropTypes.func,
   createIdea: PropTypes.func,
 };
-
-export default CreateIdeaContainer;
