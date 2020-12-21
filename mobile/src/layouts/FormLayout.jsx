@@ -13,8 +13,8 @@ import BasicInput from '../components/BasicInput';
 const style = {
   container: {
     flex: 1,
+    width: '100%',
     padding: 20,
-    flexDirection: 'column',
   },
   title: {
     marginTop: 12,
@@ -25,6 +25,8 @@ const style = {
   formFields: {
     flex: 1,
     marginTop: 26,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   placeholder: {
     minHeight: 80,
@@ -44,6 +46,9 @@ function FormsLayout(props) {
       <SafeAreaView
         style={[
           { flex: 1 },
+          {
+            backgroundColor: 'black',
+          },
           visible && { paddingBottom: 0, paddingBottom: 20 },
         ]}
       >

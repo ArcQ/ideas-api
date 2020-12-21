@@ -6,10 +6,10 @@ import customPropTypes from 'utils/customPropTypes';
 
 const style = {
   container: {
-    flex: 1,
+    backgroundColor: 'green',
   },
   contentContainer: {
-    flexGrow: 1,
+    backgroundColor: 'red',
   },
 };
 const KeyboardAwareScrollView = listenToKeyboardEvents({})(ScrollView);
@@ -27,7 +27,6 @@ export default function ScrollableAvoidKeyboard({
       alwaysBounceVertical={false}
       alwaysBounceHorizontal={false}
       style={[style.container, style]}
-      contentContainerStyle={[style.contentContainer, contentContainerStyle]}
       {...restProps}
     />
   );

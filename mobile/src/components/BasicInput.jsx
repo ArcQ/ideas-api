@@ -14,7 +14,7 @@ export const style = {
     color: colors.black80,
     backgroundColor: colors.black10,
     borderRadius: 20,
-    width: 300,
+    width: '100%',
     overflow: 'hidden',
   },
   input: {
