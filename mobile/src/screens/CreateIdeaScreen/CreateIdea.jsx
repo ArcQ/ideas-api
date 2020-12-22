@@ -18,7 +18,6 @@ const formConfig = {
   description: {
     placeholder: 'Description',
     multiline: true,
-    minHeight: 50,
   },
 };
 

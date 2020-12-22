@@ -18,9 +18,6 @@ const styles = {
     paddingHorizontal: 15,
     flex: 1,
   },
-  background: {
-    backgroundColor: colors.black85,
-  },
 };
 
 export default function BaseBottomTabNavigatorLayout({
@@ -36,7 +33,7 @@ export default function BaseBottomTabNavigatorLayout({
     <ContainerView
       style={[
         styles.scrollView,
-        { backgroundColor: colors.black85 },
+        { backgroundColor: colors.white },
         props.containerStyle,
       ]}
     >

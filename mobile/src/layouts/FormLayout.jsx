@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
-import useKeyboard from '@rnhooks/keyboard';
 
 import Button from '../components/Button';
 import CustomPropTypes from '../utils/customPropTypes';
@@ -37,35 +36,31 @@ function FormsLayout(props) {
   const { watch, control, errors, handleSubmit } = useForm({
     defaultValues: props.initialFormState,
   });
-  const [visible, dismiss] = useKeyboard();
   const fieldEntries = Object.entries(props.formConfig);
   const { CustomComponent } = props;
 
   return (
     <ScrollableAvoidKeyboard>
-      <SafeAreaView style={[{ flex: 1, width: '100%' }]}>
-        <View style={style.container}>
-          {props.titleMsg && <Text style={style.title}>{props.titleMsg}</Text>}
-          {props.descMsg && <Text style={style.desc}>{props.descMsg}</Text>}
-          <View style={style.formFields}>
-            {fieldEntries.map(([name, inputProps], i) => (
-              <BasicInput
-                inputRef={(ref) => {
-                  props.formRefs[name] = ref;
-                }}
-                // getNextRef={() => props.formRefs[fieldEntries[i + 1]?.[0]]}
-                watch={watch}
-                key={name}
-                control={control}
-                name={name}
-                errors={errors}
-                {...inputProps}
-              />
-            ))}
-            {CustomComponent ? <CustomComponent /> : null}
-          </View>
-          <View style={style.placeholder} />
+      <SafeAreaView style={style.container}>
+        {props.titleMsg && <Text style={style.title}>{props.titleMsg}</Text>}
+        {props.descMsg && <Text style={style.desc}>{props.descMsg}</Text>}
+        <View style={style.formFields}>
+          {fieldEntries.map(([name, inputProps], i) => (
+            <BasicInput
+              inputRef={(ref) => {
+                props.formRefs[name] = ref;
+              }}
+              watch={watch}
+              key={name}
+              control={control}
+              name={name}
+              errors={errors}
+              {...inputProps}
+            />
+          ))}
+          {CustomComponent ? <CustomComponent /> : null}
         </View>
+        <View style={style.placeholder} />
         <View style={{ paddingHorizontal: 20 }}>
           <Button
             style={style.submitButton}
@@ -102,7 +97,7 @@ FormsLayout.propTypes = {
   style: CustomPropTypes.style,
   preNode: PropTypes.node,
   formRefs: PropTypes.object,
-  initialFormState: CustomPropTypes.initialFormState,
+  initialFormState: PropTypes.object,
   /**
    * formConfig
    * placeholder: string
@@ -111,7 +106,7 @@ FormsLayout.propTypes = {
    * validation: { required: true, maxLength... }?
    * restProps: props?
    * */
-  formConfig: CustomPropTypes.formConfig,
+  formConfig: PropTypes.object,
 };
 
 // need to use a clas here to save refs

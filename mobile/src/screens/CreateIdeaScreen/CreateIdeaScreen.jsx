@@ -1,5 +1,4 @@
-import { SafeAreaView, Text } from 'react-native';
-import { useForm } from 'react-hook-form';
+import { SafeAreaView } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -37,8 +36,7 @@ export default function CreateIdeaScreen(props) {
   return (
     <ScrollableAvoidKeyboard>
       <SafeAreaView style={styles.container}>
-        <Text>Create</Text>
-        <FormLayout formConfig={props.formConfig} />
+        <FormLayout formConfig={props.formConfig} submitMsg="Create Idea" />
       </SafeAreaView>
     </ScrollableAvoidKeyboard>
   );

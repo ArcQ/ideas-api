@@ -25,6 +25,7 @@ export default {
   greyTime: '#868686',
   purple: '#3f0e40',
   slackBlack: '#1d1c1d',
+  primary: '#3f0e40',
 
   success: '#2eb67d',
   error: '#e01e5a',

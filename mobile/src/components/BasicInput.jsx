@@ -36,7 +36,6 @@ export default function BasicInput(props) {
     name,
     defaultValue,
     inputRef,
-    value,
     watch,
     onFocus,
     onBlur,
@@ -59,30 +58,29 @@ export default function BasicInput(props) {
         ]}
       >
         <Controller
-          as={
-            <InputComponent
+          render={({ onChange, value }) => (
+            <TextInput
               autoCapitalize="none"
               placeholderTextColor={style.placeholder.color}
               style={[style.input]}
+              value={value}
+              onChangeText={(text) => onChange(text)}
               onSubmitEditing={() => {
                 if (props?.getNextRef) {
                   props.getNextRef()?.focus();
                 }
               }}
-              {...refProps}
               {...restProps}
             />
-          }
+          )}
           control={props.control}
           rules={rules}
-          onChange={(args) => ({
-            value: CustomInput ? args[0] : args[0]?.nativeEvent?.text,
-          })}
           name={name}
           defaultValue={defaultValue}
+          {...refProps}
         />
       </View>
-      <BasicInputError errors={errors} name={name} />
+      {/* <BasicInputError errors={errors} name={name} /> */}
     </>
   );
 }

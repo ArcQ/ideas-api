@@ -28,6 +28,17 @@ const styles = {
     position: 'absolute',
     bottom: 10,
     alignSelf: 'center',
+    marginLeft: 10,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   text: {
     ...gStyle.textBold20,
@@ -49,7 +60,7 @@ export default function BaseScreen(props) {
       {/* </TouchableOpacity> */}
       <IdeasList offset={offset} baseQueryProps={props.baseQueryProps} />
       <TouchableOpacity
-        style={{ ...styles.ideaButton, marginLeft: 10 }}
+        style={styles.ideaButton}
         hitSlop={hitSlop}
         onPress={() => {
           props.goToCreateRoute();

@@ -1,16 +1,15 @@
-import { color } from 'react-native-reanimated';
 import { ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import colors from '../constants/colors';
 import { SMALL_HIT_SLOP } from '../constants/HitSlops';
 import { StylePropType } from '../utils/types';
-import fonts from '../constants/fonts';
 
 const basicButtonStyle = {
   alignItems: 'center',
   justifyContent: 'center',
-  padding: 13,
+  padding: 17,
   borderRadius: 20,
   zIndex: 10,
 };
@@ -18,12 +17,12 @@ const basicButtonStyle = {
 const buttonStyle = {
   outline: {
     ...basicButtonStyle,
-    borderColor: color['basic-700'],
+    borderColor: colors.white,
     borderWidth: 1,
   },
   filled: {
     ...basicButtonStyle,
-    backgroundColor: color.primary,
+    backgroundColor: colors.primary,
   },
   ghost: {
     ...basicButtonStyle,
@@ -33,25 +32,20 @@ const buttonStyle = {
 
 const buttonTextStyle = {
   outline: {
-    font: fonts.circularProBold,
-    color: color['basic-1000'],
-    textTransform: 'uppercase',
+    color: colors.primary,
   },
   filled: {
-    font: fonts.circularProBold,
-    color: color.green,
-    textTransform: 'uppercase',
+    color: colors.white,
   },
   ghost: {
-    font: fonts.circularProBold,
-    color: color.primary,
+    color: colors.primary,
     paddingLeft: 6,
   },
 };
 
 const iconStyle = {
   ghost: {
-    tintColor: color.primary,
+    tintColor: colors.primary,
     width: 28,
     height: 28,
   },
@@ -74,7 +68,7 @@ export default function Button(props) {
           </Text>
         </>
       ) : (
-        <ActivityIndicator size="small" color={color['basic-100']} />
+        <ActivityIndicator size="small" colors={colors['basic-100']} />
       )}
     </TouchableOpacity>
   );
