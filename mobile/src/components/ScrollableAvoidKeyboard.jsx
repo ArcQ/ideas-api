@@ -5,13 +5,13 @@ import React from 'react';
 import customPropTypes from 'utils/customPropTypes';
 
 const style = {
-  container: {
-    backgroundColor: 'green',
-  },
-  contentContainer: {
-    backgroundColor: 'red',
+  scrollView: { width: '100%' },
+  contentContainerStyle: {
+    flexGrow: 1,
+    width: '100%',
   },
 };
+
 const KeyboardAwareScrollView = listenToKeyboardEvents({})(ScrollView);
 export default function ScrollableAvoidKeyboard({
   contentContainerStyle,
@@ -26,7 +26,8 @@ export default function ScrollableAvoidKeyboard({
       bouncesZoom={false}
       alwaysBounceVertical={false}
       alwaysBounceHorizontal={false}
-      style={[style.container, style]}
+      contentContainerStyle={style.contentContainerStyle}
+      style={style.scrollView}
       {...restProps}
     />
   );

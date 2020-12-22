@@ -43,15 +43,7 @@ function FormsLayout(props) {
 
   return (
     <ScrollableAvoidKeyboard>
-      <SafeAreaView
-        style={[
-          { flex: 1 },
-          {
-            backgroundColor: 'black',
-          },
-          visible && { paddingBottom: 0, paddingBottom: 20 },
-        ]}
-      >
+      <SafeAreaView style={[{ flex: 1, width: '100%' }]}>
         <View style={style.container}>
           {props.titleMsg && <Text style={style.title}>{props.titleMsg}</Text>}
           {props.descMsg && <Text style={style.desc}>{props.descMsg}</Text>}
