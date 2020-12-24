@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
+import HomeChatSwipeNavigator from './HomeChatSwipeNavigator';
 import {
   CHAT_ACTIONS_ROUTE,
   CREATE_IDEA_ROUTE,
@@ -9,7 +10,6 @@ import {
   NOTIFICATIONS_ROUTE,
 } from '../constants/routes';
 import CreateIdea from '../screens/CreateIdeaScreen/CreateIdea';
-import BaseChatSwipeNavigator from './BaseChatSwipeNavigator';
 import ChatActions from '../screens/ChatActionsScreen/ChatActions';
 import { baseSelectors } from '../store/base/ducks';
 import ModalRoutes from './ModalRoutes';
@@ -43,7 +43,7 @@ export default function MainAppStack() {
       <Stack.Screen
         name={HOME_ROUTE}
         title="Home"
-        component={BaseChatSwipeNavigator}
+        component={HomeChatSwipeNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

@@ -10,7 +10,6 @@ module.exports = function (api) {
             assets: './src/assets',
             components: './src/components',
             constants: './src/constants',
-            containers: './src/containers',
             navigation: './src/navigation',
             screens: './src/screens',
             services: './src/services',

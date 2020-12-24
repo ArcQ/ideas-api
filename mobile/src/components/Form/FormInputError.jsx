@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import React from 'react';
 
 import colors from '../constants/colors';
-import CustomPropTypes from '../utils/customPropTypes';
+import AppPropTypes from '../utils/AppPropTypes';
 
 const getErrorMessage = (error) => 'an error occured';
 
@@ -26,6 +26,6 @@ export default function BasicInputError(props) {
 }
 
 BasicInputError.propTypes = {
-  errors: CustomPropTypes.errors,
+  errors: AppPropTypes.errors,
   name: PropTypes.string,
 };

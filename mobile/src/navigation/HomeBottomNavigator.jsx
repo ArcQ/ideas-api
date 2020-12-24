@@ -1,10 +1,9 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-
 import { Feather, AntDesign } from '@expo/vector-icons';
 
-import Base from '../screens/BaseScreen/Base';
+import IdeasListContainer from '../screens/IdeasListScreen/IdeasListContainer';
 import DrawerContent from '../components/DrawerContent';
 import device from '../constants/device';
 import DirectMessages from '../screens/DirectMessagesScreen/DirectMessages';
@@ -20,13 +19,16 @@ function BaseDrawerNavigator() {
       edgeWidth={120}
       drawerType="slide"
       drawerWidth={device.width - 32}
-      initialRouteName="MainBaseScreen"
+      initialRouteName="MainIdeasListScreen"
       overlayColor={colors.black50}
       drawerStyle={{
         width: '90%',
       }}
     >
-      <Drawer.Screen name="MainBaseScreen" component={Base} />
+      <Drawer.Screen
+        name="MainIdeasListScreen"
+        component={IdeasListContainer}
+      />
     </Drawer.Navigator>
   );
 }

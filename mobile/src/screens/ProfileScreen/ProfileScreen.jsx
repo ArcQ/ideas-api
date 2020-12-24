@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
 import gStyle from '../../constants/gStyle';
-import BaseBottomTabNavigatorLayout from '../../layouts/BaseBottomTabNavigatorLayout';
+import HomeSwipeLayout from '../../layouts/HomeSwipeLayout';
 import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
 
 export default function ProfileScreen(props) {
   return (
-    <BaseBottomTabNavigatorLayout>
+    <HomeSwipeLayout>
       <View style={styles.container}>
         <Text style={styles.text}>Profile</Text>
       </View>
-    </BaseBottomTabNavigatorLayout>
+    </HomeSwipeLayout>
   );
 }
 

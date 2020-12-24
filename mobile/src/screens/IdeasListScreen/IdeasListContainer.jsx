@@ -2,8 +2,8 @@ import React from 'react';
 import { graphql } from 'react-relay';
 import { useQuery } from 'relay-hooks';
 
+import IdeasList from './IdeasList';
 import { CREATE_IDEA_ROUTE } from '../../constants/routes';
-import BaseScreen from './BaseScreen';
 import { NavigationPropType } from '../../utils/types';
 
 const baseQuery = graphql`
@@ -26,7 +26,7 @@ const baseQuery = graphql`
   }
 `;
 
-function BaseScreenContainer(props) {
+function IdeasListScreenContainer(props) {
   const baseQueryProps = useQuery(baseQuery);
   // console.log('props', baseQueryProps);
   const _props = { baseQueryProps };
@@ -35,11 +35,11 @@ function BaseScreenContainer(props) {
     goToCreateRoute: () => props.navigation.navigate(CREATE_IDEA_ROUTE),
   };
 
-  return <BaseScreen {...{ ..._props, ...methods }} />;
+  return <IdeasList {...{ ..._props, ...methods }} />;
 }
 
-BaseScreenContainer.propTypes = {
+IdeasListScreenContainer.propTypes = {
   navigation: NavigationPropType,
 };
 
-export default BaseScreenContainer;
+export default IdeasListScreenContainer;

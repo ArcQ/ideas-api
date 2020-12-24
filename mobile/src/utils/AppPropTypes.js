@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const objectOfString = PropTypes.objectOf(PropTypes.string);
 
-const CustomPropTypes = {
+const AppPropTypes = {
   navigation: PropTypes.object,
   style: PropTypes.object,
   errors: PropTypes.object,
@@ -16,4 +16,4 @@ const CustomPropTypes = {
   objectOfString,
 };
 
-export default CustomPropTypes;
+export default AppPropTypes;

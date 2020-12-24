@@ -8,7 +8,7 @@ import { hitSlop } from '../../constants/hitslop';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
 import IdeasList from './components/IdeasList';
 import gStyle from '../../constants/gStyle';
-import BaseBottomTabNavigatorLayout from '../../layouts/BaseBottomTabNavigatorLayout';
+import HomeSwipeLayout from '../../layouts/HomeSwipeLayout';
 import colors from '../../constants/colors';
 
 const styles = {
@@ -47,10 +47,10 @@ const styles = {
   },
 };
 
-export default function BaseScreen(props) {
+export default function IdeasListScreen(props) {
   const offset = useRef(new Animated.Value(0)).current;
   return (
-    <BaseBottomTabNavigatorLayout disableScroll>
+    <HomeSwipeLayout disableScroll>
       <AnimatedHeader animatedValue={offset} />
       {/* <TouchableOpacity */}
       {/*   style={{ padding: 20 }} */}
@@ -69,10 +69,10 @@ export default function BaseScreen(props) {
       >
         <SvgLightBulb />
       </TouchableOpacity>
-    </BaseBottomTabNavigatorLayout>
+    </HomeSwipeLayout>
   );
 }
 
-BaseScreen.propTypes = {
+IdeasListScreen.propTypes = {
   goToCreateRoute: PropTypes.func,
 };

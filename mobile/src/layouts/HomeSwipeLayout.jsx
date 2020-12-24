@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-export default function BaseBottomTabNavigatorLayout({
+export default function HomeSwipeLayout({
   ImageComponent,
   BeforeImageComponent,
   AfterImageComponent,
@@ -56,7 +56,7 @@ export default function BaseBottomTabNavigatorLayout({
   );
 }
 
-BaseBottomTabNavigatorLayout.propTypes = {
+HomeSwipeLayout.propTypes = {
   onActionPress: PropTypes.func,
   disableScroll: PropTypes.bool,
   actionMsg: PropTypes.string,

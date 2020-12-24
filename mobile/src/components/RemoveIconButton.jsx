@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
-import CustomPropTypes from '../utils/customPropTypes';
+import AppPropTypes from '../utils/AppPropTypes';
 import colors from '../constants/colors';
 import { LARGE_HIT_SLOP } from '../constants/HitSlops';
 
@@ -37,5 +37,5 @@ export default function CloseIconButton(props) {
 
 CloseIconButton.propTypes = {
   onRemovePress: PropTypes.func,
-  style: CustomPropTypes.style,
+  style: AppPropTypes.style,
 };

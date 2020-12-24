@@ -2,7 +2,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Title } from '../../../components/Styled';
 import gstyle from '../../../constants/gStyle';
 import colors from '../../../constants/colors';
 
@@ -45,7 +44,6 @@ export default function IdeaItem(props) {
 }
 
 IdeaItem.propTypes = {
-  CustomStatusComponent: PropTypes.func,
-  onIdeaItemPress: PropTypes.func,
+  onItemPress: PropTypes.func,
   item: PropTypes.object,
 };

@@ -2,7 +2,7 @@ import { ScrollView } from 'react-native';
 import { listenToKeyboardEvents } from 'react-native-keyboard-aware-scroll-view';
 import React from 'react';
 
-import customPropTypes from 'utils/customPropTypes';
+import AppPropTypes from 'utils/AppPropTypes';
 
 const style = {
   scrollView: { width: '100%' },
@@ -34,6 +34,6 @@ export default function ScrollableAvoidKeyboard({
 }
 
 ScrollableAvoidKeyboard.propTypes = {
-  contentContainerStyle: customPropTypes.style,
-  style: customPropTypes.style,
+  contentContainerStyle: AppPropTypes.style,
+  style: AppPropTypes.style,
 };

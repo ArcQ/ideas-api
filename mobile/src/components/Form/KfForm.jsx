@@ -4,10 +4,9 @@ import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 
-import Button from '../components/Button';
-import CustomPropTypes from '../utils/customPropTypes';
-import ScrollableAvoidKeyboard from '../components/ScrollableAvoidKeyboard';
-import BasicInput from '../components/BasicInput';
+import Button from '../Button';
+import AppPropTypes from '../../utils/AppPropTypes';
+import ScrollableAvoidKeyboard from '../ScrollableAvoidKeyboard';
 
 const style = {
   container: {
@@ -32,20 +31,19 @@ const style = {
   },
 };
 
-function FormsLayout(props) {
+function FormComponent(props) {
   const { watch, control, errors, handleSubmit } = useForm({
     defaultValues: props.initialFormState,
   });
   const fieldEntries = Object.entries(props.formConfig);
-  const { CustomComponent } = props;
 
   return (
     <ScrollableAvoidKeyboard>
       <SafeAreaView style={style.container}>
-        {props.titleMsg && <Text style={style.title}>{props.titleMsg}</Text>}
-        {props.descMsg && <Text style={style.desc}>{props.descMsg}</Text>}
+        {props.title && <Text style={style.title}>{props.title}</Text>}
+        {props.desc && <Text style={style.desc}>{props.desc}</Text>}
         <View style={style.formFields}>
-          {fieldEntries.map(([name, inputProps], i) => (
+          {fieldEntries.map(([name, passThroughInputProps], i) => (
             <BasicInput
               inputRef={(ref) => {
                 props.formRefs[name] = ref;
@@ -55,10 +53,9 @@ function FormsLayout(props) {
               control={control}
               name={name}
               errors={errors}
-              {...inputProps}
+              {...passThroughInputProps}
             />
           ))}
-          {CustomComponent ? <CustomComponent /> : null}
         </View>
         <View style={style.placeholder} />
         <View style={{ paddingHorizontal: 20 }}>
@@ -86,15 +83,15 @@ function FormsLayout(props) {
   );
 }
 
-FormsLayout.propTypes = {
+FormComponent.propTypes = {
   onSubmit: PropTypes.func,
   submitMsg: PropTypes.string,
   onAltActionPress: PropTypes.func,
   altActionMsg: PropTypes.string,
-  titleMsg: PropTypes.string,
-  descMsg: PropTypes.string,
+  title: PropTypes.string,
+  desc: PropTypes.string,
   isSubmitting: PropTypes.bool,
-  style: CustomPropTypes.style,
+  style: AppPropTypes.style,
   preNode: PropTypes.node,
   formRefs: PropTypes.object,
   initialFormState: PropTypes.object,
@@ -109,14 +106,14 @@ FormsLayout.propTypes = {
   formConfig: PropTypes.object,
 };
 
-// need to use a clas here to save refs
-export default class FormsLayoutWrapper extends Component {
+// need to use a clas here to save refs, refactor
+export default class FormWrapper extends Component {
   constructor(props) {
     super(props);
     this.formRefs = {};
   }
 
   render() {
-    return <FormsLayout formRefs={this.formRefs} {...this.props} />;
+    return <FormComponent formRefs={this.formRefs} {...this.props} />;
   }
 }

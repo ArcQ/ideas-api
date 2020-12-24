@@ -9,15 +9,15 @@ import { withAuthenticator } from 'aws-amplify-react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { enableScreens } from 'react-native-screens';
 
+import Locale from './Locale';
+import AlertToast from './components/AlertToast';
 import { theme } from './components/Styled';
 import relay from './relay';
 import ErrorBoundary from './ErrorBoundary';
 import SuspenseScreen from './screens/SuspenseScreen/SuspenseScreen';
-import AlertToast from './containers/AlertToast';
 import MainAppStack from './navigation/MainAppStack';
 import func from './constants/func';
 import { authStateToActionDict } from './store/app/ducks';
-import Locale from './containers/Locale';
 import apiService from './services/api/apiService';
 import awsService from './services/aws/awsService';
 import getStore from './store/store';

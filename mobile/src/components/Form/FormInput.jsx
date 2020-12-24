@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import colors from '../constants/colors';
-import CustomPropTypes from '../utils/customPropTypes';
+import AppPropTypes from '../utils/AppPropTypes';
 import BasicInputError from './BasicInputError';
 
 export const style = {
@@ -31,7 +31,7 @@ export const style = {
 
 export default function BasicInput(props) {
   const {
-    CustomInput,
+    overrideInput,
     errors,
     name,
     defaultValue,
@@ -42,7 +42,8 @@ export default function BasicInput(props) {
     ...restProps
   } = props;
 
-  const InputComponent = CustomInput || TextInput;
+  const InputComponent = overrideInput || TextInput;
+
   const refProps = { ref: inputRef };
   const rules =
     props.validation ||
@@ -53,13 +54,13 @@ export default function BasicInput(props) {
       <View
         style={[
           style.inputContainer,
-          props.customInputStyle,
+          props.overrideInputStyle,
           isFocus && { borderBottomColor: colors.primary },
         ]}
       >
         <Controller
           render={({ onChange, value }) => (
-            <TextInput
+            <InputComponent
               autoCapitalize="none"
               placeholderTextColor={style.placeholder.color}
               style={[style.input]}
@@ -90,11 +91,11 @@ BasicInput.propTypes = {
   inputRef: PropTypes.func,
   getNextRef: PropTypes.func,
   name: PropTypes.string,
-  customInputStyle: CustomPropTypes.style,
-  CustomInput: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  overrideInputStyle: AppPropTypes.style,
+  overrideInput: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   control: PropTypes.object,
   validationWithHooks: PropTypes.func,
-  errors: CustomPropTypes.errors,
+  errors: AppPropTypes.errors,
   dynamicProps: PropTypes.object,
   placeholder: PropTypes.string,
   label: PropTypes.string,

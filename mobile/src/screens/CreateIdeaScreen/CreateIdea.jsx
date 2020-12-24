@@ -1,61 +1,51 @@
-import React, { useState } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import { SafeAreaView } from 'react-native';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import envService from '../../services/env/envService';
-import CustomPropTypes from '../../utils/customPropTypes';
-import CreateIdeaScreen from './CreateIdeaScreen';
+import KfForm from '../../components/Form/KfForm';
+import ScrollableAvoidKeyboard from '../../components/ScrollableAvoidKeyboard';
+import gStyle from '../../constants/gStyle';
+import colors from '../../constants/colors';
 
-const initialFormState = envService.getDefaultValues('createIdea');
-
-const formConfig = {
-  name: {
-    placeholder: 'Name',
-    validation: {
-      required: true,
-    },
+const styles = {
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
-  description: {
-    placeholder: 'Description',
-    multiline: true,
+  ideaButton: {
+    width: 60,
+    height: 60,
+    backgroundColor: colors.green,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 10,
+    alignSelf: 'center',
+  },
+  text: {
+    ...gStyle.textBold20,
+    color: colors.white,
+    alignSelf: 'center',
   },
 };
 
-export default function CreateIdeaContainer(props) {
-  const [formValues, setFormValues] = useState({});
-
-  const formMethods = useForm({});
-
-  const methods = {
-    exit() {
-      // save a draft maybe?
-      props.navigation.popToTop();
-    },
-    updateFormValues(newFormValue) {
-      setFormValues({ ...formValues, ...newFormValue });
-    },
-    onSubmitPress: formMethods.handleSubmit(() => {
-      props.createIdea({
-        clientPlans: props.navigation.getParam('clientPlans'),
-      });
-    }),
-  };
-
+export default function CreateIdea(props) {
+  console.log(props.formConfig);
   return (
-    <FormProvider {...formMethods}>
-      <CreateIdeaScreen
-        {...methods}
-        formConfig={formConfig}
-        initialFormState={initialFormState}
-      />
-    </FormProvider>
+    <ScrollableAvoidKeyboard>
+      <SafeAreaView style={styles.container}>
+        <KfForm formConfig={props.formConfig} submitMsg="Create Idea" />
+      </SafeAreaView>
+    </ScrollableAvoidKeyboard>
   );
 }
 
-CreateIdeaContainer.propTypes = {
-  navigation: CustomPropTypes.navigation,
-  createMortgageReferral: PropTypes.func,
-  isLoading: PropTypes.bool,
-  requestRvpList: PropTypes.func,
-  createIdea: PropTypes.func,
+CreateIdea.propTypes = {
+  goToChat: PropTypes.func,
+  navigation: PropTypes.object,
+  initialFormState: PropTypes.object,
+  formConfig: PropTypes.object,
 };
