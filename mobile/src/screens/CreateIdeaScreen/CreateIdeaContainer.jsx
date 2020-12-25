@@ -8,20 +8,20 @@ import CreateIdea from './CreateIdea';
 
 const initialFormState = envService.getDefaultValues('createIdea');
 
-const formConfig = {
-  name: {
-    placeholder: 'Name',
-    validation: {
-      required: true,
-    },
-  },
-  description: {
-    placeholder: 'Description',
-    multiline: true,
-  },
-};
-
 export default function CreateIdeaContainer(props) {
+  const formConfig = {
+    name: {
+      placeholder: 'Name',
+      validation: {
+        required: true,
+      },
+    },
+    description: {
+      placeholder: 'Description',
+      multiline: true,
+    },
+  };
+
   const [formValues, setFormValues] = useState({});
 
   const formMethods = useForm({});
@@ -40,6 +40,8 @@ export default function CreateIdeaContainer(props) {
       });
     }),
   };
+
+  console.log(formConfig);
 
   return (
     <FormProvider {...formMethods}>

@@ -12,7 +12,7 @@ const style = {
   },
 };
 
-export default function IdeasList(props) {
+export default function IdeasListComponent(props) {
   return (
     <FlatList
       data={props.baseQueryProps?.props?.allIdeas?.edges}
@@ -49,7 +49,7 @@ export default function IdeasList(props) {
   );
 }
 
-IdeasList.propTypes = {
+IdeasListComponent.propTypes = {
   CustomStatusComponent: PropTypes.func,
   onSwipeableRightOpen: PropTypes.func,
   onListItemPress: PropTypes.func,

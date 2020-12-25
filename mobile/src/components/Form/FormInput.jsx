@@ -3,9 +3,8 @@ import { Controller } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import colors from '../constants/colors';
-import AppPropTypes from '../utils/AppPropTypes';
-import BasicInputError from './BasicInputError';
+import colors from '../../constants/colors';
+import AppPropTypes from '../../utils/AppPropTypes';
 
 export const style = {
   inputContainer: {

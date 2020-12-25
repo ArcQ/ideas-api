@@ -2,11 +2,10 @@ import { Animated, Keyboard, TouchableOpacity } from 'react-native';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { CREATE_IDEA_ROUTE } from '../../constants/routes';
 import AnimatedHeader from './components/AnimatedHeader';
 import { hitSlop } from '../../constants/hitslop';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
-import IdeasList from './components/IdeasList';
+import IdeasListComponent from './components/IdeasListComponent';
 import gStyle from '../../constants/gStyle';
 import HomeSwipeLayout from '../../layouts/HomeSwipeLayout';
 import colors from '../../constants/colors';
@@ -58,7 +57,10 @@ export default function IdeasListScreen(props) {
       {/* > */}
       {/*   <Text style={gStyle.listText}>Chats</Text> */}
       {/* </TouchableOpacity> */}
-      <IdeasList offset={offset} baseQueryProps={props.baseQueryProps} />
+      <IdeasListComponent
+        offset={offset}
+        baseQueryProps={props.baseQueryProps}
+      />
       <TouchableOpacity
         style={styles.ideaButton}
         hitSlop={hitSlop}

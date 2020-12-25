@@ -33,6 +33,7 @@ const styles = {
 };
 
 export default function CreateIdea(props) {
+  console.log(props);
   console.log(props.formConfig);
   return (
     <ScrollableAvoidKeyboard>

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 
+import FormInput from './FormInput';
 import Button from '../Button';
 import AppPropTypes from '../../utils/AppPropTypes';
 import ScrollableAvoidKeyboard from '../ScrollableAvoidKeyboard';
@@ -44,7 +45,7 @@ function FormComponent(props) {
         {props.desc && <Text style={style.desc}>{props.desc}</Text>}
         <View style={style.formFields}>
           {fieldEntries.map(([name, passThroughInputProps], i) => (
-            <BasicInput
+            <FormInput
               inputRef={(ref) => {
                 props.formRefs[name] = ref;
               }}
