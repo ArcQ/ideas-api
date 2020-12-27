@@ -1,10 +1,11 @@
 import { SafeAreaView } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import CloseButton from '../../components/CloseButton';
 import KfForm from '../../components/Form/KfForm';
 import ScrollableAvoidKeyboard from '../../components/ScrollableAvoidKeyboard';
-import gStyle from '../../constants/gStyle';
 import colors from '../../constants/colors';
 
 const styles = {
@@ -25,19 +26,24 @@ const styles = {
     bottom: 10,
     alignSelf: 'center',
   },
-  text: {
-    ...gStyle.textBold20,
-    color: colors.white,
-    alignSelf: 'center',
+  closeButton: {
+    alignSelf: 'end',
+    position: 'absolute',
+    zIndex: 100,
+    right: 30,
+    top: 30,
   },
 };
 
 export default function CreateIdea(props) {
-  console.log(props);
-  console.log(props.formConfig);
+  const insets = useSafeAreaInsets();
   return (
     <ScrollableAvoidKeyboard>
       <SafeAreaView style={styles.container}>
+        <CloseButton
+          onPress={props.exit}
+          style={{ ...styles.closeButton, top: 30 + insets.top }}
+        />
         <KfForm formConfig={props.formConfig} submitMsg="Create Idea" />
       </SafeAreaView>
     </ScrollableAvoidKeyboard>
@@ -45,8 +51,6 @@ export default function CreateIdea(props) {
 }
 
 CreateIdea.propTypes = {
-  goToChat: PropTypes.func,
-  navigation: PropTypes.object,
-  initialFormState: PropTypes.object,
+  exit: PropTypes.func,
   formConfig: PropTypes.object,
 };

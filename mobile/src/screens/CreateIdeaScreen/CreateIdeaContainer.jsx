@@ -28,8 +28,9 @@ export default function CreateIdeaContainer(props) {
 
   const methods = {
     exit() {
-      // save a draft maybe?
-      props.navigation.popToTop();
+      // draft?
+      console.log('hi');
+      props.navigation.goBack();
     },
     updateFormValues(newFormValue) {
       setFormValues({ ...formValues, ...newFormValue });

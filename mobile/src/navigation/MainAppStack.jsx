@@ -1,6 +1,12 @@
+import {
+  HeaderStyleInterpolators,
+  TransitionSpecs,
+  createStackNavigator,
+} from '@react-navigation/stack';
+
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { createNativeStackNavigator } from 'react-native-screens/native-stack';
+// import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
 import CreateIdeaContainer from '../screens/CreateIdeaScreen/CreateIdeaContainer';
 import HomeChatSwipeNavigator from './HomeChatSwipeNavigator';
@@ -15,7 +21,43 @@ import { baseSelectors } from '../store/base/ducks';
 import ModalRoutes from './ModalRoutes';
 import Notifications from '../screens/NotificationsScreen';
 
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
+
+const createIdeaTransition = {
+  gestureDirection: 'vertical',
+  transitionSpec: {
+    open: TransitionSpecs.TransitionIOSSpec,
+    close: TransitionSpecs.TransitionIOSSpec,
+  },
+  headerStyleInterpolator: HeaderStyleInterpolators.forFade,
+  cardStyleInterpolator: ({ current, next, layouts }) => ({
+    cardStyle: {
+      transform: [
+        {
+          translateY: current.progress.interpolate({
+            inputRange: [0, 1],
+            outputRange: [layouts.screen.height, 0],
+          }),
+        },
+        {
+          scale: next
+            ? next.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0.9],
+              })
+            : 1,
+        },
+      ],
+    },
+    overlayStyle: {
+      opacity: current.progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 0.5],
+      }),
+    },
+  }),
+};
 
 export default function MainAppStack() {
   const baseName = useSelector(baseSelectors.currentBaseName);
@@ -50,7 +92,7 @@ export default function MainAppStack() {
         name={CREATE_IDEA_ROUTE}
         title="Create"
         component={CreateIdeaContainer}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, ...createIdeaTransition }}
       />
     </Stack.Navigator>
   );
