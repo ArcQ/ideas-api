@@ -1,5 +1,6 @@
 from graphene import ObjectType, Schema
 
+from core.mutations import Mutation as CoreMutation
 from core.schema import Query as CoreQuery
 
 
@@ -9,4 +10,8 @@ class Query(CoreQuery, ObjectType):
     pass
 
 
-schema = Schema(query=Query)
+class Mutation(CoreMutation, ObjectType):
+    pass
+
+
+schema = Schema(query=Query, mutation=Mutation)

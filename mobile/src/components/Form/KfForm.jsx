@@ -44,7 +44,7 @@ function FormComponent(props) {
         {props.title && <Text style={style.title}>{props.title}</Text>}
         {props.desc && <Text style={style.desc}>{props.desc}</Text>}
         <View style={style.formFields}>
-          {fieldEntries.map(([name, passThroughInputProps], i) => (
+          {fieldEntries.map(([name, passThroughInputProps]) => (
             <FormInput
               inputRef={(ref) => {
                 props.formRefs[name] = ref;
