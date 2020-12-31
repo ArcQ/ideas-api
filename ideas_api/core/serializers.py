@@ -1,10 +1,9 @@
-from rest_framework.relations import PrimaryKeyRelatedField
-
-from core.models import Lab, User
+from core.models import Idea
 
 from rest_framework import serializers
 
+
 class IdeaSerializer(serializers.Serializer):
     class Meta:
-        model = User
-        fields = ['id', 'title', 'account_name', 'users', 'created_by']
+        model = Idea
+        fields = ('title', 'desc', 'notes', 'created_by', 'lab')
