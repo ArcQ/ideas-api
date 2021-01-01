@@ -3,15 +3,18 @@ from graphene_django.rest_framework.mutation import SerializerMutation
 
 import graphene
 from core.models import Idea
-from core.serializers import IdeaSerializer
 
 
 class IdeaType(DjangoObjectType):
     class Meta:
         model = Idea
+        fields = '__all__'
 
 
-class CreateIdeaMutation(SerializerMutation):
+from core.serializers import IdeaSerializer
+
+
+class IdeaMutation(SerializerMutation):
     class Meta:
         serializer_class = IdeaSerializer
         model_operations = ['create', 'update']
@@ -19,4 +22,4 @@ class CreateIdeaMutation(SerializerMutation):
 
 
 class Mutation(graphene.ObjectType):
-    create_idea = CreateIdeaMutation.Field()
+    idea = IdeaMutation.Field()

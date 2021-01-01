@@ -45,4 +45,3 @@ class Query(ObjectType):
     idea = relay.Node.Field(IdeaNode)
     all_ideas = DjangoFilterConnectionField(IdeaNode)
 
-
