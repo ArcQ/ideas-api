@@ -3,6 +3,7 @@ from core.models import Idea, User, Lab
 from rest_framework import serializers
 
 import logging
+
 logger = logging.getLogger("mylogger")
 
 
@@ -23,12 +24,25 @@ class IdeaSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
     lab = LabSerializer(read_only=True)
     # write
-    created_by_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='created_by', write_only=True)
-    lab_id = serializers.PrimaryKeyRelatedField(queryset=Lab.objects.all(), source='lab', write_only=True)
+    created_by_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='created_by',
+                                                       write_only=True, required=False)
+    lab_id = serializers.PrimaryKeyRelatedField(queryset=Lab.objects.all(), source='lab', write_only=True,
+                                                required=False)
 
     class Meta:
         model = Idea
-        fields = ('title', 'desc', 'notes', 'created_by', 'lab', 'created_by_id', 'lab_id')
+        fields = ('id', 'title', 'desc', 'notes', 'created_by', 'lab', 'created_by_id', 'lab_id')
         extra_kwargs = {
-            'id': {'read_only': False, 'required': False}
+            'id': {'read_only': False, 'required': False},
+            'lab_id': {'read_only': False, 'required': False},
+            'created_by_id': {'read_only': False, 'required': False}
         }
+
+    def update(self, instance, validated_data):
+        # create only fields, don't allow changing for this version
+        if 'lab_id' in validated_data:
+            validated_data.pop('lab_id')
+        if 'created_by_id' in validated_data:
+            validated_data.pop('created_by_id')
+
+        return super().update(instance, validated_data)
