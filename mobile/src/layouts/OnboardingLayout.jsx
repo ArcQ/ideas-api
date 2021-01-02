@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Button from '../components/Button';
+import Button from '../components/buttons/Button';
 import { StylePropType } from '../utils/types';
 
 const style = {

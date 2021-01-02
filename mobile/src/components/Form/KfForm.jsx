@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 
+import Button from '../buttons/Button';
 import FormInput from './FormInput';
-import Button from '../Button';
 import AppPropTypes from '../../utils/AppPropTypes';
 import ScrollableAvoidKeyboard from '../ScrollableAvoidKeyboard';
 

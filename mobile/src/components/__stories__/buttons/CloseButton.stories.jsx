@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react-native';
-import CloseButton from '../CloseButton';
-import { MockWithPadding } from 'utils/testing/Mock';
+import { MockWithPadding } from '../../../utils/testing/Mock';
+import CloseButton from '../../buttons/CloseButton';
 
 export const Basic = () => (
   <MockWithPadding appearance="outline">

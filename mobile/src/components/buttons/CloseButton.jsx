@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
-import { MINI_HIT_SLOP } from '../constants/hitSlops';
-import colors from '../constants/colors';
+import AppPropTypes from '../../utils/AppPropTypes';
+import { MINI_HIT_SLOP } from '../../constants/hitSlops';
+import colors from '../../constants/colors';
 
 export default function CloseButton(props) {
   return (
@@ -20,5 +21,5 @@ export default function CloseButton(props) {
 
 CloseButton.propTypes = {
   onPress: PropTypes.func,
-  style: PropTypes.object,
+  style: AppPropTypes.style,
 };

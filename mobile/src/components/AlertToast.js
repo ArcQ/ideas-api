@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import CloseButton from '../components/CloseButton';
+import CloseButton from './buttons/CloseButton';
 import gStyle from '../constants/gStyle';
 import { alertActions, alertSelectors } from '../store/alert/ducks';
 import colors from '../constants/colors';

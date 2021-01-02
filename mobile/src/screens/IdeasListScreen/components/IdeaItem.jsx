@@ -19,7 +19,6 @@ const style = {
     flexWrap: 'wrap',
   },
   listItem: {
-    // borderColor: colors['basic-700'],
     overflow: 'hidden',
     borderRadius: 20,
     paddingRight: 0,
