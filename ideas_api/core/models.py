@@ -44,6 +44,6 @@ class LabMember(GenericModel):
 class Idea(GenericModel):
     title = models.CharField(max_length=50)
     desc = models.CharField(max_length=140)
-    notes = models.CharField(max_length=1000)
+    notes = models.CharField(max_length=1000, blank=True)
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)

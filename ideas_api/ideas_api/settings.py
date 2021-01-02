@@ -147,3 +147,25 @@ os.environ['COGNITO_PASSWORD'] = 'secret'
 COGNITO_AWS_REGION = 'us-east-1'
 COGNITO_USER_POOL = os.getenv('COGNITO_USER_POOL')   # 'eu-central-1_xYzaq'
 COGNITO_AUDIENCE = os.getenv('COGNITO_AUDIENCE')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'filters': ['require_debug_true'],
+        },
+    },
+    'loggers': {
+        'mylogger': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': True,
+        },
+    },
+}

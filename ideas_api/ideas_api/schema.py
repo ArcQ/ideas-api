@@ -13,5 +13,4 @@ class Query(CoreQuery, ObjectType):
 class Mutation(CoreMutation, ObjectType):
     pass
 
-
 schema = Schema(query=Query, mutation=Mutation)
