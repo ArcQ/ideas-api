@@ -1,5 +1,5 @@
 export default {
-  black: '#000',
+  black05: 'rgba(0, 0, 0, 0.05)',
   black10: 'rgba(0, 0, 0, 0.08)',
   black20: 'rgba(0, 0, 0, 0.2)',
   black30: 'rgba(0, 0, 0, 0.3)',
@@ -13,10 +13,7 @@ export default {
   white10: 'rgba(255, 255, 255, 0.1)',
 
   // slack colors
-  blue: '#36c5f0',
-  green: '#2eb67d',
   red: '#e01e5a',
-  yellow: '#ecb22e',
 
   blueSend: '#2e629e',
   grey: '#333233',

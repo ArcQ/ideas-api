@@ -8,7 +8,7 @@ import SwipeableRow from '../../../components/SwipeableRow';
 
 const style = {
   flatList: {
-    backgroundColor: colors['basic-100'],
+    backgroundColor: colors.white,
   },
 };
 
@@ -19,8 +19,8 @@ export default function IdeasListComponent(props) {
       keyExtractor={(item) => item.node.id}
       style={style.flatList}
       contentContainerStyle={{
-        alignItems: 'center',
-        paddingTop: 220,
+        paddingTop: 250,
+        paddingBottom: 150,
         paddingHorizontal: 20,
       }}
       showsVerticalScrollIndicator={false}
@@ -55,5 +55,5 @@ IdeasListComponent.propTypes = {
   onListItemPress: PropTypes.func,
   onListEditableItemPress: PropTypes.func,
   isEditable: PropTypes.bool,
-  baseQueryProps: PropTypes.object,
+  offset: PropTypes.object,
 };

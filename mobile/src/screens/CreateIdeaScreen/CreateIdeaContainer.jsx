@@ -29,7 +29,6 @@ export default function CreateIdeaContainer(props) {
   const methods = {
     exit() {
       // draft?
-      console.log('hi');
       props.navigation.goBack();
     },
     updateFormValues(newFormValue) {
@@ -41,8 +40,6 @@ export default function CreateIdeaContainer(props) {
       });
     }),
   };
-
-  console.log(formConfig);
 
   return (
     <FormProvider {...formMethods}>

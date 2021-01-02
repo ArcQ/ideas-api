@@ -1,7 +1,9 @@
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { MINI_HIT_SLOP } from '../../../constants/hitSlops';
 import gstyle from '../../../constants/gStyle';
 import colors from '../../../constants/colors';
 
@@ -10,35 +12,59 @@ const style = {
     ...gstyle.textBold20,
     paddingVertical: 5,
   },
-  listAcessoryText: {
-    ...gstyle.textBold20,
-    textAlign: 'right',
-    color: colors['text-basic-300'],
-  },
   desc: {
-    ...gstyle.textBold20,
+    ...gstyle.textThin20,
     paddingBottom: 10,
+    flex: 1,
+    flexWrap: 'wrap',
   },
   listItem: {
-    ...gstyle.textThin20,
     // borderColor: colors['basic-700'],
-    borderWidth: 1,
-    paddingVertical: 14,
-    paddingHorizontal: 14,
+    overflow: 'hidden',
     borderRadius: 20,
+    paddingRight: 0,
     marginTop: 14,
-    backgroundColor: 'white',
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: colors.black10,
+  },
+  itemText: {
+    flex: 1,
+    paddingVertical: 16,
+    paddingLeft: 16,
+    paddingRight: 8,
+  },
+  replyButton: {
+    backgroundColor: colors.black05,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
   },
 };
 
 export default function IdeaItem(props) {
   return (
     <View style={style.listItem}>
-      <Text style={style.title}>{props.item.title}</Text>
-      <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
-        {props.item.desc}
-      </Text>
-      <Text style={style.createdAt}>{props.item.createdAt}</Text>
+      <TouchableOpacity
+        hitSlop={MINI_HIT_SLOP}
+        onPress={() => {}}
+        style={style.itemText}
+      >
+        <Text style={style.title} numberOfLines={1} ellipsizeMode="tail">
+          {props.item.title}
+        </Text>
+        <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
+          {props.item.desc}
+        </Text>
+        <Text style={style.createdAt}>{props.item.createdAt}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        hitSlop={MINI_HIT_SLOP}
+        onPress={() => {}}
+        style={style.replyButton}
+      >
+        <FontAwesome5 name="share" size={20} color={colors.pink} />
+      </TouchableOpacity>
     </View>
   );
 }

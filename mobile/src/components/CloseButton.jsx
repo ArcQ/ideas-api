@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
+import { MINI_HIT_SLOP } from '../constants/hitSlops';
 import colors from '../constants/colors';
 
 export default function CloseButton(props) {
   return (
     <TouchableOpacity
-      hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}
+      hitSlop={MINI_HIT_SLOP}
       onPress={props.onPress}
       style={props.style}
     >

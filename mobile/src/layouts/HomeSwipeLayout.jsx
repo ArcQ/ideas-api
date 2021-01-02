@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { SMALL_HIT_SLOP } from '../constants/hitSlops';
 import SvgBrainstorm from '../components/icons/Svg.Brainstorm';
 import gStyle from '../constants/gStyle';
 import colors from '../constants/colors';
@@ -14,9 +15,12 @@ const styles = {
   scrollView: {
     flex: 1,
   },
-  contentContainer: {
-    paddingHorizontal: 15,
+  contentContainer: (isFullWidth) => ({
+    paddingHorizontal: isFullWidth ? 0 : 15,
     flex: 1,
+  }),
+  logo: {
+    marginLeft: 10,
   },
 };
 
@@ -37,11 +41,11 @@ export default function HomeSwipeLayout({
         props.containerStyle,
       ]}
     >
-      <SafeAreaView style={styles.contentContainer}>
-        <View style={gStyle.containerNavBlocks}>
+      <SafeAreaView style={styles.contentContainer(props.isFullWidth)}>
+        <View style={[gStyle.containerNavBlocks, styles.logo]}>
           <TouchableOpacity
             activeOpacity={gStyle.activeOpacity}
-            hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
+            hitSlop={SMALL_HIT_SLOP}
             onPress={() => {
               Keyboard.dismiss();
               navigation.openDrawer();
@@ -60,6 +64,7 @@ HomeSwipeLayout.propTypes = {
   onActionPress: PropTypes.func,
   disableScroll: PropTypes.bool,
   actionMsg: PropTypes.string,
+  isFullWidth: PropTypes.bool,
 
   BeforeImageComponent: PropTypes.func,
   ImageComponent: PropTypes.func,

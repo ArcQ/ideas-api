@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 import AppPropTypes from '../utils/AppPropTypes';
 import colors from '../constants/colors';
-import { LARGE_HIT_SLOP } from '../constants/HitSlops';
+import { LARGE_HIT_SLOP } from '../constants/hitSlops';
 
 const style = {
   closeButton: {

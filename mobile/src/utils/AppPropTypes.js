@@ -16,4 +16,10 @@ const AppPropTypes = {
   objectOfString,
 };
 
+export const IconButtonPropTypes = {
+  onPress: PropTypes.func,
+  iconProps: PropTypes.object,
+  style: AppPropTypes.style,
+};
+
 export default AppPropTypes;

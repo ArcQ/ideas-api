@@ -2,8 +2,8 @@ import { Animated, Keyboard, TouchableOpacity } from 'react-native';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { SMALL_HIT_SLOP } from '../../constants/hitSlops';
 import AnimatedHeader from './components/AnimatedHeader';
-import { hitSlop } from '../../constants/hitslop';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
 import IdeasListComponent from './components/IdeasListComponent';
 import gStyle from '../../constants/gStyle';
@@ -39,6 +39,11 @@ const styles = {
 
     elevation: 5,
   },
+  header: {
+    ...gStyle.textBold20,
+    color: colors.black85,
+    alignSelf: 'center',
+  },
   text: {
     ...gStyle.textBold20,
     color: colors.white,
@@ -49,7 +54,7 @@ const styles = {
 export default function IdeasListScreen(props) {
   const offset = useRef(new Animated.Value(0)).current;
   return (
-    <HomeSwipeLayout disableScroll>
+    <HomeSwipeLayout disableScroll isFullWidth>
       <AnimatedHeader animatedValue={offset} />
       {/* <TouchableOpacity */}
       {/*   style={{ padding: 20 }} */}
@@ -63,7 +68,7 @@ export default function IdeasListScreen(props) {
       />
       <TouchableOpacity
         style={styles.ideaButton}
-        hitSlop={hitSlop}
+        hitSlop={SMALL_HIT_SLOP}
         onPress={() => {
           props.goToCreateRoute();
           Keyboard.dismiss();
