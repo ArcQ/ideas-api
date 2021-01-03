@@ -42,6 +42,7 @@ const style = {
     position: 'absolute',
     right: 10,
     top: 10 + topInset,
+    zIndex: 100,
   }),
 };
 
@@ -51,7 +52,9 @@ export default function IdeaDetail(props) {
     <SafeAreaView>
       <CloseButton
         style={style.closeButton({ topInset: insets.top })}
-        onPress={props.clearAlerts}
+        onPress={() => {
+          props.onClosePress();
+        }}
       />
       {props.idea ? (
         <View>
@@ -92,4 +95,5 @@ export default function IdeaDetail(props) {
 
 IdeaDetail.propTypes = {
   idea: PropTypes.object,
+  onClosePress: PropTypes.func,
 };

@@ -3,7 +3,7 @@ import React from 'react';
 
 import { CHAT_ROUTE, HOME_BOTTOM_NAVIGATOR_ROUTE } from '../constants/routes';
 import HomeBottomNavigator from './HomeBottomNavigator';
-import Chat from '../screens/ChatScreen/Chat';
+import ChatContainer from '../screens/ChatScreen/ChatContainer';
 import colors from '../constants/colors';
 
 const Tab = createMaterialTopTabNavigator();
@@ -40,7 +40,13 @@ export default function HomeChatSwipeNavigator() {
         name={HOME_BOTTOM_NAVIGATOR_ROUTE}
         component={HomeBottomNavigator}
       />
-      <Tab.Screen name={CHAT_ROUTE} component={Chat} />
+      <Tab.Screen
+        name={CHAT_ROUTE}
+        component={ChatContainer}
+        sceneContainerStyle={{
+          backgroundColor: '#fff',
+        }}
+      />
     </Tab.Navigator>
   );
 }

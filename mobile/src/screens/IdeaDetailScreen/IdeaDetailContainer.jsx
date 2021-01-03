@@ -30,10 +30,13 @@ function IdeaDetailContainer(props) {
     ideaId: 'SWRlYU5vZGU6NGViOWNiOTMtYjExNi00M2RhLWFmNjgtOTNiOTJhMjAwNGNl',
   });
   const idea = ideaByIdQueryProps?.data?.idea;
-  console.log(idea);
   const _props = { idea };
 
-  const methods = {};
+  const methods = {
+    onClosePress: () => {
+      props.navigation.goBack();
+    },
+  };
 
   return <IdeaDetail {...{ ..._props, ...methods }} />;
 }

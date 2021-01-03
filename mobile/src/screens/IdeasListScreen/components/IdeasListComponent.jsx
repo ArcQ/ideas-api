@@ -44,7 +44,11 @@ export default function IdeasListComponent(props) {
             />
           </SwipeableRow>
         ) : (
-          <IdeaItem ideaItemOnPress={props.ideaItemOnPress} item={item.node} />
+          <IdeaItem
+            shareIdeaInChat={props.shareIdeaInChat}
+            ideaItemOnPress={props.ideaItemOnPress}
+            item={item.node}
+          />
         )
       }
     />

@@ -1,47 +1,55 @@
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { GiftedChat } from 'react-native-gifted-chat';
 
+import SendButton from '../../components/buttons/SendButton';
+import ChatHeader from './ChatHeader';
 import { MessagePropType } from '../../utils/types';
-import { threadActions, threadSelectors } from '../../store/thread/ducks';
-import { baseActions, baseSelectors } from '../../store/base/ducks';
-import ChatScreen from './ChatScreen';
+import AccessoryBar from '../../components/AccessoryBar';
+import Message from '../../components/Message';
 
-function ChatScreenContainer(props) {
-  const _props = {
-    messages: props.messages,
-    chatId: props.chatId,
-  };
+export default function ChatContainer({
+  chatId,
+  messages,
+  sendMessage,
+  getChatForBase,
+}) {
+  useEffect(() => {
+    getChatForBase({ chatId });
+  }, [chatId, getChatForBase]);
 
-  const methods = {
-    sendMessage: props.sendMessage,
-    getChatForBase: props.getChatForBase,
-  };
+  messages = [
+    {
+      _id: 1,
+      text: 'Hello developer',
+      createdAt: new Date(),
+      user: {
+        _id: 2,
+        name: 'React Native',
+        avatar: 'https://placeimg.com/140/140/any',
+      },
+    },
+  ];
 
-  return <ChatScreen {...{ ..._props, ...methods }} />;
+  return (
+    <>
+      <ChatHeader />
+      <GiftedChat
+        alwaysShowSend
+        messages={messages}
+        onSend={(msgs) => sendMessage(msgs)}
+        renderAccessory={(_props) => <AccessoryBar {..._props} />}
+        renderMessage={(_props) => <Message {..._props} />}
+        renderSend={(_props) => null}
+        user={{ _id: 1 }}
+      />
+    </>
+  );
 }
 
-ChatScreenContainer.propTypes = {
+ChatContainer.propTypes = {
   getChatForBase: PropTypes.func,
   sendMessage: PropTypes.func,
   messages: PropTypes.arrayOf(MessagePropType),
   chatId: PropTypes.string,
 };
-
-const mapStateToProps = (state) => {
-  const chatId = baseSelectors.currentChatId(state);
-  return {
-    messages: threadSelectors.messagesByChatId(chatId)(state),
-    chatId,
-  };
-};
-
-const mapDispatchToProps = {
-  sendMessage: threadActions.sendMessage,
-  getChatForBase: baseActions.getChatForBase,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ChatScreenContainer);

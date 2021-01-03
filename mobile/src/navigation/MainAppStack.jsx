@@ -6,6 +6,7 @@ import {
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import colors from '../constants/colors';
 import IdeaDetailContainer from '../screens/IdeaDetailScreen/IdeaDetailContainer';
 import {
   CHAT_ACTIONS_ROUTE,

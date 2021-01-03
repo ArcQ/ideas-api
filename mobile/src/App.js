@@ -54,17 +54,15 @@ function App() {
   return (
     <RelayEnvironmentWrapper>
       <SafeAreaProvider>
-        <ThemeProvider theme={theme}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <Locale />
-              <NavigationContainer>
-                <MainAppStack />
-              </NavigationContainer>
-              <AlertToast />
-            </PersistGate>
-          </Provider>
-        </ThemeProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Locale />
+            <NavigationContainer theme={theme}>
+              <MainAppStack />
+            </NavigationContainer>
+            <AlertToast />
+          </PersistGate>
+        </Provider>
       </SafeAreaProvider>
     </RelayEnvironmentWrapper>
   );
