@@ -1,6 +1,7 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React from 'react';
 
+import { CHAT_ROUTE, HOME_BOTTOM_NAVIGATOR_ROUTE } from '../constants/routes';
 import HomeBottomNavigator from './HomeBottomNavigator';
 import Chat from '../screens/ChatScreen/Chat';
 import colors from '../constants/colors';
@@ -11,7 +12,7 @@ export default function HomeChatSwipeNavigator() {
   return (
     <Tab.Navigator
       tabBar={() => <></>}
-      initialRouteName="Base"
+      initialRouteName={HomeBottomNavigator}
       screenContainerStyle={{
         shadowColor: '#000',
         shadowOffset: {
@@ -35,8 +36,11 @@ export default function HomeChatSwipeNavigator() {
         activeTintColor: colors.white,
       }}
     >
-      <Tab.Screen name="Base" component={HomeBottomNavigator} />
-      <Tab.Screen name="Chat" component={Chat} />
+      <Tab.Screen
+        name={HOME_BOTTOM_NAVIGATOR_ROUTE}
+        component={HomeBottomNavigator}
+      />
+      <Tab.Screen name={CHAT_ROUTE} component={Chat} />
     </Tab.Navigator>
   );
 }

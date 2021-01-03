@@ -8613,6 +8613,11 @@ immer@^7.0.5:
   resolved "https://registry.yarnpkg.com/immer/-/immer-7.0.8.tgz#41dcbc5669a76500d017bef3ad0d03ce0a1d7c1e"
   integrity sha512-XnpIN8PXBBaOD43U8Z17qg6RQiKQYGDGGCIbz1ixmLGwBkSWwmrmx5X7d+hTtXDM8ur7m5OdLE0PiO+y5RB3pw==
 
+immutable@~3.7.6:
+  version "3.7.6"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
+  integrity sha1-E7TTyxK++hVIKib+Gy665kAHHks=
+
 import-fresh@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546"
@@ -9675,7 +9680,12 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-lodash-es@^4.17.15, lodash-es@^4.2.1:
+lodash-es@^4.17.15:
+  version "4.17.20"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.20.tgz#29f6332eefc60e849f869c264bc71126ad61e8f7"
+  integrity sha512-JD1COMZsq8maT6mnuz1UMV0jvYD0E0aUsSOdrr1/nAG3dhqQXwRRgeW0cSqH1U43INKcqxaiVIQNOUDld7gRDA==
+
+lodash-es@^4.2.1:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
   integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
@@ -11996,6 +12006,28 @@ regjsparser@^0.6.4:
   dependencies:
     jsesc "~0.5.0"
 
+relay-compiler@^10.1.2:
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/relay-compiler/-/relay-compiler-10.1.2.tgz#9a770be6ef8dcb090eddcd649962087d268e9806"
+  integrity sha512-MRZWMIyl7f+YvtD9BVsxFcn/5pUlb5p5+YZ7dFzlWVS6ox0wtAvs+CFMSm6zYbxfR+E39E1PWdsGQ2zQxedKBQ==
+  dependencies:
+    "@babel/core" "^7.0.0"
+    "@babel/generator" "^7.5.0"
+    "@babel/parser" "^7.0.0"
+    "@babel/runtime" "^7.0.0"
+    "@babel/traverse" "^7.0.0"
+    "@babel/types" "^7.0.0"
+    babel-preset-fbjs "^3.3.0"
+    chalk "^4.0.0"
+    fb-watchman "^2.0.0"
+    fbjs "^3.0.0"
+    glob "^7.1.1"
+    immutable "~3.7.6"
+    nullthrows "^1.1.1"
+    relay-runtime "10.1.2"
+    signedsource "^1.0.0"
+    yargs "^15.3.1"
+
 relay-config@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/relay-config/-/relay-config-10.1.0.tgz#a730b959cd5e246290c117b5d3b108d343da8b8d"
@@ -12003,18 +12035,26 @@ relay-config@^10.1.0:
   dependencies:
     cosmiconfig "^5.0.5"
 
-relay-hooks@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/relay-hooks/-/relay-hooks-3.7.0.tgz#4ed95494c5bfb82142507d1dc66d856288bc7e2e"
-  integrity sha512-tZnS2rjeOvWpMAKIGS0w09InX//yigtyNg2ic43aAAZaLnjnp6iCJyn7HXwPx3SO/5tCymjgF/hMBicipZJnTw==
+relay-hooks@^4.0.0-rc.1:
+  version "4.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/relay-hooks/-/relay-hooks-4.0.0-rc.1.tgz#b09b050e8ba556165d48fe2c33de45d7b60c4a25"
+  integrity sha512-4TwWeOKhqAgmnBHsSQr6PHNoZPuCEoUXxf75dhJRN98A2HyCxgbdVzBR1PtLjOh6KWp9XagnS9HsU3lmKiaoTQ==
   dependencies:
     "@restart/hooks" "^0.3.1"
-    fbjs "^1.0.0"
+    fbjs "^3.0.0"
 
 relay-runtime@10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-10.1.0.tgz#4753bf36e95e8d862cef33608e3d98b4ed730d16"
   integrity sha512-bxznLnQ1ST6APN/cFi7l0FpjbZVchWQjjhj9mAuJBuUqNNCh9uV+UTRhpQF7Q8ycsPp19LHTpVyGhYb0ustuRQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    fbjs "^3.0.0"
+
+relay-runtime@10.1.2:
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-10.1.2.tgz#842577b78f556a52712773a5c328f94bafd71570"
+  integrity sha512-nAMji6xaQ4bPlBZdXwVEDBDmmPZMfmgHHskUpnDVVldhtuu9zUb4bTDYM5Sk4MMBO8uOR5MJqDkEfBkpV02w+A==
   dependencies:
     "@babel/runtime" "^7.0.0"
     fbjs "^3.0.0"
@@ -12469,6 +12509,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
+
+signedsource@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/signedsource/-/signedsource-1.0.0.tgz#1ddace4981798f93bd833973803d80d52e93ad6a"
+  integrity sha1-HdrOSYF5j5O9gzlzgD2A1S6TrWo=
 
 simple-plist@^1.0.0:
   version "1.1.0"
@@ -13845,7 +13890,7 @@ yargs@^14.2.0:
     y18n "^4.0.0"
     yargs-parser "^15.0.1"
 
-yargs@^15.1.0, yargs@^15.4.1:
+yargs@^15.1.0, yargs@^15.3.1, yargs@^15.4.1:
   version "15.4.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.4.1.tgz#0d87a16de01aee9d8bec2bfbf74f67851730f4f8"
   integrity sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==

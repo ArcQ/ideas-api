@@ -3,19 +3,19 @@ import {
   TransitionSpecs,
   createStackNavigator,
 } from '@react-navigation/stack';
-
 import React from 'react';
 import { useSelector } from 'react-redux';
-// import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
-import CreateIdeaContainer from '../screens/CreateIdeaScreen/CreateIdeaContainer';
-import HomeChatSwipeNavigator from './HomeChatSwipeNavigator';
+import IdeaDetailContainer from '../screens/IdeaDetailScreen/IdeaDetailContainer';
 import {
   CHAT_ACTIONS_ROUTE,
   CREATE_IDEA_ROUTE,
   HOME_ROUTE,
+  IDEA_DETAIL_ROUTE,
   NOTIFICATIONS_ROUTE,
 } from '../constants/routes';
+import CreateIdeaContainer from '../screens/CreateIdeaScreen/CreateIdeaContainer';
+import HomeChatSwipeNavigator from './HomeChatSwipeNavigator';
 import ChatActions from '../screens/ChatActionsScreen/ChatActions';
 import { baseSelectors } from '../store/base/ducks';
 import ModalRoutes from './ModalRoutes';
@@ -92,6 +92,12 @@ export default function MainAppStack() {
         name={CREATE_IDEA_ROUTE}
         title="Create"
         component={CreateIdeaContainer}
+        options={{ headerShown: false, ...createIdeaTransition }}
+      />
+      <Stack.Screen
+        name={IDEA_DETAIL_ROUTE}
+        title="IdeaDetail"
+        component={IdeaDetailContainer}
         options={{ headerShown: false, ...createIdeaTransition }}
       />
     </Stack.Navigator>

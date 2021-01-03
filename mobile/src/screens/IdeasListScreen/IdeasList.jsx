@@ -36,7 +36,7 @@ const style = {
   },
 };
 
-export default function IdeasListScreen(props) {
+export default function IdeasList(props) {
   const offset = useRef(new Animated.Value(0)).current;
   return (
     <HomeSwipeLayout disableScroll isFullWidth>
@@ -50,12 +50,14 @@ export default function IdeasListScreen(props) {
       <IdeasListComponent
         offset={offset}
         baseQueryProps={props.baseQueryProps}
+        ideaItemOnPress={props.ideaItemOnPress}
+        shareIdeaInChat={props.shareIdeaInChat}
       />
       <TouchableOpacity
         style={style.ideaButton}
         hitSlop={SMALL_HIT_SLOP}
         onPress={() => {
-          props.goToCreateRoute();
+          props.createIdeaOnPress();
           Keyboard.dismiss();
         }}
       >
@@ -65,6 +67,8 @@ export default function IdeasListScreen(props) {
   );
 }
 
-IdeasListScreen.propTypes = {
-  goToCreateRoute: PropTypes.func,
+IdeasList.propTypes = {
+  ideaItemOnPress: PropTypes.func,
+  shareIdeaInChat: PropTypes.func,
+  createIdeaOnPress: PropTypes.func,
 };

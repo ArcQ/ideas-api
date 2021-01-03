@@ -8,8 +8,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type BaseQueryVariables = {||};
-export type BaseQueryResponse = {|
+export type IdeasListContainerQueryVariables = {||};
+export type IdeasListContainerQueryResponse = {|
   +allIdeas: ?{|
     +edges: $ReadOnlyArray<?{|
       +node: ?{|
@@ -26,15 +26,15 @@ export type BaseQueryResponse = {|
     |}>
   |}
 |};
-export type BaseQuery = {|
-  variables: BaseQueryVariables,
-  response: BaseQueryResponse,
+export type IdeasListContainerQuery = {|
+  variables: IdeasListContainerQueryVariables,
+  response: IdeasListContainerQueryResponse,
 |};
 */
 
 
 /*
-query BaseQuery {
+query IdeasListContainerQuery {
   allIdeas {
     edges {
       node {
@@ -149,7 +149,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "BaseQuery",
+    "name": "IdeasListContainerQuery",
     "selections": (v1/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -158,20 +158,20 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "BaseQuery",
+    "name": "IdeasListContainerQuery",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "57d10588537680bc27c14de42a5be872",
+    "cacheID": "a06ab01bd17230cd57593cb74d47ee34",
     "id": null,
     "metadata": {},
-    "name": "BaseQuery",
+    "name": "IdeasListContainerQuery",
     "operationKind": "query",
-    "text": "query BaseQuery {\n  allIdeas {\n    edges {\n      node {\n        id\n        createdAt\n        updatedAt\n        lab {\n          id\n        }\n        desc\n        title\n        notes\n      }\n    }\n  }\n}\n"
+    "text": "query IdeasListContainerQuery {\n  allIdeas {\n    edges {\n      node {\n        id\n        createdAt\n        updatedAt\n        lab {\n          id\n        }\n        desc\n        title\n        notes\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '70bb71df215431baec887c0605629098';
+(node/*: any*/).hash = '4ff431516fb09f2bb5b2277bdbadca49';
 
 module.exports = node;

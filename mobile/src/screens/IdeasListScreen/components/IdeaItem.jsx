@@ -46,7 +46,9 @@ export default function IdeaItem(props) {
     <View style={style.listItem}>
       <TouchableOpacity
         hitSlop={MINI_HIT_SLOP}
-        onPress={() => {}}
+        onPress={() => {
+          props.ideaItemOnPress();
+        }}
         style={style.itemText}
       >
         <Text style={style.title} numberOfLines={1} ellipsizeMode="tail">
@@ -59,7 +61,9 @@ export default function IdeaItem(props) {
       </TouchableOpacity>
       <TouchableOpacity
         hitSlop={MINI_HIT_SLOP}
-        onPress={() => {}}
+        onPress={() => {
+          props.shareIdeaInChat({ ideaId: props.id });
+        }}
         style={style.replyButton}
       >
         <FontAwesome5 name="share" size={20} color={colors.pink} />
@@ -69,6 +73,7 @@ export default function IdeaItem(props) {
 }
 
 IdeaItem.propTypes = {
-  onItemPress: PropTypes.func,
   item: PropTypes.object,
+  ideaItemOnPress: PropTypes.func,
+  shareIdeaInChat: PropTypes.func,
 };

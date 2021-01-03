@@ -15,7 +15,7 @@ const style = {
 export default function IdeasListComponent(props) {
   return (
     <FlatList
-      data={props.baseQueryProps?.props?.allIdeas?.edges}
+      data={props.baseQueryProps?.data?.allIdeas?.edges}
       keyExtractor={(item) => item.node.id}
       style={style.flatList}
       contentContainerStyle={{
@@ -39,10 +39,12 @@ export default function IdeasListComponent(props) {
               item={item.node}
               CustomStatusComponent={props.CustomStatusComponent}
               onListItemPress={props.onListEditableItemPress}
+              ideaItemOnPress={props.ideaItemOnPress}
+              shareIdeaInChat={props.shareIdeaInChat}
             />
           </SwipeableRow>
         ) : (
-          <IdeaItem item={item.node} onListItemPress={props.onListItemPress} />
+          <IdeaItem ideaItemOnPress={props.ideaItemOnPress} item={item.node} />
         )
       }
     />
@@ -56,4 +58,6 @@ IdeasListComponent.propTypes = {
   onListEditableItemPress: PropTypes.func,
   isEditable: PropTypes.bool,
   offset: PropTypes.object,
+  ideaItemOnPress: PropTypes.func,
+  shareIdeaInChat: PropTypes.func,
 };
