@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, ViewPropTypes } from 'react-native';
+import { View, ViewPropTypes } from 'react-native';
 import { Avatar, Day, utils } from 'react-native-gifted-chat';
 
 import gStyle from '../constants/gStyle';
@@ -36,8 +36,8 @@ class Message extends React.Component {
       return (
         <Day
           {...dayProps}
-          containerStyle={styles.containerDay}
-          textStyle={styles.dayText}
+          containerStyle={style.containerDay}
+          textStyle={style.dayText}
         />
       );
     }
@@ -74,7 +74,7 @@ class Message extends React.Component {
       <Avatar
         {...avatarProps}
         imageStyle={{
-          left: [styles.slackAvatar, avatarProps.imageStyle, extraStyle],
+          left: [style.slackAvatar, avatarProps.imageStyle, extraStyle],
         }}
       />
     );
@@ -89,7 +89,7 @@ class Message extends React.Component {
       <View>
         {this.renderDay()}
 
-        <View style={[styles.container, { marginBottom }, containerStyle]}>
+        <View style={[style.container, { marginBottom }, containerStyle]}>
           {this.renderAvatar()}
           {this.renderBubble()}
         </View>
@@ -123,7 +123,7 @@ Message.propTypes = {
   user: PropTypes.object,
 };
 
-const styles = StyleSheet.create({
+const style = {
   container: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -147,6 +147,6 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
   },
-});
+};
 
 export default Message;

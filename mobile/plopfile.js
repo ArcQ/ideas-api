@@ -34,12 +34,12 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/screens/{{name}}Screen/{{name}}Screen.jsx',
+        path: 'src/screens/{{name}}Screen/{{name}}.jsx',
         templateFile: 'plop-templates/screen.hbs',
       },
       {
         type: 'add',
-        path: 'src/screens/{{name}}Screen/{{name}}.jsx',
+        path: 'src/screens/{{name}}Screen/{{name}}Container.jsx',
         templateFile: 'plop-templates/screencontainer.hbs',
       },
     ],

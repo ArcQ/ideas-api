@@ -10,12 +10,7 @@ import gStyle from '../../constants/gStyle';
 import HomeSwipeLayout from '../../layouts/HomeSwipeLayout';
 import colors from '../../constants/colors';
 
-const styles = {
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
+const style = {
   ideaButton: {
     width: 60,
     height: 60,
@@ -39,16 +34,6 @@ const styles = {
 
     elevation: 5,
   },
-  header: {
-    ...gStyle.textBold20,
-    color: colors.black85,
-    alignSelf: 'center',
-  },
-  text: {
-    ...gStyle.textBold20,
-    color: colors.white,
-    alignSelf: 'center',
-  },
 };
 
 export default function IdeasListScreen(props) {
@@ -67,7 +52,7 @@ export default function IdeasListScreen(props) {
         baseQueryProps={props.baseQueryProps}
       />
       <TouchableOpacity
-        style={styles.ideaButton}
+        style={style.ideaButton}
         hitSlop={SMALL_HIT_SLOP}
         onPress={() => {
           props.goToCreateRoute();

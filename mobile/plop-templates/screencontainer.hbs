@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {{name}}Screen from './{{name}}Screen';
+import {{name}} from './{{name}}';
 
-function {{name}}ScreenContainer(props) {
+function {{name}}Container(props) {
   const _props = {
   };
 
   const methods = {};
 
-  return <{{name}}Screen {...{ ..._props, ...methods }} />;
+  return <{{name}} {...{ ..._props, ...methods }} />;
 }
 
-{{name}}ScreenContainer.propTypes = {
+{{name}}Container.propTypes = {
   navigation: PropTypes.object,
 };
 
-export default {{name}}ScreenContainer;
+export default {{name}}Container;

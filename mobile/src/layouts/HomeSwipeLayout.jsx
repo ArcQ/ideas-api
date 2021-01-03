@@ -11,7 +11,7 @@ import gStyle from '../constants/gStyle';
 import colors from '../constants/colors';
 import { StylePropType } from '../utils/types';
 
-const styles = {
+const style = {
   scrollView: {
     flex: 1,
   },
@@ -36,13 +36,13 @@ export default function HomeSwipeLayout({
   return (
     <ContainerView
       style={[
-        styles.scrollView,
+        style.scrollView,
         { backgroundColor: colors.white },
         props.containerStyle,
       ]}
     >
-      <SafeAreaView style={styles.contentContainer(props.isFullWidth)}>
-        <View style={[gStyle.containerNavBlocks, styles.logo]}>
+      <SafeAreaView style={style.contentContainer(props.isFullWidth)}>
+        <View style={[gStyle.containerNavBlocks, style.logo]}>
           <TouchableOpacity
             activeOpacity={gStyle.activeOpacity}
             hitSlop={SMALL_HIT_SLOP}
@@ -54,7 +54,7 @@ export default function HomeSwipeLayout({
             <SvgBrainstorm />
           </TouchableOpacity>
         </View>
-        <View style={styles.contentContainer}>{props.children}</View>
+        <View style={style.contentContainer}>{props.children}</View>
       </SafeAreaView>
     </ContainerView>
   );

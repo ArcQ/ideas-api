@@ -38,7 +38,7 @@ HeaderRight.propTypes = {
   navigation: NavigationPropType.isRequired,
 };
 
-const styles = {
+const style = {
   text: {
     ...gStyle.textLarsBold18,
     fontWeight: '500',
@@ -64,8 +64,8 @@ export default function ChatHeader() {
         position: 'relative ',
       }}
     >
-      <View style={[styles.centerText, gStyle.containerNavBlocks]}>
-        <Text style={styles.text}>{baseName}</Text>
+      <View style={[style.centerText, gStyle.containerNavBlocks]}>
+        <Text style={style.text}>{baseName}</Text>
       </View>
       <HeaderBackButton
         labelVisible={false}

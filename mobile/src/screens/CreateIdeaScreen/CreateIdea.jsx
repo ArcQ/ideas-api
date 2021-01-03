@@ -8,7 +8,7 @@ import KfForm from '../../components/Form/KfForm';
 import ScrollableAvoidKeyboard from '../../components/ScrollableAvoidKeyboard';
 import colors from '../../constants/colors';
 
-const styles = {
+const style = {
   container: {
     alignItems: 'center',
     flex: 1,
@@ -39,10 +39,10 @@ export default function CreateIdea(props) {
   const insets = useSafeAreaInsets();
   return (
     <ScrollableAvoidKeyboard>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={style.container}>
         <CloseButton
           onPress={props.exit}
-          style={{ ...styles.closeButton, top: 30 + insets.top }}
+          style={{ ...style.closeButton, top: 30 + insets.top }}
         />
         <KfForm formConfig={props.formConfig} submitMsg="Create Idea" />
       </SafeAreaView>

@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Clipboard,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Clipboard, Text, TouchableOpacity, View } from 'react-native';
 import {
   MessageText,
   MessageImage,
@@ -68,7 +62,7 @@ class MessageBubble extends React.Component {
         <MessageText
           {...messageTextProps}
           textStyle={{
-            left: styles.slackMessageText,
+            left: style.slackMessageText,
           }}
         />
       );
@@ -89,7 +83,7 @@ class MessageBubble extends React.Component {
       return (
         <MessageImage
           {...messageImageProps}
-          imageStyle={[styles.slackImage, messageImageProps.imageStyle]}
+          imageStyle={[style.slackImage, messageImageProps.imageStyle]}
         />
       );
     }
@@ -108,7 +102,7 @@ class MessageBubble extends React.Component {
         return renderUsername(usernameProps);
       }
 
-      return <Text style={styles.usernameText}>{username}</Text>;
+      return <Text style={style.usernameText}>{username}</Text>;
     }
 
     return null;
@@ -127,8 +121,8 @@ class MessageBubble extends React.Component {
       return (
         <Time
           {...timeProps}
-          containerStyle={{ left: [styles.containerTime] }}
-          textStyle={{ left: [styles.timeText, timeProps.textStyle] }}
+          containerStyle={{ left: [style.containerTime] }}
+          textStyle={{ left: [style.timeText, timeProps.textStyle] }}
         />
       );
     }
@@ -144,15 +138,15 @@ class MessageBubble extends React.Component {
       isSameDay(currentMessage, previousMessage);
 
     return (
-      <View style={styles.container}>
+      <View style={style.container}>
         <TouchableOpacity
           accessibilityTraits="text"
           onLongPress={this.onLongPress}
           {...touchableProps}
         >
-          <View style={styles.containerContent}>
+          <View style={style.containerContent}>
             {isSameThread ? null : (
-              <View style={styles.containerMsgHeader}>
+              <View style={style.containerMsgHeader}>
                 {this.renderUsername()}
                 {this.renderTime()}
               </View>
@@ -198,7 +192,7 @@ MessageBubble.propTypes = {
   touchableProps: PropTypes.object,
 };
 
-const styles = StyleSheet.create({
+const style = {
   container: {
     alignItems: 'flex-start',
     flex: 1,
@@ -237,6 +231,6 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
   },
-});
+};
 
 export default MessageBubble;

@@ -1,19 +1,11 @@
-import React from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import FeatureSuggestionsScreen from './FeatureSuggestionsScreen';
+const style = {};
 
-function FeatureSuggestionsScreenContainer(props) {
-  const _props = {
-  };
-
-  const methods = {};
-
-  return <FeatureSuggestionsScreen {...{ ..._props, ...methods }} />;
+export default function FeatureSuggestions(props) {
+  return (<View />);
 }
 
-FeatureSuggestionsScreenContainer.propTypes = {
-  navigation: PropTypes.object,
-};
-
-export default FeatureSuggestionsScreenContainer;
+FeatureSuggestions.propTypes = {};

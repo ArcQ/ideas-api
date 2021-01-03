@@ -1,10 +1,10 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 
 import gStyle from '../constants/gStyle';
 import colors from '../constants/colors';
 
-const styles = StyleSheet.create({
+const style = {
   drawerContentContainer: {
     alignItems: 'center',
     backgroundColor: colors.purple,
@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     ...gStyle.textLarsBold18,
     color: colors.white,
   },
-});
+};
 
 export default function DrawerContent() {
-  return <View style={styles.drawerContentContainer} />;
+  return <View style={style.drawerContentContainer} />;
 }
