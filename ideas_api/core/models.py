@@ -30,9 +30,10 @@ class User(AbstractUser):
 
 
 class Lab(GenericModel):
-    name = models.URLField(max_length=255)
+    name = models.CharField(max_length=255)
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image_url = models.URLField(max_length=255, default='https://source.unsplash.com/random/1000x1000')
+    chat_id = models.CharField(max_length=255)
 
 
 class LabMember(GenericModel):

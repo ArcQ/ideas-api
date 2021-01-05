@@ -44,5 +44,7 @@ class IdeaSerializer(serializers.ModelSerializer):
             validated_data.pop('lab_id')
         if 'created_by_id' in validated_data:
             validated_data.pop('created_by_id')
+        if 'chat_id' in validated_data:
+            validated_data.pop('chat_id')
 
         return super().update(instance, validated_data)

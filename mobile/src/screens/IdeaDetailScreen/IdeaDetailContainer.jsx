@@ -1,11 +1,11 @@
-import { graphql } from 'react-relay';
 import { useQuery } from 'relay-hooks';
+import { graphql } from 'react-relay';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import IdeaDetail from './IdeaDetail';
 
-export const ideaByIdQuery = graphql`
+const ideaByIdQuery = graphql`
   query IdeaDetailContainerQuery($ideaId: ID!) {
     idea(id: $ideaId) {
       id

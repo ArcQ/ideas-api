@@ -1,8 +1,37 @@
 schema {
   query: Query
+  mutation: Mutation
 }
 
 scalar DateTime
+
+type ErrorType {
+  field: String!
+  messages: [String!]!
+}
+
+input IdeaMutationInput {
+  id: String
+  title: String!
+  desc: String!
+  notes: String
+  createdById: String
+  labId: String
+  clientMutationId: String
+}
+
+type IdeaMutationPayload {
+  id: String
+  title: String
+  desc: String
+  notes: String
+  createdBy: UserNode
+  lab: LabNode
+  errors: [ErrorType]
+  createdById: ID
+  labId: ID
+  clientMutationId: String
+}
 
 type IdeaNode implements Node {
   id: ID!
@@ -32,7 +61,8 @@ type LabNode implements Node {
   name: String!
   createdBy: UserNode
   imageUrl: String!
-  ideaSet(before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection!
+  chatId: String!
+  ideaSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection!
 }
 
 type LabNodeConnection {
@@ -43,6 +73,10 @@ type LabNodeConnection {
 type LabNodeEdge {
   node: LabNode
   cursor: String!
+}
+
+type Mutation {
+  idea(input: IdeaMutationInput!): IdeaMutationPayload
 }
 
 interface Node {
@@ -58,11 +92,11 @@ type PageInfo {
 
 type Query {
   lab(id: ID!): LabNode
-  allLabs(before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection
+  allLabs(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection
   user(id: ID!): UserNode
-  allUsers(before: String, after: String, first: Int, last: Int, username: String, username_Icontains: String, username_Istartswith: String, authKey: String): UserNodeConnection
+  allUsers(offset: Int, before: String, after: String, first: Int, last: Int, username: String, username_Icontains: String, username_Istartswith: String, authKey: String): UserNodeConnection
   idea(id: ID!): IdeaNode
-  allIdeas(before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection
+  allIdeas(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection
 }
 
 type UserNode implements Node {
@@ -81,8 +115,8 @@ type UserNode implements Node {
   authKey: String!
   imageUrl: String!
   email: String!
-  labSet(before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection!
-  ideaSet(before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection!
+  labSet(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection!
+  ideaSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection!
 }
 
 type UserNodeConnection {
