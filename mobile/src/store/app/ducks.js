@@ -22,6 +22,10 @@ export const authStateToActionDict = {
 
 const { initialState, selectors } = createSelectorsAndState(appNamespace, {
   signedIn: false,
+  currentLab: {
+    id: '6034f8e2-df82-11ea-87d0-0242ac130003',
+    chatId: 'cf4aeae1-cda7-41f3-adf7-9b2bb377be7d',
+  },
 });
 
 export const appSelectors = {

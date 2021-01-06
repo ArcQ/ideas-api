@@ -1,20 +1,21 @@
-import { select, take } from 'redux-saga/effects';
+import { select } from 'redux-saga/effects';
 
-import { baseConstants, baseSelectors } from './ducks';
+import { baseSelectors } from './ducks';
+import { appSelectors } from '../app/ducks';
 
-export function* getCurrentBase() {
-  const currentBase = yield select(baseSelectors.currentBase);
+export function* getCurrentIdea() {
+  const currentLab = yield select(appSelectors.currentLab);
 
-  if (currentBase) {
-    return currentBase;
+  if (currentLab) {
+    return currentLab;
   }
 
-  yield take(baseConstants.RECEIVE_BASES);
+  // wait for lab to come back yield take(labConstants.RECEIVE_MESSAGE);
 
-  return yield select(baseSelectors.currentBase);
+  return yield select(baseSelectors.currentLab);
 }
 
 export function* getCurrentChatId() {
-  yield getCurrentBase();
-  return yield select(baseSelectors.currentChatId);
+  const { chatId } = yield getCurrentIdea();
+  return chatId;
 }

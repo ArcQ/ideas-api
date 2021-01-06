@@ -12,7 +12,8 @@ import { Auth } from 'aws-amplify';
 import { eventChannel as EventChannel } from 'redux-saga';
 import { Connection } from '@knotfive/chatpi-client-js/src/chatpi-client';
 
-import { baseActions, baseSelectors } from '../base/ducks';
+import { baseSelectors } from '../base/ducks';
+import { appSelectors } from '../app/ducks';
 import { getCurrentChatId } from '../base/helpers';
 import { threadActions, threadConstants, threadSelectors } from './ducks';
 import apiService, { apiCall } from '../../services/api/apiService';
@@ -22,7 +23,7 @@ const PRESENCE_CHANGE = 'PRESENCE_CHANGE';
 const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 
 function* catchUpMessagesForBase() {
-  const chatId = yield select(baseSelectors.currentChatId);
+  const { chatId } = yield select(appSelectors.currentLab);
   const messages = yield select(threadSelectors.messagesByChatId(chatId));
 
   if (!messages || messages.length === 0) {
@@ -119,7 +120,7 @@ function* watchForChannelClose(channel) {
 function* startChannel() {
   const { accessToken } = yield Auth.currentSession();
   const currentChatId = yield getCurrentChatId();
-  const channelIds = yield select(baseSelectors.allChatIds);
+  const channelIds = [currentChatId];
 
   if (channelIds.length === 0) {
     return;
@@ -153,6 +154,8 @@ function* startChannel() {
         });
       },
     });
+
+    console.log(connection);
 
     connection.watchPresence(currentChatId);
 

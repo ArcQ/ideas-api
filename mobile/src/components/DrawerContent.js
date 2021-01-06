@@ -59,23 +59,25 @@ function DrawerContent(props) {
   return (
     <View style={style.drawerContentContainer}>
       <Text style={style.labButtonText}>Labs</Text>
-      {allLabs.map((lab) => (
-        <TouchableOpacity
-          hitSlop={MINI_HIT_SLOP}
-          onPress={() => {
-            methods.onLabButtonPress();
-          }}
-          style={style.labButton}
-        >
-          <Text
-            style={style.labButtonText}
-            numberOfLines={1}
-            ellipsizeMode="tail"
+      {allLabs &&
+        allLabs.map((lab) => (
+          <TouchableOpacity
+            key={lab.node.id}
+            hitSlop={MINI_HIT_SLOP}
+            onPress={() => {
+              methods.onLabButtonPress();
+            }}
+            style={style.labButton}
           >
-            {lab.node.name}
-          </Text>
-        </TouchableOpacity>
-      ))}
+            <Text
+              style={style.labButtonText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {lab.node.name}
+            </Text>
+          </TouchableOpacity>
+        ))}
     </View>
   );
 }

@@ -16,8 +16,8 @@ const defaultSagas = [];
 
 const signedInSagas = [
   // ---plop_append_saga---
-  baseSaga,
-  // threadSaga,
+  // baseSaga,
+  threadSaga,
   // appSaga,
   // pushTokenSaga,
   // creditConsentSaga,
