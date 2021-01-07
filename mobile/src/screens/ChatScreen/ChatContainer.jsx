@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React from 'react';
 
+import { baseActions } from '../../store/base/ducks';
+import { appSelectors } from '../../store/app/ducks';
 import { MessagePropType } from '../../utils/types';
 import { threadActions, threadSelectors } from '../../store/thread/ducks';
-import { baseActions, baseSelectors } from '../../store/base/ducks';
 import Chat from './Chat';
 
 function ChatContainer(props) {
@@ -29,7 +30,8 @@ ChatContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const chatId = baseSelectors.currentChatId(state);
+  const currentLab = appSelectors.currentLab(state);
+  const chatId = currentLab?.chatId;
   return {
     messages: threadSelectors.messagesByChatId(chatId)(state),
     chatId,

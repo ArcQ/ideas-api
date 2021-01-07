@@ -23,8 +23,9 @@ const PRESENCE_CHANGE = 'PRESENCE_CHANGE';
 const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 
 function* catchUpMessagesForBase() {
-  const { chatId } = yield select(appSelectors.currentLab);
+  const chatId = yield getCurrentChatId();
   const messages = yield select(threadSelectors.messagesByChatId(chatId));
+  const insertedAt = '2020-09-12T05:29:57';
 
   if (!messages || messages.length === 0) {
     yield apiCall(
@@ -39,7 +40,7 @@ function* catchUpMessagesForBase() {
           );
         },
       },
-      `/v1/chats/${chatId}/messages`,
+      `/v1/chats/${chatId}/messages?query_type=after&inserted_at=${insertedAt}`,
     );
   } else {
     const latestMessage = yield select(threadSelectors.latestMessage(chatId));
@@ -56,7 +57,7 @@ function* catchUpMessagesForBase() {
           );
         },
       },
-      `/v1/chats/${chatId}/messages?query=after&inserted_at=${createdAt}`,
+      `/v1/chats/${chatId}/messages?query_type=after&inserted_at=${createdAt}`,
     );
   }
 }
@@ -117,6 +118,11 @@ function* watchForChannelClose(channel) {
   channel.close();
 }
 
+function getMessageQuery() {
+  const insertedAt = '2020-09-12T05:29:57';
+  return { after: insertedAt };
+}
+
 function* startChannel() {
   const { accessToken } = yield Auth.currentSession();
   const currentChatId = yield getCurrentChatId();
@@ -134,6 +140,7 @@ function* startChannel() {
     connection = new Connection({
       url: envService.getConfig().chatpiSocketUrl,
       apiKey: envService.getConfig().apiKey,
+      messageQuery: { after: getMessageQuery() },
       userToken,
       authorizationToken: accessToken.jwtToken,
       channelIds,
@@ -154,8 +161,6 @@ function* startChannel() {
         });
       },
     });
-
-    console.log(connection);
 
     connection.watchPresence(currentChatId);
 
