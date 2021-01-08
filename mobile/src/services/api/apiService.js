@@ -26,7 +26,7 @@ export function* apiCall({ call, onSuccess }, ...args) {
       throw new ApiException(response.status, response?.data?.error);
     }
 
-    throw yield onSuccess(response.data);
+    yield onSuccess(response.data);
   } catch (e) {
     console.warn(e, args);
     yield put(

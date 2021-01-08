@@ -3,18 +3,20 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import gStyle from '../../constants/gStyle';
 import CloseButton from '../../components/buttons/CloseButton';
 import Loader from '../../components/Loader';
-import gstyle from '../../constants/gStyle';
 import colors from '../../constants/colors';
 
 const style = {
   title: {
-    ...gstyle.textBold20,
-    paddingVertical: 5,
+    ...gStyle.textBold20,
+    marginTop: 30,
+    marginBottom: 20,
+    fontSize: 30,
   },
   desc: {
-    ...gstyle.textThin20,
+    ...gStyle.textThin20,
     paddingBottom: 10,
   },
   listItem: {
@@ -26,17 +28,15 @@ const style = {
     flexDirection: 'row',
     backgroundColor: colors.black10,
   },
+  subHeader: {
+    ...gStyle.textBold210,
+    fontSize: 15,
+  },
   itemText: {
     flex: 1,
     paddingVertical: 16,
     paddingLeft: 16,
     paddingRight: 8,
-  },
-  replyButton: {
-    backgroundColor: colors.black05,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 40,
   },
   closeButton: ({ topInset }) => ({
     position: 'absolute',
@@ -49,7 +49,7 @@ const style = {
 export default function IdeaDetail(props) {
   const insets = useSafeAreaInsets();
   return (
-    <SafeAreaView>
+    <SafeAreaView style={gStyle.page}>
       <CloseButton
         style={style.closeButton({ topInset: insets.top })}
         onPress={() => {
@@ -69,7 +69,7 @@ export default function IdeaDetail(props) {
           </Text>
           <View>
             <Text
-              style={style.createdBy}
+              style={style.subHeader}
               numberOfLines={4}
               ellipsizeMode="tail"
             >

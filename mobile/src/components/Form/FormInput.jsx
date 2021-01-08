@@ -1,7 +1,7 @@
 import { TextInput, View } from 'react-native';
 import { Controller } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import colors from '../../constants/colors';
 import AppPropTypes from '../../utils/AppPropTypes';
@@ -28,26 +28,26 @@ export const style = {
   },
 };
 
-export default function BasicInput(props) {
+const FormInput = React.forwardRef((props, ref) => {
   const {
     overrideInput,
     errors,
     name,
     defaultValue,
-    inputRef,
     watch,
     onFocus,
     onBlur,
     ...restProps
   } = props;
+  console.log(defaultValue);
 
   const InputComponent = overrideInput || TextInput;
 
-  const refProps = { ref: inputRef };
   const rules =
     props.validation ||
     (props.validationWithHooks && props.validationWithHooks({ watch }));
   const [isFocus, setIsFocus] = useState(false);
+
   return (
     <>
       <View
@@ -76,18 +76,17 @@ export default function BasicInput(props) {
           control={props.control}
           rules={rules}
           name={name}
-          defaultValue={defaultValue}
-          {...refProps}
+          defaultValue={defaultValue || ''}
+          ref={ref}
         />
       </View>
-      {/* <BasicInputError errors={errors} name={name} /> */}
+      {/* <FormInputError errors={errors} name={name} /> */}
     </>
   );
-}
+});
 
-BasicInput.propTypes = {
+FormInput.propTypes = {
   onChangeText: PropTypes.func,
-  inputRef: PropTypes.func,
   getNextRef: PropTypes.func,
   name: PropTypes.string,
   overrideInputStyle: AppPropTypes.style,
@@ -107,3 +106,5 @@ BasicInput.propTypes = {
     pattern: PropTypes.instanceOf(RegExp),
   }),
 };
+
+export default FormInput;

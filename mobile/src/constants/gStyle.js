@@ -1,11 +1,10 @@
 import colors from './colors';
 import fonts from './fonts';
 
-export default {
-  container: { paddingHorizontal: 20 },
-
+const gStyle = {
   activeOpacity: 0.7,
-  container: {
+  page: {
+    marginHorizontal: 15,
     backgroundColor: colors.white,
     flex: 1,
   },
@@ -99,7 +98,6 @@ export default {
   pH16: { paddingHorizontal: 16 },
   pH24: { paddingHorizontal: 24 },
 
-  listText: { color: colors.white, ...this.textCiruBook12 },
   textBold10: { fontFamily: fonts.circularProBold, fontSize: 14 },
   textBold20: { fontFamily: fonts.circularProBold, fontSize: 16 },
   textBold30: { fontFamily: fonts.circularProBold, fontSize: 18 },
@@ -117,3 +115,13 @@ export default {
   textThin20: { fontFamily: fonts.larsseitThin, fontSize: 16 },
   textThin30: { fontFamily: fonts.larsseitThin, fontSize: 18 },
 };
+
+gStyle.listText = { color: colors.white, ...gStyle.textCiruBook12 };
+gStyle.title = {
+  ...gStyle.textBold20,
+  marginTop: 30,
+  marginBottom: 20,
+  fontSize: 30,
+};
+
+export default gStyle;

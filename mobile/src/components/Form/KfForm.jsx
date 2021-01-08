@@ -44,19 +44,20 @@ function FormComponent(props) {
         {props.title && <Text style={style.title}>{props.title}</Text>}
         {props.desc && <Text style={style.desc}>{props.desc}</Text>}
         <View style={style.formFields}>
-          {fieldEntries.map(([name, passThroughInputProps]) => (
-            <FormInput
-              inputRef={(ref) => {
-                props.formRefs[name] = ref;
-              }}
-              watch={watch}
-              key={name}
-              control={control}
-              name={name}
-              errors={errors}
-              {...passThroughInputProps}
-            />
-          ))}
+          {fieldEntries.map(([name, passThroughInputProps]) => {
+            props.formRefs[name] = React.createRef();
+            return (
+              <FormInput
+                inputRef={props.formRefs[name]}
+                watch={watch}
+                key={name}
+                control={control}
+                name={name}
+                errors={errors}
+                {...passThroughInputProps}
+              />
+            );
+          })}
         </View>
         <View style={style.placeholder} />
         <View style={{ paddingHorizontal: 20 }}>

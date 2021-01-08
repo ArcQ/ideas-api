@@ -2,6 +2,7 @@ import { Animated, Keyboard, TouchableOpacity } from 'react-native';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SMALL_HIT_SLOP } from '../../constants/hitSlops';
 import AnimatedHeader from './components/AnimatedHeader';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
@@ -11,7 +12,7 @@ import HomeSwipeLayout from '../../layouts/HomeSwipeLayout';
 import colors from '../../constants/colors';
 
 const style = {
-  ideaButton: {
+  ideaButton: (bottomInset) => ({
     width: 60,
     height: 60,
     backgroundColor: colors.green,
@@ -20,7 +21,7 @@ const style = {
     borderRadius: 30,
     overflow: 'hidden',
     position: 'absolute',
-    bottom: 10,
+    bottom: 10 + bottomInset,
     alignSelf: 'center',
     marginLeft: 10,
 
@@ -33,11 +34,13 @@ const style = {
     shadowRadius: 3.84,
 
     elevation: 5,
-  },
+  }),
 };
 
 export default function IdeasList(props) {
   const offset = useRef(new Animated.Value(0)).current;
+  const insets = useSafeAreaInsets();
+
   return (
     <HomeSwipeLayout disableScroll isFullWidth>
       <AnimatedHeader animatedValue={offset} />
@@ -54,7 +57,7 @@ export default function IdeasList(props) {
         shareIdeaInChat={props.shareIdeaInChat}
       />
       <TouchableOpacity
-        style={style.ideaButton}
+        style={style.ideaButton(insets.bottom)}
         hitSlop={SMALL_HIT_SLOP}
         onPress={() => {
           props.createIdeaOnPress();
