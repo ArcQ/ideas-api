@@ -40,6 +40,7 @@ class LabMember(GenericModel):
     role = models.CharField(max_length=255)
     user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     lab = models.ForeignKey(Lab, null=False, on_delete=models.CASCADE)
+    isAdmin = models.BooleanField(null=True)
 
 
 class Idea(GenericModel):
@@ -48,3 +49,4 @@ class Idea(GenericModel):
     notes = models.CharField(max_length=1000, blank=True)
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
+
