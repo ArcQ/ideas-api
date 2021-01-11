@@ -34,7 +34,7 @@ const style = {
     paddingRight: 8,
   },
   replyButton: {
-    backgroundColor: colors.black05,
+    backgroundColor: colors.black15,
     alignItems: 'center',
     justifyContent: 'center',
     width: 40,

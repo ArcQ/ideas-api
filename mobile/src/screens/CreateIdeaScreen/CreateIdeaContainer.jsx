@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import envService from '../../services/env/envService';
@@ -11,44 +10,39 @@ const initialFormState = envService.getDefaultValues('createIdea');
 export default function CreateIdeaContainer(props) {
   const formConfig = {
     name: {
-      placeholder: 'Name',
+      placeholder: 'Lemonade Stand',
+      label: 'Name',
       validation: {
         required: true,
       },
     },
     description: {
-      placeholder: 'Description',
+      placeholder: 'Order a whole bunch of lemons, and make some lemonade!',
+      label: 'Description',
       multiline: true,
+      inputStyle: { minHeight: 200 },
+      validation: {
+        required: true,
+      },
     },
   };
-
-  const [formValues, setFormValues] = useState({});
-
-  const formMethods = useForm({});
 
   const methods = {
     exit() {
       // draft?
       props.navigation.goBack();
     },
-    updateFormValues(newFormValue) {
-      setFormValues({ ...formValues, ...newFormValue });
+    onSubmit: () => {
+      props.createIdea({});
     },
-    onSubmitPress: formMethods.handleSubmit(() => {
-      props.createIdea({
-        clientPlans: props.navigation.getParam('clientPlans'),
-      });
-    }),
   };
 
   return (
-    <FormProvider {...formMethods}>
-      <CreateIdea
-        {...methods}
-        formConfig={formConfig}
-        initialFormState={initialFormState}
-      />
-    </FormProvider>
+    <CreateIdea
+      {...methods}
+      formConfig={formConfig}
+      initialFormState={initialFormState}
+    />
   );
 }
 

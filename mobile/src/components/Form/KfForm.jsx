@@ -1,9 +1,10 @@
+import { useForm, FormProvider } from 'react-hook-form';
 import { Text, View } from 'react-native';
 import React, { Component } from 'react';
-import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 
+import gStyle from '../../constants/gStyle';
 import Button from '../buttons/Button';
 import FormInput from './FormInput';
 import AppPropTypes from '../../utils/AppPropTypes';
@@ -13,19 +14,21 @@ const style = {
   container: {
     flex: 1,
     width: '100%',
-    padding: 20,
+    padding: 15,
   },
   title: {
-    marginTop: 12,
+    ...gStyle.title,
+    marginTop: 20,
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
   },
   desc: {
     marginTop: 14,
   },
   formFields: {
     flex: 1,
-    marginTop: 26,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   placeholder: {
     minHeight: 80,
@@ -33,55 +36,59 @@ const style = {
 };
 
 function FormComponent(props) {
-  const { watch, control, errors, handleSubmit } = useForm({
+  const formMethods = useForm({
     defaultValues: props.initialFormState,
   });
+  const { watch, control, errors, handleSubmit } = formMethods;
+
   const fieldEntries = Object.entries(props.formConfig);
 
   return (
-    <ScrollableAvoidKeyboard>
-      <SafeAreaView style={style.container}>
-        {props.title && <Text style={style.title}>{props.title}</Text>}
-        {props.desc && <Text style={style.desc}>{props.desc}</Text>}
-        <View style={style.formFields}>
-          {fieldEntries.map(([name, passThroughInputProps]) => {
-            props.formRefs[name] = React.createRef();
-            return (
-              <FormInput
-                inputRef={props.formRefs[name]}
-                watch={watch}
-                key={name}
-                control={control}
-                name={name}
-                errors={errors}
-                {...passThroughInputProps}
-              />
-            );
-          })}
-        </View>
-        <View style={style.placeholder} />
-        <View style={{ paddingHorizontal: 20 }}>
-          <Button
-            style={style.submitButton}
-            size="giant"
-            isLoading={props.isSubmitting}
-            onPress={handleSubmit(props.onSubmit)}
-          >
-            {props.submitMsg}
-          </Button>
-          {props.altActionMsg && (
+    <FormProvider {...formMethods}>
+      <ScrollableAvoidKeyboard>
+        <SafeAreaView style={style.container}>
+          {props.title && <Text style={style.title}>{props.title}</Text>}
+          {props.desc && <Text style={style.desc}>{props.desc}</Text>}
+          <View style={style.formFields}>
+            {fieldEntries.map(([name, passThroughInputProps]) => {
+              props.formRefs[name] = React.createRef();
+              return (
+                <FormInput
+                  inputRef={props.formRefs[name]}
+                  watch={watch}
+                  key={name}
+                  control={control}
+                  name={name}
+                  errors={errors}
+                  {...passThroughInputProps}
+                />
+              );
+            })}
+          </View>
+          <View style={style.placeholder} />
+          <View style={{ paddingHorizontal: 20 }}>
             <Button
               style={style.submitButton}
-              type="ghost"
               size="giant"
-              onPress={props.onAltActionPress}
+              isLoading={props.isSubmitting}
+              onPress={handleSubmit(props.onSubmit)}
             >
-              {props.altActionMsg}
+              {props.submitMsg}
             </Button>
-          )}
-        </View>
-      </SafeAreaView>
-    </ScrollableAvoidKeyboard>
+            {props.altActionMsg && (
+              <Button
+                style={style.submitButton}
+                type="ghost"
+                size="giant"
+                onPress={props.onAltActionPress}
+              >
+                {props.altActionMsg}
+              </Button>
+            )}
+          </View>
+        </SafeAreaView>
+      </ScrollableAvoidKeyboard>
+    </FormProvider>
   );
 }
 

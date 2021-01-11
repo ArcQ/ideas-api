@@ -9,3 +9,7 @@ export function camelToSnake(s) {
     .join('_')
     .toLowerCase();
 }
+
+export function titleCasing(s) {
+  return s[0].toUpperCase() + s.slice(1).toLowerCase();
+}

@@ -124,4 +124,8 @@ gStyle.title = {
   fontSize: 30,
 };
 
+gStyle.smallText = {
+  fontSize: 12,
+};
+
 export default gStyle;

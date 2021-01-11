@@ -1,8 +1,9 @@
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import gStyle from '../../constants/gStyle';
 import CloseButton from '../../components/buttons/CloseButton';
 import KfForm from '../../components/Form/KfForm';
 import ScrollableAvoidKeyboard from '../../components/ScrollableAvoidKeyboard';
@@ -10,9 +11,9 @@ import colors from '../../constants/colors';
 
 const style = {
   container: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   ideaButton: {
     width: 60,
@@ -30,8 +31,13 @@ const style = {
     alignSelf: 'end',
     position: 'absolute',
     zIndex: 100,
-    right: 30,
-    top: 30,
+    right: 20,
+    top: 20,
+  },
+  header: {
+    ...gStyle.title,
+    alignSelf: 'flex-start',
+    paddingLeft: 20,
   },
 };
 
@@ -42,9 +48,17 @@ export default function CreateIdea(props) {
       <SafeAreaView style={style.container}>
         <CloseButton
           onPress={props.exit}
-          style={{ ...style.closeButton, top: 30 + insets.top }}
+          style={{
+            ...style.closeButton,
+            top: style.closeButton.top + insets.top,
+          }}
         />
-        <KfForm formConfig={props.formConfig} submitMsg="Create Idea" />
+        <KfForm
+          title="Create An Idea"
+          formConfig={props.formConfig}
+          submitMsg="Create"
+          onSubmit={props.onSubmit}
+        />
       </SafeAreaView>
     </ScrollableAvoidKeyboard>
   );
@@ -52,5 +66,6 @@ export default function CreateIdea(props) {
 
 CreateIdea.propTypes = {
   exit: PropTypes.func,
+  onSubmit: PropTypes.func,
   formConfig: PropTypes.object,
 };
