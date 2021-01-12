@@ -1,5 +1,4 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { ThemeProvider } from 'styled-components/native';
 import { RelayEnvironmentProvider } from 'relay-hooks';
 import React, { Suspense, useState } from 'react';
 import { AppLoading } from 'expo';
