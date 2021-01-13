@@ -128,4 +128,11 @@ gStyle.smallText = {
   fontSize: 12,
 };
 
+gStyle.subHeader = {
+  fontSize: 20,
+  marginTop: 10,
+  marginBottom: 5,
+  fontWeight: '500',
+};
+
 export default gStyle;

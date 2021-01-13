@@ -17,7 +17,8 @@ export type IdeaDetailContainerQueryResponse = {|
     +createdAt: any,
     +updatedAt: any,
     +lab: {|
-      +id: string
+      +id: string,
+      +imageUrl: string,
     |},
     +createdBy: ?{|
       +username: string,
@@ -45,6 +46,7 @@ query IdeaDetailContainerQuery(
     updatedAt
     lab {
       id
+      imageUrl
     }
     createdBy {
       username
@@ -97,27 +99,28 @@ v4 = {
 v5 = {
   "alias": null,
   "args": null,
-  "concreteType": "LabNode",
-  "kind": "LinkedField",
-  "name": "lab",
-  "plural": false,
-  "selections": [
-    (v2/*: any*/)
-  ],
+  "kind": "ScalarField",
+  "name": "imageUrl",
   "storageKey": null
 },
 v6 = {
   "alias": null,
   "args": null,
-  "kind": "ScalarField",
-  "name": "username",
+  "concreteType": "LabNode",
+  "kind": "LinkedField",
+  "name": "lab",
+  "plural": false,
+  "selections": [
+    (v2/*: any*/),
+    (v5/*: any*/)
+  ],
   "storageKey": null
 },
 v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "imageUrl",
+  "name": "username",
   "storageKey": null
 },
 v8 = {
@@ -159,7 +162,7 @@ return {
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
-          (v5/*: any*/),
+          (v6/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -168,8 +171,8 @@ return {
             "name": "createdBy",
             "plural": false,
             "selections": [
-              (v6/*: any*/),
-              (v7/*: any*/)
+              (v7/*: any*/),
+              (v5/*: any*/)
             ],
             "storageKey": null
           },
@@ -200,7 +203,7 @@ return {
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
-          (v5/*: any*/),
+          (v6/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -209,8 +212,8 @@ return {
             "name": "createdBy",
             "plural": false,
             "selections": [
-              (v6/*: any*/),
               (v7/*: any*/),
+              (v5/*: any*/),
               (v2/*: any*/)
             ],
             "storageKey": null
@@ -224,16 +227,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "09f2e1dbadd03c0a796166728c748b12",
+    "cacheID": "85062bd05a4204b1d0869f81e9789f78",
     "id": null,
     "metadata": {},
     "name": "IdeaDetailContainerQuery",
     "operationKind": "query",
-    "text": "query IdeaDetailContainerQuery(\n  $ideaId: ID!\n) {\n  idea(id: $ideaId) {\n    id\n    createdAt\n    updatedAt\n    lab {\n      id\n    }\n    createdBy {\n      username\n      imageUrl\n      id\n    }\n    desc\n    title\n    notes\n  }\n}\n"
+    "text": "query IdeaDetailContainerQuery(\n  $ideaId: ID!\n) {\n  idea(id: $ideaId) {\n    id\n    createdAt\n    updatedAt\n    lab {\n      id\n      imageUrl\n    }\n    createdBy {\n      username\n      imageUrl\n      id\n    }\n    desc\n    title\n    notes\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'd542d8a8bc389fe95badabbad3bfc299';
+(node/*: any*/).hash = 'f4138d98478437b507b44c346b3059c8';
 
 module.exports = node;

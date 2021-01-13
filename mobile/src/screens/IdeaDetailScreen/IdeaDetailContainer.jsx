@@ -13,6 +13,7 @@ const ideaByIdQuery = graphql`
       updatedAt
       lab {
         id
+        imageUrl
       }
       createdBy {
         username

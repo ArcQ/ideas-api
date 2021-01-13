@@ -3,6 +3,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { getFromNow } from '../../../utils/dateUtil';
 import { MINI_HIT_SLOP } from '../../../constants/hitSlops';
 import gstyle from '../../../constants/gStyle';
 import colors from '../../../constants/colors';
@@ -57,7 +58,7 @@ export default function IdeaItem(props) {
         <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
           {props.item.desc}
         </Text>
-        <Text style={style.createdAt}>{props.item.createdAt}</Text>
+        <Text style={style.createdAt}>{getFromNow(props.item.createdAt)}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         hitSlop={MINI_HIT_SLOP}

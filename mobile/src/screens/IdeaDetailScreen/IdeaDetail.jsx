@@ -1,8 +1,9 @@
-import { SafeAreaView, Text, View } from 'react-native';
+import { Image, SafeAreaView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { getFormattedDate } from '../../utils/dateUtil';
 import gStyle from '../../constants/gStyle';
 import CloseButton from '../../components/buttons/CloseButton';
 import Loader from '../../components/Loader';
@@ -29,8 +30,7 @@ const style = {
     backgroundColor: colors.black10,
   },
   subHeader: {
-    ...gStyle.textBold210,
-    fontSize: 15,
+    ...gStyle.subHeader,
   },
   itemText: {
     flex: 1,
@@ -64,6 +64,7 @@ export default function IdeaDetail(props) {
           <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
             {props.idea.desc}
           </Text>
+          <Text style={style.subHeader}>Notes</Text>
           <Text style={style.notes} numberOfLines={4} ellipsizeMode="tail">
             {props.idea.notes}
           </Text>
@@ -73,8 +74,14 @@ export default function IdeaDetail(props) {
               numberOfLines={4}
               ellipsizeMode="tail"
             >
-              Created by
+              Posted by
             </Text>
+            <Image
+              style={style.tinyLogo}
+              source={{
+                uri: props.idea.lab.imageUrl,
+              }}
+            />
             <Text
               style={style.createdBy}
               numberOfLines={4}
@@ -83,7 +90,9 @@ export default function IdeaDetail(props) {
               {props.idea.createdBy.username}
             </Text>
           </View>
-          <Text style={style.createdAt}>{props.idea.createdAt}</Text>
+          <Text style={style.createdAt}>
+            {getFormattedDate(props.idea.createdAt)}
+          </Text>
           <Text style={style.subHeader}>Comments</Text>
         </View>
       ) : (
