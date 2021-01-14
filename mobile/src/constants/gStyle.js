@@ -131,7 +131,7 @@ gStyle.smallText = {
 gStyle.subHeader = {
   fontSize: 20,
   marginTop: 10,
-  marginBottom: 5,
+  marginBottom: 8,
   fontWeight: '500',
 };
 

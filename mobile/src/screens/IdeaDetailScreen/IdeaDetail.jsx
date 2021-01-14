@@ -1,9 +1,10 @@
-import { Image, SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { getFormattedDate } from '../../utils/dateUtil';
+import ActionButtons from './components/ActionButtons';
+import AppPropTypes from '../../utils/AppPropTypes';
 import gStyle from '../../constants/gStyle';
 import CloseButton from '../../components/buttons/CloseButton';
 import Loader from '../../components/Loader';
@@ -12,7 +13,7 @@ import colors from '../../constants/colors';
 const style = {
   title: {
     ...gStyle.textBold20,
-    marginTop: 30,
+    marginTop: 50,
     marginBottom: 20,
     fontSize: 30,
   },
@@ -50,6 +51,7 @@ export default function IdeaDetail(props) {
   const insets = useSafeAreaInsets();
   return (
     <SafeAreaView style={gStyle.page}>
+      <ActionButtons />
       <CloseButton
         style={style.closeButton({ topInset: insets.top })}
         onPress={() => {
@@ -61,39 +63,20 @@ export default function IdeaDetail(props) {
           <Text style={style.title} ellipsizeMode="tail">
             {props.idea.title}
           </Text>
+          <Text style={style.subHeader}>Description</Text>
           <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
             {props.idea.desc}
           </Text>
           <Text style={style.subHeader}>Notes</Text>
-          <Text style={style.notes} numberOfLines={4} ellipsizeMode="tail">
-            {props.idea.notes}
-          </Text>
-          <View>
-            <Text
-              style={style.subHeader}
-              numberOfLines={4}
-              ellipsizeMode="tail"
-            >
-              Posted by
+          {props.idea.notes && (
+            <Text style={style.notes} numberOfLines={4} ellipsizeMode="tail">
+              {props.idea.notes}
             </Text>
-            <Image
-              style={style.tinyLogo}
-              source={{
-                uri: props.idea.lab.imageUrl,
-              }}
-            />
-            <Text
-              style={style.createdBy}
-              numberOfLines={4}
-              ellipsizeMode="tail"
-            >
-              {props.idea.createdBy.username}
-            </Text>
-          </View>
-          <Text style={style.createdAt}>
-            {getFormattedDate(props.idea.createdAt)}
+          )}
+
+          <Text style={style.subHeader} numberOfLines={4} ellipsizeMode="tail">
+            Posted by
           </Text>
-          <Text style={style.subHeader}>Comments</Text>
         </View>
       ) : (
         <Loader />
@@ -103,6 +86,6 @@ export default function IdeaDetail(props) {
 }
 
 IdeaDetail.propTypes = {
-  idea: PropTypes.object,
+  idea: AppPropTypes.idea,
   onClosePress: PropTypes.func,
 };

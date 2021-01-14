@@ -137,7 +137,7 @@ const style = {
   },
   dayText: {
     ...gStyle.textLarsBold16,
-    color: colors.slackBlack,
+    color: colors.blueBlack,
     paddingBottom: 2,
     textAlign: 'left',
   },

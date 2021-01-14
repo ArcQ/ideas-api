@@ -22,6 +22,8 @@ export type IdeaDetailContainerQueryResponse = {|
     |},
     +createdBy: ?{|
       +username: string,
+      +firstName: string,
+      +lastName: string,
       +imageUrl: string,
     |},
     +desc: string,
@@ -50,6 +52,8 @@ query IdeaDetailContainerQuery(
     }
     createdBy {
       username
+      firstName
+      lastName
       imageUrl
       id
     }
@@ -127,17 +131,31 @@ v8 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "desc",
+  "name": "firstName",
   "storageKey": null
 },
 v9 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "title",
+  "name": "lastName",
   "storageKey": null
 },
 v10 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "desc",
+  "storageKey": null
+},
+v11 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "title",
+  "storageKey": null
+},
+v12 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -172,13 +190,15 @@ return {
             "plural": false,
             "selections": [
               (v7/*: any*/),
+              (v8/*: any*/),
+              (v9/*: any*/),
               (v5/*: any*/)
             ],
             "storageKey": null
           },
-          (v8/*: any*/),
-          (v9/*: any*/),
-          (v10/*: any*/)
+          (v10/*: any*/),
+          (v11/*: any*/),
+          (v12/*: any*/)
         ],
         "storageKey": null
       }
@@ -213,30 +233,32 @@ return {
             "plural": false,
             "selections": [
               (v7/*: any*/),
+              (v8/*: any*/),
+              (v9/*: any*/),
               (v5/*: any*/),
               (v2/*: any*/)
             ],
             "storageKey": null
           },
-          (v8/*: any*/),
-          (v9/*: any*/),
-          (v10/*: any*/)
+          (v10/*: any*/),
+          (v11/*: any*/),
+          (v12/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "85062bd05a4204b1d0869f81e9789f78",
+    "cacheID": "5f15f2b4497258f9f6598b4f370a8226",
     "id": null,
     "metadata": {},
     "name": "IdeaDetailContainerQuery",
     "operationKind": "query",
-    "text": "query IdeaDetailContainerQuery(\n  $ideaId: ID!\n) {\n  idea(id: $ideaId) {\n    id\n    createdAt\n    updatedAt\n    lab {\n      id\n      imageUrl\n    }\n    createdBy {\n      username\n      imageUrl\n      id\n    }\n    desc\n    title\n    notes\n  }\n}\n"
+    "text": "query IdeaDetailContainerQuery(\n  $ideaId: ID!\n) {\n  idea(id: $ideaId) {\n    id\n    createdAt\n    updatedAt\n    lab {\n      id\n      imageUrl\n    }\n    createdBy {\n      username\n      firstName\n      lastName\n      imageUrl\n      id\n    }\n    desc\n    title\n    notes\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f4138d98478437b507b44c346b3059c8';
+(node/*: any*/).hash = '53acfc85fe1641852cb668465860cb63';
 
 module.exports = node;

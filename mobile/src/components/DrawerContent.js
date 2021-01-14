@@ -19,7 +19,7 @@ const style = {
   drawerContentContainer: {
     alignItems: 'left',
     padding: 20,
-    backgroundColor: colors.purple,
+    backgroundColor: colors.green,
     flex: 1,
     justifyContent: 'center',
   },

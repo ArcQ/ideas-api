@@ -21,8 +21,7 @@ export default {
   greyIcon: '#616061',
   greyLine: '#c6c6c6',
   greyTime: '#868686',
-  purple: '#3f0e40',
-  slackBlack: '#1d1c1d',
+  blueBlack: '#1d1c1d',
   primary: '#3f0e40',
 
   success: '#2eb67d',

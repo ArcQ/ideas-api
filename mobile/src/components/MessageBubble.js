@@ -209,7 +209,7 @@ const style = {
   },
   usernameText: {
     ...gStyle.textLarsBold14,
-    color: colors.slackBlack,
+    color: colors.blueBlack,
     marginRight: 8,
   },
   containerTime: {

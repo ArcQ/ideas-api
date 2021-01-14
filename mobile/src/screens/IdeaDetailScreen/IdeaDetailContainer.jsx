@@ -17,6 +17,8 @@ const ideaByIdQuery = graphql`
       }
       createdBy {
         username
+        firstName
+        lastName
         imageUrl
       }
       desc
