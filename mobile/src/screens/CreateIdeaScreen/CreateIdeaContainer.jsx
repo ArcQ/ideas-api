@@ -49,7 +49,7 @@ export default function CreateIdeaContainer(props) {
     },
   };
 
-  const [mutate, { loading }] = useMutation(createIdeaMutation, {
+  const [createIdea, { loading }] = useMutation(createIdeaMutation, {
     onCompleted: ({ idea }) => {
       console.log(idea);
     },
@@ -61,7 +61,7 @@ export default function CreateIdeaContainer(props) {
       props.navigation.goBack();
     },
     onSubmit: (data) => {
-      mutate({
+      createIdea({
         variables: {
           input: {
             title: data.title,

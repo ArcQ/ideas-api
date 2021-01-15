@@ -24,8 +24,8 @@ const style = {
 export default function ActionButtons(props) {
   return (
     <View style={style.container}>
-      <EditButton style={{ paddingLeft: 5 }} />
-      <DeleteButton style={{ paddingHorizontal: 5 }} />
+      <EditButton style={{ paddingLeft: 5 }} onPress={props.onEdit} />
+      <DeleteButton style={{ paddingHorizontal: 5 }} onPress={props.onDelete} />
     </View>
   );
 }
@@ -33,4 +33,6 @@ export default function ActionButtons(props) {
 ActionButtons.propTypes = {
   createdBy: AppPropTypes.user,
   createdAt: PropTypes.string,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
 };

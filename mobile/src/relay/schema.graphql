@@ -5,6 +5,10 @@ schema {
 
 scalar DateTime
 
+type DeleteIdeaMutation {
+  ok: Boolean
+}
+
 type ErrorType {
   field: String!
   messages: [String!]!
@@ -77,6 +81,7 @@ type LabNodeEdge {
 
 type Mutation {
   idea(input: IdeaMutationInput!): IdeaMutationPayload
+  deleteIdea(id: ID): DeleteIdeaMutation
 }
 
 interface Node {

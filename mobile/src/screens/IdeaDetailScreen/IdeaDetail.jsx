@@ -51,7 +51,7 @@ export default function IdeaDetail(props) {
   const insets = useSafeAreaInsets();
   return (
     <SafeAreaView style={gStyle.page}>
-      <ActionButtons />
+      <ActionButtons onDelete={props.onDelete} onEdit={props.onEdit} />
       <CloseButton
         style={style.closeButton({ topInset: insets.top })}
         onPress={() => {
@@ -88,4 +88,6 @@ export default function IdeaDetail(props) {
 IdeaDetail.propTypes = {
   idea: AppPropTypes.idea,
   onClosePress: PropTypes.func,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
 };
