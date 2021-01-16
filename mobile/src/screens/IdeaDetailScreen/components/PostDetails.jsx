@@ -4,7 +4,6 @@ import React from 'react';
 
 import AppPropTypes from '../../../utils/AppPropTypes';
 import colors from '../../../constants/colors';
-import { style } from '../../../components/Form/FormInput';
 import { getFormattedDate } from '../../../utils/dateUtil';
 
 const style = {

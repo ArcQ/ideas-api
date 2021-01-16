@@ -48,7 +48,7 @@ export default function IdeaItem(props) {
       <TouchableOpacity
         hitSlop={MINI_HIT_SLOP}
         onPress={() => {
-          props.ideaItemOnPress();
+          props.ideaItemOnPress(props.item.id);
         }}
         style={style.itemText}
       >

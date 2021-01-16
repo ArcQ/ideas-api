@@ -38,8 +38,7 @@ export default function IdeasListComponent(props) {
             <IdeaItem
               item={item.node}
               CustomStatusComponent={props.CustomStatusComponent}
-              onListItemPress={props.onListEditableItemPress}
-              ideaItemOnPress={props.ideaItemOnPress}
+              ideaItemOnPress={() => props.ideaItemOnPress(item.node.id)}
               shareIdeaInChat={props.shareIdeaInChat}
             />
           </SwipeableRow>
@@ -58,7 +57,6 @@ export default function IdeasListComponent(props) {
 IdeasListComponent.propTypes = {
   CustomStatusComponent: PropTypes.func,
   onSwipeableRightOpen: PropTypes.func,
-  onListItemPress: PropTypes.func,
   onListEditableItemPress: PropTypes.func,
   isEditable: PropTypes.bool,
   offset: PropTypes.object,

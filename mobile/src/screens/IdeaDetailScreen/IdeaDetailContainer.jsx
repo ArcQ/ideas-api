@@ -38,12 +38,14 @@ const deleteIdeaMutation = graphql`
 `;
 
 function IdeaDetailContainer(props) {
+  const ideaId = props.route.params?.ideaId;
+  // console.log(props.route);
   const ideaByIdQueryProps = useQuery(ideaByIdQuery, {
-    ideaId: 'SWRlYU5vZGU6NGViOWNiOTMtYjExNi00M2RhLWFmNjgtOTNiOTJhMjAwNGNl',
+    ideaId,
   });
   const [deleteIdea, { loading }] = useMutation(deleteIdeaMutation, {
     onCompleted: ({ deleteIdea }) => {
-      console.log(deleteIdea);
+      // console.log(deleteIdea);
     },
   });
   const idea = ideaByIdQueryProps?.data?.idea;
@@ -68,6 +70,7 @@ function IdeaDetailContainer(props) {
 
 IdeaDetailContainer.propTypes = {
   navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default IdeaDetailContainer;

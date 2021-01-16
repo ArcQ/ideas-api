@@ -48,43 +48,8 @@ const style = {
   }),
 };
 
-export default function IdeaDetail(props) {
-  const insets = useSafeAreaInsets();
-  return (
-    <SafeAreaView style={gStyle.page}>
-      <ActionButtons onDelete={props.onDelete} onEdit={props.onEdit} />
-      <CloseButton
-        style={style.closeButton({ topInset: insets.top })}
-        onPress={() => {
-          props.onClosePress();
-        }}
-      />
-      {props.idea ? (
-        <View>
-          <Text style={style.title} ellipsizeMode="tail">
-            {props.idea.title}
-          </Text>
-          <Text style={style.subHeader}>Description</Text>
-          <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
-            {props.idea.desc}
-          </Text>
-          <Text style={style.subHeader}>Notes</Text>
-          {props.idea.notes && (
-            <Text style={style.notes} numberOfLines={4} ellipsizeMode="tail">
-              {props.idea.notes}
-            </Text>
-          )}
-
-          <Text style={style.subHeader} numberOfLines={4} ellipsizeMode="tail">
-            Posted by
-          </Text>
-          <PostDetails createdBy={props.idea.createdBy} />
-        </View>
-      ) : (
-        <Loader />
-      )}
-    </SafeAreaView>
-  );
+export default function EditableText(props) {
+  return <View />;
 }
 
 IdeaDetail.propTypes = {
