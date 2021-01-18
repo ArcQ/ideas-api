@@ -29,6 +29,11 @@ const style = {
     ...gStyle.textCiruBook12,
     color: colors.white,
   },
+  closeButton: {
+    position: 'absolute',
+    right: 20,
+    top: 15,
+  },
 };
 
 // TODO, should make this generic toast, not just alert modal, because it allows for success now
@@ -53,7 +58,7 @@ function AlertToast(props) {
         ]}
       >
         <Text style={style.alertText}>{props.alert.message}</Text>
-        <CloseButton onPress={props.clearAlerts} />
+        <CloseButton style={style.closeButton} onPress={props.clearAlerts} />
       </View>
     </Modal>
   );

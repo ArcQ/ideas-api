@@ -68,11 +68,13 @@ export default function IdeaDetail(props) {
           <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
             {props.idea.desc}
           </Text>
-          <Text style={style.subHeader}>Notes</Text>
-          {props.idea.notes && (
-            <Text style={style.notes} numberOfLines={4} ellipsizeMode="tail">
-              {props.idea.notes}
-            </Text>
+          {!!props.idea.notes && (
+            <>
+              <Text style={style.subHeader}>Notes</Text>
+              <Text style={style.notes} numberOfLines={4} ellipsizeMode="tail">
+                {props.idea.notes}
+              </Text>
+            </>
           )}
 
           <Text style={style.subHeader} numberOfLines={4} ellipsizeMode="tail">

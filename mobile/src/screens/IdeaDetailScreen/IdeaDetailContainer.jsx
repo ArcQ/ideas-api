@@ -1,10 +1,13 @@
+import { connect } from 'react-redux';
 import { useMutation, useQuery } from 'relay-hooks';
 import { graphql } from 'react-relay';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import { parseUuid } from '../../utils/idUtil';
+import { alertActions } from '../../store/alert/ducks';
 import IdeaDetail from './IdeaDetail';
+import { deleteIdeaSuccessMessage } from '../../store/alert/alertMessages';
 
 const ideaByIdQuery = graphql`
   query IdeaDetailContainerQuery($ideaId: ID!) {
@@ -61,6 +64,10 @@ function IdeaDetailContainer(props) {
           id: parseUuid(idea.id),
         },
       });
+      props.navigation.goBack();
+      setTimeout(() => {
+        props.setSuccessMessage(deleteIdeaSuccessMessage);
+      }, 400);
     },
     onEdit: () => {},
   };
@@ -71,6 +78,16 @@ function IdeaDetailContainer(props) {
 IdeaDetailContainer.propTypes = {
   navigation: PropTypes.object,
   route: PropTypes.object,
+  setSuccessMessage: PropTypes.func,
 };
 
-export default IdeaDetailContainer;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {
+  setSuccessMessage: alertActions.setSuccessMessage,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(IdeaDetailContainer);
