@@ -11,6 +11,7 @@ const UserPropType = PropTypes.shape({
 
 const AppPropTypes = {
   navigation: PropTypes.object,
+  route: PropTypes.object,
   style: PropTypes.object,
   errors: PropTypes.object,
   items: PropTypes.arrayOf(

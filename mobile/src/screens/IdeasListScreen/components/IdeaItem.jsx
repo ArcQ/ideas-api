@@ -3,6 +3,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import AppPropTypes from '../../../utils/AppPropTypes';
 import { getFromNow } from '../../../utils/dateUtil';
 import { MINI_HIT_SLOP } from '../../../constants/hitSlops';
 import gstyle from '../../../constants/gStyle';
@@ -63,7 +64,7 @@ export default function IdeaItem(props) {
       <TouchableOpacity
         hitSlop={MINI_HIT_SLOP}
         onPress={() => {
-          props.shareIdeaInChat({ ideaId: props.id });
+          props.shareIdeaInChat(props.item);
         }}
         style={style.replyButton}
       >
@@ -74,7 +75,7 @@ export default function IdeaItem(props) {
 }
 
 IdeaItem.propTypes = {
-  item: PropTypes.object,
+  item: AppPropTypes.idea,
   ideaItemOnPress: PropTypes.func,
   shareIdeaInChat: PropTypes.func,
 };
