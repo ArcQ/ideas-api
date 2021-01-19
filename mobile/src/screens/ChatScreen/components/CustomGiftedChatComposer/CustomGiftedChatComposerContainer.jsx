@@ -3,8 +3,8 @@ import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Colors from '../../constants/colors';
-import AppPropTypes from '../../utils/AppPropTypes';
+import Colors from '../../../../constants/colors';
+import AppPropTypes from '../../../../utils/AppPropTypes';
 import CustomGiftedChatComposer from './CustomGiftedChatComposer';
 
 const MIN_COMPOSER_HEIGHT = Platform.select({
@@ -52,6 +52,8 @@ export default class CustomGiftedChatComposerContainer extends React.Component {
       {...this.props}
       contentSize={this.contentSize}
       idea={this.props.idea}
+      onIdeaItemPress={this.props.onIdeaItemPress}
+      onDeletePreviewPress={this.props.onDeletePreviewPress}
       onChangeText={this.onChangeText}
       onContentSizeChange={this.onContentSizeChange}
     />
@@ -80,6 +82,8 @@ CustomGiftedChatComposerContainer.propTypes = {
   text: PropTypes.string,
   placeholder: PropTypes.string,
   placeholderTextColor: PropTypes.string,
+  onIdeaItemPress: PropTypes.func,
+  onDeletePreviewPress: PropTypes.func,
   textInputProps: PropTypes.object,
   onTextChanged: PropTypes.func,
   multiline: PropTypes.bool,

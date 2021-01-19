@@ -37,9 +37,9 @@ function IdeasListScreenContainer(props) {
   const methods = {
     createIdeaOnPress: () => props.navigation.navigate(CREATE_IDEA_ROUTE),
     goToChatRoute: () => props.navigation.navigate(CHAT_ROUTE),
-    ideaItemOnPress: (idea) => {
+    ideaItemOnPress: (ideaId) => {
       props.navigation.navigate(IDEA_DETAIL_ROUTE, {
-        idea,
+        ideaId,
       });
     },
     shareIdeaInChat: (idea) => {

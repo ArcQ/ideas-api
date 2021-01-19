@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 
+import CustomGiftedChatComposerContainer from './components/CustomGiftedChatComposer/CustomGiftedChatComposerContainer';
 import AppPropTypes from '../../utils/AppPropTypes';
-import CustomGiftedChatComposerContainer from '../../components/CustomGiftedChatComposer/CustomGiftedChatComposerContainer';
 import ChatHeader from './ChatHeader';
 import { MessagePropType } from '../../utils/types';
 import AccessoryBar from '../../components/AccessoryBar';
@@ -14,6 +14,8 @@ export default function Chat({
   messages,
   sendMessage,
   getChatForBase,
+  onIdeaItemPress,
+  onDeletePreviewPress,
   idea,
 }) {
   useEffect(() => {
@@ -30,7 +32,12 @@ export default function Chat({
         renderAccessory={(_props) => <AccessoryBar {..._props} />}
         renderMessage={(_props) => <Message {..._props} />}
         renderComposer={(_props) => (
-          <CustomGiftedChatComposerContainer idea={idea} {..._props} />
+          <CustomGiftedChatComposerContainer
+            onIdeaItemPress={onIdeaItemPress}
+            onDeletePreviewPress={onDeletePreviewPress}
+            idea={idea}
+            {..._props}
+          />
         )}
         renderSend={(_props) => null}
         user={{ _id: 1 }}
@@ -41,6 +48,8 @@ export default function Chat({
 
 Chat.propTypes = {
   getChatForBase: PropTypes.func,
+  onIdeaItemPress: PropTypes.func,
+  onDeletePreviewPress: PropTypes.func,
   sendMessage: PropTypes.func,
   messages: PropTypes.arrayOf(MessagePropType),
   chatId: PropTypes.string,

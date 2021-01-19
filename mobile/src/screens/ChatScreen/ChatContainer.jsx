@@ -1,7 +1,8 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import React from 'react';
 
+import { IDEA_DETAIL_ROUTE } from '../../constants/routes';
 import AppPropTypes from '../../utils/AppPropTypes';
 import { baseActions } from '../../store/base/ducks';
 import { appSelectors } from '../../store/app/ducks';
@@ -19,6 +20,14 @@ function ChatContainer(props) {
   const methods = {
     sendMessage: props.sendMessage,
     getChatForBase: props.getChatForBase,
+    onIdeaItemPress: (ideaId) => {
+      props.navigation.navigate(IDEA_DETAIL_ROUTE, {
+        ideaId,
+      });
+    },
+    onDeletePreviewPress: () => {
+      props.navigation.setParams({ idea: null });
+    },
   };
 
   return <Chat {...{ ..._props, ...methods }} />;
@@ -30,6 +39,7 @@ ChatContainer.propTypes = {
   route: AppPropTypes.route,
   messages: PropTypes.arrayOf(MessagePropType),
   chatId: PropTypes.string,
+  navigation: AppPropTypes.navigation,
 };
 
 const mapStateToProps = (state) => {

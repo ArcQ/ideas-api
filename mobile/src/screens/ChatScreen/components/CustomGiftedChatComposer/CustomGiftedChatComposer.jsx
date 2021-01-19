@@ -3,9 +3,9 @@ import { Platform, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Colors from '../../../../constants/colors';
+import AppPropTypes from '../../../../utils/AppPropTypes';
 import IdeaPreview from './IdeaPreview';
-import Colors from '../../constants/colors';
-import AppPropTypes from '../../utils/AppPropTypes';
 
 const MIN_COMPOSER_HEIGHT = Platform.select({
   ios: 33,
@@ -43,7 +43,13 @@ const styles = {
 export default function CustomGiftedChatComposer(props) {
   return (
     <View style={{ flex: 1 }}>
-      {props.idea && <IdeaPreview idea={props.idea} />}
+      {props.idea && (
+        <IdeaPreview
+          idea={props.idea}
+          onIdeaItemPress={props.onIdeaItemPress}
+          onDeletePress={props.onDeletePreviewPress}
+        />
+      )}
       <TextInput
         testID={props.placeholder}
         accessible
@@ -103,6 +109,8 @@ CustomGiftedChatComposer.propTypes = {
   textInputProps: PropTypes.object,
   onTextChanged: PropTypes.func,
   onContentSizeChange: PropTypes.func,
+  onIdeaItemPress: PropTypes.func,
+  onDeletePreviewPress: PropTypes.func,
   onChangeText: PropTypes.func,
   onInputSizeChanged: PropTypes.func,
   multiline: PropTypes.bool,

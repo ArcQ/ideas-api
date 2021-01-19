@@ -14,12 +14,17 @@ export default function CloseButton(props) {
       onPress={props.onPress}
       style={props.style}
     >
-      <AntDesign name="closecircle" size={24} color={colors.black20} />
+      <AntDesign name="closecircle" size={props.size} color={colors.black20} />
     </TouchableOpacity>
   );
 }
 
+CloseButton.defaultProps = {
+  size: 24,
+};
+
 CloseButton.propTypes = {
   onPress: PropTypes.func,
   style: AppPropTypes.style,
+  size: PropTypes.number,
 };
