@@ -14,7 +14,7 @@ const style = {
     borderRadius: 20,
     padding: 15,
     margin: 10,
-    minHeight: 80,
+    height: 80,
     backgroundColor: colors.black10,
   },
   title: {

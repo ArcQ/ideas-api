@@ -18,7 +18,9 @@ function ChatContainer(props) {
   };
 
   const methods = {
-    sendMessage: props.sendMessage,
+    sendMessage: (message) => {
+      props.sendMessage({ ...message, ideaId: _props.idea?.id });
+    },
     getChatForBase: props.getChatForBase,
     onIdeaItemPress: (ideaId) => {
       props.navigation.navigate(IDEA_DETAIL_ROUTE, {

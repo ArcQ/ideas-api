@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { CHAT_ROUTE } from '../constants/routes';
 import { SMALL_HIT_SLOP } from '../constants/hitSlops';
 import SvgBrainstorm from '../components/icons/Svg.Brainstorm';
 import gStyle from '../constants/gStyle';
@@ -21,6 +22,14 @@ const style = {
   }),
   logo: {
     marginLeft: 10,
+  },
+  actionButton: {
+    marginRight: 15,
+  },
+  navContainer: {
+    height: 50,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 };
 
@@ -42,13 +51,25 @@ export default function HomeSwipeLayout({
       ]}
     >
       <SafeAreaView style={style.contentContainer(props.isFullWidth)}>
-        <View style={[gStyle.containerNavBlocks, style.logo]}>
+        <View style={style.navContainer}>
           <TouchableOpacity
             activeOpacity={gStyle.activeOpacity}
+            style={[gStyle.containerNavBlocks, style.logo]}
             hitSlop={SMALL_HIT_SLOP}
             onPress={() => {
               Keyboard.dismiss();
               navigation.openDrawer();
+            }}
+          >
+            <SvgBrainstorm />
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={gStyle.activeOpacity}
+            hitSlop={SMALL_HIT_SLOP}
+            style={[gStyle.containerNavBlocks, style.actionButton]}
+            onPress={() => {
+              Keyboard.dismiss();
+              navigation.navigate(CHAT_ROUTE);
             }}
           >
             <SvgBrainstorm />

@@ -9,6 +9,9 @@ import { MessagePropType } from '../../utils/types';
 import AccessoryBar from '../../components/AccessoryBar';
 import Message from '../../components/Message';
 
+const DEFAULT_INPUT_TOOLBAR_HEIGHT = 44;
+const IDEA_INPUT_TOOLBAR_HEIGHT = 100;
+
 export default function Chat({
   chatId,
   messages,
@@ -31,6 +34,9 @@ export default function Chat({
         onSend={(msgs) => sendMessage(msgs)}
         renderAccessory={(_props) => <AccessoryBar {..._props} />}
         renderMessage={(_props) => <Message {..._props} />}
+        minInputToolbarHeight={
+          idea ? IDEA_INPUT_TOOLBAR_HEIGHT : DEFAULT_INPUT_TOOLBAR_HEIGHT
+        }
         renderComposer={(_props) => (
           <CustomGiftedChatComposerContainer
             onIdeaItemPress={onIdeaItemPress}
