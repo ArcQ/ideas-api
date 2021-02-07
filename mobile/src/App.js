@@ -1,13 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { RelayEnvironmentProvider } from 'relay-hooks';
 import React, { Suspense, useState } from 'react';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { enableScreens } from 'react-native-screens';
 
+import loadAssets from './assets/loadAssets';
 import Locale from './Locale';
 import AlertToast from './components/AlertToast';
 import { theme } from './components/Styled';
@@ -15,7 +16,6 @@ import relay from './relay';
 import ErrorBoundary from './ErrorBoundary';
 import SuspenseScreen from './screens/SuspenseScreen/SuspenseScreen';
 import MainAppStack from './navigation/MainAppStack';
-import func from './constants/func';
 import { authStateToActionDict } from './store/app/ducks';
 import apiService from './services/api/apiService';
 import awsService from './services/aws/awsService';
@@ -40,13 +40,14 @@ function RelayEnvironmentWrapper({ children }) {
 }
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   if (loading) {
     return (
       <AppLoading
-        onFinish={() => setLoading(true)}
-        startAsync={func.loadAssetsAsync}
+        onFinish={() => setLoading(false)}
+        onError={() => console.log('TODO')}
+        startAsync={loadAssets.loadAssetsAsync}
       />
     );
   }

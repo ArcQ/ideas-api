@@ -11,15 +11,19 @@ import CloseButton from '../../components/buttons/CloseButton';
 import Loader from '../../components/Loader';
 import colors from '../../constants/colors';
 
-const style = {
+const getStyle = () => ({
   title: {
-    ...gStyle.textBold20,
+    fontWeight: '500',
     marginTop: 50,
     marginBottom: 20,
     fontSize: 30,
   },
   desc: {
-    ...gStyle.textThin20,
+    ...gStyle.textThin,
+    paddingBottom: 10,
+  },
+  notes: {
+    ...gStyle.textThin,
     paddingBottom: 10,
   },
   listItem: {
@@ -46,9 +50,10 @@ const style = {
     top: 10 + topInset,
     zIndex: 100,
   }),
-};
+});
 
 export default function IdeaDetail(props) {
+  const style = getStyle();
   const insets = useSafeAreaInsets();
   return (
     <SafeAreaView style={gStyle.page}>

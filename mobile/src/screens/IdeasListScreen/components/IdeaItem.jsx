@@ -9,9 +9,9 @@ import { MINI_HIT_SLOP } from '../../../constants/hitSlops';
 import gstyle from '../../../constants/gStyle';
 import colors from '../../../constants/colors';
 
-const style = {
+const getStyle = () => ({
   title: {
-    ...gstyle.textBold20,
+    ...gstyle.textBold,
     paddingVertical: 5,
   },
   desc: {
@@ -41,9 +41,10 @@ const style = {
     justifyContent: 'center',
     width: 40,
   },
-};
+});
 
 export default function IdeaItem(props) {
+  const style = getStyle();
   return (
     <View style={style.listItem}>
       <TouchableOpacity

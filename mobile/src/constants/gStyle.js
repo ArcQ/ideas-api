@@ -1,5 +1,4 @@
 import colors from './colors';
-import fonts from './fonts';
 
 const gStyle = {
   activeOpacity: 0.7,
@@ -47,23 +46,6 @@ const gStyle = {
   flex4: { flex: 4 },
   flex5: { flex: 5 },
 
-  textCiruBold14: { fontFamily: fonts.circularProBold, fontSize: 14 },
-  textCiruBold16: { fontFamily: fonts.circularProBold, fontSize: 16 },
-  textCiruBold18: { fontFamily: fonts.circularProBold, fontSize: 18 },
-  textCiruBook12: { fontFamily: fonts.circularProBook, fontSize: 12 },
-  textCiruBook14: { fontFamily: fonts.circularProBook, fontSize: 14 },
-  textCiruBook16: { fontFamily: fonts.circularProBook, fontSize: 16 },
-  textCiruBook18: { fontFamily: fonts.circularProBook, fontSize: 18 },
-  textLarsBold14: { fontFamily: fonts.larsseitBold, fontSize: 14 },
-  textLarsBold16: { fontFamily: fonts.larsseitBold, fontSize: 16 },
-  textLarsBold18: { fontFamily: fonts.larsseitBold, fontSize: 18 },
-  textLarsItalic14: { fontFamily: fonts.larsseitItalic, fontSize: 14 },
-  textLarsItalic16: { fontFamily: fonts.larsseitItalic, fontSize: 16 },
-  textLarsItalic18: { fontFamily: fonts.larsseitItalic, fontSize: 18 },
-  textLarsThin14: { fontFamily: fonts.larsseitThin, fontSize: 14 },
-  textLarsThin16: { fontFamily: fonts.larsseitThin, fontSize: 16 },
-  textLarsThin18: { fontFamily: fonts.larsseitThin, fontSize: 18 },
-
   spacer24: { height: 24 },
   spacer48: { height: 48 },
   spacer64: { height: 64 },
@@ -98,30 +80,48 @@ const gStyle = {
   pH16: { paddingHorizontal: 16 },
   pH24: { paddingHorizontal: 24 },
 
-  textBold10: { fontFamily: fonts.circularProBold, fontSize: 14 },
-  textBold20: { fontFamily: fonts.circularProBold, fontSize: 16 },
-  textBold30: { fontFamily: fonts.circularProBold, fontSize: 18 },
-  textBook10: { fontFamily: fonts.circularProBook, fontSize: 12 },
-  textBook20: { fontFamily: fonts.circularProBook, fontSize: 14 },
-  textBook30: { fontFamily: fonts.circularProBook, fontSize: 16 },
-  textBook40: { fontFamily: fonts.circularProBook, fontSize: 18 },
-  textBold210: { fontFamily: fonts.larsseitBold, fontSize: 14 },
-  textBold220: { fontFamily: fonts.larsseitBold, fontSize: 16 },
-  textBold230: { fontFamily: fonts.larsseitBold, fontSize: 18 },
-  textItalic10: { fontFamily: fonts.larsseitItalic, fontSize: 14 },
-  textItalic20: { fontFamily: fonts.larsseitItalic, fontSize: 16 },
-  textItalic30: { fontFamily: fonts.larsseitItalic, fontSize: 18 },
-  textThin10: { fontFamily: fonts.larsseitThin, fontSize: 14 },
-  textThin20: { fontFamily: fonts.larsseitThin, fontSize: 16 },
-  textThin30: { fontFamily: fonts.larsseitThin, fontSize: 18 },
-};
+  textBold10: { fontFamily: 'circularProBold', fontSize: 14 },
+  textBold20: { fontFamily: 'circularProBold', fontSize: 16 },
+  textBold30: { fontFamily: 'circularProBold', fontSize: 18 },
+  textBook10: { fontFamily: 'circularProBook', fontSize: 12 },
+  textBook20: { fontFamily: 'circularProBook', fontSize: 14 },
+  textBook30: { fontFamily: 'circularProBook', fontSize: 16 },
+  textBook40: { fontFamily: 'circularProBook', fontSize: 18 },
+  textBold210: { fontFamily: 'larsseitBold', fontSize: 14 },
+  textBold220: { fontFamily: 'larsseitBold', fontSize: 16 },
+  textBold230: { fontFamily: 'larsseitBold', fontSize: 18 },
+  textItalic10: { fontFamily: 'larsseitItalic', fontSize: 14 },
+  textItalic20: { fontFamily: 'larsseitItalic', fontSize: 16 },
+  textItalic30: { fontFamily: 'larsseitItalic', fontSize: 18 },
+  textThin10: { fontFamily: 'larsseitThin', fontSize: 14 },
+  textThin20: { fontFamily: 'larsseitThin', fontSize: 16 },
+  textThin30: { fontFamily: 'larsseitThin', fontSize: 18 },
 
-gStyle.listText = { color: colors.white, ...gStyle.textCiruBook12 };
-gStyle.title = {
-  ...gStyle.textBold20,
-  marginTop: 30,
-  marginBottom: 20,
-  fontSize: 30,
+  header: {
+    fontFamily: 'circularProBold',
+    fontSize: 35,
+    fontWeight: '500',
+    marginTop: 30,
+    marginBottom: 20,
+  },
+  title: {
+    fontFamily: 'circularProBold',
+    fontSize: 30,
+    fontWeight: '500',
+    marginTop: 30,
+    marginBottom: 20,
+  },
+  subTitle: {
+    fontFamily: 'circularProBold',
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  textBold: {
+    fontFamily: 'circularProBold',
+    fontSize: 16,
+  },
+  textThin: { fontFamily: 'larsseitThin', fontSize: 16 },
+  listText: { color: colors.white, fontSize: 12 },
 };
 
 gStyle.smallText = {
