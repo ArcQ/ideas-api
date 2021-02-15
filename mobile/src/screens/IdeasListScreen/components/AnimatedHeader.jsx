@@ -2,7 +2,7 @@ import { Animated, Text } from 'react-native';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import SquareButton from '../../../components/buttons/SquareButton';
+import FilterBar from './FilterBar';
 import colors from '../../../constants/colors';
 import gStyle from '../../../constants/gStyle';
 
@@ -22,7 +22,7 @@ const getStyle = () => ({
   welcomeText: {
     ...gStyle.subTitle,
     marginTop: 10,
-    color: colors.black50,
+    color: colors.black30,
   },
   header: {
     ...gStyle.header,
@@ -36,7 +36,7 @@ export default function AnimatedHeader({ animatedValue }) {
 
   const headerHeight = animatedValue.interpolate({
     inputRange: [0, HEADER_HEIGHT + insets.top],
-    outputRange: [HEADER_HEIGHT + insets.top, insets.top + 44],
+    outputRange: [HEADER_HEIGHT + insets.top, 40],
     extrapolate: 'clamp',
   });
 
@@ -48,7 +48,7 @@ export default function AnimatedHeader({ animatedValue }) {
         {'\n'}
         ideas today?
       </Text>
-      <SquareButton />
+      <FilterBar />
     </Animated.View>
   );
 }

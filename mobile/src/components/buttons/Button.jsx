@@ -2,6 +2,7 @@ import { ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import gStyle from '../../constants/gStyle';
 import { SMALL_HIT_SLOP } from '../../constants/hitSlops';
 import colors from '../../constants/colors';
 import { StylePropType } from '../../utils/types';
@@ -12,6 +13,7 @@ const basicButtonStyle = {
   padding: 17,
   borderRadius: 20,
   zIndex: 10,
+  fontSize: 50,
 };
 
 const buttonStyle = {
@@ -24,6 +26,10 @@ const buttonStyle = {
     ...basicButtonStyle,
     backgroundColor: colors.primary,
   },
+  secondaryFilled: {
+    ...basicButtonStyle,
+    backgroundColor: colors.secondary,
+  },
   ghost: {
     ...basicButtonStyle,
     flexDirection: 'row',
@@ -35,6 +41,10 @@ const buttonTextStyle = {
     color: colors.primary,
   },
   filled: {
+    fontSize: 16,
+    color: colors.white,
+  },
+  secondaryFilled: {
     color: colors.white,
   },
   ghost: {

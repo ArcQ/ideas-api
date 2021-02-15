@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Keyboard, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -72,7 +73,11 @@ export default function HomeSwipeLayout({
               navigation.navigate(CHAT_ROUTE);
             }}
           >
-            <SvgBrainstorm />
+            <MaterialCommunityIcons
+              name="chat-outline"
+              size={36}
+              color={colors.black50}
+            />
           </TouchableOpacity>
         </View>
         <View style={style.contentContainer}>{props.children}</View>

@@ -118,10 +118,11 @@ const gStyle = {
   },
   textBold: {
     fontFamily: 'circularProBold',
-    fontSize: 16,
+    fontSize: 17,
   },
   textThin: { fontFamily: 'larsseitThin', fontSize: 16 },
-  listText: { color: colors.white, fontSize: 12 },
+  listText: { color: colors.white, fontSize: 14 },
+  largeText: { fontSize: 17 },
 };
 
 gStyle.smallText = {

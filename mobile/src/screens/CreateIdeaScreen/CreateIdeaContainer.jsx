@@ -1,6 +1,6 @@
 import { useMutation } from 'relay-hooks';
 import React from 'react';
-import { commitMutation, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 import PropTypes from 'prop-types';
 
 import envService from '../../services/env/envService';

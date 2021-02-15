@@ -1,3 +1,5 @@
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Auth } from 'aws-amplify';
 import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-relay';
@@ -10,10 +12,21 @@ import colors from '../constants/colors';
 
 const style = {
   labButton: {
-    padding: 5,
+    flexDirection: 'row',
+    overflow: 'hidden',
+    marginHorizontal: 20,
+    paddingVertical: 10,
+  },
+  drawerTitle: {
+    marginBottom: 5,
+    ...gStyle.subTitle,
+    color: colors.white,
+    alignSelf: 'flex-start',
   },
   labButtonText: {
+    ...gStyle.largeText,
     color: colors.white,
+    marginHorizontal: 15,
     alignSelf: 'flex-start',
   },
   drawerContentContainer: {
@@ -26,6 +39,13 @@ const style = {
   text: {
     ...gStyle.textLarsBold18,
     color: colors.white,
+  },
+  contentSection: {
+    marginBottom: 10,
+  },
+  profileButton: {
+    borderRadius: 20,
+    backgroundColor: colors.darkGreen,
   },
 };
 
@@ -43,6 +63,44 @@ const drawerContentQuery = graphql`
   }
 `;
 
+function DrawerLink(props) {
+  return (
+    <TouchableOpacity
+      key={props.id}
+      hitSlop={MINI_HIT_SLOP}
+      onPress={props.onPress}
+      style={style.labButton}
+    >
+      {props.logo}
+      <Text style={style.labButtonText} numberOfLines={1} ellipsizeMode="tail">
+        {props.text}
+      </Text>
+    </TouchableOpacity>
+  );
+}
+
+DrawerLink.propTypes = {
+  id: PropTypes.string,
+  onPress: PropTypes.func,
+};
+
+function ProfileButton(props) {
+  return (
+    <TouchableOpacity
+      key={props.id}
+      hitSlop={MINI_HIT_SLOP}
+      onPress={props.onPress}
+      style={style.profileButton}
+    >
+      <Text style={style.labButtonText} numberOfLines={1} ellipsizeMode="tail">
+        ArcQ
+      </Text>
+    </TouchableOpacity>
+  );
+}
+
+ProfileButton.propTypes = {};
+
 function DrawerContent(props) {
   const drawerContentQueryProps = useQuery(drawerContentQuery, {
     ideaId: 'SWRlYU5vZGU6NGViOWNiOTMtYjExNi00M2RhLWFmNjgtOTNiOTJhMjAwNGNl',
@@ -54,30 +112,46 @@ function DrawerContent(props) {
     onLabButtonPress: () => {
       // props.navigation.goBack();
     },
+    onLogoutPress: async () => {
+      try {
+        await Auth.signOut();
+      } catch (error) {
+        console.log('error signing out: ', error);
+      }
+    },
   };
 
   return (
     <View style={style.drawerContentContainer}>
-      <Text style={style.labButtonText}>Labs</Text>
-      {allLabs &&
-        allLabs.map((lab) => (
-          <TouchableOpacity
-            key={lab.node.id}
-            hitSlop={MINI_HIT_SLOP}
-            onPress={() => {
-              methods.onLabButtonPress();
-            }}
-            style={style.labButton}
-          >
-            <Text
-              style={style.labButtonText}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
-              {lab.node.name}
-            </Text>
-          </TouchableOpacity>
-        ))}
+      <Text style={style.drawerTitle}>Labs</Text>
+      <View style={style.contentSection}>
+        {allLabs &&
+          allLabs.map((lab) => (
+            <DrawerLink
+              logo={<Entypo name="lab-flask" size={24} color="white" />}
+              id={lab.node.id}
+              onPress={() => {
+                methods.onLabButtonPress();
+              }}
+              text={lab.node.name}
+              style={style.labButton}
+            />
+          ))}
+      </View>
+      <Text style={style.drawerTitle}>Profile</Text>
+      <ProfileButton
+        id="profileLink"
+        onPress={() => {
+          methods.logout();
+        }}
+      />
+      <DrawerLink
+        id="logoutLink"
+        logo={<MaterialCommunityIcons name="logout" size={24} color="white" />}
+        onPress={methods.onLogoutPress}
+        text="Logout"
+        style={style.labButton}
+      />
     </View>
   );
 }

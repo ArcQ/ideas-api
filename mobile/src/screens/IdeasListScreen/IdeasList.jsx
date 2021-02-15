@@ -44,12 +44,6 @@ export default function IdeasList(props) {
   return (
     <HomeSwipeLayout disableScroll isFullWidth>
       <AnimatedHeader animatedValue={offset} />
-      {/* <TouchableOpacity */}
-      {/*   style={{ padding: 20 }} */}
-      {/*   onPress={() => props.goToChat()} */}
-      {/* > */}
-      {/*   <Text style={gStyle.listText}>Chats</Text> */}
-      {/* </TouchableOpacity> */}
       <IdeasListComponent
         offset={offset}
         baseQueryProps={props.baseQueryProps}

@@ -1,7 +1,7 @@
 from graphene_django.rest_framework.mutation import SerializerMutation
 
 import graphene
-
+# do not remove this, we need to import this before core.models even though it's not used in this file
 import core.schema
 from core.models import Idea
 from core.serializers import IdeaSerializer

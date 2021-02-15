@@ -13,42 +13,25 @@ export const style = {
     marginBottom: 10,
     marginTop: 10,
     color: colors.black80,
-    backgroundColor: colors.black10,
     borderRadius: 20,
     width: '100%',
     overflow: 'visible',
-  },
-  focusInputContainer: {
-    shadowColor: colors.green,
-    borderColor: colors.green50,
-    borderWidth: 1,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.35,
-    shadowRadius: 4.65,
-
-    elevation: 7,
   },
   focusLabel: {
     color: colors.green,
   },
   input: {
-    padding: 15,
-    paddingTop: 14,
-    borderRadius: 10,
+    ...gStyle.textThin,
+    paddingLeft: 20,
     overflow: 'hidden',
-    color: colors.black80,
-    fontSize: 14,
-    lineHeight: 20,
+    color: colors.black,
+    lineHeight: 25,
   },
   placeholder: {
-    color: colors.black30,
+    color: colors.black40,
   },
   label: {
-    ...gStyle.smallText,
-    color: colors.black50,
+    ...gStyle.subTitle,
     paddingLeft: 5,
     paddingTop: 10,
   },
@@ -82,13 +65,7 @@ const FormInput = React.forwardRef((props, ref) => {
           {props.label}
         </Text>
       )}
-      <View
-        style={[
-          style.inputContainer,
-          props.inputContainerStyle,
-          isFocus && style.focusInputContainer,
-        ]}
-      >
+      <View style={[style.inputContainer, props.inputContainerStyle]}>
         <Controller
           render={({ onChange, value }) => (
             <InputComponent

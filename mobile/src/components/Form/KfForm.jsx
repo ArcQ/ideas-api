@@ -15,6 +15,7 @@ const style = {
     flex: 1,
     width: '100%',
     padding: 15,
+    paddingBottom: 0,
   },
   title: {
     ...gStyle.title,
@@ -31,6 +32,9 @@ const style = {
     // justifyContent: 'center',
   },
   placeholder: {
+    minHeight: 80,
+  },
+  submitButton: {
     minHeight: 80,
   },
 };

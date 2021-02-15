@@ -9,6 +9,7 @@ import SwipeableRow from '../../../components/SwipeableRow';
 const style = {
   flatList: {
     backgroundColor: colors.white,
+    marginTop: 80,
   },
 };
 
@@ -19,7 +20,7 @@ export default function IdeasListComponent(props) {
       keyExtractor={(item) => item.node.id}
       style={style.flatList}
       contentContainerStyle={{
-        paddingTop: 250,
+        paddingTop: 150,
         paddingBottom: 150,
         paddingHorizontal: 20,
       }}
