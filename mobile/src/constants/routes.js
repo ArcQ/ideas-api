@@ -1,3 +1,5 @@
+export const LANDING = 'Landing';
+export const AMPLIFY_AUTH = 'Amplify';
 export const CHAT_ACTIONS_ROUTE = 'ChatActions';
 export const HOME_ROUTE = 'Home';
 export const NOTIFICATIONS_ROUTE = 'Notifications';

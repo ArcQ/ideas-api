@@ -30,10 +30,10 @@ export default function OnboardingView({
   const ContainerView = props.disableScroll ? View : ScrollView;
   return (
     <ContainerView style={[style.scrollView, props.containerStyle]}>
+      {BeforeImageComponent && <BeforeImageComponent />}
+      {ImageComponent && <ImageComponent />}
+      {AfterImageComponent && <AfterImageComponent />}
       <View style={[style.container, { paddingHorizontal: 20 }]}>
-        {BeforeImageComponent && <BeforeImageComponent />}
-        {ImageComponent && <ImageComponent />}
-        {AfterImageComponent && <AfterImageComponent />}
         <View
           style={[
             {

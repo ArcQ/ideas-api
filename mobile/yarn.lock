@@ -3724,6 +3724,14 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@knotfive/aws-amplify-react-native@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@knotfive/aws-amplify-react-native/-/aws-amplify-react-native-4.3.0.tgz#a08e1bd6a37731c2d8fceff9257ac284181a0fc7"
+  integrity sha512-OsEUtH2IeDfUM6gvvQ4lWLAkROTPaJly2ofqzZSBP+xC2jkiB6IV/aRcO+IeKWSNHlS6y8LIkHhvfdgeyU6EJg==
+  dependencies:
+    babel-preset-es2015 "^6.24.1"
+    buffer "^5.2.1"
+
 "@knotfive/chatpi-client-js@^0.0.30":
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@knotfive/chatpi-client-js/-/chatpi-client-js-0.0.30.tgz#626ecab11c92aa0d83e8f6cd959c5b8d6b40ce1c"

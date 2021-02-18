@@ -111,6 +111,11 @@ const gStyle = {
     marginTop: 30,
     marginBottom: 20,
   },
+  emphasis: {
+    fontFamily: 'circularProBold',
+    fontSize: 24,
+    fontWeight: '500',
+  },
   subTitle: {
     fontFamily: 'circularProBold',
     fontSize: 18,
@@ -119,6 +124,10 @@ const gStyle = {
   textBold: {
     fontFamily: 'circularProBold',
     fontSize: 17,
+  },
+  text: {
+    fontFamily: 'circularProBook',
+    fontSize: 16,
   },
   textThin: { fontFamily: 'larsseitThin', fontSize: 16 },
   listText: { color: colors.white, fontSize: 14 },
