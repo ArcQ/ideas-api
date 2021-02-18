@@ -5,6 +5,7 @@ import AppLoading from 'expo-app-loading';
 import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { withAuthenticator } from 'aws-amplify-react-native';
+import defaultSignupFields from 'aws-amplify-react-native/dist/Auth/common/default-sign-up-fields';
 import { PersistGate } from 'redux-persist/integration/react';
 import { enableScreens } from 'react-native-screens';
 
@@ -76,5 +77,9 @@ export default withAuthenticator(App, {
       store.dispatch(authStateToActionDict[authState]);
       // store.replaceReducer();
     }
+  },
+  signUpConfig: {
+    header: 'Sign Up',
+    signUpFields: defaultSignupFields.pop(),
   },
 });

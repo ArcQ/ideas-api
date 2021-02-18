@@ -2,6 +2,7 @@ import { Animated, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import IdeaListEmptyState from './IdeaListEmptyState';
 import colors from '../../../constants/colors';
 import IdeaItem from './IdeaItem';
 import SwipeableRow from '../../../components/SwipeableRow';
@@ -16,6 +17,7 @@ const style = {
 export default function IdeasListComponent(props) {
   return (
     <FlatList
+      ListEmptyComponent={<IdeaListEmptyState />}
       data={props.baseQueryProps?.data?.allIdeas?.edges}
       keyExtractor={(item) => item.node.id}
       style={style.flatList}

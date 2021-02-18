@@ -8,7 +8,7 @@ import gStyle from '../../constants/gStyle';
 import colors from '../../constants/colors';
 import AppPropTypes from '../../utils/AppPropTypes';
 
-export const style = {
+export const formStyle = {
   inputContainer: {
     marginBottom: 10,
     marginTop: 10,
@@ -61,11 +61,11 @@ const FormInput = React.forwardRef((props, ref) => {
   return (
     <>
       {props.label && (
-        <Text style={[style.label, isFocus && style.focusLabel]}>
+        <Text style={[formStyle.label, isFocus && formStyle.focusLabel]}>
           {props.label}
         </Text>
       )}
-      <View style={[style.inputContainer, props.inputContainerStyle]}>
+      <View style={[formStyle.inputContainer, props.inputContainerStyle]}>
         <Controller
           render={({ onChange, value }) => (
             <InputComponent
@@ -82,8 +82,8 @@ const FormInput = React.forwardRef((props, ref) => {
                 }
                 setIsFocus(false);
               }}
-              placeholderTextColor={style.placeholder.color}
-              style={[style.input, props.inputStyle]}
+              placeholderTextColor={formStyle.placeholder.color}
+              style={[formStyle.input, props.inputStyle]}
               value={value}
               onChangeText={(text) => onChange(text)}
               onSubmitEditing={() => {

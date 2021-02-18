@@ -4,7 +4,7 @@ export const deepSquidInk = '#152939';
 export const linkUnderlayColor = '#FFF';
 export const errorIconColor = '#30d0fe';
 
-export default StyleSheet.create({
+export default {
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -116,4 +116,4 @@ export default StyleSheet.create({
   pickerItem: {
     height: 44,
   },
-});
+};
