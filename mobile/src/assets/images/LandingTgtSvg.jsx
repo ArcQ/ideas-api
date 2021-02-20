@@ -4,6 +4,9 @@ import Svg, { G, Ellipse, Circle, Path } from 'react-native-svg';
 
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
+export const landingTgtSvgHeight = 451;
+export const landingTgtSvgWidth = 325;
+
 function SvgComponent(props) {
   return (
     <Svg

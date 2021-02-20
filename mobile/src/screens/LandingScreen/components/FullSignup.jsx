@@ -13,11 +13,11 @@ const style = {
     flexGrow: 1,
     justifyContent: 'flex-start',
     marginBottom: 20,
-    marginTop: 32,
+    marginTop: 20,
   },
   question: {
     textAlign: 'center',
-    marginVertical: 8,
+    marginTop: 30,
     ...gStyle.subTitle,
   },
   answer: {
@@ -43,63 +43,38 @@ export default function FullSignup({ ...props }) {
   const imageWidth = 325;
   const multiplier = (height * 0.5) / imageHeight;
   return (
-    <OnboardingLayout
-      noContainerPadding
-      containerStyle={{ paddingTop: 10 }}
-      BeforeImageComponent={() => (
+    <>
+      <OnboardingLayout
+        noContainerPadding
+        containerStyle={{ paddingTop: 10 }}
+        BeforeImageComponent={() => (
+          <View style={style.textContainer}>
+            <Text style={style.question}>How will you start?</Text>
+          </View>
+        )}
+        ImageComponent={() => (
+          <View style={style.backgroundImage(width, multiplier)}>
+            <LandingTgtSvg
+              width={width * multiplier}
+              height={(width / imageWidth) * imageHeight * multiplier}
+            />
+          </View>
+        )}
+      />
+      <View style={style.actionContainer}>
         <View style={style.textContainer}>
-          <Text style={style.question}>
-            How are you planning to use Idea App?
+          <Text style={style.answer}>Brainstorm with others</Text>
+          <Text style={style.desc}>
+            Share your ideas, chat with the group.
+            {'\n'} Find the best ideas together.
           </Text>
         </View>
-      )}
-      ImageComponent={() => (
-        <View
-          style={{
-            marginLeft: (-width * (multiplier - 1)) / 2,
-            marginTop: -30,
-            marginBottom: -150,
-          }}
-        >
-          <LandingTgtSvg
-            width={width * multiplier}
-            height={(width / imageWidth) * imageHeight * multiplier}
-          />
-        </View>
-      )}
-      AfterImageComponent={() => (
-        <View>
-          <View style={style.textContainer}>
-            <Text style={style.answer}>Brainstorm with others</Text>
-            <Text style={style.desc}>
-              Share your ideas, chat with the group.
-              {'\n'} Find the best ideas together.
-            </Text>
-          </View>
-        </View>
-      )}
-      onActionPress={props.onSignUpPress}
-      actionMsg="signUp"
-      AfterActionComponent={() => (
-        <>
-          <Button onPress={props.onSignInPress}>Sign Up</Button>
-          <Button
-            buttonStyle={style.signInButton}
-            onPress={props.onSignInPress}
-          >
-            Sign In
-          </Button>
-          <Button
-            buttonStyle={style.loginGhost}
-            buttonTextStyle={style.loginGhostText}
-            type="ghost"
-            onPress={props.onSignInPress}
-          >
-            Continue without an account
-          </Button>
-        </>
-      )}
-    />
+        <Button onPress={props.onSignInPress}>Sign Up</Button>
+        <Button buttonStyle={style.signInButton} onPress={props.onSignInPress}>
+          Sign In
+        </Button>
+      </View>
+    </>
   );
 }
 

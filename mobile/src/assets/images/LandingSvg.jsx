@@ -2,6 +2,9 @@ import * as React from 'react';
 import Svg, { Defs, Path, G, Mask, Use } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
+export const landingSvgHeight = 662;
+export const landingSvgWidth = 676;
+
 function SvgComponent(props) {
   return (
     <Svg
