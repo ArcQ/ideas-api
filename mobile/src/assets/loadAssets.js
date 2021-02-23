@@ -35,14 +35,6 @@ const loadAssetsAsync = async () => {
 
   // promise load all
   const result = await Promise.all([...fontAssets, ...imageAssets]);
-  console.log('donedone done done');
-  console.log('donedone done done');
-  console.log('donedone done done');
-  console.log('donedone done done');
-  console.log('donedone done done');
-  console.log('donedone done done');
-  console.log('donedone done done');
-  console.log('donedone done done');
   return result;
 };
 

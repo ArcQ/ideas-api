@@ -1,9 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
+import LandingContainer from '../screens/LandingScreen/LandingContainer';
 import AmplifyAuth from '../screens/AmplifyAuthScreen/AmplifyAuth';
 import { AMPLIFY_AUTH, LANDING } from '../constants/routes';
-import Landing from '../screens/LandingScreen/Landing';
 import ModalRoutes from './ModalRoutes';
 
 const Stack = createStackNavigator();
@@ -18,7 +18,11 @@ export default function AuthStack() {
       }}
       transitionConfig={ModalRoutes}
     >
-      <Stack.Screen name={LANDING} title="Landing" component={Landing} />
+      <Stack.Screen
+        name={LANDING}
+        title="Landing"
+        component={LandingContainer}
+      />
       <Stack.Screen
         name={AMPLIFY_AUTH}
         title="Amplify"

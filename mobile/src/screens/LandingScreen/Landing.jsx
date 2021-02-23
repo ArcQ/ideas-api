@@ -130,7 +130,7 @@ export default function Landing(props) {
         }
         afterDescNode={
           <>
-            <Button onPress={props.onSignInPress}>Sign Up</Button>
+            <Button onPress={props.onSignUpPress}>Sign Up</Button>
             <Button
               buttonStyle={style.signInButton}
               onPress={props.onSignInPress}

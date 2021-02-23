@@ -14,7 +14,7 @@ import Greetings from '@knotfive/aws-amplify-react-native/dist/Auth/Greetings';
 
 export default function AmplifyAuth(props) {
   return (
-    <Authenticator authState="signUp">
+    <Authenticator authState={props.authState}>
       <SignIn />
       <ConfirmSignIn />
       <VerifyContact />

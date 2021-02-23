@@ -19,3 +19,5 @@ export default {
   CustomConfirmSignIn: 'customConfirmSignIn',
   VerifyContact: 'verifyContact',
 };
+
+export const NoAuthMode = 'noAuth';

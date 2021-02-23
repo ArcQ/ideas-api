@@ -32,7 +32,6 @@ function* catchUpMessagesForBase() {
       {
         call: apiService.chat.get,
         *onSuccess(response) {
-          console.log(response);
           yield put(
             threadActions.receiveMessages({
               chatId,
@@ -50,7 +49,6 @@ function* catchUpMessagesForBase() {
       {
         call: apiService.chat.get,
         *onSuccess(response) {
-          console.log(response);
           yield put(
             threadActions.receiveMessages({
               chatId,
@@ -102,7 +100,6 @@ function* subscribeChatpiEvent(messagesChannel) {
 
 function* watchForSendMessage(connection, action) {
   const currentChatId = yield getCurrentChatId();
-  console.log(action.payload);
   try {
     connection.sendMessage({
       channelId: currentChatId,

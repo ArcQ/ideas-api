@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import AmplifyAuth from './AmplifyAuth';
 
 function AmplifyAuthContainer(props) {
-  const _props = {
-  };
+  const _props = {};
 
   const methods = {};
 

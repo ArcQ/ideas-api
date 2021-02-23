@@ -27,6 +27,7 @@ module.exports = {
     'react/jsx-wrap-multilines': 0,
     'react/jsx-closing-tag-location': 0,
     'react/jsx-props-no-spreading': 0,
+    'react/forbid-prop-types': 0,
     'import/no-named-as-default': 0,
     'no-param-reassign': ['error', { props: false }],
     'no-mixed-operators': 1,
