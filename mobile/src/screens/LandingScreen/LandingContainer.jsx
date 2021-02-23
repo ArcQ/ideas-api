@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  AMPLIFY_AUTH,
-  SIGNIN_PARAM,
-  SIGNUP_PARAM,
-} from '../../constants/routes';
+  SIGNIN_SCREEN_PARAM,
+  SIGNUP_SCREEN_PARAM,
+} from '../../constants/amplifyAuthState';
+import { AMPLIFY_AUTH } from '../../constants/routes';
 import Landing from './Landing';
 
 function LandingContainer(props) {
@@ -13,10 +13,14 @@ function LandingContainer(props) {
 
   const methods = {
     onSignInPress: () => {
-      props.navigation.push(AMPLIFY_AUTH, { authScreen: SIGNIN_PARAM });
+      props.navigation.navigate(AMPLIFY_AUTH, {
+        initialAuthScreen: SIGNIN_SCREEN_PARAM,
+      });
     },
     onSignUpPress: () => {
-      props.navigation.push(AMPLIFY_AUTH, { authScreen: SIGNUP_PARAM });
+      props.navigation.navigate(AMPLIFY_AUTH, {
+        initialAuthScreen: SIGNUP_SCREEN_PARAM,
+      });
     },
     continueOnPress: () => {
       // props.navigation.push(AMPLIFY_AUTH, { authScreen: SIGNUP_PARAM });

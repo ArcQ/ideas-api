@@ -16,7 +16,7 @@ const basicButtonStyle = {
   fontSize: 50,
 };
 
-const buttonStyle = {
+export const buttonStyle = {
   outline: {
     ...basicButtonStyle,
     borderColor: colors.white,
@@ -36,7 +36,7 @@ const buttonStyle = {
   },
 };
 
-const buttonTextStyle = {
+export const buttonTextStyle = {
   outline: {
     color: colors.primary,
   },

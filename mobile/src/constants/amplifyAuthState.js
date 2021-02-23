@@ -21,3 +21,6 @@ export default {
 };
 
 export const NoAuthMode = 'noAuth';
+
+export const SIGNUP_SCREEN_PARAM = 'signUp';
+export const SIGNIN_SCREEN_PARAM = 'signIn';

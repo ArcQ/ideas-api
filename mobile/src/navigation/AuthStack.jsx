@@ -1,8 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
+import AmplifyAuthContainer from '../screens/AmplifyAuthScreen/AmplifyAuthContainer';
 import LandingContainer from '../screens/LandingScreen/LandingContainer';
-import AmplifyAuth from '../screens/AmplifyAuthScreen/AmplifyAuth';
 import { AMPLIFY_AUTH, LANDING } from '../constants/routes';
 import ModalRoutes from './ModalRoutes';
 
@@ -26,7 +26,7 @@ export default function AuthStack() {
       <Stack.Screen
         name={AMPLIFY_AUTH}
         title="Amplify"
-        component={AmplifyAuth}
+        component={AmplifyAuthContainer}
       />
     </Stack.Navigator>
   );

@@ -7,6 +7,3 @@ export const CREATE_IDEA_ROUTE = 'CreateIdea';
 export const IDEA_DETAIL_ROUTE = 'IdeaDetail';
 export const CHAT_ROUTE = 'Chat';
 export const HOME_BOTTOM_NAVIGATOR_ROUTE = 'HomeBottom';
-
-export const SIGNIN_PARAM = 'Signin';
-export const SIGNUP_PARAM = 'Signup';

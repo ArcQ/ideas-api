@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import colors from './colors';
+import gStyle from './gStyle';
+import { buttonStyle, buttonTextStyle } from '../components/buttons/Button';
+import { formStyle } from '../components/Form/FormInput';
 
 export const deepSquidInk = '#152939';
 export const linkUnderlayColor = '#FFF';
@@ -24,9 +27,7 @@ export default {
     marginBottom: 32,
   },
   sectionHeaderText: {
-    color: deepSquidInk,
-    fontSize: 20,
-    fontWeight: '500',
+    ...gStyle.title,
   },
   sectionFooter: {
     width: '100%',
@@ -38,7 +39,7 @@ export default {
   },
   sectionFooterLink: {
     fontSize: 14,
-    color: '#30d0fe',
+    color: colors.green,
     alignItems: 'baseline',
     textAlign: 'center',
   },
@@ -71,9 +72,7 @@ export default {
     width: '100%',
   },
   button: {
-    backgroundColor: '#30d0fe',
-    alignItems: 'center',
-    padding: 16,
+    ...buttonStyle.filled,
   },
   buttonDisabled: {
     backgroundColor: '#85E4FF',
@@ -81,22 +80,13 @@ export default {
     padding: 16,
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
+    ...buttonTextStyle.filled,
   },
   formField: {
     marginBottom: 22,
   },
-  input: {
-    padding: 16,
-    borderWidth: 1,
-    borderRadius: 3,
-    borderColor: '#C4C4C4',
-  },
-  inputLabel: {
-    marginBottom: 8,
-  },
+  input: { ...formStyle.inputContainer, ...formStyle.input },
+  inputLabel: formStyle.label,
   phoneContainer: {
     display: 'flex',
     flexDirection: 'row',

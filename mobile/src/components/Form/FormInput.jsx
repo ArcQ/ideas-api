@@ -20,15 +20,15 @@ export const formStyle = {
   focusLabel: {
     color: colors.green,
   },
+  placeholder: {
+    color: colors.black40,
+  },
   input: {
     ...gStyle.textThin,
     paddingLeft: 20,
     overflow: 'hidden',
     color: colors.black,
     lineHeight: 25,
-  },
-  placeholder: {
-    color: colors.black40,
   },
   label: {
     ...gStyle.subTitle,
