@@ -24,3 +24,13 @@ export const NoAuthMode = 'noAuth';
 
 export const SIGNUP_SCREEN_PARAM = 'signUp';
 export const SIGNIN_SCREEN_PARAM = 'signIn';
+
+const authStatus = {
+  SIGN_IN_SUCCESS: 'signIn',
+  SIGN_UP_SUCCESS: 'signUp',
+  SIGN_OUT_SUCCESS: 'signOut',
+  SIGN_IN_FAILURE: 'signIn_failure',
+  TOKEN_REFRESH: 'tokenRefresh',
+  TOKEN_REFRESH_FAILURE: 'tokenRefresh_failure',
+  CONFIGURED: 'configured',
+};

@@ -62,6 +62,7 @@ const createIdeaTransition = {
 
 export default function MainAppStack() {
   const baseName = useSelector(baseSelectors.currentBaseName);
+  console.log('hi');
 
   return (
     <Stack.Navigator
