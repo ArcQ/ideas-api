@@ -86,6 +86,7 @@ export default {
     marginBottom: 22,
   },
   input: { ...formStyle.inputContainer, ...formStyle.input },
+  placeholderTextColor: colors.black70,
   inputLabel: formStyle.label,
   phoneContainer: {
     display: 'flex',

@@ -1,12 +1,14 @@
+import PropTypes from 'prop-types';
+import { Provider, connect } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { RelayEnvironmentProvider } from 'relay-hooks';
 import React, { Suspense, useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { PersistGate } from 'redux-persist/integration/react';
 import { enableScreens } from 'react-native-screens';
 
+import { appSelectors } from './store/app/ducks';
 import AuthStack from './navigation/AuthStack';
 import loadAssets from './assets/loadAssets';
 import Locale from './Locale';
@@ -37,9 +39,24 @@ function RelayEnvironmentWrapper({ children }) {
   );
 }
 
+function Main(props) {
+  return <>{!props.signedIn ? <AuthStack /> : <MainAppStack />}</>;
+}
+
+Main.propTypes = {
+  signedIn: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  signedIn: appSelectors.signedIn(state),
+});
+
+const mapDispatchToProps = {};
+
+const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main);
+
 function App() {
   const [loading, setLoading] = useState(true);
-  const [isSignedIn, setIsSignedIn] = useState(false);
 
   if (loading) {
     return (
@@ -57,7 +74,7 @@ function App() {
           <PersistGate loading={null} persistor={persistor}>
             <Locale />
             <NavigationContainer theme={theme}>
-              {!isSignedIn ? <AuthStack /> : <MainAppStack />}
+              <MainContainer />
             </NavigationContainer>
             <AlertToast />
           </PersistGate>

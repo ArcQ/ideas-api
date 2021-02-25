@@ -4,12 +4,11 @@ import { take, all, fork, cancel } from 'redux-saga/effects';
 import { retryHoc } from '../utils/reduxHelpers';
 import { appConstants } from './app/ducks';
 import threadSaga from './thread/sagas';
-import baseSaga from './base/sagas';
+
+import appSaga from './app/sagas';
 
 const MAX_TRIES = 3;
 const RETRY_DELAY = 200;
-
-// import appSaga from './app/sagas';
 // import profileSaga from './profile/sagas';
 
 const defaultSagas = [];
@@ -18,7 +17,7 @@ const signedInSagas = [
   // ---plop_append_saga---
   // baseSaga,
   threadSaga,
-  // appSaga,
+  appSaga,
   // pushTokenSaga,
   // creditConsentSaga,
   // profileSaga,

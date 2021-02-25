@@ -11,8 +11,14 @@ import RequireNewPassword from '@knotfive/aws-amplify-react-native/dist/Auth/Req
 import Greetings from '@knotfive/aws-amplify-react-native/dist/Auth/Greetings';
 import defaultSignupFields from '@knotfive/aws-amplify-react-native/dist/Auth/common/default-sign-up-fields';
 
+import envService from '../../services/env/envService';
 import AmplifyTheme from '../../constants/AmplifyTheme';
 
+const defaultSignInValues = envService.getDefaultValues('signIn');
+const defaultSignUpValues = envService.getDefaultValues('signUp');
+const defaultForgotPasswordValues = envService.getDefaultValues(
+  'forgotPassword',
+);
 const signUpFields = defaultSignupFields.slice(-1);
 
 export default function AmplifyAuth(props) {
@@ -23,12 +29,12 @@ export default function AmplifyAuth(props) {
       theme={AmplifyTheme}
       signUpConfig={{ signUpFields }}
     >
-      <SignIn />
+      <SignIn defaultValues={defaultSignInValues} />
       <ConfirmSignIn />
       <VerifyContact />
-      <SignUp />
+      <SignUp defaultValues={defaultSignUpValues} />
       <ConfirmSignUp />
-      <ForgotPassword />
+      <ForgotPassword defaultValues={defaultForgotPasswordValues} />
       <RequireNewPassword />
       <Greetings />
     </Authenticator>

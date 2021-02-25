@@ -8,17 +8,12 @@ import {
 
 export const appNamespace = 'app';
 
-const constArr = ['SIGNED_IN', 'SIGNED_OUT'];
+const constArr = ['SIGNED_IN', 'SIGN_UP', 'SIGNED_OUT'];
 
 export const {
   constants: appConstants,
   actions: appActions,
 } = createConstantsAndActions(appNamespace, constArr);
-
-export const authStateToActionDict = {
-  [amplifyAuthState.SignedIn]: appActions.signedIn,
-  [amplifyAuthState.SignedOut]: appActions.signedOut,
-};
 
 const { initialState, selectors } = createSelectorsAndState(appNamespace, {
   signedIn: false,

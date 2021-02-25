@@ -1,5 +1,6 @@
 import produce from 'immer';
 
+import { authStatus } from '../../constants/amplifyAuthState';
 import { ERROR, SUCCESS } from '../../constants/status';
 import { errorConstants } from '../error/ducks';
 import {
@@ -28,11 +29,18 @@ const c = alertConstants;
 
 const mapError = (payload) => {
   switch (true) {
+    case payload?.code === authStatus.SIGN_IN_FAILURE:
+      return {
+        message: 'Sign in failure, please sign in again.',
+      };
     case payload?.status === 401:
       return {
         message: 'Signed out, please sign in again',
       };
-    case !!payload?.error?.message === 'Networking issue':
+    case payload?.status === 401:
+      return {
+        message: 'Signed out, please sign in again',
+      };
     default:
       return {
         message: "Sorry, it seems like we're having some issues right now",

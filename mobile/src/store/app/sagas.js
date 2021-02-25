@@ -1,59 +1,73 @@
-import { all, put, take, takeEvery } from 'redux-saga/effects';
+import { fork, put, takeEvery } from 'redux-saga/effects';
+import { eventChannel as EventChannel } from 'redux-saga';
 import { Hub } from 'aws-amplify';
 
+import { appActions } from './ducks';
+import { authStatus } from '../../constants/amplifyAuthState';
 import { errorActions } from '../error/ducks';
-import { getCurrentChatId } from '../base/helpers';
 
 function* subscribeAuthState(event) {
-  switch (event) {
-    case 'signIn':
-      console.log('user signed in');
-      break;
-    case 'signUp':
-      console.log('user signed up');
-      break;
-    case 'signOut':
-      console.log('user signed out');
-      break;
-    case 'signIn_failure':
+  console.log(event);
+  console.log(event.payload.data.event);
+  switch (event.payload.data.event) {
+    case authStatus.SIGN_IN_SUCCESS:
+      console.info('user signed in');
       yield put(
-        errorActions.setError({
-          error: e,
+        appActions.signIn({
+          user: {
+            code: authStatus.SIGN_IN_FAILURE,
+          },
         }),
       );
       break;
-    case 'tokenRefresh':
-      console.log('token refresh succeeded');
+    case authStatus.SIGN_UP_SUCCESS:
+      console.log('user signed up');
+      appActions.signUp({
+        user: {
+          code: authStatus.SIGN_IN_FAILURE,
+        },
+      });
       break;
-    case 'tokenRefresh_failure':
-      console.log('token refresh failed');
+    case authStatus.SIGN_OUT_SUCCESS:
+      console.log('user signed out');
       break;
-    case 'configured':
-      console.log('the Auth module is configured');
+    case authStatus.SIGN_IN_FAILURE:
+      yield put(
+        errorActions.setError({
+          error: {
+            code: authStatus.SIGN_IN_FAILURE,
+          },
+        }),
+      );
+      break;
+    case authStatus.TOKEN_REFRESH:
+      console.info('token refresh succeeded');
+      break;
+    case authStatus.TOKEN_REFRESH_FAILURE:
+      console.info('token refresh failed');
+      break;
+    case authStatus.CONFIGURED:
+      console.info('the Auth module is configured');
+      break;
     default:
       console.error('Unexpected auth state unhandled');
   }
 }
 
 function* startChannel() {
-  const currentChatId = yield getCurrentChatId();
-  const channelIds = [currentChatId];
+  console.log('hi');
 
-  if (channelIds.length === 0) {
-    return;
-  }
-
-  const messagesChannel = new EventChannel((emitter) => {
-    Hub.listen('auth', () => {
-      emitter();
+  const hubChannel = new EventChannel((emitter) => {
+    Hub.listen('auth', (event) => {
+      emitter(event);
     });
 
     return () => {};
   });
 
-  yield all([takeEvery(messagesChannel, subscribeAuthState)]);
+  yield takeEvery(hubChannel, subscribeAuthState);
 }
 
 export default function* appSaga() {
-  yield startChannel();
+  yield fork(startChannel);
 }

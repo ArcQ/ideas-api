@@ -25,7 +25,7 @@ export const NoAuthMode = 'noAuth';
 export const SIGNUP_SCREEN_PARAM = 'signUp';
 export const SIGNIN_SCREEN_PARAM = 'signIn';
 
-const authStatus = {
+export const authStatus = {
   SIGN_IN_SUCCESS: 'signIn',
   SIGN_UP_SUCCESS: 'signUp',
   SIGN_OUT_SUCCESS: 'signOut',

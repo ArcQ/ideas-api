@@ -6,9 +6,12 @@ import { activateKeepAwake } from 'expo-keep-awake';
 import config from '../../config.json';
 import configProd from '../../config.production.json';
 
-const handleRandomValues = (v) => {
+const handleRandomValues = (v, vars) => {
   if (v === 'randomEmail') {
-    return `hello+${uuidv1().split('-')[0]}@gmail.com`;
+    return `${vars.gmail}+${uuidv1().split('-')[0]}@gmail.com`;
+  }
+  if (v === 'randomUser') {
+    return `${vars.user}+${uuidv1().split('-')[0]}`;
   }
   return v;
 };
@@ -32,7 +35,7 @@ export default {
       return {};
     }
     return map(
-      (v) => handleRandomValues(v),
+      (v) => handleRandomValues(v, !this.getConfig()?.useDefaultValues.vars),
       this.getConfig()?.defaultValues?.[k] || {},
     );
   },
