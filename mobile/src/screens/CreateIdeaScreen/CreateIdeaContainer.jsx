@@ -50,9 +50,7 @@ export default function CreateIdeaContainer(props) {
   };
 
   const [createIdea, { loading }] = useMutation(createIdeaMutation, {
-    onCompleted: ({ idea }) => {
-      console.log(idea);
-    },
+    onCompleted: ({ idea }) => {},
   });
 
   const methods = {

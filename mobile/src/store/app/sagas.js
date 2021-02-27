@@ -1,42 +1,43 @@
+import { Auth, Hub } from 'aws-amplify';
 import { fork, put, takeEvery } from 'redux-saga/effects';
 import { eventChannel as EventChannel } from 'redux-saga';
-import { Hub } from 'aws-amplify';
 
-import { appActions } from './ducks';
+import { appActions, appConstants } from './ducks';
 import { authStatus } from '../../constants/amplifyAuthState';
 import { errorActions } from '../error/ducks';
 
 function* subscribeAuthState(event) {
-  console.log(event);
-  console.log(event.payload.data.event);
-  switch (event.payload.data.event) {
+  switch (event?.payload?.event) {
     case authStatus.SIGN_IN_SUCCESS:
-      console.info('user signed in');
       yield put(
         appActions.signIn({
+          type: authStatus.SIGN_IN_SUCCESS,
           user: {
-            code: authStatus.SIGN_IN_FAILURE,
+            ...event.payload.data.attributes,
           },
         }),
       );
       break;
     case authStatus.SIGN_UP_SUCCESS:
       console.log('user signed up');
-      appActions.signUp({
-        user: {
-          code: authStatus.SIGN_IN_FAILURE,
-        },
-      });
+      yield put(
+        appActions.signUp({
+          type: authStatus.SIGN_UP_SUCCESS,
+          user: {
+            ...event.payload.data.attributes,
+          },
+        }),
+      );
       break;
     case authStatus.SIGN_OUT_SUCCESS:
       console.log('user signed out');
+      yield put(appActions.signOut());
       break;
     case authStatus.SIGN_IN_FAILURE:
       yield put(
         errorActions.setError({
-          error: {
-            code: authStatus.SIGN_IN_FAILURE,
-          },
+          type: authStatus.SIGN_IN_FAILURE,
+          error: {},
         }),
       );
       break;
@@ -49,14 +50,15 @@ function* subscribeAuthState(event) {
     case authStatus.CONFIGURED:
       console.info('the Auth module is configured');
       break;
+    case authStatus.SIGN_OUT:
+      console.info('the Auth module is configured');
+      break;
     default:
       console.error('Unexpected auth state unhandled');
   }
 }
 
 function* startChannel() {
-  console.log('hi');
-
   const hubChannel = new EventChannel((emitter) => {
     Hub.listen('auth', (event) => {
       emitter(event);
@@ -69,5 +71,25 @@ function* startChannel() {
 }
 
 export default function* appSaga() {
+  try {
+    const {
+      idToken: { jwtToken, payload },
+    } = yield Auth.currentSession();
+    yield put(
+      appActions.finishLoad({
+        signedIn: true,
+        accessToken: {
+          jwtToken,
+        },
+        user: {
+          username: payload['cognito:username'],
+          email: payload.email,
+        },
+      }),
+    );
+  } catch (e) {
+    yield put(appActions.finishLoad({ signedIn: false }));
+  }
+
   yield fork(startChannel);
 }

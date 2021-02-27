@@ -35,7 +35,7 @@ export default {
       return {};
     }
     return map(
-      (v) => handleRandomValues(v, !this.getConfig()?.useDefaultValues.vars),
+      (v) => handleRandomValues(v, !this.getConfig()?.defaultValues.vars),
       this.getConfig()?.defaultValues?.[k] || {},
     );
   },

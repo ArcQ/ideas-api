@@ -11,13 +11,12 @@ const MAX_TRIES = 3;
 const RETRY_DELAY = 200;
 // import profileSaga from './profile/sagas';
 
-const defaultSagas = [];
+const defaultSagas = [appSaga];
 
 const signedInSagas = [
   // ---plop_append_saga---
   // baseSaga,
   threadSaga,
-  appSaga,
   // pushTokenSaga,
   // creditConsentSaga,
   // profileSaga,

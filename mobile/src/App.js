@@ -1,3 +1,4 @@
+import { LogBox } from 'react-native';
 import PropTypes from 'prop-types';
 import { Provider, connect } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
@@ -22,6 +23,7 @@ import apiService from './services/api/apiService';
 import awsService from './services/aws/awsService';
 import getStore from './store/store';
 
+LogBox.ignoreLogs(['No current user']);
 enableScreens();
 
 awsService.init();
@@ -40,15 +42,20 @@ function RelayEnvironmentWrapper({ children }) {
 }
 
 function Main(props) {
+  if (props.isLoading) {
+    return null;
+  }
   return <>{!props.signedIn ? <AuthStack /> : <MainAppStack />}</>;
 }
 
 Main.propTypes = {
   signedIn: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   signedIn: appSelectors.signedIn(state),
+  isLoading: appSelectors.isLoading(state),
 });
 
 const mapDispatchToProps = {};
@@ -56,12 +63,12 @@ const mapDispatchToProps = {};
 const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main);
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [isAssetsLoading, setAssetsLoading] = useState(true);
 
-  if (loading) {
+  if (isAssetsLoading) {
     return (
       <AppLoading
-        onFinish={() => setLoading(false)}
+        onFinish={() => setAssetsLoading(false)}
         onError={() => console.log('TODO')}
         startAsync={loadAssets.loadAssetsAsync}
       />

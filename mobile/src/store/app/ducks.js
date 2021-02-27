@@ -8,7 +8,7 @@ import {
 
 export const appNamespace = 'app';
 
-const constArr = ['SIGNED_IN', 'SIGN_UP', 'SIGNED_OUT'];
+const constArr = ['FINISH_LOAD', 'SIGN_IN', 'SIGN_UP', 'SIGN_OUT'];
 
 export const {
   constants: appConstants,
@@ -16,7 +16,9 @@ export const {
 } = createConstantsAndActions(appNamespace, constArr);
 
 const { initialState, selectors } = createSelectorsAndState(appNamespace, {
+  isLoading: false,
   signedIn: false,
+  user: undefined,
   currentLab: {
     id: '6034f8e2-df82-11ea-87d0-0242ac130003',
     chatId: 'cf4aeae1-cda7-41f3-adf7-9b2bb377be7d',
@@ -31,12 +33,20 @@ const c = appConstants;
 
 const appReducer = produce((state = initialState, action) => {
   switch (action.type) {
-    case c.SIGNED_IN: {
-      state.signedIn = true;
+    case c.FINISH_LOAD: {
+      state.signedIn = action.payload.signedIn;
+      state.accessToken = action.payload.accessToken;
+      state.user = action.payload.user;
+      state.loading = false;
       return state;
     }
-    case c.SIGNED_OUT: {
-      state.signedOut = true;
+    case c.SIGN_IN: {
+      state.signedIn = true;
+      state.user = action.payload.user;
+      return state;
+    }
+    case c.SIGN_OUT: {
+      state.signedIn = false;
       return state;
     }
     default:

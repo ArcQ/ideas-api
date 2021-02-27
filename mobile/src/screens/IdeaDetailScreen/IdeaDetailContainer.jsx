@@ -42,14 +42,11 @@ const deleteIdeaMutation = graphql`
 
 function IdeaDetailContainer(props) {
   const ideaId = props.route.params?.ideaId;
-  // console.log(props.route);
   const ideaByIdQueryProps = useQuery(ideaByIdQuery, {
     ideaId,
   });
   const [deleteIdea, { loading }] = useMutation(deleteIdeaMutation, {
-    onCompleted: ({ deleteIdea }) => {
-      // console.log(deleteIdea);
-    },
+    onCompleted: ({ deleteIdea }) => {},
   });
   const idea = ideaByIdQueryProps?.data?.idea;
   const _props = { idea };

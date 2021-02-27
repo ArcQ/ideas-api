@@ -22,6 +22,10 @@ export default {
     width: '100%',
     padding: 30,
   },
+  sectionScroll: {
+    padding: 15,
+    width: '100%',
+  },
   sectionHeader: {
     width: '100%',
     marginBottom: 32,
@@ -75,7 +79,8 @@ export default {
     ...buttonStyle.filled,
   },
   buttonDisabled: {
-    backgroundColor: '#85E4FF',
+    ...buttonStyle.filled,
+    backgroundColor: colors.black20,
     alignItems: 'center',
     padding: 16,
   },

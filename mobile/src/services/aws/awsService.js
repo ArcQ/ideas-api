@@ -10,8 +10,9 @@ export default {
     const authScreenLabels = {
       en: {
         'Sign in to your account': 'Welcome Back',
-        'Sign Up': 'Create new account',
+        'Sign Up': 'Sign up',
         'Sign Up Account': 'Create a new account',
+        'Sign In on Signup': 'Sign in to my account',
       },
     };
 
