@@ -6,15 +6,24 @@ import {
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import colors from '../constants/colors';
-import IdeaDetailContainer from '../screens/IdeaDetailScreen/IdeaDetailContainer';
 import {
   CHAT_ACTIONS_ROUTE,
   CREATE_IDEA_ROUTE,
+  CREATE_LAB_ROUTE,
+  EDIT_LAB_ROUTE,
   HOME_ROUTE,
   IDEA_DETAIL_ROUTE,
+  INVITE_TO_LAB_ROUTE,
+  JOIN_LAB_ROUTE,
   NOTIFICATIONS_ROUTE,
+  PROFILE_ROUTE,
 } from '../constants/routes';
+import ProfileContainer from '../screens/ProfileScreen/ProfileContainer';
+import EditLabContainer from '../screens/EditLabScreen/EditLabContainer';
+import CreateLabContainer from '../screens/CreateLabScreen/CreateLabContainer';
+import InviteToLabContainer from '../screens/InviteToLabScreen/InviteToLabContainer';
+import JoinLabContainer from '../screens/JoinLabScreen/JoinLabContainer';
+import IdeaDetailContainer from '../screens/IdeaDetailScreen/IdeaDetailContainer';
 import CreateIdeaContainer from '../screens/CreateIdeaScreen/CreateIdeaContainer';
 import HomeChatSwipeNavigator from './HomeChatSwipeNavigator';
 import ChatActions from '../screens/ChatActionsScreen/ChatActions';
@@ -100,6 +109,31 @@ export default function MainAppStack() {
         title="IdeaDetail"
         component={IdeaDetailContainer}
         options={{ headerShown: false, ...createIdeaTransition }}
+      />
+      <Stack.Screen
+        name={JOIN_LAB_ROUTE}
+        title="Create"
+        component={JoinLabContainer}
+      />
+      <Stack.Screen
+        name={INVITE_TO_LAB_ROUTE}
+        title="Create"
+        component={InviteToLabContainer}
+      />
+      <Stack.Screen
+        name={EDIT_LAB_ROUTE}
+        title="Create"
+        component={EditLabContainer}
+      />
+      <Stack.Screen
+        name={CREATE_LAB_ROUTE}
+        title="Create"
+        component={CreateLabContainer}
+      />
+      <Stack.Screen
+        name={PROFILE_ROUTE}
+        title="Create"
+        component={ProfileContainer}
       />
     </Stack.Navigator>
   );

@@ -131,7 +131,7 @@ const gStyle = {
   },
   textThin: { fontFamily: 'larsseitThin', fontSize: 16 },
   listText: { color: colors.white, fontSize: 14 },
-  largeText: { fontSize: 17 },
+  largeText: { fontSize: 18 },
 };
 
 gStyle.smallText = {

@@ -1,4 +1,9 @@
-import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import {
+  Entypo,
+  Feather,
+  Ionicons,
+  MaterialCommunityIcons,
+} from '@expo/vector-icons';
 import { Auth } from 'aws-amplify';
 import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
@@ -6,6 +11,11 @@ import { graphql } from 'react-relay';
 import { useQuery } from 'relay-hooks';
 import React from 'react';
 
+import {
+  CREATE_LAB_ROUTE,
+  EDIT_LAB_ROUTE,
+  PROFILE_ROUTE,
+} from '../constants/routes';
 import { MINI_HIT_SLOP } from '../constants/hitSlops';
 import gStyle from '../constants/gStyle';
 import colors from '../constants/colors';
@@ -29,7 +39,9 @@ const style = {
     marginHorizontal: 15,
     alignSelf: 'flex-start',
   },
+  labsHeader: { width: '100%' },
   drawerContentContainer: {
+    width: '100%',
     alignItems: 'left',
     padding: 20,
     backgroundColor: colors.green,
@@ -42,6 +54,16 @@ const style = {
   },
   contentSection: {
     marginBottom: 10,
+  },
+  editLabButtonText: {
+    color: colors.white,
+    marginHorizontal: 15,
+    alignSelf: 'flex-start',
+  },
+  editLabButton: {
+    paddingVertical: 3,
+    backgroundColor: colors.darkGreen,
+    borderRadius: 20,
   },
   profileButton: {
     borderRadius: 20,
@@ -99,7 +121,33 @@ function ProfileButton(props) {
   );
 }
 
-ProfileButton.propTypes = {};
+ProfileButton.propTypes = {
+  id: PropTypes.string,
+  onPress: PropTypes.func,
+};
+
+function EditLabsButton(props) {
+  return (
+    <TouchableOpacity
+      hitSlop={MINI_HIT_SLOP}
+      onPress={props.onPress}
+      style={style.editLabButton}
+    >
+      <Text
+        style={style.editLabButtonText}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
+        <Feather name="edit-2" size={15} color="white" />
+        Edit
+      </Text>
+    </TouchableOpacity>
+  );
+}
+
+EditLabsButton.propTypes = {
+  onPress: PropTypes.func,
+};
 
 function DrawerContent(props) {
   const drawerContentQueryProps = useQuery(drawerContentQuery, {
@@ -109,8 +157,17 @@ function DrawerContent(props) {
   const allLabs = drawerContentQueryProps?.data?.allLabs.edges;
 
   const methods = {
+    onCreateLabPress: () => {
+      props.navigation.navigate(CREATE_LAB_ROUTE);
+    },
+    onEditLabsPress: () => {
+      props.navigation.navigate(EDIT_LAB_ROUTE);
+    },
     onLabButtonPress: () => {
-      // props.navigation.goBack();
+      props.navigation.closeDrawer();
+    },
+    onProfilePress: () => {
+      props.navigation.navigate(PROFILE_ROUTE);
     },
     onLogoutPress: async () => {
       try {
@@ -123,7 +180,14 @@ function DrawerContent(props) {
 
   return (
     <View style={style.drawerContentContainer}>
-      <Text style={style.drawerTitle}>Labs</Text>
+      <View style={[gStyle.flexRowSpace, style.labsHeader]}>
+        <Text style={style.drawerTitle}>Labs</Text>
+        <EditLabsButton
+          onPress={() => {
+            methods.onEditLabsPress();
+          }}
+        />
+      </View>
       <View style={style.contentSection}>
         {allLabs &&
           allLabs.map((lab) => (
@@ -131,18 +195,26 @@ function DrawerContent(props) {
               logo={<Entypo name="lab-flask" size={24} color="white" />}
               id={lab.node.id}
               onPress={() => {
-                methods.onLabButtonPress();
+                methods.onLabButtonPress(lab.node.id);
               }}
               text={lab.node.name}
               style={style.labButton}
             />
           ))}
+        <DrawerLink
+          logo={<Ionicons name="ios-add" size={24} color="white" />}
+          onPress={() => {
+            methods.onLabButtonPress();
+          }}
+          text="Add/Join a New Lab"
+          style={style.labButton}
+        />
       </View>
       <Text style={style.drawerTitle}>Profile</Text>
       <ProfileButton
         id="profileLink"
         onPress={() => {
-          methods.logout();
+          methods.onProfilePress();
         }}
       />
       <DrawerLink

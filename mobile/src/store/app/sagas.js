@@ -19,7 +19,6 @@ function* subscribeAuthState(event) {
       );
       break;
     case authStatus.SIGN_UP_SUCCESS:
-      console.log('user signed up');
       yield put(
         appActions.signUp({
           type: authStatus.SIGN_UP_SUCCESS,
@@ -30,7 +29,6 @@ function* subscribeAuthState(event) {
       );
       break;
     case authStatus.SIGN_OUT_SUCCESS:
-      console.log('user signed out');
       yield put(appActions.signOut());
       break;
     case authStatus.SIGN_IN_FAILURE:
