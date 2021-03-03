@@ -1,9 +1,4 @@
-import {
-  Entypo,
-  Feather,
-  Ionicons,
-  MaterialCommunityIcons,
-} from '@expo/vector-icons';
+import { AntDesign, Entypo, Feather, Ionicons } from '@expo/vector-icons';
 import { Auth } from 'aws-amplify';
 import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
@@ -11,24 +6,34 @@ import { graphql } from 'react-relay';
 import { useQuery } from 'relay-hooks';
 import React from 'react';
 
+import { MINI_HIT_SLOP, SMALL_HIT_SLOP } from '../constants/hitSlops';
 import {
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
+  INVITE_TO_LAB_ROUTE,
   PROFILE_ROUTE,
 } from '../constants/routes';
-import { MINI_HIT_SLOP } from '../constants/hitSlops';
 import gStyle from '../constants/gStyle';
 import colors from '../constants/colors';
 
 const style = {
-  labButton: {
+  currentLabSection: {
+    borderBottomColor: colors.white50,
+    borderBottomWidth: 1,
+    width: '100%',
+    paddingBottom: 10,
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+  drawerLink: {
     flexDirection: 'row',
     overflow: 'hidden',
     marginHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 9,
+    marginVertical: 2,
   },
   drawerTitle: {
-    marginBottom: 5,
+    marginBottom: 10,
     ...gStyle.subTitle,
     color: colors.white,
     alignSelf: 'flex-start',
@@ -43,10 +48,13 @@ const style = {
   drawerContentContainer: {
     width: '100%',
     alignItems: 'left',
-    padding: 20,
     backgroundColor: colors.green,
     flex: 1,
     justifyContent: 'center',
+  },
+  drawerContentBody: {
+    padding: 20,
+    width: '100%',
   },
   text: {
     ...gStyle.textLarsBold18,
@@ -61,7 +69,9 @@ const style = {
     alignSelf: 'flex-start',
   },
   editLabButton: {
+    zIndex: 10,
     paddingVertical: 3,
+    marginBottom: 10,
     backgroundColor: colors.darkGreen,
     borderRadius: 20,
   },
@@ -89,9 +99,8 @@ function DrawerLink(props) {
   return (
     <TouchableOpacity
       key={props.id}
-      hitSlop={MINI_HIT_SLOP}
       onPress={props.onPress}
-      style={style.labButton}
+      style={style.drawerLink}
     >
       {props.logo}
       <Text style={style.labButtonText} numberOfLines={1} ellipsizeMode="tail">
@@ -129,7 +138,7 @@ ProfileButton.propTypes = {
 function EditLabsButton(props) {
   return (
     <TouchableOpacity
-      hitSlop={MINI_HIT_SLOP}
+      hitSlop={SMALL_HIT_SLOP}
       onPress={props.onPress}
       style={style.editLabButton}
     >
@@ -138,7 +147,12 @@ function EditLabsButton(props) {
         numberOfLines={1}
         ellipsizeMode="tail"
       >
-        <Feather name="edit-2" size={15} color="white" />
+        <Feather
+          name="edit-2"
+          size={15}
+          color="white"
+          style={{ paddingRight: 10 }}
+        />{' '}
         Edit
       </Text>
     </TouchableOpacity>
@@ -157,6 +171,9 @@ function DrawerContent(props) {
   const allLabs = drawerContentQueryProps?.data?.allLabs.edges;
 
   const methods = {
+    onInviteToLabPress: () => {
+      props.navigation.navigate(INVITE_TO_LAB_ROUTE);
+    },
     onCreateLabPress: () => {
       props.navigation.navigate(CREATE_LAB_ROUTE);
     },
@@ -180,50 +197,77 @@ function DrawerContent(props) {
 
   return (
     <View style={style.drawerContentContainer}>
-      <View style={[gStyle.flexRowSpace, style.labsHeader]}>
-        <Text style={style.drawerTitle}>Labs</Text>
-        <EditLabsButton
-          onPress={() => {
-            methods.onEditLabsPress();
-          }}
-        />
-      </View>
-      <View style={style.contentSection}>
-        {allLabs &&
-          allLabs.map((lab) => (
-            <DrawerLink
-              logo={<Entypo name="lab-flask" size={24} color="white" />}
-              id={lab.node.id}
-              onPress={() => {
-                methods.onLabButtonPress(lab.node.id);
-              }}
-              text={lab.node.name}
-              style={style.labButton}
-            />
-          ))}
+      <View style={[style.currentLabSection]}>
+        <Text style={style.drawerTitle}>Current Lab</Text>
         <DrawerLink
-          logo={<Ionicons name="ios-add" size={24} color="white" />}
+          logo={
+            <Ionicons
+              name="ios-person-add"
+              size={20}
+              style={{ padding: 2 }}
+              color="white"
+            />
+          }
           onPress={() => {
-            methods.onLabButtonPress();
+            methods.onInviteToLabPress();
           }}
-          text="Add/Join a New Lab"
+          text="Invite to Lab"
           style={style.labButton}
         />
       </View>
-      <Text style={style.drawerTitle}>Profile</Text>
-      <ProfileButton
-        id="profileLink"
-        onPress={() => {
-          methods.onProfilePress();
-        }}
-      />
-      <DrawerLink
-        id="logoutLink"
-        logo={<MaterialCommunityIcons name="logout" size={24} color="white" />}
-        onPress={methods.onLogoutPress}
-        text="Logout"
-        style={style.labButton}
-      />
+      <View style={style.drawerContentBody}>
+        <View style={[gStyle.flexRowSpace, style.labsHeader]}>
+          <Text style={style.drawerTitle}>Labs</Text>
+          <EditLabsButton
+            onPress={() => {
+              methods.onEditLabsPress();
+            }}
+          />
+        </View>
+        <View style={style.contentSection}>
+          {allLabs &&
+            allLabs.map((lab) => (
+              <DrawerLink
+                logo={<Entypo name="lab-flask" size={24} color="white" />}
+                id={lab.node.id}
+                onPress={() => {
+                  methods.onLabButtonPress(lab.node.id);
+                }}
+                text={lab.node.name}
+                style={style.labButton}
+              />
+            ))}
+          <DrawerLink
+            logo={<Ionicons name="ios-add" size={24} color="white" />}
+            onPress={() => {
+              methods.onCreateLabPress();
+            }}
+            text="Add/Join a New Lab"
+            style={style.labButton}
+          />
+        </View>
+        <Text style={style.drawerTitle}>Profile</Text>
+        <ProfileButton
+          id="profileLink"
+          onPress={() => {
+            methods.onProfilePress();
+          }}
+        />
+        <DrawerLink
+          id="logoutLink"
+          logo={
+            <AntDesign
+              name="logout"
+              size={20}
+              style={{ padding: 2 }}
+              color="white"
+            />
+          }
+          onPress={methods.onLogoutPress}
+          text="Logout"
+          style={style.labButton}
+        />
+      </View>
     </View>
   );
 }

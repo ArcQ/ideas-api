@@ -1,12 +1,12 @@
-import { Image, SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import Button from '../../components/buttons/Button';
-import ScrollableAvoidKeyboard from '../../components/ScrollableAvoidKeyboard';
-import CloseButton from '../../components/buttons/CloseButton';
-import KfForm from '../../components/Form/KfForm';
+import CreateLab from '../../screens/CreateLabScreen/CreateLab';
+import ScrollableAvoidKeyboard from '../ScrollableAvoidKeyboard';
+import CloseButton from '../buttons/CloseButton';
+import KfForm from './KfForm';
 
 const style = {
   closeButton: (topInset) => ({
@@ -17,7 +17,7 @@ const style = {
   }),
 };
 
-export default function CreateLab(props) {
+export default function AddUsersInput(props) {
   const insets = useSafeAreaInsets();
 
   return (
@@ -33,6 +33,7 @@ export default function CreateLab(props) {
           title="Create a Lab"
           formConfig={props.formConfig}
           submitMsg="Create"
+          postFormInputComponent={() => <View />}
           onSubmit={props.onSubmit}
         />
       </SafeAreaView>

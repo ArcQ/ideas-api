@@ -1,5 +1,6 @@
 import { SafeAreaView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import * as ImagePicker from 'expo-image-picker';
 import PropTypes from 'prop-types';
 import React from 'react';
 

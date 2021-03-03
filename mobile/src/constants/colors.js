@@ -23,6 +23,7 @@ export default {
   white: '#fff',
   white0: 'rgba(255, 255, 255, 0)',
   white10: 'rgba(255, 255, 255, 0.1)',
+  white50: 'rgba(255, 255, 255, 0.5)',
 
   // slack colors
   red: '#e01e5a',

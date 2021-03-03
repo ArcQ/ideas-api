@@ -69,6 +69,7 @@ function FormComponent(props) {
               );
             })}
           </View>
+          {props.postFormInputComponent && props.postFormInputComponent()}
           <View style={style.placeholder} />
           <View style={{ paddingHorizontal: 20 }}>
             <Button
@@ -98,6 +99,7 @@ function FormComponent(props) {
 
 FormComponent.propTypes = {
   onSubmit: PropTypes.func,
+  postFormInputComponent: PropTypes.func,
   submitMsg: PropTypes.string,
   onAltActionPress: PropTypes.func,
   altActionMsg: PropTypes.string,
