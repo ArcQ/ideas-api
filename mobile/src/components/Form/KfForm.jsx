@@ -19,7 +19,7 @@ const style = {
   },
   title: {
     ...gStyle.title,
-    marginTop: 20,
+    marginTop: -10,
     fontWeight: 'bold',
     alignSelf: 'flex-start',
   },

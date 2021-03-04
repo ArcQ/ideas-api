@@ -5,6 +5,7 @@ import { useMutation } from 'relay-hooks';
 import { graphql } from 'react-relay';
 import PropTypes from 'prop-types';
 
+import ModalInput from '../../components/Form/ModalInput';
 import ImageInput from '../../components/Form/ImageInput';
 import envService from '../../services/env/envService';
 import AppPropTypes from '../../utils/AppPropTypes';
@@ -49,15 +50,15 @@ export default function CreateLabContainer(props) {
   }, []);
 
   const formConfig = {
-    name: {
-      placeholder: 'Lemonade Company',
-      label: 'Name',
+    image: {
+      overrideInput: ImageInput,
       validation: {
         required: true,
       },
     },
-    image: {
-      overrideInput: ImageInput,
+    name: {
+      placeholder: 'Lemonade Stand Company',
+      label: 'Name',
       validation: {
         required: true,
       },
@@ -71,6 +72,14 @@ export default function CreateLabContainer(props) {
     //     required: true,
     //   },
     // },
+    users: {
+      placeholder: 'Lemonade Stand Company',
+      overrideInput: ModalInput,
+      label: 'Invite Users',
+      validation: {
+        required: false,
+      },
+    },
   };
 
   const [createLab, { loading }] = useMutation(createLabMutation, {

@@ -1,9 +1,7 @@
-import { SafeAreaView, View } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import CreateLab from '../../screens/CreateLabScreen/CreateLab';
 import ScrollableAvoidKeyboard from '../ScrollableAvoidKeyboard';
 import CloseButton from '../buttons/CloseButton';
 import KfForm from './KfForm';
@@ -17,7 +15,7 @@ const style = {
   }),
 };
 
-export default function AddUsersInput(props) {
+export default function AddUsersModal(props) {
   const insets = useSafeAreaInsets();
 
   return (
@@ -41,7 +39,7 @@ export default function AddUsersInput(props) {
   );
 }
 
-CreateLab.propTypes = {
+AddUsersModal.propTypes = {
   formConfig: PropTypes.object,
   onSubmit: PropTypes.func,
   pickImage: PropTypes.func,

@@ -114,6 +114,11 @@
     "graphql": "^15.4.0",
     "prettier": "^2.0.5",
     "react-native-storybook-loader": "^2.0.2",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/react-native": "^5.2.8",
+    "@storybook/react-native-server": "^5.2.8",
     "relay-config": "^10.1.0",
     "relay-test-utils": "^10.1.0"
   },

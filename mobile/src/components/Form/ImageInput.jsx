@@ -4,15 +4,17 @@ import * as ImagePicker from 'expo-image-picker';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import gStyle from '../../constants/gStyle';
 import colors from '../../constants/colors';
 import { MINI_HIT_SLOP } from '../../constants/hitSlops';
 
 const style = {
   placeholderImage: {
-    marginTop: 40,
-    borderWidth: 1,
-    borderColor: colors.black15,
+    ...gStyle.grayBorder,
     borderRadius: 50,
+    marginTop: 30,
+    marginBottom: 20,
+    borderWidth: 1,
     width: 100,
     height: 100,
   },
@@ -20,9 +22,9 @@ const style = {
     position: 'absolute',
     borderRadius: 30,
     backgroundColor: colors.green,
-    right: 5,
+    right: 7,
     paddingleft: 2,
-    bottom: -5,
+    bottom: 17,
   },
 };
 

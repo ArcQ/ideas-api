@@ -2,20 +2,19 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import gstyle from '../../../constants/gStyle';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import AppPropTypes from '../../../utils/AppPropTypes';
-import colors from '../../../constants/colors';
 
 const style = {
   container: {
+    ...gstyle.grayBorder,
     position: 'absolute',
     bottom: 35,
     right: 35,
     padding: 12,
     marginVertical: 10,
-    borderColor: colors.black20,
-    borderWidth: 1,
     borderRadius: 20,
     flexDirection: 'row',
   },

@@ -33,6 +33,10 @@ const gStyle = {
     borderBottomWidth: 0,
     elevation: 0,
   },
+  grayBorder: {
+    borderColor: colors.black20,
+    borderWidth: 1,
+  },
 
   containerNavBlocks: {
     height: 44,

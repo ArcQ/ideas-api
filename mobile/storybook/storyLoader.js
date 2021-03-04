@@ -3,9 +3,17 @@
 //
 // https://github.com/elderfo/react-native-storybook-loader.git
 
-function loadStories() {}
+function loadStories() {
+  require('../src/components/__stories__/buttons/CloseButton.stories');
+  require('../src/components/__stories__/DrawerContent.stories');
+  require('../src/components/__stories__/KfForm.stories');
+}
 
-const stories = [];
+const stories = [
+  '../src/components/__stories__/buttons/CloseButton.stories',
+  '../src/components/__stories__/DrawerContent.stories',
+  '../src/components/__stories__/KfForm.stories',
+];
 
 module.exports = {
   loadStories,

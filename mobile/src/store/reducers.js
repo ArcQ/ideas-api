@@ -1,7 +1,6 @@
 import { pipe } from 'ramda';
 import { combineReducers } from 'redux';
 
-import { ignoreOutside } from '../utils/reduxHelpers';
 import baseReducer, { baseNamespace } from './base/ducks';
 import appReducer, { appConstants, appNamespace } from './app/ducks';
 import alertReducer, { alertNamespace } from './alert/ducks';

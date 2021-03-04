@@ -1,9 +1,9 @@
 import { persistReducer, persistStore } from 'redux-persist';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-
 import AsyncStorage from '@react-native-community/async-storage';
 
+import envService from '../services/env/envService';
 import { cachedProfilesNamespace } from './cachedProfiles/ducks';
 import { baseNamespace } from './base/ducks';
 import { threadNamespace } from './thread/ducks';

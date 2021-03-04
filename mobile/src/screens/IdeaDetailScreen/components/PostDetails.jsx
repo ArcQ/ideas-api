@@ -2,16 +2,15 @@ import PropTypes from 'prop-types';
 import { Image, Text, View } from 'react-native';
 import React from 'react';
 
+import gStyle from '../../../constants/gStyle';
 import AppPropTypes from '../../../utils/AppPropTypes';
-import colors from '../../../constants/colors';
 import { getFormattedDate } from '../../../utils/dateUtil';
 
 const style = {
   container: {
+    ...gStyle.grayBorder,
     padding: 15,
     marginVertical: 10,
-    borderColor: colors.black20,
-    borderWidth: 1,
     borderRadius: 30,
   },
 };

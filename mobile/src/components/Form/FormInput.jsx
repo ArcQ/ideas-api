@@ -33,7 +33,7 @@ export const formStyle = {
   label: {
     ...gStyle.subTitle,
     paddingLeft: 5,
-    paddingTop: 10,
+    paddingTop: 15,
   },
 };
 
