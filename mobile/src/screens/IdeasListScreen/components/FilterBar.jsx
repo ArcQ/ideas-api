@@ -5,30 +5,6 @@ import { AntDesign } from '@expo/vector-icons';
 import colors from '../../../constants/colors';
 import gStyle from '../../../constants/gStyle';
 
-const HEADER_HEIGHT = 200;
-
-const getStyle = () => ({
-  animatedContainer: (headerHeight) => ({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 10,
-    margin: 20,
-    height: headerHeight,
-    background: 'blue',
-  }),
-  welcomeText: {
-    ...gStyle.subTitle,
-    marginTop: 10,
-    color: colors.black30,
-  },
-  header: {
-    ...gStyle.header,
-    marginTop: 20,
-  },
-});
-
 export default function FilterBar(props) {
   return (
     <View style={{ flexDirection: 'row' }}>

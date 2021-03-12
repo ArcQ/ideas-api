@@ -31,10 +31,15 @@ const AppPropTypes = {
   }),
 };
 
-export const IconButtonPropTypes = {
-  onPress: PropTypes.func,
-  iconProps: PropTypes.object,
-  style: AppPropTypes.style,
-};
+export const MessagePropType = PropTypes.shape({
+  id: PropTypes.string,
+  text: PropTypes.string,
+  user_id: PropTypes.string,
+  chat_id: PropTypes.string,
+});
+
+export const NavigationPropType = PropTypes.object; // eslint-ignore-line
+
+export const StylePropType = PropTypes.object; // eslint-ignore-line
 
 export default AppPropTypes;

@@ -5,7 +5,7 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Button from '../components/buttons/Button';
-import { StylePropType } from '../utils/types';
+import { StylePropType } from '../utils/AppPropTypes';
 
 const style = {
   actionButton: {

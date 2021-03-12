@@ -8,7 +8,7 @@ import {
   IDEA_DETAIL_ROUTE,
 } from '../../constants/routes';
 import IdeasList from './IdeasList';
-import { NavigationPropType } from '../../utils/types';
+import { NavigationPropType } from '../../utils/AppPropTypes';
 
 const ideasListQuery = graphql`
   query IdeasListContainerQuery {

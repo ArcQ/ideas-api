@@ -5,7 +5,7 @@ import React from 'react';
 import gStyle from '../../constants/gStyle';
 import { SMALL_HIT_SLOP } from '../../constants/hitSlops';
 import colors from '../../constants/colors';
-import { StylePropType } from '../../utils/types';
+import { StylePropType } from '../../utils/AppPropTypes';
 
 const basicButtonStyle = {
   alignItems: 'center',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { NavigationPropType } from '../../utils/types';
+import { NavigationPropType } from '../../utils/AppPropTypes';
 import Profile from './Profile';
 
 function ProfileContainer(props) {

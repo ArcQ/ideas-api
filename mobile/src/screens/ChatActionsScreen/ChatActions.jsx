@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ChatActionsScreen from './ChatActionsScreen';
-import { NavigationPropType } from '../../utils/types';
+import { NavigationPropType } from '../../utils/AppPropTypes';
 
 function ChatActionsScreenContainer(props) {
   const _props = {};

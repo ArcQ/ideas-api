@@ -6,7 +6,7 @@ import { MockWithPadding } from '../../utils/testing/Mock';
 
 export const Basic = () => (
   <MockWithPadding appearance="outline">
-    <DrawerContent />
+    {/* <DrawerContent /> */}
   </MockWithPadding>
 );
 

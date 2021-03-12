@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import CustomGiftedChatComposerContainer from './components/CustomGiftedChatComposer/CustomGiftedChatComposerContainer';
-import AppPropTypes from '../../utils/AppPropTypes';
+import AppPropTypes, { MessagePropType } from '../../utils/AppPropTypes';
 import ChatHeader from './ChatHeader';
-import { MessagePropType } from '../../utils/types';
+
 import AccessoryBar from '../../components/AccessoryBar';
 import Message from '../../components/Message';
 

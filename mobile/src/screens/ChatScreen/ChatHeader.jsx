@@ -10,7 +10,7 @@ import { baseSelectors } from '../../store/base/ducks';
 import gStyle from '../../constants/gStyle';
 import SvgBell from '../../components/icons/Svg.Bell';
 import SvgDotsVertical from '../../components/icons/Svg.DotsVertical';
-import { NavigationPropType } from '../../utils/types';
+import { NavigationPropType } from '../../utils/AppPropTypes';
 
 const HeaderRight = ({ navigation }) => (
   <View style={[gStyle.containerNavBlocks, gStyle.flexRowCenter]}>

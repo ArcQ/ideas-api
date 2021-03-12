@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { IDEA_DETAIL_ROUTE } from '../../constants/routes';
-import AppPropTypes from '../../utils/AppPropTypes';
+import AppPropTypes, { MessagePropType } from '../../utils/AppPropTypes';
 import { baseActions } from '../../store/base/ducks';
 import { appSelectors } from '../../store/app/ducks';
-import { MessagePropType } from '../../utils/types';
+
 import { threadActions, threadSelectors } from '../../store/thread/ducks';
 import Chat from './Chat';
 

@@ -5,7 +5,7 @@ import React from 'react';
 const style = {};
 
 export default function InviteToLab(props) {
-  return (<View />);
+  return <View />;
 }
 
 InviteToLab.propTypes = {};

@@ -11,7 +11,7 @@ import { SMALL_HIT_SLOP } from '../constants/hitSlops';
 import SvgBrainstorm from '../components/icons/Svg.Brainstorm';
 import gStyle from '../constants/gStyle';
 import colors from '../constants/colors';
-import { StylePropType } from '../utils/types';
+import { StylePropType } from '../utils/AppPropTypes';
 
 const style = {
   scrollView: {
