@@ -1,11 +1,35 @@
-import { View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const style = {};
+import gStyle from '../../constants/gStyle';
+import SelectList from '../../components/SelectList';
+
+const style = {
+  container: {
+    padding: 15,
+  },
+};
 
 export default function EditLab(props) {
-  return (<View />);
+  return (
+    <SafeAreaView>
+      <View style={style.container}>
+        <Text style={[gStyle.title]} ellipsizeMode="tail">
+          Edit Labs
+        </Text>
+        <SelectList
+          placeholder="Search for Labs"
+          items={props.labs}
+          onChangeText={(text) => {
+            console.log(text);
+          }}
+        />
+      </View>
+    </SafeAreaView>
+  );
 }
 
-EditLab.propTypes = {};
+EditLab.propTypes = {
+  labs: PropTypes.array,
+};

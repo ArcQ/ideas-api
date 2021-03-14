@@ -1,9 +1,7 @@
 import { Image, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import gStyle from '../constants/gStyle';
-import Button from './buttons/Button';
 import Avatar from './Avatar';
 import AppPropTypes from '../utils/AppPropTypes';
 
@@ -11,12 +9,14 @@ const getStyle = () => ({
   labContainer: {
     ...gStyle.grayBorder,
     padding: 15,
+    marginTop: 20,
     borderRadius: 20,
     flexDirection: 'row',
   },
   textContainer: {
     flex: 1,
     marginTop: 15,
+    marginLeft: 10,
   },
   authorDesc: {
     marginBottom: 10,
@@ -56,5 +56,4 @@ export default function SelectLabItem(props) {
 
 SelectLabItem.propTypes = {
   item: AppPropTypes.lab,
-  requestJoin: PropTypes.func,
 };

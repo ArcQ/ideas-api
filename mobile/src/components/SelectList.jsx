@@ -1,4 +1,4 @@
-import { FlatList, TextInput, View } from 'react-native';
+import { FlatList, TextInput, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
@@ -7,7 +7,7 @@ import SelectLabItem from './SelectLabItem';
 import colors from '../constants/colors';
 
 const getStyle = () => ({
-  searchIcon: { paddingTop: 5 },
+  searchIcon: { paddingTop: 7 },
   searchContainer: {
     flexDirection: 'row',
     paddingHorizontal: 15,
@@ -34,17 +34,26 @@ export default function SelectList(props) {
             flex: 16,
             marginLeft: 15,
           }}
-          placeholder="Invite Users..."
+          placeholder={props.placeholder}
           onChangeText={props.queryOnChange}
         />
         <View />
       </View>
-      <FlatList data={props.items} renderItem={SelectLabItem} />
+      <FlatList
+        data={props.items}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={props.onItemPress}>
+            <SelectLabItem item={item} />
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 }
 
 SelectList.propTypes = {
   items: PropTypes.array,
+  onItemPress: PropTypes.func,
+  placeholder: PropTypes.string,
   queryOnChange: PropTypes.func,
 };

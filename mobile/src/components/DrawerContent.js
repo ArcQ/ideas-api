@@ -1,4 +1,10 @@
-import { AntDesign, Entypo, Feather, Ionicons } from '@expo/vector-icons';
+import {
+  AntDesign,
+  Entypo,
+  Feather,
+  Ionicons,
+  Octicons,
+} from '@expo/vector-icons';
 import { Auth } from 'aws-amplify';
 import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
@@ -6,13 +12,14 @@ import { graphql } from 'react-relay';
 import { useQuery } from 'relay-hooks';
 import React from 'react';
 
-import { MINI_HIT_SLOP, SMALL_HIT_SLOP } from '../constants/hitSlops';
 import {
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
   INVITE_TO_LAB_ROUTE,
+  JOIN_LAB_ROUTE,
   PROFILE_ROUTE,
 } from '../constants/routes';
+import { MINI_HIT_SLOP, SMALL_HIT_SLOP } from '../constants/hitSlops';
 import gStyle from '../constants/gStyle';
 import colors from '../constants/colors';
 
@@ -135,7 +142,7 @@ ProfileButton.propTypes = {
   onPress: PropTypes.func,
 };
 
-function EditLabsButton(props) {
+function CreateLabsButton(props) {
   return (
     <TouchableOpacity
       hitSlop={SMALL_HIT_SLOP}
@@ -148,18 +155,18 @@ function EditLabsButton(props) {
         ellipsizeMode="tail"
       >
         <Feather
-          name="edit-2"
+          name="edit"
           size={15}
           color="white"
           style={{ paddingRight: 10 }}
         />{' '}
-        Edit
+        Create
       </Text>
     </TouchableOpacity>
   );
 }
 
-EditLabsButton.propTypes = {
+CreateLabsButton.propTypes = {
   onPress: PropTypes.func,
 };
 
@@ -171,11 +178,20 @@ function DrawerContent(props) {
   const allLabs = drawerContentQueryProps?.data?.allLabs.edges;
 
   const methods = {
+    onHomePress: () => {
+      props.navigation.navigate(HOME_ROUTE);
+    },
     onInviteToLabPress: () => {
+      props.navigation.navigate(INVITE_TO_LAB_ROUTE);
+    },
+    onFeatureRequestPress: () => {
       props.navigation.navigate(INVITE_TO_LAB_ROUTE);
     },
     onCreateLabPress: () => {
       props.navigation.navigate(CREATE_LAB_ROUTE);
+    },
+    onJoinLabsPress: () => {
+      props.navigation.navigate(JOIN_LAB_ROUTE);
     },
     onEditLabsPress: () => {
       props.navigation.navigate(EDIT_LAB_ROUTE);
@@ -200,6 +216,22 @@ function DrawerContent(props) {
       <View style={[style.currentLabSection]}>
         <Text style={style.drawerTitle}>Current Lab</Text>
         <DrawerLink
+          logo={<Feather name="home" size={20} color="white" />}
+          onPress={() => {
+            methods.onHomePress();
+          }}
+          text="Return to Lab"
+          style={style.labButton}
+        />
+        <DrawerLink
+          logo={<Feather name="edit-2" size={20} color="white" />}
+          onPress={() => {
+            methods.onEditLabsPress();
+          }}
+          text="Edit Lab"
+          style={style.labButton}
+        />
+        <DrawerLink
           logo={
             <Ionicons
               name="ios-person-add"
@@ -218,9 +250,9 @@ function DrawerContent(props) {
       <View style={style.drawerContentBody}>
         <View style={[gStyle.flexRowSpace, style.labsHeader]}>
           <Text style={style.drawerTitle}>Labs</Text>
-          <EditLabsButton
+          <CreateLabsButton
             onPress={() => {
-              methods.onEditLabsPress();
+              methods.onCreateLabPress();
             }}
           />
         </View>
@@ -240,9 +272,9 @@ function DrawerContent(props) {
           <DrawerLink
             logo={<Ionicons name="ios-add" size={24} color="white" />}
             onPress={() => {
-              methods.onCreateLabPress();
+              methods.onJoinLabsPress();
             }}
-            text="Add/Join a New Lab"
+            text="Join a New Lab"
             style={style.labButton}
           />
         </View>
@@ -252,6 +284,20 @@ function DrawerContent(props) {
           onPress={() => {
             methods.onProfilePress();
           }}
+        />
+        <DrawerLink
+          id="featureLink"
+          logo={
+            <Octicons
+              name="request-changes"
+              size={20}
+              style={{ padding: 2 }}
+              color="white"
+            />
+          }
+          onPress={methods.onFeatureRequestPress}
+          text="Feature Requests"
+          style={style.labButton}
         />
         <DrawerLink
           id="logoutLink"
