@@ -8,7 +8,8 @@ function loadStories() {
   require('../src/components/__stories__/buttons/CloseButton.stories');
   require('../src/components/__stories__/DrawerContent.stories');
   require('../src/components/__stories__/KfForm.stories');
-  require('../src/components/__stories__/SelectUsers.stories');
+  require('../src/components/__stories__/SelectLabItem.stories');
+  require('../src/components/__stories__/SelectList.stories');
 }
 
 const stories = [
@@ -16,7 +17,8 @@ const stories = [
   '../src/components/__stories__/buttons/CloseButton.stories',
   '../src/components/__stories__/DrawerContent.stories',
   '../src/components/__stories__/KfForm.stories',
-  '../src/components/__stories__/SelectUsers.stories',
+  '../src/components/__stories__/SelectLabItem.stories',
+  '../src/components/__stories__/SelectList.stories',
 ];
 
 module.exports = {

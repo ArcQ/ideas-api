@@ -23,6 +23,13 @@ const AppPropTypes = {
   listData: PropTypes.arrayOf(objectOfString),
   objectOfString,
   user: UserPropType,
+  lab: PropTypes.shape({
+    id: PropTypes.String,
+    createdAt: PropTypes.String,
+    updatedAt: PropTypes.String,
+    name: PropTypes.String,
+    imageUrl: PropTypes.String,
+  }),
   idea: PropTypes.shape({
     title: PropTypes.String,
     desc: PropTypes.String,

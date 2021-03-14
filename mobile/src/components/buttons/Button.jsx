@@ -13,13 +13,12 @@ const basicButtonStyle = {
   padding: 17,
   borderRadius: 20,
   zIndex: 10,
-  fontSize: 50,
 };
 
 export const buttonStyle = {
   outline: {
     ...basicButtonStyle,
-    borderColor: colors.white,
+    ...gStyle.grayBorder,
     borderWidth: 1,
   },
   filled: {
