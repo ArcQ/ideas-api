@@ -1,9 +1,8 @@
-import { Image, SafeAreaView, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import Button from '../../components/buttons/Button';
 import ScrollableAvoidKeyboard from '../../components/ScrollableAvoidKeyboard';
 import CloseButton from '../../components/buttons/CloseButton';
 import KfForm from '../../components/Form/KfForm';
@@ -43,6 +42,5 @@ export default function CreateLab(props) {
 CreateLab.propTypes = {
   formConfig: PropTypes.object,
   onSubmit: PropTypes.func,
-  pickImage: PropTypes.func,
-  image: PropTypes.object,
+  exit: PropTypes.func,
 };

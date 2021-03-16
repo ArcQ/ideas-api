@@ -36,6 +36,16 @@ const AppPropTypes = {
     notes: PropTypes.String,
     createdBy: UserPropType,
   }),
+  formInput: {
+    autoCapitalize: PropTypes.String,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    placeholderTextColor: PropTypes.String,
+    style: StylePropType,
+    value: PropTypes.any,
+    onChangeText: PropTypes.func,
+    onSubmitEditing: PropTypes.func,
+  },
 };
 
 export const MessagePropType = PropTypes.shape({

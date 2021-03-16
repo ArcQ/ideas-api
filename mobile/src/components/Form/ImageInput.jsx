@@ -38,7 +38,7 @@ export default function ImageInput(props) {
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      props.onSubmitEditing(result.uri);
     }
   };
 

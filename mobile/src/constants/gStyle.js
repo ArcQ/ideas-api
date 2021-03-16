@@ -2,6 +2,9 @@ import colors from './colors';
 
 const gStyle = {
   activeOpacity: 0.7,
+  containerPadding: {
+    padding: 15,
+  },
   page: {
     marginHorizontal: 15,
     backgroundColor: colors.white,
@@ -134,6 +137,7 @@ const gStyle = {
     fontSize: 16,
   },
   textThin: { fontFamily: 'larsseitThin', fontSize: 16 },
+  thinEmphasis: { fontFamily: 'larsseitThin', fontSize: 40 },
   listText: { color: colors.white, fontSize: 14 },
   largeText: { fontSize: 18 },
 };

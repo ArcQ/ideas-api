@@ -5,6 +5,7 @@ import { useMutation } from 'relay-hooks';
 import { graphql } from 'react-relay';
 import PropTypes from 'prop-types';
 
+import InvitedUsersDisplay from './components/InvitedUsersDisplay';
 import ModalInput from '../../components/Form/ModalInput';
 import ImageInput from '../../components/Form/ImageInput';
 import envService from '../../services/env/envService';
@@ -75,6 +76,7 @@ export default function CreateLabContainer(props) {
     users: {
       placeholder: 'Lemonade Stand Company',
       overrideInput: ModalInput,
+      InputComponent: InvitedUsersDisplay,
       label: 'Invite Users',
       validation: {
         required: false,

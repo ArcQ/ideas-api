@@ -57,7 +57,6 @@ const FormInput = React.forwardRef((props, ref) => {
     props.validation ||
     (props.validationWithHooks && props.validationWithHooks({ watch }));
   const [isFocus, setIsFocus] = useState(false);
-
   return (
     <>
       {props.label && (

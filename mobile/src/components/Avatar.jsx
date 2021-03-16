@@ -2,11 +2,11 @@ import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const getStyle = () => ({
+const getStyle = (size) => ({
   img: { borderRadius: 30, margin: 10 },
   defaultSize: {
-    height: 60,
-    width: 60,
+    height: size,
+    width: size,
   },
 });
 

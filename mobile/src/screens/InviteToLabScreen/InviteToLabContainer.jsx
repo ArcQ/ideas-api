@@ -1,13 +1,22 @@
+import { Clipboard } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { mockLab } from '../../utils/mockData';
 import InviteToLab from './InviteToLab';
 
 function InviteToLabContainer(props) {
+  const code = 'a1597';
   const _props = {
+    code,
+    lab: mockLab,
   };
 
-  const methods = {};
+  const methods = {
+    copyToClipboard: () => {
+      Clipboard.setString(code);
+    },
+  };
 
   return <InviteToLab {...{ ..._props, ...methods }} />;
 }
