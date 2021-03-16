@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { ImagePicker } from 'expo';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -37,15 +37,12 @@ export default function ModalInput(props) {
         }}
         style={style.itemText}
       >
-        <View style={style.addUsersButton} />
+        {props.InputComponent()}
       </TouchableOpacity>
     </View>
   );
 }
 
 ModalInput.propTypes = {
-  formConfig: PropTypes.object,
-  onSubmit: PropTypes.func,
-  pickImage: PropTypes.func,
-  image: PropTypes.object,
+  InputComponent: PropTypes.func.isRequired,
 };

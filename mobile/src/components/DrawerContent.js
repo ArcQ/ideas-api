@@ -15,6 +15,7 @@ import React from 'react';
 import {
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
+  HOME_ROUTE,
   INVITE_TO_LAB_ROUTE,
   JOIN_LAB_ROUTE,
   PROFILE_ROUTE,

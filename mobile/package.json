@@ -26,6 +26,7 @@
     "generate": "yarn schema"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^3.9.0",
     "@expo/vector-icons": "^12.0.0",
     "@knotfive/aws-amplify-react-native": "^4.3.0",
     "@knotfive/chatpi-client-js": "^0.0.30",
@@ -97,6 +98,11 @@
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
     "@babel/plugin-proposal-optional-chaining": "^7.10.4",
     "@graphql-codegen/cli": "^1.19.2",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/react-native": "^5.2.8",
+    "@storybook/react-native-server": "^5.2.8",
     "babel-eslint": "^10.1.0",
     "babel-jest": "25.5.1",
     "babel-plugin-relay": "^9.1.0",
@@ -114,11 +120,6 @@
     "graphql": "^15.4.0",
     "prettier": "^2.0.5",
     "react-native-storybook-loader": "^2.0.2",
-    "@storybook/addon-actions": "^5.2.8",
-    "@storybook/addon-links": "^5.2.8",
-    "@storybook/addons": "^5.2.8",
-    "@storybook/react-native": "^5.2.8",
-    "@storybook/react-native-server": "^5.2.8",
     "relay-config": "^10.1.0",
     "relay-test-utils": "^10.1.0"
   },

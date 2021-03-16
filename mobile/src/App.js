@@ -1,3 +1,4 @@
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { LogBox } from 'react-native';
 import PropTypes from 'prop-types';
 import { Provider, connect } from 'react-redux';
@@ -77,15 +78,17 @@ function App() {
   return (
     <RelayEnvironmentWrapper>
       <SafeAreaProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Locale />
-            <NavigationContainer theme={theme}>
-              <MainContainer />
-            </NavigationContainer>
-            <AlertToast />
-          </PersistGate>
-        </Provider>
+        <ActionSheetProvider>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Locale />
+              <NavigationContainer theme={theme}>
+                <MainContainer />
+              </NavigationContainer>
+              <AlertToast />
+            </PersistGate>
+          </Provider>
+        </ActionSheetProvider>
       </SafeAreaProvider>
     </RelayEnvironmentWrapper>
   );

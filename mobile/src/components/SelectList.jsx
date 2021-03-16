@@ -11,6 +11,7 @@ const getStyle = () => ({
   searchContainer: {
     flexDirection: 'row',
     paddingHorizontal: 15,
+    paddingTop: 15,
   },
   container: { paddingHorizontal: 15, flex: 1 },
 });
@@ -42,7 +43,7 @@ export default function SelectList(props) {
       <FlatList
         data={props.items}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={props.onItemPress}>
+          <TouchableOpacity onPress={() => props.onItemPress(item)}>
             <SelectLabItem item={item} />
           </TouchableOpacity>
         )}

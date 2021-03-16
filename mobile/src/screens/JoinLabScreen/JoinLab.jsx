@@ -5,15 +5,13 @@ import React from 'react';
 import SelectList from '../../components/SelectList';
 
 export default function JoinLab(props) {
-  console.log(props);
   return (
-    <SafeAreaView style={{ flex: 1, padding: 15 }}>
+    <SafeAreaView style={{ flex: 1, padding: 15, paddingTop: 25 }}>
       <SelectList
-        placeholder="Search for Labs"
+        placeholder="Find a lab to join..."
         items={props.labs}
-        onChangeText={(text) => {
-          console.log(text);
-        }}
+        onChangeText={props.onChangeText}
+        onItemPress={props.onLabPress}
       />
     </SafeAreaView>
   );
@@ -21,4 +19,6 @@ export default function JoinLab(props) {
 
 JoinLab.propTypes = {
   labs: PropTypes.array,
+  onChangeText: PropTypes.func,
+  onLabPress: PropTypes.func,
 };
