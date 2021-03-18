@@ -24,6 +24,9 @@ class User(AbstractUser):
     auth_key = models.CharField(max_length=255, unique=True)
     image_url = models.CharField(max_length=255)
     email = models.EmailField()
+    is_active = models.BooleanField(default=True)
+
+    is_authenticated = True
 
     def __str__(self):
         return self.username + " " + self.auth_key
@@ -42,6 +45,7 @@ class LabMember(GenericModel):
     user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     lab = models.ForeignKey(Lab, null=False, on_delete=models.CASCADE)
     isAdmin = models.BooleanField(null=True)
+    is_admin = models.BooleanField(null=True)
 
 
 class Idea(GenericModel):

@@ -74,7 +74,7 @@ export default function MainAppStack() {
   return (
     <Stack.Navigator
       headerMode="none"
-      initialRouteName={INVITE_TO_LAB_ROUTE}
+      initialRouteName={HOME_ROUTE}
       screenOptions={{
         headerBackTitleVisible: false,
       }}

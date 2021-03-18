@@ -1,3 +1,6 @@
+import json
+
+import cognitojwt
 from django.http import HttpResponse
 from django_cognito_jwt import JSONWebTokenAuthentication
 from graphene_django.views import GraphQLView
@@ -7,9 +10,12 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
+from common.CognitoAuthentication import CognitoAuthentication
+from ideas_api.settings import COGNITO_AWS_REGION, COGNITO_AUDIENCE, COGNITO_USER_POOL
+
 
 class AuthenticatedGraphQLView(GraphQLView):
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [CognitoAuthentication]
     permission_classes = [IsAuthenticated]
 
     def authenticate_request(self, request):

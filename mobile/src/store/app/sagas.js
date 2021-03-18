@@ -73,6 +73,8 @@ export default function* appSaga() {
     const {
       idToken: { jwtToken, payload },
     } = yield Auth.currentSession();
+
+    console.log(jwtToken);
     yield put(
       appActions.finishLoad({
         signedIn: true,

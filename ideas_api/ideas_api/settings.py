@@ -140,13 +140,12 @@ GRAPHENE = {
 AUTH_USER_MODEL = "core.User"
 
 # Set environment variables
-os.environ['COGNITO_USER'] = 'username'
-os.environ['COGNITO_PASSWORD'] = 'secret'
-
-# Get environment variables
 COGNITO_AWS_REGION = 'us-east-1'
 COGNITO_USER_POOL = os.getenv('COGNITO_USER_POOL')   # 'eu-central-1_xYzaq'
 COGNITO_AUDIENCE = os.getenv('COGNITO_AUDIENCE')
+# (Optional) If you want to cache the Cognito public keys between requests you can enable the COGNITO_PUBLIC_KEYS_CACHING_ENABLED setting (it only works if you have the Django CACHES setup to anything other than the dummy backend).
+# COGNITO_PUBLIC_KEYS_CACHING_ENABLED = True
+# COGNITO_PUBLIC_KEYS_CACHING_TIMEOUT = 60*60*24
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
