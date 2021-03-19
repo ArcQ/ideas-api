@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import EditLabs from './EditLabs';
 
 function EditLabsContainer(props) {
-  const _props = {
-  };
+  const _props = {};
 
   const methods = {};
 

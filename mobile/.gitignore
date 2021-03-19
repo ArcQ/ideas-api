@@ -10,4 +10,5 @@ web-build/
 web-report/
 .DS_Store
 src/config*
-*.idea
+.idea/*
+src/__generated__/*

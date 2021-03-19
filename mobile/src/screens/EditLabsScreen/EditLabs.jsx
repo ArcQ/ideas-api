@@ -5,7 +5,7 @@ import React from 'react';
 const style = {};
 
 export default function EditLabs(props) {
-  return (<View />);
+  return <View />;
 }
 
 EditLabs.propTypes = {};

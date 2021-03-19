@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import FeatureSuggestions from './FeatureSuggestions';
 
 function FeatureSuggestionsContainer(props) {
-  const _props = {
-  };
+  const _props = {};
 
   const methods = {};
 

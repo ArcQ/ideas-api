@@ -5,7 +5,7 @@ import React from 'react';
 const style = {};
 
 export default function FeatureSuggestions(props) {
-  return (<View />);
+  return <View />;
 }
 
 FeatureSuggestions.propTypes = {};
