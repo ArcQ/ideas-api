@@ -37,11 +37,18 @@ class UserNode(DjangoObjectType):
 
 class Query(ObjectType):
     lab = relay.Node.Field(LabNode)
-    all_labs = DjangoFilterConnectionField(LabNode)
+    my_labs = DjangoFilterConnectionField(LabNode)
 
     user = relay.Node.Field(UserNode)
     all_users = DjangoFilterConnectionField(UserNode)
 
     idea = relay.Node.Field(IdeaNode)
     all_ideas = DjangoFilterConnectionField(IdeaNode)
+
+    def resolve_my_labs(self, info):
+        # context will reference to the Django request
+        if not info.context.user.is_authenticated:
+            return Lab.objects.none()
+        else:
+            return Lab.objects.filter(owner=info.context.user)
 
