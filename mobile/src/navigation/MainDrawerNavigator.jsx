@@ -6,14 +6,12 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import {
-  CHAT_ACTIONS_ROUTE,
+  
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
   HOME_ROUTE,
-  IDEA_DETAIL_ROUTE,
   INVITE_TO_LAB_ROUTE,
   JOIN_LAB_ROUTE,
-  NOTIFICATIONS_ROUTE,
   PROFILE_ROUTE,
 } from '../constants/routes';
 import ProfileContainer from '../screens/ProfileScreen/ProfileContainer';
@@ -21,10 +19,7 @@ import EditLabContainer from '../screens/EditLabScreen/EditLabContainer';
 import CreateLabContainer from '../screens/CreateLabScreen/CreateLabContainer';
 import InviteToLabContainer from '../screens/InviteToLabScreen/InviteToLabContainer';
 import JoinLabContainer from '../screens/JoinLabScreen/JoinLabContainer';
-import IdeaDetailContainer from '../screens/IdeaDetailScreen/IdeaDetailContainer';
 import MainStackNavigator from './MainStackNavigator';
-import ChatActions from '../screens/ChatActionsScreen/ChatActions';
-import Notifications from '../screens/NotificationsScreen';
 
 import DrawerContent from '../components/DrawerContent';
 import device from '../constants/device';
@@ -114,23 +109,6 @@ export default function MainDrawerNavigator() {
         name={PROFILE_ROUTE}
         title="Profile"
         component={ProfileContainer}
-        options={{ headerShown: false, ...createIdeaTransition }}
-      />
-      <Drawer.Screen
-        name={CHAT_ACTIONS_ROUTE}
-        title="ChatActions"
-        component={ChatActions}
-        options={{ stackPresentation: 'modal' }}
-      />
-      <Drawer.Screen
-        name={NOTIFICATIONS_ROUTE}
-        title="Notifications"
-        component={Notifications}
-      />
-      <Drawer.Screen
-        name={IDEA_DETAIL_ROUTE}
-        title="Idea Detail"
-        component={IdeaDetailContainer}
         options={{ headerShown: false, ...createIdeaTransition }}
       />
     </Drawer.Navigator>
