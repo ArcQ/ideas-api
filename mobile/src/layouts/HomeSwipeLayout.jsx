@@ -22,7 +22,7 @@ const style = {
     flex: 1,
   }),
   logo: {
-    marginLeft: 10,
+    marginLeft: 20,
   },
   actionButton: {
     marginRight: 15,

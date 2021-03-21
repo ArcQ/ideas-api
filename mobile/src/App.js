@@ -19,7 +19,7 @@ import { theme } from './components/Styled';
 import relay from './relay';
 import ErrorBoundary from './ErrorBoundary';
 import SuspenseScreen from './screens/SuspenseScreen/SuspenseScreen';
-import MainAppStack from './navigation/MainAppStack';
+import MainDrawerNavigator from './navigation/MainDrawerNavigator';
 import apiService from './services/api/apiService';
 import awsService from './services/aws/awsService';
 import getStore from './store/store';
@@ -46,7 +46,7 @@ function Main(props) {
   if (props.isLoading) {
     return null;
   }
-  return <>{!props.signedIn ? <AuthStack /> : <MainAppStack />}</>;
+  return <>{!props.signedIn ? <AuthStack /> : <MainDrawerNavigator />}</>;
 }
 
 Main.propTypes = {

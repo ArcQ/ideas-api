@@ -12,3 +12,4 @@ export const CREATE_LAB_ROUTE = 'CreateLab';
 export const EDIT_LAB_ROUTE = 'EditLab';
 export const INVITE_TO_LAB_ROUTE = 'InviteToLab';
 export const JOIN_LAB_ROUTE = 'JoinLab';
+export const MAIN_IDEAS_LIST_ROUTE = 'MainIdeasListScreen';
