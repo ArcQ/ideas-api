@@ -1,18 +1,28 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
+import { Dimensions } from 'react-native';
 
-import { CHAT_ROUTE, HOME_BOTTOM_NAVIGATOR_ROUTE } from '../constants/routes';
+import { CHAT_ROUTE, HOME_BOTTOM_NAVIGATOR_ROUTE, CREATE_IDEA_ROUTE } from '../constants/routes';
 import HomeBottomNavigator from './HomeBottomNavigator';
+import CreateIdeaContainer from '../screens/CreateIdeaScreen/CreateIdeaContainer';
 import ChatContainer from '../screens/ChatScreen/ChatContainer';
+import IdeasListContainer from '../screens/IdeasListScreen/IdeasListContainer';
 import colors from '../constants/colors';
+import AnimatedTabNav from '../components/AnimatedTabNav';
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createBottomTabNavigator();
 
-export default function HomeChatSwipeNavigator() {
+export default function HomeChatSwipeNavigator(props) {
   return (
     <Tab.Navigator
-      tabBar={() => <></>}
-      initialRouteName={HomeBottomNavigator}
+      initialLayout={{ width: Dimensions.get("window").width }}
+      tabBarOptions={{
+        showLabel: false,
+        dimensions: Dimensions.get("window"),
+      }}
+      tabBar={(props) => <AnimatedTabNav {...props} />}
+      initialRouteName={"MainIdeasListScreen"}
       screenContainerStyle={{
         shadowColor: '#000',
         shadowOffset: {
@@ -37,8 +47,14 @@ export default function HomeChatSwipeNavigator() {
       }}
     >
       <Tab.Screen
-        name={HOME_BOTTOM_NAVIGATOR_ROUTE}
-        component={HomeBottomNavigator}
+        name="MainIdeasListScreen"
+        component={IdeasListContainer}
+      />
+      <Tab.Screen
+        name={CREATE_IDEA_ROUTE}
+        title="Create Idea"
+        component={CreateIdeaContainer}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name={CHAT_ROUTE}
