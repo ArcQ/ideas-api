@@ -1,6 +1,5 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
-import subscribeGraphql from './subscribeGraphql';
 import cacheHandler from './cacheHandler';
 import { relayTransactionLogger } from './utils';
 
@@ -22,7 +21,7 @@ class Relay {
   }
 
   init() {
-    if (__DEV__) console.log('relay env instance initialized');
+    if (__DEV__) console.info('relay env instance initialized');
     this.environment = new Environment(getRelayConfig());
   }
 }

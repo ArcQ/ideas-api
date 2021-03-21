@@ -1,7 +1,11 @@
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 import React from 'react';
 
-import { CHAT_ROUTE, CREATE_IDEA_ROUTE, MAIN_IDEAS_LIST_ROUTE } from '../constants/routes';
+import {
+  CHAT_ROUTE,
+  CREATE_IDEA_ROUTE,
+  MAIN_IDEAS_LIST_ROUTE,
+} from '../constants/routes';
 import CreateIdeaContainer from '../screens/CreateIdeaScreen/CreateIdeaContainer';
 import ChatContainer from '../screens/ChatScreen/ChatContainer';
 import IdeasListContainer from '../screens/IdeasListScreen/IdeasListContainer';
@@ -27,17 +31,17 @@ export default function MainStackNavigator() {
       <Stack.Screen
         name={MAIN_IDEAS_LIST_ROUTE}
         component={IdeasListContainer}
-        options={{ 
-          headerShown: false
+        options={{
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name={CREATE_IDEA_ROUTE}
         title="Create Idea"
         component={CreateIdeaContainer}
-        options={{ 
+        options={{
           headerShown: false,
-          stackPresentation: 'modal'
+          stackPresentation: 'modal',
         }}
       />
       <Stack.Screen
@@ -46,8 +50,8 @@ export default function MainStackNavigator() {
         sceneContainerStyle={{
           backgroundColor: '#fff',
         }}
-        options={{ 
-          headerShown: false
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

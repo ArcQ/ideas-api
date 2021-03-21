@@ -27,13 +27,14 @@ export const retryHoc = (maxTries, retryDelay) =>
         break;
       } catch (e) {
         if (n < maxTries) {
-          yield console.warn(
+          console.warn(
+            // eslint-disable-line no-console
             `saga failed ${maxTries} times, rerunning, error was: `,
             e,
           );
           break;
         } else {
-          yield console.warn('saga failed, rerunning, error was: ', e);
+          console.warn('saga failed, rerunning, error was: ', e); // eslint-disable-line no-console
         }
       }
       yield delay(retryDelay);

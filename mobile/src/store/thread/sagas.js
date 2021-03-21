@@ -12,9 +12,6 @@ import { Auth } from 'aws-amplify';
 import { eventChannel as EventChannel } from 'redux-saga';
 import { Connection } from '@knotfive/chatpi-client-js/src/chatpi-client';
 
-import { baseSelectors } from '../base/ducks';
-import { appSelectors } from '../app/ducks';
-import { getCurrentChatId } from '../base/helpers';
 import { threadActions, threadConstants, threadSelectors } from './ducks';
 import apiService, { apiCall } from '../../services/api/apiService';
 import envService from '../../services/env/envService';

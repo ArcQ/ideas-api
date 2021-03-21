@@ -21,9 +21,7 @@ export default function EditLab(props) {
         <SelectList
           placeholder="Search for Labs"
           items={props.labs}
-          onChangeText={(text) => {
-            console.log(text);
-          }}
+          onChangeText={(text) => {}}
         />
       </View>
     </SafeAreaView>

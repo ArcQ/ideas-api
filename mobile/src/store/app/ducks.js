@@ -1,6 +1,5 @@
 import produce from 'immer';
 
-import amplifyAuthState from '../../constants/amplifyAuthState';
 import {
   createConstantsAndActions,
   createSelectorsAndState,

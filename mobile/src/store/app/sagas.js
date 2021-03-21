@@ -2,7 +2,7 @@ import { Auth, Hub } from 'aws-amplify';
 import { fork, put, takeEvery } from 'redux-saga/effects';
 import { eventChannel as EventChannel } from 'redux-saga';
 
-import { appActions, appConstants } from './ducks';
+import { appActions } from './ducks';
 import { authStatus } from '../../constants/amplifyAuthState';
 import { errorActions } from '../error/ducks';
 
@@ -40,19 +40,15 @@ function* subscribeAuthState(event) {
       );
       break;
     case authStatus.TOKEN_REFRESH:
-      console.info('token refresh succeeded');
       break;
     case authStatus.TOKEN_REFRESH_FAILURE:
-      console.info('token refresh failed');
       break;
     case authStatus.CONFIGURED:
-      console.info('the Auth module is configured');
       break;
     case authStatus.SIGN_OUT:
-      console.info('the Auth module is configured');
       break;
     default:
-      console.error('Unexpected auth state unhandled');
+      console.error('Unexpected auth state unhandled'); // eslint-disable-line no-console
   }
 }
 
@@ -74,7 +70,6 @@ export default function* appSaga() {
       idToken: { jwtToken, payload },
     } = yield Auth.currentSession();
 
-    console.log(jwtToken);
     yield put(
       appActions.finishLoad({
         signedIn: true,

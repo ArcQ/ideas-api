@@ -121,6 +121,8 @@ function DrawerLink(props) {
 DrawerLink.propTypes = {
   id: PropTypes.string,
   onPress: PropTypes.func,
+  logo: PropTypes.node,
+  text: PropTypes.string,
 };
 
 function ProfileButton(props) {
@@ -159,8 +161,8 @@ function CreateLabsButton(props) {
           name="edit"
           size={15}
           color="white"
-          style={{ paddingRight: 10 }}
-        />{' '}
+          style={{ paddingRight: 15 }}
+        />
         Create
       </Text>
     </TouchableOpacity>

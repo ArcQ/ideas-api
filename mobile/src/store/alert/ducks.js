@@ -37,10 +37,6 @@ const mapError = (payload) => {
       return {
         message: 'Signed out, please sign in again',
       };
-    case payload?.status === 401:
-      return {
-        message: 'Signed out, please sign in again',
-      };
     default:
       return {
         message: "Sorry, it seems like we're having some issues right now",

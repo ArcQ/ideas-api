@@ -7,8 +7,11 @@ import {
   cachedProfilesSelectors,
 } from './ducks';
 
-function* fetchPerson({ id }) {
-  return { profile: undefined };
+function* fetchPerson() {
+  const result = yield new Promise((resolve) =>
+    resolve({ profile: undefined }),
+  );
+  return result;
 }
 
 export function* getCachedProfile({ id }) {

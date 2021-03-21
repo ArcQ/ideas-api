@@ -42,6 +42,10 @@ function RelayEnvironmentWrapper({ children }) {
   );
 }
 
+RelayEnvironmentWrapper.propTypes = {
+  children: PropTypes.node,
+};
+
 function Main(props) {
   if (props.isLoading) {
     return null;

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { IDEA_DETAIL_ROUTE } from '../../constants/routes';
 import AppPropTypes, { MessagePropType } from '../../utils/AppPropTypes';
-import { baseActions } from '../../store/base/ducks';
 import { appSelectors } from '../../store/app/ducks';
 
 import { threadActions, threadSelectors } from '../../store/thread/ducks';
@@ -55,7 +54,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   sendMessage: threadActions.sendMessage,
-  getChatForBase: baseActions.getChatForBase,
+  getChatForBase: () => {},
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);

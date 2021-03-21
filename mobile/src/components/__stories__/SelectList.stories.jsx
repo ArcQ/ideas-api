@@ -28,9 +28,7 @@ export const SelectLabs = () => (
             'https://images.unsplash.com/photo-1597476934600-ef660b4ce617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
         },
       ]}
-      onChangeText={(text) => {
-        console.log(text);
-      }}
+      onChangeText={(text) => {}}
     />
   </MockWithPadding>
 );

@@ -15,7 +15,6 @@ const defaultSagas = [appSaga];
 
 const signedInSagas = [
   // ---plop_append_saga---
-  // baseSaga,
   threadSaga,
   // pushTokenSaga,
   // creditConsentSaga,
@@ -51,7 +50,7 @@ export default function* rootSaga() {
         yield cancel(signedInTasks);
       }
     } catch (e) {
-      console.warn(e);
+      console.warn(e); // eslint-disable-line no-console
     }
   });
 }

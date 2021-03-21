@@ -37,7 +37,7 @@ function RightDeleteAction(props) {
           ],
         }}
       >
-        <DeleteIcon width={20} height={20} color="#fff" padding={3} />
+        {/* <DeleteIcon width={20} height={20} color="#fff" padding={3} /> */}
         <Text style={style.actionText}>Delete</Text>
       </Animated.View>
     </View>

@@ -6,7 +6,6 @@ import { HeaderBackButton } from '@react-navigation/stack';
 import React from 'react';
 
 import colors from '../../constants/colors';
-import { baseSelectors } from '../../store/base/ducks';
 import gStyle from '../../constants/gStyle';
 import SvgBell from '../../components/icons/Svg.Bell';
 import SvgDotsVertical from '../../components/icons/Svg.DotsVertical';
@@ -56,7 +55,6 @@ const style = {
 export default function ChatHeader() {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-  const baseName = useSelector(baseSelectors.currentBaseName);
   return (
     <View
       style={{
@@ -65,7 +63,7 @@ export default function ChatHeader() {
       }}
     >
       <View style={[style.centerText, gStyle.containerNavBlocks]}>
-        <Text style={style.text}>{baseName}</Text>
+        <Text style={style.text}>Placeholder Name</Text>
       </View>
       <HeaderBackButton
         labelVisible={false}

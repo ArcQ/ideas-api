@@ -1,15 +1,15 @@
-import { Observable } from 'relay-runtime';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
+// import { Observable } from 'relay-runtime';
+// import { SubscriptionClient } from 'subscriptions-transport-ws';
 
-import envService from '../services/env/envService';
+// import envService from '../services/env/envService';
 
-const url = envService.getConfig().coreApiUrl;
+// const url = envService.getConfig().coreApiUrl;
 
 // const subscriptionClient = new SubscriptionClient(`${url}/ws/graphql`, {
 //   reconnect: true,
 // });
 
-function subscribeGraphQL(request, variables) {
+function subscribeGraphQL(/* request, variables */) {
   // Note: https://github.com/facebook/relay/issues/2869#issuecomment-534905537
   // const subscribeObservable = subscriptionClient.request({
   //   query: request.text,

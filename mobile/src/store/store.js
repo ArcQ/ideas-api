@@ -3,16 +3,14 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import envService from '../services/env/envService';
 import { cachedProfilesNamespace } from './cachedProfiles/ducks';
-import { baseNamespace } from './base/ducks';
 import { threadNamespace } from './thread/ducks';
 import createReducer from './reducers';
 import rootSaga from './sagas';
 
 const persistConfig = {
   key: 'reduxState',
-  whitelist: [cachedProfilesNamespace, baseNamespace, threadNamespace],
+  whitelist: [cachedProfilesNamespace, threadNamespace],
   storage: AsyncStorage,
 };
 
