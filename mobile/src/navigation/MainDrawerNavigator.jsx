@@ -3,12 +3,10 @@ import {
   TransitionSpecs,
 } from '@react-navigation/stack';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { createNativeStackNavigator } from 'react-native-screens/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import {
   CHAT_ACTIONS_ROUTE,
-  CREATE_IDEA_ROUTE,
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
   HOME_ROUTE,
@@ -24,14 +22,15 @@ import CreateLabContainer from '../screens/CreateLabScreen/CreateLabContainer';
 import InviteToLabContainer from '../screens/InviteToLabScreen/InviteToLabContainer';
 import JoinLabContainer from '../screens/JoinLabScreen/JoinLabContainer';
 import IdeaDetailContainer from '../screens/IdeaDetailScreen/IdeaDetailContainer';
-import CreateIdeaContainer from '../screens/CreateIdeaScreen/CreateIdeaContainer';
-import HomeChatSwipeNavigator from './HomeChatSwipeNavigator';
+import MainStackNavigator from './MainStackNavigator';
 import ChatActions from '../screens/ChatActionsScreen/ChatActions';
-import { baseSelectors } from '../store/base/ducks';
-import ModalRoutes from './ModalRoutes';
 import Notifications from '../screens/NotificationsScreen';
 
-const Stack = createNativeStackNavigator();
+import DrawerContent from '../components/DrawerContent';
+import device from '../constants/device';
+import colors from '../constants/colors';
+
+const Drawer = createDrawerNavigator();
 
 const createIdeaTransition = {
   gestureDirection: 'vertical',
@@ -68,77 +67,72 @@ const createIdeaTransition = {
   }),
 };
 
-export default function MainAppStack() {
-  const baseName = useSelector(baseSelectors.currentBaseName);
-
+export default function MainDrawerNavigator() {
   return (
-    <Stack.Navigator
-      headerMode="none"
+    <Drawer.Navigator
+      drawerContent={(props) => <DrawerContent {...props} />}
+      edgeWidth={120}
+      drawerType="slide"
+      drawerWidth={device.width - 32}
       initialRouteName={HOME_ROUTE}
-      screenOptions={{
-        headerBackTitleVisible: false,
+      overlayColor={colors.black50}
+      drawerStyle={{
+        width: '90%',
       }}
-      transitionConfig={ModalRoutes}
     >
-      <Stack.Screen
-        name={CHAT_ACTIONS_ROUTE}
-        title="ChatActions"
-        component={ChatActions}
-        options={{ stackPresentation: 'modal' }}
-      />
-      <Stack.Screen
-        name={NOTIFICATIONS_ROUTE}
-        title="Notifications"
-        component={Notifications}
-      />
-      <Stack.Screen
+      <Drawer.Screen
         name={HOME_ROUTE}
         title="Home"
-        component={HomeChatSwipeNavigator}
+        component={MainStackNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name={CREATE_IDEA_ROUTE}
-        title="Create Idea"
-        component={CreateIdeaContainer}
-        options={{ headerShown: false, ...createIdeaTransition }}
-      />
-      <Stack.Screen
-        name={IDEA_DETAIL_ROUTE}
-        title="Idea Detail"
-        component={IdeaDetailContainer}
-        options={{ headerShown: false, ...createIdeaTransition }}
-      />
-      <Stack.Screen
-        name={JOIN_LAB_ROUTE}
-        title="Join Lab"
-        component={JoinLabContainer}
-        options={{ headerShown: false, ...createIdeaTransition }}
-      />
-      <Stack.Screen
-        name={INVITE_TO_LAB_ROUTE}
-        title="Invite to Lab"
-        component={InviteToLabContainer}
-        options={{ headerShown: false, ...createIdeaTransition }}
-      />
-      <Stack.Screen
+      <Drawer.Screen
         name={EDIT_LAB_ROUTE}
         title="Edit Lab"
         component={EditLabContainer}
         options={{ headerShown: false, ...createIdeaTransition }}
       />
-      <Stack.Screen
+      <Drawer.Screen
+        name={INVITE_TO_LAB_ROUTE}
+        title="Invite to Lab"
+        component={InviteToLabContainer}
+        options={{ headerShown: false, ...createIdeaTransition }}
+      />
+      <Drawer.Screen
+        name={JOIN_LAB_ROUTE}
+        title="Join Lab"
+        component={JoinLabContainer}
+        options={{ headerShown: false, ...createIdeaTransition }}
+      />
+      <Drawer.Screen
         name={CREATE_LAB_ROUTE}
         title="Create Lab"
         component={CreateLabContainer}
         options={{ headerShown: false, ...createIdeaTransition }}
       />
-      <Stack.Screen
+      <Drawer.Screen
         name={PROFILE_ROUTE}
         title="Profile"
         component={ProfileContainer}
         options={{ headerShown: false, ...createIdeaTransition }}
       />
-    </Stack.Navigator>
+      <Drawer.Screen
+        name={CHAT_ACTIONS_ROUTE}
+        title="ChatActions"
+        component={ChatActions}
+        options={{ stackPresentation: 'modal' }}
+      />
+      <Drawer.Screen
+        name={NOTIFICATIONS_ROUTE}
+        title="Notifications"
+        component={Notifications}
+      />
+      <Drawer.Screen
+        name={IDEA_DETAIL_ROUTE}
+        title="Idea Detail"
+        component={IdeaDetailContainer}
+        options={{ headerShown: false, ...createIdeaTransition }}
+      />
+    </Drawer.Navigator>
   );
 }

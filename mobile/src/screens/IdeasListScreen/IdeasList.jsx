@@ -7,7 +7,6 @@ import { SMALL_HIT_SLOP } from '../../constants/hitSlops';
 import AnimatedHeader from './components/AnimatedHeader';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
 import IdeasListComponent from './components/IdeasListComponent';
-import gStyle from '../../constants/gStyle';
 import HomeSwipeLayout from '../../layouts/HomeSwipeLayout';
 import colors from '../../constants/colors';
 
