@@ -38,13 +38,13 @@ class Lab(GenericModel):
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image_url = models.URLField(max_length=255, default='https://source.unsplash.com/random/1000x1000')
     chat_id = models.CharField(max_length=255)
+    code = models.CharField(max_length=55)
 
 
 class LabMember(GenericModel):
     role = models.CharField(max_length=255)
     user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     lab = models.ForeignKey(Lab, null=False, on_delete=models.CASCADE)
-    isAdmin = models.BooleanField(null=True)
     is_admin = models.BooleanField(null=True)
 
 
@@ -54,4 +54,10 @@ class Idea(GenericModel):
     notes = models.CharField(max_length=1000, blank=True)
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
+
+
+class LabJoin(GenericModel):
+    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
+    status = models.CharField(max_length=20)
 

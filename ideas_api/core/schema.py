@@ -2,11 +2,11 @@ import base64
 from uuid import UUID
 
 from django.core.exceptions import PermissionDenied, ValidationError
-from django_filters import OrderingFilter
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
+from common.RelayIdParser import parse_relay_id
 from core.models import Lab, Idea, User, LabMember
 
 
@@ -20,29 +20,22 @@ class IdeaNode(DjangoObjectType):
             'lab_id': ['exact'],
         }
         interfaces = (relay.Node,)
-        order_by = OrderingFilter(
-            fields=(
-                'created_at',
-            )
-        )
 
     @classmethod
     def get_queryset(cls, queryset, info):
         try:
             lab_id_args = list(filter(lambda field: field.name.value == "labId", info.field_asts[0].arguments))
             if len(lab_id_args) > 0:
-                lab_id_bytes = base64.b64decode(lab_id_args[0].value.value)
-                lab_id_str = lab_id_bytes.decode("ascii").split("LabNode:")[1]
+                lab_id = parse_relay_id(lab_id_args[0].value.value)
                 if LabMember.objects.filter(user_id=info.context.user.id,
-                                            lab_id=UUID(lab_id_str)).count() > 0:
-                    return queryset
+                                            lab_id=lab_id).count() > 0:
+                    return queryset.order_by('-created_at')
                 else:
                     raise PermissionDenied("You do not have permission to access the requested lab")
             else:
                 raise PermissionDenied("You need to submit a lab to access ideas")
         except:
             raise ValidationError("Could not parse lab id")
-
 
 
 class LabNode(DjangoObjectType):

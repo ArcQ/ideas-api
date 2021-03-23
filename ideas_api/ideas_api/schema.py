@@ -1,7 +1,8 @@
 from graphene import ObjectType, Schema
 
-from core.mutations import Mutation as CoreMutation
+# core.schema needs to be imported and initialized before mutations
 from core.schema import Query as CoreQuery
+from core.mutations import Mutation as CoreMutation
 
 
 class Query(CoreQuery, ObjectType):
