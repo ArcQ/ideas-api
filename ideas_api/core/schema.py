@@ -1,6 +1,3 @@
-import base64
-from uuid import UUID
-
 from django.core.exceptions import PermissionDenied, ValidationError
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
@@ -8,6 +5,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 
 from common.RelayIdParser import parse_relay_id
 from core.models import Lab, Idea, User, LabMember
+from core.permissions import CrudPermission, PermissionResource, is_allowed_on_lab
 
 
 class IdeaNode(DjangoObjectType):
@@ -27,11 +25,8 @@ class IdeaNode(DjangoObjectType):
             lab_id_args = list(filter(lambda field: field.name.value == "labId", info.field_asts[0].arguments))
             if len(lab_id_args) > 0:
                 lab_id = parse_relay_id(lab_id_args[0].value.value)
-                if LabMember.objects.filter(user_id=info.context.user.id,
-                                            lab_id=lab_id).count() > 0:
+                if is_allowed_on_lab(PermissionResource.LAB, CrudPermission.VIEW, info.context.user, lab_id):
                     return queryset.order_by('-created_at')
-                else:
-                    raise PermissionDenied("You do not have permission to access the requested lab")
             else:
                 raise PermissionDenied("You need to submit a lab to access ideas")
         except:

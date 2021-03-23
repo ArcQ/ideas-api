@@ -3,6 +3,8 @@ import uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+def random_code():
+    return str(random.randint(1000, 9999))
 
 class GenericModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

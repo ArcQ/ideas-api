@@ -20,7 +20,9 @@ class LabMutation(SerializerMutation):
         user_id = info.context.user.id
         input['created_by_id'] = parse_relay_id(input['created_by_id'])
         input['lab_id'] = parse_relay_id(input['lab_id'])
-        if is_allowed_on_lab(PermissionResource.LAB, id ? : CrudPermission.MODIFY, user_id, input['lab_id']):
+        permission = CrudPermission.MODIFY if input['id'] else CrudPermission.CREATE
+
+        if is_allowed_on_lab(PermissionResource.LAB, permission, user_id, input['lab_id']):
             return super().mutate_and_get_payload(root, info, **input)
 
 
@@ -31,10 +33,10 @@ class DeleteLabMutation(graphene.Mutation):
         id = graphene.ID()
 
     @classmethod
-    def mutate(cls, root, info, **kwargs):
+    def mutate(cls, root, info, **input):
         user = info.context.user
         if is_allowed_on_lab(PermissionResource.LAB, CrudPermission.DELETE, user, input['lab_id']):
-            obj = Lab.objects.get(pk=kwargs['id'])
+            obj = Lab.objects.get(pk=input['id'])
             obj.delete()
             return cls(ok=True)
 
@@ -42,6 +44,7 @@ class DeleteLabMutation(graphene.Mutation):
 class IdeaMutation(SerializerMutation):
     created_by_id = graphene.ID()
     lab_id = graphene.ID()
+
     # id = graphene.ID()
 
     class Meta:
@@ -63,9 +66,9 @@ class DeleteIdeaMutation(graphene.Mutation):
         id = graphene.ID()
 
     @classmethod
-    def mutate(cls, root, info, **kwargs):
+    def mutate(cls, root, info, **input):
         if is_allowed_on_lab(PermissionResource.LAB, CrudPermission.VIEW, info.context.user, input['lab_id']):
-            obj = Idea.objects.get(pk=kwargs['id'])
+            obj = Idea.objects.get(pk=input['id'])
             obj.delete()
             return cls(ok=True)
 
@@ -83,7 +86,8 @@ class LabJoinMutation(SerializerMutation):
     def mutate_and_get_payload(cls, root, info, **input):
         input['created_by_id'] = parse_relay_id(input['created_by_id'])
         input['lab_id'] = parse_relay_id(input['lab_id'])
-        if is_allowed_on_lab(PermissionResource.LAB_JOIN, CrudPermission.VIEW, info.context.user, input['lab_id']):
+        lab_join = LabJoin.objects.get(pk=input['id'])
+        if is_allowed_on_lab(PermissionResource.LAB_JOIN, CrudPermission.MODIFY, info.context.user, lab_join.lab_id):
             return super().mutate_and_get_payload(root, info, **input)
 
 
@@ -94,10 +98,10 @@ class DeleteLabJoinMutation(graphene.Mutation):
         id = graphene.ID()
 
     @classmethod
-    def mutate(cls, root, info, **kwargs):
-        if is_allowed_on_lab(PermissionResource.LAB_JOIN, CrudPermission.VIEW, info.context.user, input['lab_id']):
-            obj = LabJoin.objects.get(pk=kwargs['id'])
-            obj.delete()
+    def mutate(cls, root, info, **input):
+        lab_join = LabJoin.objects.get(pk=input['id'])
+        if is_allowed_on_lab(PermissionResource.LAB_JOIN, CrudPermission.DELETE, info.context.user, lab_join.lab_id):
+            lab_join.delete()
             return cls(ok=True)
 
 
