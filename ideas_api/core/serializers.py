@@ -1,4 +1,5 @@
 from core.models import Idea, User, Lab
+from django.db import IntegrityError
 
 from rest_framework import serializers
 
@@ -11,6 +12,18 @@ class LabSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lab
         fields = '__all__'
+
+    def update(self, instance, validated_data):
+        # regenerate code if non unique
+        count = 0
+        while count < 3:
+            try:
+                return super().update(instance, validated_data)
+            except IntegrityError:
+                print("generated duplicate code, retrying")
+            count += 1
+
+        return super().update(instance, validated_data)
 
 
 class UserSerializer(serializers.ModelSerializer):

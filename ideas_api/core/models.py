@@ -1,10 +1,15 @@
 import uuid
+import string
+import random
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 def random_code():
-    return str(random.randint(1000, 9999))
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(2)) + str(random.randint(1000, 9999))
+
 
 class GenericModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -40,7 +45,7 @@ class Lab(GenericModel):
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image_url = models.URLField(max_length=255, default='https://source.unsplash.com/random/1000x1000')
     chat_id = models.CharField(max_length=255)
-    code = models.CharField(max_length=55)
+    code = models.CharField(max_length=55, default=random_code, unique=True)
 
 
 class LabMember(GenericModel):
@@ -62,4 +67,3 @@ class LabJoin(GenericModel):
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
     status = models.CharField(max_length=20)
-
