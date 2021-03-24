@@ -76,19 +76,19 @@ class DeleteIdeaMutation(graphene.Mutation):
 class LabJoinMutation(SerializerMutation):
     created_by_id = graphene.ID()
     lab_id = graphene.ID()
-    id = graphene.ID()
 
     class Meta:
         serializer_class = IdeaSerializer
         lookup_field = 'id'
 
+    # any one can create lab, but no uppdates
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
         input['created_by_id'] = parse_relay_id(input['created_by_id'])
         input['lab_id'] = parse_relay_id(input['lab_id'])
-        lab_join = LabJoin.objects.get(pk=input['id'])
-        if is_allowed_on_lab(PermissionResource.LAB_JOIN, CrudPermission.MODIFY, info.context.user, lab_join.lab_id):
-            return super().mutate_and_get_payload(root, info, **input)
+        if input['id']:
+            raise PermissionDenied("Updates are not allowed on lab joins")
+        return super().mutate_and_get_payload(root, info, **input)
 
 
 class DeleteLabJoinMutation(graphene.Mutation):
