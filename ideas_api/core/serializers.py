@@ -1,4 +1,4 @@
-from core.models import Idea, User, Lab
+from core.models import Idea, User, Lab, LabJoin
 from django.db import IntegrityError
 
 from rest_framework import serializers
@@ -12,8 +12,9 @@ class LabSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lab
         fields = '__all__'
+        read_only_fields = ['code']
 
-    def update(self, instance, validated_data):
+    def create(self, instance, validated_data):
         # regenerate code if non unique
         count = 0
         while count < 3:
@@ -24,6 +25,17 @@ class LabSerializer(serializers.ModelSerializer):
             count += 1
 
         return super().update(instance, validated_data)
+
+
+class LabJoinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LabJoin
+        fields = '__all__'
+
+    def update(self, instance, validated_data):
+        instance.accepted_by = validated_data.get('status', instance.accepted_by)
+        instance.status = validated_data.get('status', instance.status)
+        return instance
 
 
 class UserSerializer(serializers.ModelSerializer):

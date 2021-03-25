@@ -1,19 +1,15 @@
-from django.core.exceptions import PermissionDenied
 from graphene_django.rest_framework.mutation import SerializerMutation
 
 import graphene
 from common.RelayIdParser import parse_relay_id
-from core.models import Idea, LabMember, Lab, LabJoin
+from core.models import Idea, Lab, LabJoin
 from core.permissions import is_allowed_on_lab, CrudPermission, PermissionResource
-from core.serializers import IdeaSerializer
+from core.serializers import IdeaSerializer, LabJoinSerializer, LabSerializer
 
 
 class LabMutation(SerializerMutation):
-    # id = graphene.ID()
-
     class Meta:
-        serializer_class = IdeaSerializer
-        # lookup_field = 'id'
+        serializer_class = LabSerializer
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
@@ -45,11 +41,8 @@ class IdeaMutation(SerializerMutation):
     created_by_id = graphene.ID()
     lab_id = graphene.ID()
 
-    # id = graphene.ID()
-
     class Meta:
         serializer_class = IdeaSerializer
-        # lookup_field = 'id'
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
@@ -78,16 +71,18 @@ class LabJoinMutation(SerializerMutation):
     lab_id = graphene.ID()
 
     class Meta:
-        serializer_class = IdeaSerializer
+        serializer_class = LabJoinSerializer
         lookup_field = 'id'
 
     # any one can create lab, but no uppdates
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        input['created_by_id'] = parse_relay_id(input['created_by_id'])
+        input['created_by_id'] = info.context.user.id
         input['lab_id'] = parse_relay_id(input['lab_id'])
-        if input['id']:
-            raise PermissionDenied("Updates are not allowed on lab joins")
+        if input['id'] and is_allowed_on_lab(PermissionResource.LAB_JOIN, CrudPermission.MODIFY, info.context.user,
+                                             input['lab_id']):
+            input['accepted_by'] = info.context.user.id
+            return super().mutate_and_get_payload(root, info, **input)
         return super().mutate_and_get_payload(root, info, **input)
 
 

@@ -1,9 +1,16 @@
 import uuid
 import string
 import random
+from enum import Enum
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+
+class LabMemberRoles(Enum):
+    MEMBER = 'member'
+    ADMIN = 'admin'
+    OWNER = 'owner'
 
 
 def random_code():
@@ -65,5 +72,7 @@ class Idea(GenericModel):
 
 class LabJoin(GenericModel):
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    accepted_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    is_accepted = models.BooleanField(default=False)
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
     status = models.CharField(max_length=20)

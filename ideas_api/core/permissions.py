@@ -22,7 +22,8 @@ def build_permission_string(permission_resource: PermissionResource, crud_permis
 
 
 def lab_admin_permissions(lab_id: str):
-    return [build_permission_string(PermissionResource.LAB_JOIN, CrudPermission.DELETE, lab_id)
+    return [build_permission_string(PermissionResource.LAB_JOIN, CrudPermission.DELETE, lab_id),
+            build_permission_string(PermissionResource.LAB_JOIN, CrudPermission.MODIFY, lab_id),
             build_permission_string(PermissionResource.LAB, CrudPermission.CREATE, lab_id),
             build_permission_string(PermissionResource.LAB, CrudPermission.MODIFY, lab_id),
             build_permission_string(PermissionResource.LAB, CrudPermission.DELETE, lab_id)]
