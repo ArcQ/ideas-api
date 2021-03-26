@@ -8,25 +8,6 @@ import logging
 logger = logging.getLogger("mylogger")
 
 
-class LabSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Lab
-        fields = '__all__'
-        read_only_fields = ['code']
-
-    def create(self, instance, validated_data):
-        # regenerate code if non unique
-        count = 0
-        while count < 3:
-            try:
-                return super().update(instance, validated_data)
-            except IntegrityError:
-                print("generated duplicate code, retrying")
-            count += 1
-
-        return super().update(instance, validated_data)
-
-
 class LabJoinSerializer(serializers.ModelSerializer):
     class Meta:
         model = LabJoin
@@ -42,6 +23,29 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'auth_key', 'image_url', 'email']
+
+
+class LabSerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
+    # write
+    created_by_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='created_by',
+                                                       write_only=True, required=False)
+    class Meta:
+        model = Lab
+        fields = '__all__'
+        read_only_fields = ['code']
+
+    def create(self, validated_data):
+        # regenerate code if non unique
+        count = 0
+        while count < 3:
+            try:
+                return super().create(validated_data)
+            except IntegrityError:
+                print("generated duplicate code, retrying")
+            count += 1
+
+        return super().create(validated_data)
 
 
 class IdeaSerializer(serializers.ModelSerializer):
