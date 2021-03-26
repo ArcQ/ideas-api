@@ -71,8 +71,8 @@ class Idea(GenericModel):
 
 
 class LabJoin(GenericModel):
-    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    accepted_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_created")
+    accepted_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_accepted")
     is_accepted = models.BooleanField(default=False)
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
     status = models.CharField(max_length=20)

@@ -14,7 +14,7 @@ class LabMutation(SerializerMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
         user_id = info.context.user.id
-        input['created_by_id'] = parse_relay_id(input['created_by_id'])
+        input['created_by_id'] = info.context.user.id
         input['lab_id'] = parse_relay_id(input['lab_id'])
         permission = CrudPermission.MODIFY if input['id'] else CrudPermission.CREATE
 
@@ -46,7 +46,7 @@ class IdeaMutation(SerializerMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        input['created_by_id'] = parse_relay_id(input['created_by_id'])
+        input['created_by_id'] = info.context.user.id
         input['lab_id'] = parse_relay_id(input['lab_id'])
         if is_allowed_on_lab(PermissionResource.LAB, CrudPermission.VIEW, info.context.user, input['lab_id']):
             return super().mutate_and_get_payload(root, info, **input)
@@ -74,15 +74,17 @@ class LabJoinMutation(SerializerMutation):
         serializer_class = LabJoinSerializer
         lookup_field = 'id'
 
-    # any one can create lab, but no uppdates
+    # any one can create lab, but no updates
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        input['created_by_id'] = info.context.user.id
-        input['lab_id'] = parse_relay_id(input['lab_id'])
         if input['id'] and is_allowed_on_lab(PermissionResource.LAB_JOIN, CrudPermission.MODIFY, info.context.user,
                                              input['lab_id']):
             input['accepted_by'] = info.context.user.id
             return super().mutate_and_get_payload(root, info, **input)
+
+        input['created_by_id'] = info.context.user.id
+        input['lab_id'] = parse_relay_id(input['lab_id'])
+
         return super().mutate_and_get_payload(root, info, **input)
 
 
