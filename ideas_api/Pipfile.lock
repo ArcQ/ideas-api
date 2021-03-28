@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0168badb6f1f2f3f8e9d751b4e1e8b16abe05e0a425658b8f6cf51434066bda4"
+            "sha256": "4056a71dcdc96ad0c2b9aef034d237e578824a6726db356722a734a6458aa9d4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -163,6 +163,14 @@
             "index": "pypi",
             "version": "==2.4.0"
         },
+        "django-guardian": {
+            "hashes": [
+                "sha256:0e70706c6cda88ddaf8849bddb525b8df49de05ba0798d4b3506049f0d95cbc8",
+                "sha256:ed2de26e4defb800919c5749fb1bbe370d72829fbd72895b6cf4f7f1a7607e1b"
+            ],
+            "index": "pypi",
+            "version": "==2.3.0"
+        },
         "django-seed": {
             "hashes": [
                 "sha256:5cdda71dcd51b2e7340e4aec9035d99d7014409a4b11adddbdff17d814968221"
@@ -188,11 +196,11 @@
         },
         "faker": {
             "hashes": [
-                "sha256:60a7263104ef7a14ecfe2af1142d53924aa534ccec85cea82bb67b2b32f84421",
-                "sha256:f43ac743c34affb1c7fccca8b06450371cd482b6ddcb4110e420acb24356e70b"
+                "sha256:579348fac4597cf5c998f10e3b840b48d85157413cb501809f98a83eb228e907",
+                "sha256:c2852cadc99a4ebdbf06934e4c15e30f2307d414ead21d15605759602645f152"
             ],
-            "index": "pypi",
-            "version": "==6.6.2"
+            "markers": "python_version >= '3.6'",
+            "version": "==6.6.3"
         },
         "graphene": {
             "hashes": [
@@ -441,11 +449,11 @@
         },
         "faker": {
             "hashes": [
-                "sha256:60a7263104ef7a14ecfe2af1142d53924aa534ccec85cea82bb67b2b32f84421",
-                "sha256:f43ac743c34affb1c7fccca8b06450371cd482b6ddcb4110e420acb24356e70b"
+                "sha256:579348fac4597cf5c998f10e3b840b48d85157413cb501809f98a83eb228e907",
+                "sha256:c2852cadc99a4ebdbf06934e4c15e30f2307d414ead21d15605759602645f152"
             ],
-            "index": "pypi",
-            "version": "==6.6.2"
+            "markers": "python_version >= '3.6'",
+            "version": "==6.6.3"
         },
         "python-dateutil": {
             "hashes": [

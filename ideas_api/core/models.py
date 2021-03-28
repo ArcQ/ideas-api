@@ -6,6 +6,8 @@ from enum import Enum
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from core.permission_vars import build_permissions_model_meta, lab_admin_permissions
+
 
 class LabMemberRoles(Enum):
     MEMBER = 'member'
@@ -53,6 +55,9 @@ class Lab(GenericModel):
     image_url = models.URLField(max_length=255, default='https://source.unsplash.com/random/1000x1000')
     chat_id = models.CharField(max_length=255)
     code = models.CharField(max_length=55, default=random_code, unique=True)
+
+    class Meta:
+        permissions = build_permissions_model_meta(lab_admin_permissions)
 
 
 class LabMember(GenericModel):

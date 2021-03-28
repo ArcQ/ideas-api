@@ -37,10 +37,10 @@ singledispatch = "==3.4.0.3"
 six = "==1.15.0"
 text-unidecode = "==1.3"
 urllib3 = "==1.26.3"
-Faker = "==6.6.2"
 PyJWT = "==1.7.1"
 Rx = "==1.6.1"
 cognitojwt = "*"
+django-guardian = "*"
 
 [requires]
 python_version = "3.9"
