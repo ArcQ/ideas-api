@@ -1,16 +1,15 @@
 from uuid import UUID
 
 import django_filters
-from django.core.exceptions import PermissionDenied, ValidationError
+import graphene
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseForbidden
 from graphene import relay, ObjectType
-from graphene.relay.tests.test_global_id import CustomNode
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
-from guardian.testapp.models import Project
 
-from common.RelayIdParser import parse_relay_id
-from core.models import Lab, Idea, User, LabMember
-from core.permission_vars import Role
+from core.models import Lab, Idea, User
+from core.permission_vars import Role, build_permission_string
 from core.permissions import CrudPermission, PermissionResource, is_allowed_on_lab
 
 
@@ -19,8 +18,15 @@ class RegularIdNode(relay.Node):
         name = 'Node'
 
     @classmethod
+    def node_resolver(cls, only_type, root, info, id):
+        return cls.get_node_from_global_id(info, id, only_type=only_type)
+
+    @classmethod
+    def from_global_id(cls, type, id):
+        return UUID(id)
+
+    @classmethod
     def to_global_id(cls, type, id):
-        # returns a non-encoded ID
         return id
 
     @classmethod
@@ -30,7 +36,7 @@ class RegularIdNode(relay.Node):
 
 
 class IdeaNode(DjangoObjectType):
-    lab_id = django_filters.ModelChoiceFilter(queryset=Lab.objects.all().values_list('id', flat=True))
+    lab__id = django_filters.ModelChoiceFilter(queryset=Lab.objects.all().values_list('id', flat=True))
 
     class Meta:
         model = Idea
@@ -38,17 +44,17 @@ class IdeaNode(DjangoObjectType):
             'title': ['exact', 'icontains'],
             'desc': ['exact', 'icontains'],
             'notes': ['exact', 'icontains'],
-            'lab_id': ['exact'],
+            'lab__id': ['exact'],
         }
         interfaces = (RegularIdNode,)
 
     @classmethod
     def get_queryset(cls, queryset, info):
-        lab_id_args = list(filter(lambda field: field.name.value == "labId", info.field_asts[0].arguments))
+        lab_id_args = list(filter(lambda field: field.name.value == "lab_Id", info.field_asts[0].arguments))
         if len(lab_id_args) > 0:
             lab_id = lab_id_args[0].value.value
-            if is_allowed_on_lab(PermissionResource.LAB, CrudPermission.VIEW, Role.ADMIN, info.context.user,
-                                 lab_id):
+            if info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
+                                          Lab.objects.get(pk=lab_id)):
                 return queryset.order_by('-created_at')
         else:
             raise PermissionDenied("You need to submit a lab to access ideas")
@@ -78,11 +84,30 @@ class UserNode(DjangoObjectType):
 
 
 class Query(ObjectType):
-    lab = relay.Node.Field(LabNode)
+    lab = graphene.Field(LabNode, id=graphene.UUID())
     my_labs = DjangoFilterConnectionField(LabNode)
 
-    user = relay.Node.Field(UserNode)
+    my_user = graphene.Field(UserNode, id=graphene.UUID())
     all_users = DjangoFilterConnectionField(UserNode)
 
-    idea = relay.Node.Field(IdeaNode)
+    idea = graphene.Field(IdeaNode, id=graphene.UUID())
     my_ideas = DjangoFilterConnectionField(IdeaNode)
+
+    def resolve_lab(root, info, id):  # noqa
+        if info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
+                                      Lab.objects.get(pk=id)):
+            return Lab.objects.get(pk=id, labmember__user_id=info.context.user.id)
+        raise PermissionDenied("Not allowed")
+
+    def resolve_my_user(root, info, id):  # noqa
+        # only implemented for retrieving your own profile
+        if info.context.user.id == id:
+            return info.context.user
+        raise PermissionDenied("Not allowed")
+
+    def resolve_idea(root, info, id):  # noqa
+        idea = Idea.objects.get(pk=id)
+        if info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
+                                      idea.lab):
+            return idea
+        raise PermissionDenied("Not allowed")
