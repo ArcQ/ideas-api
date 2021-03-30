@@ -1,4 +1,4 @@
-from core.models import Idea, User, Lab, LabJoin
+from core.models import Idea, User, Lab, LabJoin, LabJoinStatus
 from django.db import IntegrityError
 
 from rest_framework import serializers
@@ -12,11 +12,13 @@ class LabJoinSerializer(serializers.ModelSerializer):
     class Meta:
         model = LabJoin
         fields = '__all__'
+        read_only_fields = ['lab', 'created_by']
 
     def update(self, instance, validated_data):
-        instance.accepted_by = validated_data.get('status', instance.accepted_by)
-        instance.status = validated_data.get('status', instance.status)
-        return instance
+        if instance.status == LabJoinStatus.AWAITING or LabJoinStatus.DENIED:
+            instance.handled_by = validated_data.get('handled_by', instance.accepted_by)
+            instance.status = validated_data.get('status', LabJoinStatus.is_valid_update(instance.status))
+            return instance
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -30,6 +32,7 @@ class LabSerializer(serializers.ModelSerializer):
     # write
     created_by_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='created_by',
                                                        write_only=True, required=False)
+
     class Meta:
         model = Lab
         fields = '__all__'

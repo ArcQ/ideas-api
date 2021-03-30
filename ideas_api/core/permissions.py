@@ -38,7 +38,6 @@ def delete_lab_group_member(instance: Lab):
 # view is automatic if you're a member
 def is_allowed_on_lab(permission_resource: PermissionResource, crud_permission: CrudPermission, role: Role, user: User,
                       lab_id: str) -> bool:
-    group = Group.objects.get(name=build_group_string(permission_resource, role, lab_id))
     if LabMember.objects.filter(user_id=user.id,
                                 lab_id=lab_id).count() > 0 \
             and user.has_perm(build_permission_string(permission_resource, crud_permission),

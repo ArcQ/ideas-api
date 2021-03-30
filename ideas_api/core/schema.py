@@ -3,14 +3,13 @@ from uuid import UUID
 import django_filters
 import graphene
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseForbidden
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
 from core.models import Lab, Idea, User
-from core.permission_vars import Role, build_permission_string
-from core.permissions import CrudPermission, PermissionResource, is_allowed_on_lab
+from core.permission_vars import build_permission_string
+from core.permissions import CrudPermission, PermissionResource
 
 
 class RegularIdNode(relay.Node):

@@ -9,6 +9,16 @@ from django.db import models
 from core.permission_vars import build_permissions_model_meta, lab_admin_permissions
 
 
+class LabJoinStatus(Enum):
+    ACCEPTED = 'accepted'
+    DENIED = 'denied'
+    AWAITING = 'awaiting'
+
+    @classmethod
+    def is_valid_update(cls, value):
+        return value in [cls.ACCEPTED.value, cls.DENIED.value]
+
+
 class LabMemberRoles(Enum):
     MEMBER = 'member'
     ADMIN = 'admin'
@@ -76,8 +86,11 @@ class Idea(GenericModel):
 
 
 class LabJoin(GenericModel):
-    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_created")
-    accepted_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_accepted")
-    is_accepted = models.BooleanField(default=False)
+    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_created",
+                                   unique=False)
+    handled_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_accepted")
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, default=LabJoinStatus.AWAITING.value)
+
+    class Meta:
+        unique_together = (('created_by', 'lab'),)
