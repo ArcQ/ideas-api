@@ -16,14 +16,14 @@ def create_lab(instance: Lab, created, **kwargs):
 
 
 @receiver(pre_delete, sender=Lab)
-def delete_lab(_sender, instance: Lab, **kwargs):
+def delete_lab(instance: Lab, **kwargs):
     delete_lab_group_admin(instance)
     delete_lab_group_member(instance)
 
 
 @receiver(post_save, sender=LabJoin)
-def create_lab_join(_sender, instance: LabJoin, created, **kwargs):
-    if not created and instance.status is LabJoinStatus.AWAITING.value:
+def create_lab_join(instance: LabJoin, created, **kwargs):
+    if not created and instance.status is LabJoinStatus.ACCEPTED.value:
         member_group = Group.objects.get(name=build_group_string(PermissionResource.LAB, Role.MEMBER, instance.id))
         instance.created_by.groups.add(member_group)
         LabMember.objects.create(role=LabMemberRoles.OWNER.value, user=instance.created_by, lab=instance.lab,

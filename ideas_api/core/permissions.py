@@ -29,7 +29,7 @@ def delete_lab_group_admin(instance: Lab):
 
 
 def delete_lab_group_member(instance: Lab):
-    group = Group.objects.create(name=build_group_string(PermissionResource.LAB, Role.MEMBER, str(instance.id)))
+    group = Group.objects.get(name=build_group_string(PermissionResource.LAB, Role.MEMBER, str(instance.id)))
     for perm_str in [build_permission_string(PermissionResource.LAB, CrudPermission.VIEW)]:
         remove_perm(perm_str, group, instance)
     group.delete()

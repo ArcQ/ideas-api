@@ -7,7 +7,7 @@ from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
-from core.models import Lab, Idea, User
+from core.models import Lab, Idea, User, LabJoin
 from core.permission_vars import build_permission_string
 from core.permissions import CrudPermission, PermissionResource
 
@@ -30,7 +30,6 @@ class RegularIdNode(relay.Node):
 
     @classmethod
     def get_node_from_global_id(cls, info, global_id, only_type=None):
-        print(global_id)
         return super().get_node_from_global_id(cls, info, UUID(global_id), only_type=None)
 
 
@@ -53,7 +52,7 @@ class IdeaNode(DjangoObjectType):
         if len(lab_id_args) > 0:
             lab_id = lab_id_args[0].value.value
             if info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
-                                          Lab.objects.get(pk=lab_id)):
+                                          Lab.objects.get(pk=UUID(lab_id))):
                 return queryset.order_by('-created_at')
         else:
             raise PermissionDenied("You need to submit a lab to access ideas")
@@ -82,6 +81,21 @@ class UserNode(DjangoObjectType):
         interfaces = (RegularIdNode,)
 
 
+class LabJoinNode(DjangoObjectType):
+    lab__id = django_filters.ModelChoiceFilter(queryset=Lab.objects.all().values_list('id', flat=True))
+
+    class Meta:
+        model = LabJoin
+        interfaces = (RegularIdNode,)
+        filter_fields = {
+            'lab__id': ['exact'],
+        }
+
+    @classmethod
+    def get_queryset(cls, queryset, info):
+        return queryset
+
+
 class Query(ObjectType):
     lab = graphene.Field(LabNode, id=graphene.UUID())
     my_labs = DjangoFilterConnectionField(LabNode)
@@ -91,6 +105,9 @@ class Query(ObjectType):
 
     idea = graphene.Field(IdeaNode, id=graphene.UUID())
     my_ideas = DjangoFilterConnectionField(IdeaNode)
+
+    lab_join = graphene.Field(LabJoinNode, id=graphene.UUID())
+    my_labs = DjangoFilterConnectionField(LabJoinNode)
 
     def resolve_lab(root, info, id):  # noqa
         if info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),

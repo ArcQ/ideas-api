@@ -87,7 +87,7 @@ class Idea(GenericModel):
 
 class LabJoin(GenericModel):
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_created",
-                                   unique=False)
+                                   unique=True)
     handled_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_accepted")
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, default=LabJoinStatus.AWAITING.value)

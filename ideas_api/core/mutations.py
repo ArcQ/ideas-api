@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from django.core.exceptions import PermissionDenied
 from graphene_django.rest_framework.mutation import SerializerMutation
 
@@ -34,30 +36,40 @@ class DeleteLabMutation(graphene.Mutation):
 
     @classmethod
     def mutate(cls, root, info, **input):
+        lab = Lab.objects.get(pk=UUID(input['id']))
         if info.context.user.has_perm(
-                build_permission_string(PermissionResource.LAB, CrudPermission.DELETE), Lab.objects.get(input['id'])):
-            obj = Lab.objects.get(pk=input['id'])
-            obj.delete()
+                build_permission_string(PermissionResource.LAB, CrudPermission.DELETE), lab):
+            lab.delete()
             return cls(ok=True)
 
 
 class IdeaMutation(SerializerMutation):
-    created_by_id = graphene.ID()
     lab_id = graphene.ID()
 
     class Meta:
         serializer_class = IdeaSerializer
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, user=None, **input):
-        if not user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
-                             Lab.objects.get(pk=input['lab_id'])):
-            raise PermissionDenied("You do not have permission to access ideas on the requested lab")
-
+    def mutate_and_get_payload(cls, root, info, **input):
         if is_create(input):
-            input['created_by_id'] = info.context.user.id
-        elif Idea.objects.get(pk=input['id']).lab_id != input['lab_id']:
-            raise PermissionDenied("You do not have permission to access the requested lab")
+            return cls.create(root, info, **input)
+        else:
+            return cls.update(root, info, **input)
+
+    @classmethod
+    def create(cls, root, info, **input):
+        input['created_by_id'] = info.context.user.id
+        if not info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
+                                          Lab.objects.get(pk=UUID(input['lab_id']))):
+            raise PermissionDenied("You do not have permission to access ideas on the requested lab")
+        return super().mutate_and_get_payload(root, info, **input)
+
+    @classmethod
+    def update(cls, root, info, **input):
+        idea = Idea.objects.get(pk=input['id'])
+        if not info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
+                                          idea.lab):
+            raise PermissionDenied("You do not have permission to access ideas on the requested lab")
         return super().mutate_and_get_payload(root, info, **input)
 
 
@@ -69,15 +81,14 @@ class DeleteIdeaMutation(graphene.Mutation):
 
     @classmethod
     def mutate(cls, root, info, **input):
-        if info.context.user.has_perm(
-                build_permission_string(PermissionResource.LAB, CrudPermission.VIEW), Lab.objects.get(input['lab_id'])):
-            obj = Idea.objects.get(pk=input['id'])
-            obj.delete()
+        idea = Idea.objects.get(pk=UUID(input['id']))
+        if info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
+                                      idea.lab):
+            idea.delete()
             return cls(ok=True)
 
 
 class LabJoinMutation(SerializerMutation):
-    created_by_id = graphene.ID()
     lab_id = graphene.ID()
 
     class Meta:
@@ -91,7 +102,7 @@ class LabJoinMutation(SerializerMutation):
             input['created_by_id'] = info.context.user.id
             return super().mutate_and_get_payload(root, info, **input)
 
-        lab = Lab.objects.get(labjoin__id=info['id'])
+        lab = Lab.objects.get(labjoin__id=UUID(input['id']))
         if not info.context.user.has_perm(
                 build_permission_string(PermissionResource.LAB, CrudPermission.MODIFY), lab):
             raise PermissionDenied('You dont have permissions to act on this lab')
@@ -107,4 +118,4 @@ class Mutation(graphene.ObjectType):
     idea = IdeaMutation.Field()
     delete_idea = DeleteIdeaMutation.Field()
 
-    lab_join = LabJoin.Field()
+    lab_join = LabJoinMutation.Field()
