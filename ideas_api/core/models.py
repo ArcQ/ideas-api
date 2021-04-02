@@ -15,8 +15,8 @@ class LabJoinStatus(Enum):
     AWAITING = 'awaiting'
 
     @classmethod
-    def is_valid_update(cls, value):
-        return value in [cls.ACCEPTED.value, cls.DENIED.value]
+    def is_active_status(cls, value):
+        return value in [cls.AWAITING.value, cls.DENIED.value]
 
 
 class LabMemberRoles(Enum):

@@ -60,12 +60,17 @@ class LabJoinSerializer(serializers.ModelSerializer):
             'created_by_id': {'read_only': False, 'required': False}
         }
 
+    def validate_status(self, value):
+        valid_values=[LabJoinStatus.ACCEPTED.value, LabJoinStatus.DENIED.value]
+        if value not in valid_values:
+            raise serializers.ValidationError("invalid status; Valid values are: " + ','.join(valid_values))
+        return value
+
     def create(self, validated_data):
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
-        if instance.status == LabJoinStatus.AWAITING.value or LabJoinStatus.DENIED.value:
-            validated_data['status'] = validated_data.get('status', LabJoinStatus.is_valid_update(instance.status))
+        if LabJoinStatus.is_active_status(instance.status):
             return super().update(instance, validated_data)
 
 

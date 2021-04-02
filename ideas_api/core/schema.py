@@ -7,7 +7,7 @@ from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
-from core.models import Lab, Idea, User, LabJoin
+from core.models import Lab, Idea, User, LabJoin, LabMember
 from core.permission_vars import build_permission_string
 from core.permissions import CrudPermission, PermissionResource
 
@@ -96,6 +96,21 @@ class LabJoinNode(DjangoObjectType):
         return queryset
 
 
+class LabMemberNode(DjangoObjectType):
+    lab__id = django_filters.ModelChoiceFilter(queryset=Lab.objects.all().values_list('id', flat=True))
+
+    class Meta:
+        model = LabMember
+        interfaces = (RegularIdNode,)
+        filter_fields = {
+            'lab__id': ['exact'],
+        }
+
+    @classmethod
+    def get_queryset(cls, queryset, info):
+        return queryset
+
+
 class Query(ObjectType):
     lab = graphene.Field(LabNode, id=graphene.UUID())
     my_labs = DjangoFilterConnectionField(LabNode)
@@ -107,7 +122,10 @@ class Query(ObjectType):
     my_ideas = DjangoFilterConnectionField(IdeaNode)
 
     lab_join = graphene.Field(LabJoinNode, id=graphene.UUID())
-    my_labs = DjangoFilterConnectionField(LabJoinNode)
+    my_lab_joins = DjangoFilterConnectionField(LabJoinNode)
+
+    lab_member = graphene.Field(LabMemberNode, id=graphene.UUID())
+    my_lab_members = DjangoFilterConnectionField(LabMemberNode)
 
     def resolve_lab(root, info, id):  # noqa
         if info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),

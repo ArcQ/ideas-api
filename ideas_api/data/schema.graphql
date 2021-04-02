@@ -9,6 +9,10 @@ type DeleteIdeaMutation {
   ok: Boolean
 }
 
+type DeleteLabMutation {
+  ok: Boolean
+}
+
 type ErrorType {
   field: String!
   messages: [String!]!
@@ -16,23 +20,24 @@ type ErrorType {
 
 input IdeaMutationInput {
   id: String
+  createdById: String
+  labId: String
   title: String!
   desc: String!
   notes: String
-  createdById: String
-  labId: String
   clientMutationId: String
 }
 
 type IdeaMutationPayload {
   id: String
+  createdBy: UserNode
+  lab: LabNode
+  createdAt: DateTime
+  updatedAt: DateTime
   title: String
   desc: String
   notes: String
-  createdBy: UserNode
-  lab: LabNode
   errors: [ErrorType]
-  createdById: ID
   labId: ID
   clientMutationId: String
 }
@@ -58,6 +63,91 @@ type IdeaNodeEdge {
   cursor: String!
 }
 
+input LabJoinMutationInput {
+  id: String
+  createdById: String
+  handledById: String
+  labId: String
+  status: String
+  handledBy: String
+  clientMutationId: String
+}
+
+type LabJoinMutationPayload {
+  id: String
+  createdBy: UserNode
+  lab: LabNode
+  createdAt: DateTime
+  updatedAt: DateTime
+  status: String
+  handledBy: String
+  errors: [ErrorType]
+  labId: ID
+  clientMutationId: String
+}
+
+type LabJoinNode implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: UserNode
+  handledBy: UserNode
+  lab: LabNode!
+  status: String!
+}
+
+type LabJoinNodeConnection {
+  pageInfo: PageInfo!
+  edges: [LabJoinNodeEdge]!
+}
+
+type LabJoinNodeEdge {
+  node: LabJoinNode
+  cursor: String!
+}
+
+type LabMemberNode implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  role: String!
+  user: UserNode!
+  lab: LabNode!
+  isAdmin: Boolean
+}
+
+type LabMemberNodeConnection {
+  pageInfo: PageInfo!
+  edges: [LabMemberNodeEdge]!
+}
+
+type LabMemberNodeEdge {
+  node: LabMemberNode
+  cursor: String!
+}
+
+input LabMutationInput {
+  id: String
+  createdById: String
+  name: String!
+  imageUrl: String
+  chatId: String!
+  clientMutationId: String
+}
+
+type LabMutationPayload {
+  id: String
+  createdBy: UserNode
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  imageUrl: String
+  chatId: String
+  code: String
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
 type LabNode implements Node {
   id: ID!
   createdAt: DateTime!
@@ -66,7 +156,10 @@ type LabNode implements Node {
   createdBy: UserNode
   imageUrl: String!
   chatId: String!
-  ideaSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection!
+  code: String!
+  labmemberSet(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabMemberNodeConnection!
+  ideaSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String, lab_Id: UUID): IdeaNodeConnection!
+  labjoinSet(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabJoinNodeConnection!
 }
 
 type LabNodeConnection {
@@ -80,8 +173,11 @@ type LabNodeEdge {
 }
 
 type Mutation {
+  lab(input: LabMutationInput!): LabMutationPayload
+  deleteLab(id: ID): DeleteLabMutation
   idea(input: IdeaMutationInput!): IdeaMutationPayload
   deleteIdea(id: ID): DeleteIdeaMutation
+  labJoin(input: LabJoinMutationInput!): LabJoinMutationPayload
 }
 
 interface Node {
@@ -96,20 +192,23 @@ type PageInfo {
 }
 
 type Query {
-  lab(id: ID!): LabNode
-  allLabs(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection
-  user(id: ID!): UserNode
+  lab(id: UUID): LabNode
+  myLabs(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection
+  myUser(id: UUID): UserNode
   allUsers(offset: Int, before: String, after: String, first: Int, last: Int, username: String, username_Icontains: String, username_Istartswith: String, authKey: String): UserNodeConnection
-  idea(id: ID!): IdeaNode
-  allIdeas(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection
+  idea(id: UUID): IdeaNode
+  myIdeas(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String, lab_Id: UUID): IdeaNodeConnection
+  labJoin(id: UUID): LabJoinNode
+  myLabJoins(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabJoinNodeConnection
 }
+
+scalar UUID
 
 type UserNode implements Node {
   password: String!
   lastLogin: DateTime
   isSuperuser: Boolean!
   isStaff: Boolean!
-  isActive: Boolean!
   dateJoined: DateTime!
   id: ID!
   createdAt: DateTime!
@@ -120,8 +219,12 @@ type UserNode implements Node {
   authKey: String!
   imageUrl: String!
   email: String!
+  isActive: Boolean!
   labSet(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection!
-  ideaSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String): IdeaNodeConnection!
+  labmemberSet(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabMemberNodeConnection!
+  ideaSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String, lab_Id: UUID): IdeaNodeConnection!
+  labJoinCreated(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabJoinNodeConnection!
+  labJoinAccepted(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabJoinNodeConnection!
 }
 
 type UserNodeConnection {

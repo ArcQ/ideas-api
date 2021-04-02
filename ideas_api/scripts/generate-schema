@@ -1,0 +1,1 @@
+pipenv run python manage.py graphql_schema --schema ideas_api.schema.schema --out data/schema.graphql
