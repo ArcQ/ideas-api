@@ -10,7 +10,7 @@ import IdeaDetail from './IdeaDetail';
 import { deleteIdeaSuccessMessage } from '../../store/alert/alertMessages';
 
 const ideaByIdQuery = graphql`
-  query IdeaDetailContainerQuery($ideaId: ID!) {
+  query IdeaDetailContainerQuery($ideaId: UUID) {
     idea(id: $ideaId) {
       id
       createdAt

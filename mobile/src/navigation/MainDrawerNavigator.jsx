@@ -6,7 +6,6 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import {
-  
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
   HOME_ROUTE,

@@ -1,3 +1,5 @@
+from abc import abstractmethod
+
 from core.models import Idea, User, Lab, LabJoin, LabJoinStatus
 from django.db import IntegrityError
 
@@ -7,6 +9,25 @@ import logging
 
 logger = logging.getLogger("mylogger")
 
+generic_read_only_fields = ['created_at', 'updated_at']
+
+
+class WithCreateOnlyModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        create_only_fields = ()
+
+    def _check_if_create_only(self, validated_data):
+        for key in validated_data.keys():
+            if key in self.Meta.create_only_fields:
+                raise serializers.ValidationError(f'{key} is a create only key')
+
+    @abstractmethod
+    def update(self, instance, validated_data):
+        if 'create_only_fields' in self.Meta.keys():
+            self._check_if_create_only(validated_data)
+
+        return super().update(instance, validated_data)
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,7 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class LabSerializer(serializers.ModelSerializer):
+class LabSerializer(WithCreateOnlyModelSerializer):
     created_by = UserSerializer(read_only=True)
     # write
     created_by_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='created_by',
@@ -23,7 +44,8 @@ class LabSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lab
         fields = '__all__'
-        read_only_fields = ['code', 'created_by']
+        read_only_fields = ['code'] + generic_read_only_fields
+        create_only_fields = ['created_by_id', 'created_by']
 
     def create(self, validated_data):
         # regenerate code if non unique
@@ -38,7 +60,7 @@ class LabSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class LabJoinSerializer(serializers.ModelSerializer):
+class LabJoinSerializer(WithCreateOnlyModelSerializer):
     created_by = UserSerializer(read_only=True)
     lab = LabSerializer(read_only=True)
     # write
@@ -51,19 +73,20 @@ class LabJoinSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LabJoin
-        # fields = ['created_by', 'created_by_id', 'handled_by', 'lab_id', 'status', 'lab']
         fields = '__all__'
-        # read_only_fields = ['created_by']
         extra_kwargs = {
             'id': {'read_only': True, 'required': False},
             'lab_id': {'read_only': False, 'required': False},
             'created_by_id': {'read_only': False, 'required': False}
         }
+        read_only_fields = generic_read_only_fields
+        create_only_fields = ['created_by_id', 'created_by']
 
     def validate_status(self, value):
-        valid_values=[LabJoinStatus.ACCEPTED.value, LabJoinStatus.DENIED.value]
+        valid_values = [LabJoinStatus.ACCEPTED.value, LabJoinStatus.DENIED.value]
         if value not in valid_values:
-            raise serializers.ValidationError("invalid status; Valid values are: " + ','.join(valid_values))
+            valid_values_str = ','.join(valid_values)
+            raise serializers.ValidationError(f'invalid status; Valid values are: {valid_values_str}')
         return value
 
     def create(self, validated_data):
@@ -74,7 +97,7 @@ class LabJoinSerializer(serializers.ModelSerializer):
             return super().update(instance, validated_data)
 
 
-class IdeaSerializer(serializers.ModelSerializer):
+class IdeaSerializer(WithCreateOnlyModelSerializer):
     # read only
     created_by = UserSerializer(read_only=True)
     lab = LabSerializer(read_only=True)
@@ -88,11 +111,13 @@ class IdeaSerializer(serializers.ModelSerializer):
         model = Idea
         # fields = ('id', 'title', 'desc', 'notes', 'created_by', 'lab', 'created_by_id', 'lab_id')
         fields = '__all__'
+        read_only_fields = generic_read_only_fields
         extra_kwargs = {
             'id': {'read_only': True, 'required': False},
             'lab_id': {'read_only': False, 'required': False},
             'created_by_id': {'read_only': False, 'required': False}
         }
+        create_only_fields = ['created_by_id', 'created_by']
 
     def update(self, instance, validated_data):
         # create only fields, don't allow changing for this version

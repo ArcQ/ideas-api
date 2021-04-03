@@ -8,7 +8,7 @@ import JoinLab from './JoinLab';
 
 const joinLabQuery = graphql`
   query JoinLabContainerQuery {
-    allLabs {
+    myLabs {
       edges {
         node {
           id

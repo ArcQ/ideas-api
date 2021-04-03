@@ -11,8 +11,8 @@ import IdeasList from './IdeasList';
 import { NavigationPropType } from '../../utils/AppPropTypes';
 
 const ideasListQuery = graphql`
-  query IdeasListContainerQuery {
-    allIdeas {
+  query IdeasListContainerQuery($labId: UUID) {
+    myIdeas(lab_Id: $labId) {
       edges {
         node {
           id
@@ -20,6 +20,7 @@ const ideasListQuery = graphql`
           updatedAt
           lab {
             id
+            name
           }
           desc
           title
@@ -31,8 +32,12 @@ const ideasListQuery = graphql`
 `;
 
 function IdeasListScreenContainer(props) {
-  const baseQueryProps = useQuery(ideasListQuery);
+  const baseQueryProps = useQuery(ideasListQuery, {
+    labId: 'e27c629f-c1d1-49f1-b3eb-b67e6b7c1c2a',
+  });
   const _props = { baseQueryProps };
+
+  console.log(baseQueryProps);
 
   const methods = {
     createIdeaOnPress: () => props.navigation.navigate(CREATE_IDEA_ROUTE),

@@ -91,12 +91,27 @@ const style = {
 
 const drawerContentQuery = graphql`
   query DrawerContentQuery {
-    allLabs {
+    myLabs {
       edges {
         node {
           id
+          code
+          createdBy {
+            id
+            username
+          }
           name
+          imageUrl
           chatId
+          labmemberSet {
+            edges {
+              node {
+                user {
+                  username
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -174,11 +189,9 @@ CreateLabsButton.propTypes = {
 };
 
 function DrawerContent(props) {
-  const drawerContentQueryProps = useQuery(drawerContentQuery, {
-    ideaId: 'SWRlYU5vZGU6NGViOWNiOTMtYjExNi00M2RhLWFmNjgtOTNiOTJhMjAwNGNl',
-  });
+  const drawerContentQueryProps = useQuery(drawerContentQuery);
 
-  const allLabs = drawerContentQueryProps?.data?.allLabs.edges;
+  const myLabs = drawerContentQueryProps?.data?.myLabs?.edges;
 
   const methods = {
     onHomePress: () => {
@@ -260,9 +273,10 @@ function DrawerContent(props) {
           />
         </View>
         <View style={style.contentSection}>
-          {allLabs &&
-            allLabs.map((lab) => (
+          {myLabs &&
+            myLabs.map((lab) => (
               <DrawerLink
+                key={lab.node.id}
                 logo={<Entypo name="lab-flask" size={24} color="white" />}
                 id={lab.node.id}
                 onPress={() => {

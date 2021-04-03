@@ -200,6 +200,8 @@ type Query {
   myIdeas(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String, lab_Id: UUID): IdeaNodeConnection
   labJoin(id: UUID): LabJoinNode
   myLabJoins(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabJoinNodeConnection
+  labMember(id: UUID): LabMemberNode
+  myLabMembers(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabMemberNodeConnection
 }
 
 scalar UUID

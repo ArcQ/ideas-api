@@ -99,8 +99,7 @@ export default function CreateLabContainer(props) {
           input: {
             title: data.title,
             desc: data.desc,
-            labId: '6034f8e2-df82-11ea-87d0-0242ac130003',
-            createdById: '40e6215d-b5c6-4896-987c-f30f3678f608',
+            labId: 'e27c629f-c1d1-49f1-b3eb-b67e6b7c1c2a',
           },
         },
       });
