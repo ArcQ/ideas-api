@@ -1,7 +1,10 @@
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import React from 'react';
 import { graphql } from 'react-relay';
 import { useQuery } from 'relay-hooks';
 
+import { appSelectors } from '../../store/app/ducks';
 import {
   CHAT_ROUTE,
   CREATE_IDEA_ROUTE,
@@ -33,11 +36,9 @@ const ideasListQuery = graphql`
 
 function IdeasListScreenContainer(props) {
   const baseQueryProps = useQuery(ideasListQuery, {
-    labId: 'e27c629f-c1d1-49f1-b3eb-b67e6b7c1c2a',
+    labId: props.currentLab.id,
   });
   const _props = { baseQueryProps };
-
-  console.log(baseQueryProps);
 
   const methods = {
     createIdeaOnPress: () => props.navigation.navigate(CREATE_IDEA_ROUTE),
@@ -57,6 +58,16 @@ function IdeasListScreenContainer(props) {
 
 IdeasListScreenContainer.propTypes = {
   navigation: NavigationPropType,
+  currentLab: PropTypes.object,
 };
 
-export default IdeasListScreenContainer;
+const mapStateToProps = (state) => ({
+  currentLab: appSelectors.currentLab(state),
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(IdeasListScreenContainer);

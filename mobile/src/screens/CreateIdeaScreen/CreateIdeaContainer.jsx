@@ -1,8 +1,10 @@
+import { connect } from 'react-redux';
 import { useMutation } from 'relay-hooks';
 import React from 'react';
 import { graphql } from 'react-relay';
 import PropTypes from 'prop-types';
 
+import { appSelectors } from '../../store/app/ducks';
 import envService from '../../services/env/envService';
 import AppPropTypes from '../../utils/AppPropTypes';
 import CreateIdea from './CreateIdea';
@@ -29,7 +31,7 @@ const createIdeaMutation = graphql`
   }
 `;
 
-export default function CreateIdeaContainer(props) {
+function CreateIdeaContainer(props) {
   const formConfig = {
     title: {
       placeholder: 'Lemonade Stand',
@@ -64,8 +66,7 @@ export default function CreateIdeaContainer(props) {
           input: {
             title: data.title,
             desc: data.desc,
-            labId: 'e27c629f-c1d1-49f1-b3eb-b67e6b7c1c2a',
-            createdById: '40e6215d-b5c6-4896-987c-f30f3678f608',
+            labId: props.currentLab.id,
           },
         },
       });
@@ -86,4 +87,16 @@ CreateIdeaContainer.propTypes = {
   createMortgageReferral: PropTypes.func,
   isLoading: PropTypes.bool,
   requestRvpList: PropTypes.func,
+  currentLab: PropTypes.object,
 };
+
+const mapStateToProps = (state) => ({
+  currentLab: appSelectors.currentLab(state),
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreateIdeaContainer);

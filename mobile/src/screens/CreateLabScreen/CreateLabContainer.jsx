@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
@@ -5,6 +6,7 @@ import { useMutation } from 'relay-hooks';
 import { graphql } from 'react-relay';
 import PropTypes from 'prop-types';
 
+import { appSelectors } from '../../store/app/ducks';
 import InvitedUsersDisplay from './components/InvitedUsersDisplay';
 import ModalInput from '../../components/Form/ModalInput';
 import ImageInput from '../../components/Form/ImageInput';
@@ -34,7 +36,7 @@ const createLabMutation = graphql`
   }
 `;
 
-export default function CreateLabContainer(props) {
+function CreateLabContainer(props) {
   const [image, setImage] = useState();
 
   useEffect(() => {
@@ -99,7 +101,7 @@ export default function CreateLabContainer(props) {
           input: {
             title: data.title,
             desc: data.desc,
-            labId: 'e27c629f-c1d1-49f1-b3eb-b67e6b7c1c2a',
+            labId: props.currentLab.id,
           },
         },
       });
@@ -121,4 +123,13 @@ CreateLabContainer.propTypes = {
   createMortgageReferral: PropTypes.func,
   isLoading: PropTypes.bool,
   requestRvpList: PropTypes.func,
+  currentLab: PropTypes.object,
 };
+
+const mapStateToProps = (state) => ({
+  currentLab: appSelectors.currentLab(state),
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateLabContainer);
