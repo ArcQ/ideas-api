@@ -59,12 +59,12 @@ class User(AbstractUser):
 
 
 class Lab(GenericModel):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
     # desc = models.CharField(max_length=255)
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image_url = models.URLField(max_length=255, default='https://source.unsplash.com/random/1000x1000')
     chat_id = models.CharField(max_length=255)
-    code = models.CharField(max_length=55, default=random_code, unique=True)
+    code = models.CharField(max_length=55, default=random_code, unique=True, db_index=True)
 
     class Meta:
         permissions = build_permissions_model_meta(lab_admin_permissions)
@@ -86,8 +86,7 @@ class Idea(GenericModel):
 
 
 class LabJoin(GenericModel):
-    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_created",
-                                   unique=True)
+    created_by = models.OneToOneField(User, on_delete=models.CASCADE)
     handled_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="lab_join_accepted")
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, default=LabJoinStatus.AWAITING.value)

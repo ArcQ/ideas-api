@@ -1,18 +1,23 @@
-import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useMutation, useQuery } from 'relay-hooks';
+import React, { useState } from 'react';
 import { graphql } from 'react-relay';
-import { useQuery } from 'relay-hooks';
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import JoinLab from './JoinLab';
 
-const joinLabQuery = graphql`
-  query JoinLabContainerQuery {
-    myLabs {
+const labByCodeQuery = graphql`
+  query JoinLabContainerQuery($code: String) {
+    myLabs(code: $code) {
       edges {
         node {
           id
+          code
+          createdBy {
+            id
+            username
+          }
           name
+          imageUrl
           chatId
         }
       }
@@ -20,54 +25,53 @@ const joinLabQuery = graphql`
   }
 `;
 
-function JoinLabContainer(props) {
-  const { showActionSheetWithOptions } = useActionSheet();
+const joinLabMutation = graphql`
+  mutation JoinLabContainerMutation($input: LabJoinMutationInput!) {
+    labJoin(input: $input) {
+      id
+      createdBy {
+        id
+      }
+      lab {
+        id
+      }
+      status
+    }
+  }
+`;
 
-  const selectListProps = useQuery(joinLabQuery, {
-    ideaId: 'SWRlYU5vZGU6NGViOWNiOTMtYjExNi00M2RhLWFmNjgtOTNiOTJhMjAwNGNl',
+function JoinLabContainer(props) {
+  const [requestJoinF, { loading }] = useMutation(joinLabMutation, {
+    onCompleted: ({ labJoin }) => {},
   });
 
-  const allLabs = selectListProps?.data?.allLabs.edges;
-  const joinLab = () => {};
+  const [code, setCode] = useState(null);
 
-  const _props = {
-    labs: [
-      {
-        id: '6034f8e2-df82-11ea-87d0-0242ac130003',
-        createdAt: '2020-10-10',
-        createdByUsername: 'arcq',
-        updatedAt: '2020-10-10',
-        name: 'base1',
-        imageUrl:
-          'https://images.unsplash.com/photo-1597476934600-ef660b4ce617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-      },
-      {
-        id: '"a510a7cc-df82-11ea-87d0-0242ac130003',
-        createdAt: '2020-10-10',
-        updatedAt: '2020-10-10',
-        createdByUsername: 'arcq',
-        name: 'base2',
-        imageUrl:
-          'https://images.unsplash.com/photo-1597476934600-ef660b4ce617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-      },
-    ],
-  };
+  const labPreview = useQuery(
+    labByCodeQuery,
+    {
+      code,
+    },
+    { skip: !!code },
+  );
+
+  const _props = {};
 
   const methods = {
-    onLabPress: (item) => {
-      showActionSheetWithOptions(
-        {
-          options: ['Join Lab', 'Cancel'],
-          cancelButtonIndex: 1,
-        },
-        (buttonIndex) => {
-          if (buttonIndex === 0) {
-            joinLab(item.id);
-          }
-        },
-      );
+    previewLabDetail: (data) => {
+      setCode(data.code);
     },
-    onChangeText: () => {},
+    requestJoin: () => {
+      requestJoinF({
+        variables: {
+          input: [
+            {
+              labId: labPreview.id,
+            },
+          ],
+        },
+      });
+    },
   };
 
   return <JoinLab {...{ ..._props, ...methods }} />;
@@ -75,6 +79,7 @@ function JoinLabContainer(props) {
 
 JoinLabContainer.propTypes = {
   navigation: PropTypes.object,
+  currentLab: PropTypes.object,
 };
 
 export default JoinLabContainer;

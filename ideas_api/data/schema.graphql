@@ -90,7 +90,7 @@ type LabJoinNode implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  createdBy: UserNode
+  createdBy: UserNode!
   handledBy: UserNode
   lab: LabNode!
   status: String!
@@ -193,7 +193,7 @@ type PageInfo {
 
 type Query {
   lab(id: UUID): LabNode
-  myLabs(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection
+  myLabs(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String, code: String): LabNodeConnection
   myUser(id: UUID): UserNode
   allUsers(offset: Int, before: String, after: String, first: Int, last: Int, username: String, username_Icontains: String, username_Istartswith: String, authKey: String): UserNodeConnection
   idea(id: UUID): IdeaNode
@@ -222,10 +222,10 @@ type UserNode implements Node {
   imageUrl: String!
   email: String!
   isActive: Boolean!
-  labSet(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): LabNodeConnection!
+  labSet(offset: Int, before: String, after: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String, code: String): LabNodeConnection!
   labmemberSet(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabMemberNodeConnection!
   ideaSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, title_Icontains: String, desc: String, desc_Icontains: String, notes: String, notes_Icontains: String, lab_Id: UUID): IdeaNodeConnection!
-  labJoinCreated(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabJoinNodeConnection!
+  labjoin: LabJoinNode
   labJoinAccepted(offset: Int, before: String, after: String, first: Int, last: Int, lab_Id: UUID): LabJoinNodeConnection!
 }
 

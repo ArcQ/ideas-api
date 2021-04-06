@@ -63,6 +63,7 @@ class LabNode(DjangoObjectType):
         model = Lab
         filter_fields = {
             'name': ['exact', 'icontains', 'istartswith'],
+            'code': ['exact'],
         }
         interfaces = (RegularIdNode,)
 
