@@ -1,8 +1,9 @@
 import { Animated, Keyboard, TouchableOpacity } from 'react-native';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import AppPropTypes from '../../utils/AppPropTypes';
 import { SMALL_HIT_SLOP } from '../../constants/hitSlops';
 import AnimatedHeader from './components/AnimatedHeader';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
@@ -41,14 +42,17 @@ export default function IdeasList(props) {
   const insets = useSafeAreaInsets();
 
   return (
-    <HomeSwipeLayout disableScroll isFullWidth>
-      <AnimatedHeader animatedValue={offset} />
-      <IdeasListComponent
-        offset={offset}
-        baseQueryProps={props.baseQueryProps}
-        ideaItemOnPress={props.ideaItemOnPress}
-        shareIdeaInChat={props.shareIdeaInChat}
-      />
+    <>
+      <HomeSwipeLayout disableScroll isFullWidth>
+        <AnimatedHeader animatedValue={offset} />
+        <IdeasListComponent
+          offset={offset}
+          baseQueryProps={props.baseQueryProps}
+          ideaItemOnPress={props.ideaItemOnPress}
+          shareIdeaInChat={props.shareIdeaInChat}
+        />
+      </HomeSwipeLayout>
+
       <TouchableOpacity
         style={style.ideaButton(insets.bottom)}
         hitSlop={SMALL_HIT_SLOP}
@@ -59,7 +63,7 @@ export default function IdeasList(props) {
       >
         <SvgLightBulb />
       </TouchableOpacity>
-    </HomeSwipeLayout>
+    </>
   );
 }
 
@@ -67,4 +71,5 @@ IdeasList.propTypes = {
   ideaItemOnPress: PropTypes.func,
   shareIdeaInChat: PropTypes.func,
   createIdeaOnPress: PropTypes.func,
+  baseQueryProps: AppPropTypes.LabPropType,
 };

@@ -19,8 +19,7 @@ const { initialState, selectors } = createSelectorsAndState(appNamespace, {
   signedIn: false,
   user: undefined,
   currentLab: {
-    id:
-      'e27c629f-c1d1-49f1-b3eb-b67e6b7c1c2a6034f8e2-df82-11ea-87d0-0242ac130003',
+    id: 'e27c629f-c1d1-49f1-b3eb-b67e6b7c1c2a',
     chatId: 'cf4aeae1-cda7-41f3-adf7-9b2bb377be7d',
   },
 });

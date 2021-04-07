@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import React from 'react';
 import { graphql } from 'react-relay';
 import { useQuery } from 'relay-hooks';
 
@@ -35,10 +35,20 @@ const ideasListQuery = graphql`
 `;
 
 function IdeasListScreenContainer(props) {
-  const baseQueryProps = useQuery(ideasListQuery, {
-    labId: props.currentLab.id,
-  });
-  const _props = { baseQueryProps };
+  const [loaded, setLoaded] = useState(false);
+  const { data, error, retry, isLoading } = useQuery(
+    ideasListQuery,
+    {
+      labId: props.currentLab.id,
+    },
+    {
+      onComplete: (v) => {
+        setLoaded(true);
+      },
+      fetchPolicy: loaded ? 'store-or-network' : 'store-and-network',
+    },
+  );
+  const _props = { baseQueryProps: { data, error, retry, isLoading } };
 
   const methods = {
     createIdeaOnPress: () => props.navigation.navigate(CREATE_IDEA_ROUTE),

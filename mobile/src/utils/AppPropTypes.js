@@ -9,6 +9,15 @@ const UserPropType = PropTypes.shape({
   imageUrl: PropTypes.String,
 });
 
+const LabPropType = PropTypes.shape({
+  id: PropTypes.String,
+  code: PropTypes.String,
+  createdBy: UserPropType,
+  name: PropTypes.String,
+  imageUrl: PropTypes.String,
+  chatId: PropTypes.String,
+});
+
 const AppPropTypes = {
   navigation: PropTypes.object,
   route: PropTypes.object,
@@ -20,6 +29,7 @@ const AppPropTypes = {
       shortDescription: PropTypes.string,
     }),
   ),
+  LabPropType,
   listData: PropTypes.arrayOf(objectOfString),
   objectOfString,
   user: UserPropType,

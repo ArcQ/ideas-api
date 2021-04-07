@@ -7,7 +7,7 @@ import EmptyIdeasSvg from '../../../assets/images/EmptyIdeasSvg';
 export default function IdeaListEmptyState() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <View style={{ paddingVertical: 20 }}>
+      <View style={{ paddingTop: 40, paddingBottom: 20 }}>
         <EmptyIdeasSvg />
       </View>
       <Text style={{ ...gStyle.textThin }}>
