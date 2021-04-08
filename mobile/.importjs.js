@@ -26,6 +26,17 @@ module.exports = {
       'useImperativeMethods',
       'useLayoutEffect',
     ],
+    // 'react-relay': [
+    //   'RelayEnvironmentProvider',
+    //   'useEffect',
+    //   'useContext',
+    //   'useReducer',
+    //   'useCallback',
+    //   'useMemo',
+    //   'useRef',
+    //   'useImperativeMethods',
+    //   'useLayoutEffect',
+    // ],
   },
   aliases: {
     PropTypes: 'third-party-libs/prop-types',

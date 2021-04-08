@@ -15,7 +15,7 @@ const Title = styled.Text`
 export default function SuspenseScreen() {
   return (
     <Container>
-      <Title>Hello</Title>
+      <Title>Loading</Title>
     </Container>
   );
 }

@@ -12,4 +12,4 @@ export const getFromNow = (dateString) =>
   dayjs(dateString).tz(Localization.timezone).fromNow();
 
 export const getFormattedDate = (dateString) =>
-  dayjs(dateString).format('dddd, MMMM D, YYYY h:mm A');
+  dayjs(dateString).format('dddd, MMMM D, YYYY h:mm');

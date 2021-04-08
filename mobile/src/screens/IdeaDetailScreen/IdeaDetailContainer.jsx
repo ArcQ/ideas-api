@@ -1,6 +1,5 @@
+import { graphql, useLazyLoadQuery, useMutation } from 'react-relay';
 import { connect } from 'react-redux';
-import { useMutation, useQuery } from 'relay-hooks';
-import { graphql } from 'react-relay';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,22 +11,10 @@ import { deleteIdeaSuccessMessage } from '../../store/alert/alertMessages';
 const ideaByIdQuery = graphql`
   query IdeaDetailContainerQuery($ideaId: UUID) {
     idea(id: $ideaId) {
-      id
-      createdAt
-      updatedAt
-      lab {
-        id
-        imageUrl
-      }
       createdBy {
-        username
-        firstName
-        lastName
-        imageUrl
+        ...UserFragment
       }
-      desc
-      title
-      notes
+      ...IdeaFragment
     }
   }
 `;
@@ -41,14 +28,13 @@ const deleteIdeaMutation = graphql`
 `;
 
 function IdeaDetailContainer(props) {
-  const ideaId = props.route.params?.ideaId;
-  const ideaByIdQueryProps = useQuery(ideaByIdQuery, {
-    ideaId,
-  });
-  const [deleteIdea, { loading }] = useMutation(deleteIdeaMutation, {
-    onCompleted: ({ deleteIdea }) => {},
-  });
-  const idea = ideaByIdQueryProps?.data?.idea;
+  const ideaData = useLazyLoadQuery(
+    ideaByIdQuery,
+    { ideaId: props.route.params?.ideaId },
+    { fetchPolicy: 'store-or-network' },
+  );
+  const [deleteIdea, isInFlight] = useMutation(deleteIdeaMutation);
+  const idea = ideaData?.idea;
   const _props = { idea };
 
   const methods = {
@@ -78,7 +64,7 @@ IdeaDetailContainer.propTypes = {
   setSuccessMessage: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
   setSuccessMessage: alertActions.setSuccessMessage,

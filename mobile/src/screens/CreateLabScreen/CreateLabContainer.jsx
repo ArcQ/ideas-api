@@ -1,9 +1,8 @@
+import { graphql, useMutation } from 'react-relay';
 import { connect } from 'react-redux';
 import { Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
-import { useMutation } from 'relay-hooks';
-import { graphql } from 'react-relay';
 import PropTypes from 'prop-types';
 
 import { appSelectors } from '../../store/app/ducks';

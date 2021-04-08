@@ -5,8 +5,8 @@ import React from 'react';
 const getStyle = (size) => ({
   img: { borderRadius: 30, margin: 10 },
   defaultSize: {
-    height: size,
-    width: size,
+    height: size || 30,
+    width: size || 30,
   },
 });
 

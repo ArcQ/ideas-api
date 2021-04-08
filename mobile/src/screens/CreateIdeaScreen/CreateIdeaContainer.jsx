@@ -1,7 +1,6 @@
+import { graphql, useMutation } from 'react-relay';
 import { connect } from 'react-redux';
-import { useMutation } from 'relay-hooks';
 import React from 'react';
-import { graphql } from 'react-relay';
 import PropTypes from 'prop-types';
 
 import { appSelectors } from '../../store/app/ducks';

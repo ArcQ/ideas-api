@@ -50,9 +50,9 @@ class IdeaNode(DjangoObjectType):
     def get_queryset(cls, queryset, info):
         lab_id_args = list(filter(lambda field: field.name.value == "lab_Id", info.field_asts[0].arguments))
         if len(lab_id_args) > 0:
-            lab_id = lab_id_args[0].value.value
+            lab_id = info.variable_values['lab_Id'] or UUID(lab_id_args[0].value.value)
             if info.context.user.has_perm(build_permission_string(PermissionResource.LAB, CrudPermission.VIEW),
-                                          Lab.objects.get(pk=UUID(lab_id))):
+                                          Lab.objects.get(pk=lab_id)):
                 return queryset.order_by('-created_at')
         else:
             raise PermissionDenied("You need to submit a lab to access ideas")

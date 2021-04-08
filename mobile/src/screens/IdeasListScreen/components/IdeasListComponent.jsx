@@ -2,6 +2,7 @@ import { Animated, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import AppPropTypes from '../../../utils/AppPropTypes';
 import IdeaListEmptyState from './IdeaListEmptyState';
 import colors from '../../../constants/colors';
 import IdeaItem from './IdeaItem';
@@ -15,11 +16,14 @@ const style = {
 };
 
 export default function IdeasListComponent(props) {
+  if (!props.ideaList) {
+    return null;
+  }
   return (
     <FlatList
       ListEmptyComponent={<IdeaListEmptyState />}
-      data={props.baseQueryProps?.data?.allIdeas?.edges}
-      keyExtractor={(item) => item.node.id}
+      data={props.ideaList}
+      keyExtractor={(item) => item.node.__id}
       style={style.flatList}
       contentContainerStyle={{
         paddingTop: 150,
@@ -34,10 +38,7 @@ export default function IdeasListComponent(props) {
       )}
       renderItem={({ item }) =>
         props.isEditable ? (
-          <SwipeableRow
-            key={item.node.id}
-            onSwipeableRightOpen={props.onSwipeableRightOpen}
-          >
+          <SwipeableRow onSwipeableRightOpen={props.onSwipeableRightOpen}>
             <IdeaItem
               item={item.node}
               CustomStatusComponent={props.CustomStatusComponent}
@@ -60,9 +61,9 @@ export default function IdeasListComponent(props) {
 IdeasListComponent.propTypes = {
   CustomStatusComponent: PropTypes.func,
   onSwipeableRightOpen: PropTypes.func,
-  onListEditableItemPress: PropTypes.func,
   isEditable: PropTypes.bool,
   offset: PropTypes.object,
   ideaItemOnPress: PropTypes.func,
   shareIdeaInChat: PropTypes.func,
+  ideaList: PropTypes.arrayOf(AppPropTypes.LabPropType),
 };

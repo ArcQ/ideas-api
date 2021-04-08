@@ -40,6 +40,10 @@ const style = {
 export default function IdeasList(props) {
   const offset = useRef(new Animated.Value(0)).current;
   const insets = useSafeAreaInsets();
+  // TODO should be showing some loading state
+  if (!props.ideaList) {
+    return null;
+  }
 
   return (
     <>
@@ -47,7 +51,7 @@ export default function IdeasList(props) {
         <AnimatedHeader animatedValue={offset} />
         <IdeasListComponent
           offset={offset}
-          baseQueryProps={props.baseQueryProps}
+          ideaList={props.ideaList}
           ideaItemOnPress={props.ideaItemOnPress}
           shareIdeaInChat={props.shareIdeaInChat}
         />
@@ -71,5 +75,5 @@ IdeasList.propTypes = {
   ideaItemOnPress: PropTypes.func,
   shareIdeaInChat: PropTypes.func,
   createIdeaOnPress: PropTypes.func,
-  baseQueryProps: AppPropTypes.LabPropType,
+  ideaList: PropTypes.arrayOf(AppPropTypes.LabPropType),
 };

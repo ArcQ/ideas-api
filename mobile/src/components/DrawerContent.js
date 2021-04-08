@@ -1,3 +1,5 @@
+import React from 'react';
+import { graphql, useLazyLoadQuery } from 'react-relay';
 import {
   AntDesign,
   Entypo,
@@ -8,9 +10,6 @@ import {
 import { Auth } from 'aws-amplify';
 import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-relay';
-import { useQuery } from 'relay-hooks';
-import React from 'react';
 
 import {
   CREATE_LAB_ROUTE,
@@ -89,7 +88,7 @@ const style = {
   },
 };
 
-const drawerContentQuery = graphql`
+export const drawerContentQuery = graphql`
   query DrawerContentQuery {
     myLabs {
       edges {
@@ -189,9 +188,13 @@ CreateLabsButton.propTypes = {
 };
 
 function DrawerContent(props) {
-  const drawerContentQueryProps = useQuery(drawerContentQuery);
+  const drawerContentQueryProps = useLazyLoadQuery(
+    drawerContentQuery,
+    {},
+    { fetchPolicy: 'store-or-network' },
+  );
 
-  const myLabs = drawerContentQueryProps?.data?.myLabs?.edges;
+  const myLabs = drawerContentQueryProps?.myLabs?.edges;
 
   const methods = {
     onHomePress: () => {

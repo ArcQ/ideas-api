@@ -1,9 +1,11 @@
+import { useFragment } from 'react-relay';
 import { SafeAreaView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as ImagePicker from 'expo-image-picker';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import UserFragment from '../../relay/fragments/UserFragment';
+import IdeaFragment from '../../relay/fragments/IdeaFragment';
 import PostDetails from './components/PostDetails';
 import ActionButtons from './components/ActionButtons';
 import AppPropTypes from '../../utils/AppPropTypes';
@@ -56,6 +58,8 @@ const getStyle = () => ({
 export default function IdeaDetail(props) {
   const style = getStyle();
   const insets = useSafeAreaInsets();
+  const idea = useFragment(IdeaFragment, props.idea);
+  const createdBy = useFragment(UserFragment, props.idea.createdBy);
   return (
     <SafeAreaView style={gStyle.page}>
       <ActionButtons onDelete={props.onDelete} onEdit={props.onEdit} />
@@ -65,20 +69,20 @@ export default function IdeaDetail(props) {
           props.onClosePress();
         }}
       />
-      {props.idea ? (
+      {idea ? (
         <View>
           <Text style={style.title} ellipsizeMode="tail">
-            {props.idea.title}
+            {idea.title}
           </Text>
           <Text style={style.subHeader}>Description</Text>
           <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
-            {props.idea.desc}
+            {idea.desc}
           </Text>
-          {!!props.idea.notes && (
+          {!!idea.notes && (
             <>
               <Text style={style.subHeader}>Notes</Text>
               <Text style={style.notes} numberOfLines={4} ellipsizeMode="tail">
-                {props.idea.notes}
+                {idea.notes}
               </Text>
             </>
           )}
@@ -86,7 +90,7 @@ export default function IdeaDetail(props) {
           <Text style={style.subHeader} numberOfLines={4} ellipsizeMode="tail">
             Posted by
           </Text>
-          <PostDetails createdBy={props.idea.createdBy} />
+          <PostDetails createdBy={createdBy} createdAt={idea.createdAt} />
         </View>
       ) : (
         <Loader />

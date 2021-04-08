@@ -1,8 +1,10 @@
+import { useFragment } from 'react-relay';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import IdeaFragment from '../../../relay/fragments/IdeaFragment';
 import AppPropTypes from '../../../utils/AppPropTypes';
 import { getFromNow } from '../../../utils/dateUtil';
 import { MINI_HIT_SLOP } from '../../../constants/hitSlops';
@@ -45,27 +47,29 @@ const getStyle = () => ({
 
 export default function IdeaItem(props) {
   const style = getStyle();
+  const item = useFragment(IdeaFragment, props.item);
+
   return (
     <View style={style.listItem}>
       <TouchableOpacity
         hitSlop={MINI_HIT_SLOP}
         onPress={() => {
-          props.ideaItemOnPress(props.item.id);
+          props.ideaItemOnPress(item.id);
         }}
         style={style.itemText}
       >
         <Text style={style.title} numberOfLines={1} ellipsizeMode="tail">
-          {props.item.title}
+          {item.title}
         </Text>
         <Text style={style.desc} numberOfLines={4} ellipsizeMode="tail">
-          {props.item.desc}
+          {item.desc}
         </Text>
-        <Text style={style.createdAt}>{getFromNow(props.item.createdAt)}</Text>
+        <Text style={style.createdAt}>{getFromNow(item.createdAt)}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         hitSlop={MINI_HIT_SLOP}
         onPress={() => {
-          props.shareIdeaInChat(props.item);
+          props.shareIdeaInChat(item);
         }}
         style={style.replyButton}
       >

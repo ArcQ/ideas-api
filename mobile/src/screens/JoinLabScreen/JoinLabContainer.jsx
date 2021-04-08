@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from 'relay-hooks';
+import { graphql, useMutation, usePreloadedQuery } from 'react-relay';
 import React, { useState } from 'react';
-import { graphql } from 'react-relay';
 import PropTypes from 'prop-types';
 
 import JoinLab from './JoinLab';
@@ -47,7 +46,7 @@ function JoinLabContainer(props) {
 
   const [code, setCode] = useState(null);
 
-  const labPreview = useQuery(
+  const labPreview = usePreloadedQuery(
     labByCodeQuery,
     {
       code,

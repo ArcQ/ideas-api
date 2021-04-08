@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { graphql, useLazyLoadQuery } from 'react-relay';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { graphql } from 'react-relay';
-import { useQuery } from 'relay-hooks';
 
 import { appSelectors } from '../../store/app/ducks';
 import {
@@ -13,21 +12,12 @@ import {
 import IdeasList from './IdeasList';
 import { NavigationPropType } from '../../utils/AppPropTypes';
 
-const ideasListQuery = graphql`
-  query IdeasListContainerQuery($labId: UUID) {
-    myIdeas(lab_Id: $labId) {
+export const ideasListQuery = graphql`
+  query IdeasListContainerQuery($lab_Id: UUID) {
+    myIdeas(lab_Id: $lab_Id) {
       edges {
         node {
-          id
-          createdAt
-          updatedAt
-          lab {
-            id
-            name
-          }
-          desc
-          title
-          notes
+          ...IdeaFragment
         }
       }
     }
@@ -35,20 +25,12 @@ const ideasListQuery = graphql`
 `;
 
 function IdeasListScreenContainer(props) {
-  const [loaded, setLoaded] = useState(false);
-  const { data, error, retry, isLoading } = useQuery(
+  const data = useLazyLoadQuery(
     ideasListQuery,
-    {
-      labId: props.currentLab.id,
-    },
-    {
-      onComplete: (v) => {
-        setLoaded(true);
-      },
-      fetchPolicy: loaded ? 'store-or-network' : 'store-and-network',
-    },
+    { lab_Id: props.currentLab.id },
+    { fetchPolicy: 'store-or-network' },
   );
-  const _props = { baseQueryProps: { data, error, retry, isLoading } };
+  const _props = { ideaList: data?.myIdeas?.edges };
 
   const methods = {
     createIdeaOnPress: () => props.navigation.navigate(CREATE_IDEA_ROUTE),
