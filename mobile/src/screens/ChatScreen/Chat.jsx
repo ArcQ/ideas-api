@@ -13,18 +13,12 @@ const DEFAULT_INPUT_TOOLBAR_HEIGHT = 44;
 const IDEA_INPUT_TOOLBAR_HEIGHT = 100;
 
 export default function Chat({
-  chatId,
   messages,
   sendMessage,
-  getChatForBase,
   onIdeaItemPress,
   onDeletePreviewPress,
   idea,
 }) {
-  useEffect(() => {
-    getChatForBase({ chatId });
-  }, [chatId, getChatForBase]);
-
   return (
     <>
       <ChatHeader />

@@ -54,7 +54,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   sendMessage: threadActions.sendMessage,
-  getChatForBase: () => {},
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);

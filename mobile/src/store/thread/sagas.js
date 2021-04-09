@@ -1,4 +1,4 @@
-import { PURGE } from 'redux-persist';
+// import { PURGE } from 'redux-persist';
 import {
   all,
   call,
@@ -76,7 +76,9 @@ function* handleSuccessfulChatpiEvent(event) {
       // yield put(baseActions.presenceChange({ presence: event.presence }));
       break;
     case RECEIVE_MESSAGE: {
-      const user = yield select(baseSelectors.getUser(event.payload.user_id));
+      // const user = yield select(baseSelectors.getUser(event.payload.user_id));
+      // TODO need to get list of cached users from graphql
+      const user = {};
       yield put(
         threadActions.receiveMessage({
           chatId: event.channelId,
@@ -184,11 +186,11 @@ function* startChannel() {
 }
 
 export default function* threadSaga() {
-  yield put({
-    type: PURGE,
-    key: 'reduxState', // Whatever you chose for the "key" value when initialising redux-persist in the **persistCombineReducers** method - e.g. "root"
-    result: () => null, // Func expected on the submitted action.
-  });
+  // yield put({
+  //   type: PURGE,
+  //   key: 'reduxState', // Whatever you chose for the "key" value when initialising redux-persist in the **persistCombineReducers** method - e.g. "root"
+  //   result: () => null, // Func expected on the submitted action.
+  // });
   yield fork(catchUpMessagesForBase);
   yield startChannel();
 }

@@ -28,6 +28,7 @@ export function* apiCall({ call, onSuccess }, ...args) {
 
     yield onSuccess(response.data);
   } catch (e) {
+    // eslint-disable-next-line
     console.warn(e, args);
     yield put(
       errorActions.setError({

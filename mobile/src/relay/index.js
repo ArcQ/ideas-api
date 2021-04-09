@@ -21,6 +21,7 @@ class Relay {
   }
 
   init() {
+    // eslint-disable-next-line
     if (__DEV__) console.info('relay env instance initialized');
     this.environment = new Environment(getRelayConfig());
   }

@@ -42,31 +42,39 @@ RelayEnvironmentWrapper.propTypes = {
   children: PropTypes.node,
 };
 
+// class AssetsException {
+//   constructor() {
+//     this.message = 'Error loading assets';
+//     this.name = 'AssetsException';
+//   }
+// }
+
 function App() {
   const [isAssetsLoading, setAssetsLoading] = useState(true);
 
-  if (isAssetsLoading) {
-    return (
-      <AppLoading
-        onFinish={() => setAssetsLoading(false)}
-        onError={() => console.log('TODO')}
-        startAsync={loadAssets.loadAssetsAsync}
-      />
-    );
-  }
   return (
     <RelayEnvironmentWrapper>
-      <SafeAreaProvider>
-        <ActionSheetProvider>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <Locale />
-              <Main />
-              <AlertToast />
-            </PersistGate>
-          </Provider>
-        </ActionSheetProvider>
-      </SafeAreaProvider>
+      {isAssetsLoading ? (
+        <AppLoading
+          onFinish={() => setAssetsLoading(false)}
+          onError={() => {
+            // throw new AssetsException();
+          }}
+          startAsync={loadAssets.loadAssetsAsync}
+        />
+      ) : (
+        <SafeAreaProvider>
+          <ActionSheetProvider>
+            <Provider store={store}>
+              <PersistGate loading={null} persistor={persistor}>
+                <Locale />
+                <Main />
+                <AlertToast />
+              </PersistGate>
+            </Provider>
+          </ActionSheetProvider>
+        </SafeAreaProvider>
+      )}
     </RelayEnvironmentWrapper>
   );
 }

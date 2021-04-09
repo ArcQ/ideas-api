@@ -9,7 +9,7 @@ import { appSelectors } from './store/app/ducks';
 import AuthStack from './navigation/AuthStack';
 import MainDrawerNavigator from './navigation/MainDrawerNavigator';
 
-function LoggedIn(props) {
+function LoggedIn() {
   return (
     <QueryContext.Provider value={{}}>
       <MainDrawerNavigator />
@@ -17,9 +17,7 @@ function LoggedIn(props) {
   );
 }
 
-LoggedIn.propTypes = {
-  currentLab: PropTypes.object,
-};
+LoggedIn.propTypes = {};
 
 function Main(props) {
   const navigationRef = useRef();
@@ -34,22 +32,6 @@ function Main(props) {
         theme={theme}
         onReady={() => {
           routeNameRef.current = navigationRef.current.getCurrentRoute().name;
-          // const preloaded = loadIdeasListQuery(
-          //   {
-          //     labId: props.currentLab.id,
-          //   },
-          //   {
-          //     fetchPolicy: 'store-and-network',
-          //     networkCacheConfig: { force: true },
-          //   },
-          // );
-          // loadMainQuery(
-          //   {},
-          //   {
-          //     fetchPolicy: 'store-and-network',
-          //     networkCacheConfig: { force: true },
-          //   },
-          // );
         }}
         onStateChange={async () => {
           const previousRouteName = routeNameRef.current;

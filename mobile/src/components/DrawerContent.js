@@ -225,7 +225,8 @@ function DrawerContent(props) {
       try {
         await Auth.signOut();
       } catch (error) {
-        console.warn('error signing out: ', error);
+        // eslint-disable-next-line
+        console.info('error signing out: ', error);
       }
     },
   };

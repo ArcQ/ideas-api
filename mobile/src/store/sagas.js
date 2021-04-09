@@ -38,14 +38,14 @@ export default function* rootSaga() {
         const { accessToken } = yield Auth.currentSession();
 
         if (!accessToken) {
-          yield take(appConstants.SIGNED_IN);
+          yield take(appConstants.SIGN_IN);
         }
 
         const signedInTasks = yield fork(function* () {
           yield all(signedInSagas.map((saga) => retry(saga)));
         });
 
-        yield take(appConstants.SIGNED_OUT);
+        yield take(appConstants.SIGN_OUT);
 
         yield cancel(signedInTasks);
       }
