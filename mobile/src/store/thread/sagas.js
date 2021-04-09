@@ -12,12 +12,22 @@ import { Auth } from 'aws-amplify';
 import { eventChannel as EventChannel } from 'redux-saga';
 import { Connection } from '@knotfive/chatpi-client-js/src/chatpi-client';
 
+import { appConstants, appSelectors } from '../app/ducks';
 import { threadActions, threadConstants, threadSelectors } from './ducks';
 import apiService, { apiCall } from '../../services/api/apiService';
 import envService from '../../services/env/envService';
 
 const PRESENCE_CHANGE = 'PRESENCE_CHANGE';
 const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+
+function* getCurrentChatId() {
+  const currentLab = yield select(appSelectors.currentLab);
+  if (!currentLab) {
+    const action = yield take(appConstants.SET_CURRENT_LAB);
+    return action.chatId;
+  }
+  return currentLab.chatId;
+}
 
 function* catchUpMessagesForBase() {
   const chatId = yield getCurrentChatId();

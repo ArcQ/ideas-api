@@ -7,7 +7,13 @@ import {
 
 export const appNamespace = 'app';
 
-const constArr = ['FINISH_LOAD', 'SIGN_IN', 'SIGN_UP', 'SIGN_OUT'];
+const constArr = [
+  'FINISH_LOAD',
+  'SIGN_IN',
+  'SIGN_UP',
+  'SIGN_OUT',
+  'SET_CURRENT_LAB',
+];
 
 export const {
   constants: appConstants,
@@ -22,6 +28,7 @@ const { initialState, selectors } = createSelectorsAndState(appNamespace, {
     id: 'e27c629f-c1d1-49f1-b3eb-b67e6b7c1c2a',
     chatId: 'cf4aeae1-cda7-41f3-adf7-9b2bb377be7d',
   },
+  // currentLab: undefined,
 });
 
 export const appSelectors = {
@@ -37,6 +44,13 @@ const appReducer = produce((state = initialState, action) => {
       state.accessToken = action.payload.accessToken;
       state.user = action.payload.user;
       state.loading = false;
+      return state;
+    }
+    case c.SET_CURRENT_LAB: {
+      state.currentLab = {
+        id: action.payload.id,
+        chatId: action.payload.chatId,
+      };
       return state;
     }
     case c.SIGN_IN: {
