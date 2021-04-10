@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import SendButton from './buttons/SendButton';
-import gStyle from '../constants/gStyle';
-import SvgAt from './icons/Svg.At';
-import SvgPaperClip from './icons/Svg.PaperClip';
-import SvgImage from './icons/Svg.Image';
+import gStyle from '../../../constants/gStyle';
+import SvgAt from '../../../components/icons/Svg.At';
+import SvgPaperClip from '../../../components/icons/Svg.PaperClip';
+import SvgImage from '../../../components/icons/Svg.Image';
+import SendButton from '../../../components/buttons/SendButton';
 
 export default (props) => (
   <View style={[gStyle.flexRowCenter, gStyle.pH8]}>

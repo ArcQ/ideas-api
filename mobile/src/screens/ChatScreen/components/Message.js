@@ -1,10 +1,11 @@
+import { Avatar, utils } from 'react-native-gifted-chat';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ViewPropTypes } from 'react-native';
-import { Avatar, Day, utils } from 'react-native-gifted-chat';
 
-import gStyle from '../constants/gStyle';
-import colors from '../constants/colors';
+import CustomDay from './CustomGiftedChatComposer/CustomDay';
+import colors from '../../../constants/colors';
+import gStyle from '../../../constants/gStyle';
 import MessageBubble from './MessageBubble';
 
 // components
@@ -34,7 +35,7 @@ class Message extends React.Component {
       }
 
       return (
-        <Day
+        <CustomDay
           {...dayProps}
           containerStyle={style.containerDay}
           textStyle={style.dayText}
@@ -131,8 +132,6 @@ const style = {
   },
   containerDay: {
     alignItems: 'flex-start',
-    borderBottomColor: colors.greyLine,
-    borderBottomWidth: 1,
     marginHorizontal: 8,
   },
   dayText: {

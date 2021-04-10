@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import CustomGiftedChatComposerContainer from './components/CustomGiftedChatComposer/CustomGiftedChatComposerContainer';
 import AppPropTypes, { MessagePropType } from '../../utils/AppPropTypes';
 import ChatHeader from './ChatHeader';
 
-import AccessoryBar from '../../components/AccessoryBar';
-import Message from '../../components/Message';
+import AccessoryBar from './components/AccessoryBar';
+import Message from './components/Message';
 
 const DEFAULT_INPUT_TOOLBAR_HEIGHT = 44;
 const IDEA_INPUT_TOOLBAR_HEIGHT = 100;
