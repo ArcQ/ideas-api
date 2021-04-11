@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 
+import AppPropTypes from '../../utils/AppPropTypes';
 import CustomGiftedChatComposerContainer from './components/CustomGiftedChatComposer/CustomGiftedChatComposerContainer';
-import AppPropTypes, { MessagePropType } from '../../utils/AppPropTypes';
 import ChatHeader from './ChatHeader';
-
 import AccessoryBar from './components/AccessoryBar';
 import Message from './components/Message';
 
@@ -51,7 +50,7 @@ Chat.propTypes = {
   onIdeaItemPress: PropTypes.func,
   onDeletePreviewPress: PropTypes.func,
   sendMessage: PropTypes.func,
-  messages: PropTypes.arrayOf(MessagePropType),
+  messages: PropTypes.arrayOf(AppPropTypes.message),
   chatId: PropTypes.string,
   idea: AppPropTypes.idea,
 };

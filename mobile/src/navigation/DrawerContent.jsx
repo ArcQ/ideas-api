@@ -1,5 +1,5 @@
+import { graphql } from 'react-relay';
 import React from 'react';
-import { graphql, useLazyLoadQuery } from 'react-relay';
 import {
   AntDesign,
   Entypo,
@@ -7,18 +7,10 @@ import {
   Ionicons,
   Octicons,
 } from '@expo/vector-icons';
-import { Auth } from 'aws-amplify';
 import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-import {
-  CREATE_LAB_ROUTE,
-  EDIT_LAB_ROUTE,
-  HOME_ROUTE,
-  INVITE_TO_LAB_ROUTE,
-  JOIN_LAB_ROUTE,
-  PROFILE_ROUTE,
-} from '../constants/routes';
+import AppPropTypes from '../utils/AppPropTypes';
 import { MINI_HIT_SLOP, SMALL_HIT_SLOP } from '../constants/hitSlops';
 import gStyle from '../constants/gStyle';
 import colors from '../constants/colors';
@@ -188,49 +180,6 @@ CreateLabsButton.propTypes = {
 };
 
 function DrawerContent(props) {
-  const drawerContentQueryProps = useLazyLoadQuery(
-    drawerContentQuery,
-    {},
-    { fetchPolicy: 'store-or-network' },
-  );
-
-  const myLabs = drawerContentQueryProps?.myLabs?.edges;
-
-  const methods = {
-    onHomePress: () => {
-      props.navigation.navigate(HOME_ROUTE);
-    },
-    onInviteToLabPress: () => {
-      props.navigation.navigate(INVITE_TO_LAB_ROUTE);
-    },
-    onFeatureRequestPress: () => {
-      props.navigation.navigate(INVITE_TO_LAB_ROUTE);
-    },
-    onCreateLabPress: () => {
-      props.navigation.navigate(CREATE_LAB_ROUTE);
-    },
-    onJoinLabsPress: () => {
-      props.navigation.navigate(JOIN_LAB_ROUTE);
-    },
-    onEditLabsPress: () => {
-      props.navigation.navigate(EDIT_LAB_ROUTE);
-    },
-    onLabButtonPress: () => {
-      props.navigation.closeDrawer();
-    },
-    onProfilePress: () => {
-      props.navigation.navigate(PROFILE_ROUTE);
-    },
-    onLogoutPress: async () => {
-      try {
-        await Auth.signOut();
-      } catch (error) {
-        // eslint-disable-next-line
-        console.info('error signing out: ', error);
-      }
-    },
-  };
-
   return (
     <View style={style.drawerContentContainer}>
       <View style={[style.currentLabSection]}>
@@ -238,7 +187,7 @@ function DrawerContent(props) {
         <DrawerLink
           logo={<Feather name="home" size={20} color="white" />}
           onPress={() => {
-            methods.onHomePress();
+            props.onHomePress();
           }}
           text="Return to Lab"
           style={style.labButton}
@@ -246,7 +195,7 @@ function DrawerContent(props) {
         <DrawerLink
           logo={<Feather name="edit-2" size={20} color="white" />}
           onPress={() => {
-            methods.onEditLabsPress();
+            props.onEditLabsPress();
           }}
           text="Edit Lab"
           style={style.labButton}
@@ -261,7 +210,7 @@ function DrawerContent(props) {
             />
           }
           onPress={() => {
-            methods.onInviteToLabPress();
+            props.onInviteToLabPress();
           }}
           text="Invite to Lab"
           style={style.labButton}
@@ -272,19 +221,19 @@ function DrawerContent(props) {
           <Text style={style.drawerTitle}>Labs</Text>
           <CreateLabsButton
             onPress={() => {
-              methods.onCreateLabPress();
+              props.onCreateLabPress();
             }}
           />
         </View>
         <View style={style.contentSection}>
-          {myLabs &&
-            myLabs.map((lab) => (
+          {props.myLabs &&
+            props.myLabs.map((lab) => (
               <DrawerLink
                 key={lab.node.id}
                 logo={<Entypo name="lab-flask" size={24} color="white" />}
                 id={lab.node.id}
                 onPress={() => {
-                  methods.onLabButtonPress(lab.node.id);
+                  props.onLabButtonPress(lab.node);
                 }}
                 text={lab.node.name}
                 style={style.labButton}
@@ -293,7 +242,7 @@ function DrawerContent(props) {
           <DrawerLink
             logo={<Ionicons name="ios-add" size={24} color="white" />}
             onPress={() => {
-              methods.onJoinLabsPress();
+              props.onJoinLabsPress();
             }}
             text="Join a New Lab"
             style={style.labButton}
@@ -303,7 +252,7 @@ function DrawerContent(props) {
         <ProfileButton
           id="profileLink"
           onPress={() => {
-            methods.onProfilePress();
+            props.onProfilePress();
           }}
         />
         <DrawerLink
@@ -316,7 +265,7 @@ function DrawerContent(props) {
               color="white"
             />
           }
-          onPress={methods.onFeatureRequestPress}
+          onPress={props.onFeatureRequestPress}
           text="Feature Requests"
           style={style.labButton}
         />
@@ -330,7 +279,7 @@ function DrawerContent(props) {
               color="white"
             />
           }
-          onPress={methods.onLogoutPress}
+          onPress={props.onLogoutPress}
           text="Logout"
           style={style.labButton}
         />
@@ -340,7 +289,16 @@ function DrawerContent(props) {
 }
 
 DrawerContent.propTypes = {
-  navigation: PropTypes.object,
+  myLabs: PropTypes.arrayOf(AppPropTypes.lab),
+  onHomePress: PropTypes.func,
+  onInviteToLabPress: PropTypes.func,
+  onFeatureRequestPress: PropTypes.func,
+  onCreateLabPress: PropTypes.func,
+  onJoinLabsPress: PropTypes.func,
+  onEditLabsPress: PropTypes.func,
+  onLabButtonPress: PropTypes.func,
+  onProfilePress: PropTypes.func,
+  onLogoutPress: PropTypes.func,
 };
 
 export default DrawerContent;

@@ -5,12 +5,12 @@ import { forceFetch, isMutation, isQuery } from './utils';
 
 const oneMinute = 60 * 1000;
 const queryResponseCache = new QueryResponseCache({
-  size: 250,
+  size: 20,
   ttl: oneMinute,
 });
 
 const cacheHandler = async (request, variables, cacheConfig) => {
-  const queryID = request.text || '';
+  const queryID = request.name;
 
   if (isMutation(request)) {
     queryResponseCache.clear();
@@ -19,13 +19,11 @@ const cacheHandler = async (request, variables, cacheConfig) => {
   }
 
   const fromCache = queryResponseCache.get(queryID, variables);
-
   if (isQuery(request) && fromCache !== null && !forceFetch(cacheConfig)) {
     return fromCache;
   }
 
   const fromServer = await fetchGraphql(request, variables);
-
   if (fromServer) {
     queryResponseCache.set(queryID, variables, fromServer);
   }

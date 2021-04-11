@@ -75,5 +75,5 @@ IdeasList.propTypes = {
   ideaItemOnPress: PropTypes.func,
   shareIdeaInChat: PropTypes.func,
   createIdeaOnPress: PropTypes.func,
-  ideaList: PropTypes.arrayOf(AppPropTypes.LabPropType),
+  ideaList: PropTypes.arrayOf(AppPropTypes.lab),
 };

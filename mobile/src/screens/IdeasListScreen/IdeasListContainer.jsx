@@ -28,7 +28,10 @@ function IdeasListScreenContainer(props) {
   const data = useLazyLoadQuery(
     ideasListQuery,
     { lab_Id: props.currentLab.id },
-    { fetchPolicy: 'store-or-network' },
+    {
+      fetchPolicy: 'store-or-network',
+      networkCacheConfig: { force: false },
+    },
   );
   const _props = { ideaList: data?.myIdeas?.edges };
 

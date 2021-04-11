@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import AppPropTypes from '../../utils/AppPropTypes';
 import { IDEA_DETAIL_ROUTE } from '../../constants/routes';
-import AppPropTypes, { MessagePropType } from '../../utils/AppPropTypes';
 import { appSelectors } from '../../store/app/ducks';
-
 import { threadActions, threadSelectors } from '../../store/thread/ducks';
 import Chat from './Chat';
 
@@ -38,7 +37,7 @@ ChatContainer.propTypes = {
   getChatForBase: PropTypes.func,
   sendMessage: PropTypes.func,
   route: AppPropTypes.route,
-  messages: PropTypes.arrayOf(MessagePropType),
+  messages: PropTypes.arrayOf(AppPropTypes.message),
   chatId: PropTypes.string,
   navigation: AppPropTypes.navigation,
 };

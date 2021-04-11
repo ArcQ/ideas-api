@@ -6,7 +6,6 @@
 function loadStories() {
   require('../src/components/__stories__/Avatar.stories');
   require('../src/components/__stories__/buttons/CloseButton.stories');
-  require('../src/components/__stories__/DrawerContent.stories');
   require('../src/components/__stories__/KfForm.stories');
   require('../src/components/__stories__/SelectLabItem.stories');
   require('../src/components/__stories__/SelectList.stories');
@@ -15,7 +14,6 @@ function loadStories() {
 const stories = [
   '../src/components/__stories__/Avatar.stories',
   '../src/components/__stories__/buttons/CloseButton.stories',
-  '../src/components/__stories__/DrawerContent.stories',
   '../src/components/__stories__/KfForm.stories',
   '../src/components/__stories__/SelectLabItem.stories',
   '../src/components/__stories__/SelectList.stories',

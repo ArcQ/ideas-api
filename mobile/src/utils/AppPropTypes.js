@@ -18,6 +18,13 @@ const LabPropType = PropTypes.shape({
   chatId: PropTypes.String,
 });
 
+export const MessagePropType = PropTypes.shape({
+  id: PropTypes.string,
+  text: PropTypes.string,
+  user_id: PropTypes.string,
+  chat_id: PropTypes.string,
+});
+
 const AppPropTypes = {
   navigation: PropTypes.object,
   route: PropTypes.object,
@@ -30,17 +37,11 @@ const AppPropTypes = {
       shortDescription: PropTypes.string,
     }),
   ),
-  LabPropType,
+  user: UserPropType,
+  message: MessagePropType,
+  lab: LabPropType,
   listData: PropTypes.arrayOf(objectOfString),
   objectOfString,
-  user: UserPropType,
-  lab: PropTypes.shape({
-    id: PropTypes.String,
-    createdAt: PropTypes.String,
-    updatedAt: PropTypes.String,
-    name: PropTypes.String,
-    imageUrl: PropTypes.String,
-  }),
   idea: PropTypes.shape({
     title: PropTypes.String,
     desc: PropTypes.String,
@@ -58,13 +59,6 @@ const AppPropTypes = {
     onSubmitEditing: PropTypes.func,
   },
 };
-
-export const MessagePropType = PropTypes.shape({
-  id: PropTypes.string,
-  text: PropTypes.string,
-  user_id: PropTypes.string,
-  chat_id: PropTypes.string,
-});
 
 export const NavigationPropType = PropTypes.object; // eslint-ignore-line
 

@@ -5,7 +5,7 @@ import {
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import AppPropTypes from '../utils/AppPropTypes';
+import DrawerContentContainer from './DrawerContentContainer';
 import {
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
@@ -20,7 +20,6 @@ import CreateLabContainer from '../screens/CreateLabScreen/CreateLabContainer';
 import InviteToLabContainer from '../screens/InviteToLabScreen/InviteToLabContainer';
 import JoinLabContainer from '../screens/JoinLabScreen/JoinLabContainer';
 import MainStackNavigator from './MainStackNavigator';
-import DrawerContent from '../components/DrawerContent';
 import device from '../constants/device';
 import colors from '../constants/colors';
 
@@ -61,12 +60,10 @@ const createIdeaTransition = {
   }),
 };
 
-export default function MainDrawerNavigator(props) {
+export default function MainDrawerNavigator() {
   return (
     <Drawer.Navigator
-      drawerContent={(_props) => (
-        <DrawerContent {..._props} mainQueryRef={props.mainQueryRef} />
-      )}
+      drawerContent={(_props) => <DrawerContentContainer {..._props} />}
       edgeWidth={120}
       drawerType="slide"
       drawerWidth={device.width - 32}
@@ -116,7 +113,4 @@ export default function MainDrawerNavigator(props) {
   );
 }
 
-MainDrawerNavigator.propTypes = {
-  mainQueryRef: AppPropTypes.queryRef,
-  ideasListQueryRef: AppPropTypes.queryRef,
-};
+MainDrawerNavigator.propTypes = {};

@@ -26,38 +26,36 @@ function Main(props) {
     return null;
   }
   return (
-    <>
-      <NavigationContainer
-        ref={navigationRef}
-        theme={theme}
-        onReady={() => {
-          routeNameRef.current = navigationRef.current.getCurrentRoute().name;
-        }}
-        onStateChange={async () => {
-          const previousRouteName = routeNameRef.current;
-          const currentRouteName = navigationRef.current.getCurrentRoute().name;
+    <NavigationContainer
+      ref={navigationRef}
+      theme={theme}
+      onReady={() => {
+        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+      }}
+      onStateChange={async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
 
-          if (previousRouteName !== currentRouteName) {
-            // The line below uses the expo-firebase-analytics tracker
-            // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
-            // Change this line to use another Mobile analytics SDK
-            // await analytics().logScreenView({
-            //   screen_name: currentRouteName,
-            //   screen_class: currentRouteName,
-            // });
-          }
+        if (previousRouteName !== currentRouteName) {
+          // The line below uses the expo-firebase-analytics tracker
+          // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
+          // Change this line to use another Mobile analytics SDK
+          // await analytics().logScreenView({
+          //   screen_name: currentRouteName,
+          //   screen_class: currentRouteName,
+          // });
+        }
 
-          // Save the current route name for later comparison
-          routeNameRef.current = currentRouteName;
-        }}
-      >
-        {!props.signedIn ? (
-          <AuthStack />
-        ) : (
-          <LoggedIn currentLab={props.currentLab} />
-        )}
-      </NavigationContainer>
-    </>
+        // Save the current route name for later comparison
+        routeNameRef.current = currentRouteName;
+      }}
+    >
+      {!props.signedIn ? (
+        <AuthStack />
+      ) : (
+        <LoggedIn currentLab={props.currentLab} />
+      )}
+    </NavigationContainer>
   );
 }
 

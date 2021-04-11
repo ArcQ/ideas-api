@@ -65,5 +65,5 @@ IdeasListComponent.propTypes = {
   offset: PropTypes.object,
   ideaItemOnPress: PropTypes.func,
   shareIdeaInChat: PropTypes.func,
-  ideaList: PropTypes.arrayOf(AppPropTypes.LabPropType),
+  ideaList: PropTypes.arrayOf(AppPropTypes.lab),
 };
