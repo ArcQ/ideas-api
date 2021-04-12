@@ -80,35 +80,6 @@ const style = {
   },
 };
 
-export const drawerContentQuery = graphql`
-  query DrawerContentQuery {
-    myLabs {
-      edges {
-        node {
-          id
-          code
-          createdBy {
-            id
-            username
-          }
-          name
-          imageUrl
-          chatId
-          labmemberSet {
-            edges {
-              node {
-                user {
-                  username
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 function DrawerLink(props) {
   return (
     <TouchableOpacity

@@ -16,9 +16,6 @@ const style = {
 };
 
 export default function IdeasListComponent(props) {
-  if (!props.ideaList) {
-    return null;
-  }
   return (
     <FlatList
       ListEmptyComponent={<IdeaListEmptyState />}

@@ -1,8 +1,11 @@
-import React from 'react';
-import { graphql, useLazyLoadQuery } from 'react-relay';
+import { compose } from 'redux';
+import React, { useContext } from 'react';
+import { graphql, usePreloadedQuery } from 'react-relay';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import suspenseContextWrapper from '../../wrappers/suspenseContextWrapper';
+import { QueryContext } from '../../context';
 import { appSelectors } from '../../store/app/ducks';
 import {
   CHAT_ROUTE,
@@ -25,14 +28,8 @@ export const ideasListQuery = graphql`
 `;
 
 function IdeasListScreenContainer(props) {
-  const data = useLazyLoadQuery(
-    ideasListQuery,
-    { lab_Id: props.currentLab.id },
-    {
-      fetchPolicy: 'store-or-network',
-      networkCacheConfig: { force: false },
-    },
-  );
+  const { ideasListQueryRef } = useContext(QueryContext);
+  const data = usePreloadedQuery(ideasListQuery, ideasListQueryRef);
   const _props = { ideaList: data?.myIdeas?.edges };
 
   const methods = {
@@ -62,7 +59,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  suspenseContextWrapper('ideasListQueryRef'),
 )(IdeasListScreenContainer);

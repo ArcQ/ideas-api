@@ -1,8 +1,8 @@
+import React from 'react';
 import {
   HeaderStyleInterpolators,
   TransitionSpecs,
 } from '@react-navigation/stack';
-import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import DrawerContentContainer from './DrawerContentContainer';

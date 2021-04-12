@@ -20,7 +20,10 @@ import apiService from './services/api/apiService';
 import awsService from './services/aws/awsService';
 import getStore from './store/store';
 
-LogBox.ignoreLogs(['No current user']);
+LogBox.ignoreLogs([
+  'No current user',
+  'Warning: Functions are not valid as a React child.',
+]);
 enableScreens();
 
 awsService.init();
@@ -32,7 +35,7 @@ function RelayEnvironmentWrapper({ children }) {
   return (
     <RelayEnvironmentProvider environment={relay.environment}>
       <ErrorBoundary fallback={<SuspenseScreen error />}>
-        <Suspense fallback={<SuspenseScreen />}>{children}</Suspense>
+        {children}
       </ErrorBoundary>
     </RelayEnvironmentProvider>
   );

@@ -40,10 +40,6 @@ const style = {
 export default function IdeasList(props) {
   const offset = useRef(new Animated.Value(0)).current;
   const insets = useSafeAreaInsets();
-  // TODO should be showing some loading state
-  if (!props.ideaList) {
-    return null;
-  }
 
   return (
     <>

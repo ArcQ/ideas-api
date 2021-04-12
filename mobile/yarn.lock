@@ -16030,11 +16030,6 @@ r2@^2.0.1:
     node-fetch "^2.0.0-alpha.8"
     typedarray-to-buffer "^3.1.2"
 
-rambda@^6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/rambda/-/rambda-6.4.0.tgz#bf080047b03d8d2c72e3ce5c17c603517a65749a"
-  integrity sha512-aBoE7YrGQP1xnxjyg5fhupfS+FTrDVjZMtwpezl15RKLNnKLOYDfjx/0xDE+8GyWbbZfODRkAOZmnpvxrAONbQ==
-
 ramda@^0.21.0:
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"

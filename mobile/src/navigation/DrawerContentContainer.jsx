@@ -1,10 +1,13 @@
+import { compose } from 'redux';
+import React, { useContext } from 'react';
+import { graphql, usePreloadedQuery } from 'react-relay';
 import { Auth } from 'aws-amplify';
-import { graphql, useLazyLoadQuery } from 'react-relay';
 import { connect } from 'react-redux';
-import React from 'react';
 import PropTypes from 'prop-types';
 
-import DrawerContent, { drawerContentQuery } from './DrawerContent';
+import suspenseContextWrapper from '../wrappers/suspenseContextWrapper';
+import { QueryContext } from '../context';
+import DrawerContent from './DrawerContent';
 import {
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
@@ -18,7 +21,7 @@ import { threadActions } from '../store/thread/ducks';
 import { appActions, appSelectors } from '../store/app/ducks';
 
 export const drawerContentContainerQuery = graphql`
-  query DrawerContentQuery {
+  query DrawerContentContainerQuery {
     myLabs {
       edges {
         node {
@@ -47,13 +50,9 @@ export const drawerContentContainerQuery = graphql`
 `;
 
 function DrawerContentContainer(props) {
-  const drawerContentQueryProps = useLazyLoadQuery(
-    drawerContentQuery,
-    {},
-    { fetchPolicy: 'store-or-network' },
-  );
-
-  const myLabs = drawerContentQueryProps?.myLabs?.edges;
+  const { drawerQueryRef } = useContext(QueryContext);
+  const myLabs = usePreloadedQuery(drawerContentContainerQuery, drawerQueryRef)
+    ?.myLabs?.edges;
 
   const _props = {
     chatId: props.currentLab.chatId,
@@ -116,7 +115,7 @@ const mapDispatchToProps = {
   sendMessage: threadActions.sendMessage,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  suspenseContextWrapper('drawerQueryRef'),
 )(DrawerContentContainer);

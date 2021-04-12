@@ -62,7 +62,6 @@
     "phoenixjs": "^1.0.5",
     "plop": "^2.5.3",
     "prop-types": "^15.7.2",
-    "rambda": "^6.4.0",
     "ramda": "^0.27.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
