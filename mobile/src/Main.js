@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { ideasListQuery } from './screens/IdeasListScreen/components/IdeasListComponent';
 import AppPropTypes from './utils/AppPropTypes';
-import { ideasListQuery } from './screens/IdeasListScreen/IdeasListContainer';
 import { theme } from './components/Styled';
 import { QueryContext } from './context';
 import { appSelectors } from './store/app/ducks';

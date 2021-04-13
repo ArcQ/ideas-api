@@ -1,7 +1,10 @@
+import { graphql, usePreloadedQuery } from 'react-relay';
+import React, { useContext } from 'react';
 import { Animated, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import React from 'react';
 
+import { QueryContext } from '../../../context';
+import suspenseContextWrapper from '../../../wrappers/suspenseContextWrapper';
 import AppPropTypes from '../../../utils/AppPropTypes';
 import IdeaListEmptyState from './IdeaListEmptyState';
 import colors from '../../../constants/colors';
@@ -15,11 +18,27 @@ const style = {
   },
 };
 
-export default function IdeasListComponent(props) {
+export const ideasListQuery = graphql`
+  query IdeasListComponentQuery($lab_Id: UUID) {
+    myIdeas(lab_Id: $lab_Id) {
+      edges {
+        node {
+          ...IdeaFragment
+        }
+      }
+    }
+  }
+`;
+
+function IdeasListComponent(props) {
+  const { ideasListQueryRef } = useContext(QueryContext);
+  const data = usePreloadedQuery(ideasListQuery, ideasListQueryRef);
+  const ideaList = data?.myIdeas?.edges;
+
   return (
     <FlatList
       ListEmptyComponent={<IdeaListEmptyState />}
-      data={props.ideaList}
+      data={ideaList}
       keyExtractor={(item) => item.node.__id}
       style={style.flatList}
       contentContainerStyle={{
@@ -64,3 +83,5 @@ IdeasListComponent.propTypes = {
   shareIdeaInChat: PropTypes.func,
   ideaList: PropTypes.arrayOf(AppPropTypes.lab),
 };
+
+export default suspenseContextWrapper('ideasListQueryRef')(IdeasListComponent);

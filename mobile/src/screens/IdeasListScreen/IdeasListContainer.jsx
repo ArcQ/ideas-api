@@ -15,22 +15,8 @@ import {
 import IdeasList from './IdeasList';
 import { NavigationPropType } from '../../utils/AppPropTypes';
 
-export const ideasListQuery = graphql`
-  query IdeasListContainerQuery($lab_Id: UUID) {
-    myIdeas(lab_Id: $lab_Id) {
-      edges {
-        node {
-          ...IdeaFragment
-        }
-      }
-    }
-  }
-`;
-
 function IdeasListScreenContainer(props) {
-  const { ideasListQueryRef } = useContext(QueryContext);
-  const data = usePreloadedQuery(ideasListQuery, ideasListQueryRef);
-  const _props = { ideaList: data?.myIdeas?.edges };
+  const _props = {};
 
   const methods = {
     createIdeaOnPress: () => props.navigation.navigate(CREATE_IDEA_ROUTE),
@@ -59,7 +45,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  suspenseContextWrapper('ideasListQueryRef'),
-)(IdeasListScreenContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  IdeasListScreenContainer,
+);

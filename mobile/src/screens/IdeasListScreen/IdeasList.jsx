@@ -47,7 +47,6 @@ export default function IdeasList(props) {
         <AnimatedHeader animatedValue={offset} />
         <IdeasListComponent
           offset={offset}
-          ideaList={props.ideaList}
           ideaItemOnPress={props.ideaItemOnPress}
           shareIdeaInChat={props.shareIdeaInChat}
         />
@@ -71,5 +70,4 @@ IdeasList.propTypes = {
   ideaItemOnPress: PropTypes.func,
   shareIdeaInChat: PropTypes.func,
   createIdeaOnPress: PropTypes.func,
-  ideaList: PropTypes.arrayOf(AppPropTypes.lab),
 };

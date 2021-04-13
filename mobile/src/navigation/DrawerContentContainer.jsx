@@ -50,7 +50,7 @@ export const drawerContentContainerQuery = graphql`
 `;
 
 function DrawerContentContainer(props) {
-  const { drawerQueryRef } = useContext(QueryContext);
+  const { drawerQueryRef, loadIdeasListQuery } = useContext(QueryContext);
   const myLabs = usePreloadedQuery(drawerContentContainerQuery, drawerQueryRef)
     ?.myLabs?.edges;
 
@@ -79,6 +79,10 @@ function DrawerContentContainer(props) {
       props.navigation.navigate(EDIT_LAB_ROUTE);
     },
     onLabButtonPress: (labNode) => {
+      loadIdeasListQuery(
+        { lab_Id: labNode.id },
+        { fetchPolicy: 'store-and-network' },
+      );
       props.setCurrentLab(labNode);
       props.navigation.closeDrawer();
     },
