@@ -79,12 +79,12 @@ function DrawerContentContainer(props) {
       props.navigation.navigate(EDIT_LAB_ROUTE);
     },
     onLabButtonPress: (labNode) => {
+      props.navigation.closeDrawer();
+      props.setCurrentLab(labNode);
       loadIdeasListQuery(
         { lab_Id: labNode.id },
         { fetchPolicy: 'store-and-network' },
       );
-      props.setCurrentLab(labNode);
-      props.navigation.closeDrawer();
     },
     onProfilePress: () => {
       props.navigation.navigate(PROFILE_ROUTE);

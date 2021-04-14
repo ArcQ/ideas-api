@@ -41,6 +41,7 @@ PyJWT = "==1.7.1"
 Rx = "==1.6.1"
 cognitojwt = "*"
 django-guardian = "*"
+aiokafka = "*"
 
 [requires]
 python_version = "3.9"
