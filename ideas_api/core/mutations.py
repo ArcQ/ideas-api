@@ -4,9 +4,9 @@ from django.core.exceptions import PermissionDenied
 from graphene_django.rest_framework.mutation import SerializerMutation
 
 import graphene
-from core.models import Idea, Lab, LabJoin, LabMember
-from core.permission_vars import Role, build_permission_string
-from core.permissions import is_allowed_on_lab, CrudPermission, PermissionResource
+from core.models import Idea, Lab
+from core.permission_vars import build_permission_string
+from core.permissions import CrudPermission, PermissionResource
 from core.serializers import IdeaSerializer, LabJoinSerializer, LabSerializer
 
 

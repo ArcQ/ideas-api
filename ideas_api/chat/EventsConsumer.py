@@ -7,13 +7,7 @@ from ideas_api import settings
 loop = asyncio.get_event_loop()
 
 TOPIC = "chatpi"
-UPSERT_CHAT_ENTITY = "upsert-chat-entity"
-UPSERT_USER = "upsert-user"
-MODIFY_CHAT_MEMBER = "modify-chat-member"
-
-
-def handle_message_CREATE_CHAT_COMPLETE(value):
-    Lab.objects.filter(pk=value.referenceId).update(chatId=value.chatId)
+CREATED_CHAT = "created-chat"
 
 
 class EventsConsumer:
@@ -35,11 +29,8 @@ class EventsConsumer:
             async for msg in self.consumer:
                 print("consumed: ", msg.topic, msg.partition, msg.offset,
                       msg.key, msg.value, msg.timestamp)
-                method_str = "handle_message_" + msg.key
-                if method_str in self:
-                    self[method_str]
+                if msg.key == CREATED_CHAT:
+                    Lab.objects.filter(pk=msg.value.referenceId).update(chatId=msg.value.chatId)
         finally:
             print("stop consuming")
             await self.consumer.stop()
-
-EventsConsumer().listen()
