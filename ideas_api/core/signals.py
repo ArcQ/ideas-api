@@ -9,7 +9,6 @@ from core.permissions import PermissionResource, create_lab_group_admin, \
 
 events_producer = EventsProducer()
 
-
 @receiver(post_save, sender=Lab)
 def create_lab(instance: Lab, created, **kwargs):
     if created:
