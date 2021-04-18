@@ -1,5 +1,5 @@
 from django.contrib.auth.models import Group
-from django.db.models.signals import post_save, pre_delete, post_delete
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 
 from chat.EventProducer import EventsProducer
@@ -9,10 +9,11 @@ from core.permissions import PermissionResource, create_lab_group_admin, \
 
 events_producer = EventsProducer()
 
+
 @receiver(post_save, sender=Lab)
 def create_lab(instance: Lab, created, **kwargs):
     if created:
-        events_producer.send_upsert_chat_entity(members=[instance.created_by.auth_key])
+        events_producer.send_upsert_chat_entity(members=[instance.created_by.auth_key], chat_id=instance.chat_id)
         admin_group, _member_group = create_lab_group_admin(instance), create_lab_group_member(instance)
         instance.created_by.groups.add(admin_group)
         LabMember.objects.create(role=LabMemberRoles.OWNER.value, user=instance.created_by, lab=instance, is_admin=True)

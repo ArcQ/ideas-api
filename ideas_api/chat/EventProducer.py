@@ -1,4 +1,5 @@
 import asyncio
+import json
 
 from confluent_kafka.cimpl import Producer
 
@@ -25,19 +26,19 @@ class EventsProducer:
         self.loop.run_until_complete(self.__start_producer())
 
     def send_upsert_chat_entity(self, members, chat_id):
-        event = create_event(self, chat_id=chat_id, members=members)
+        event = create_event(chatId=chat_id, members=members)
         self.__send_event(UPSERT_CHAT_ENTITY, event)
 
     def send_delete_chat_entity(self, chat_id):
-        event = create_event(self, entity={"chat_id": chat_id})
+        event = create_event(entity={"chatId": chat_id})
         self.__send_event(DELETE_CHAT_ENTITY, event)
 
     def send_add_chat_member(self, user_auth_key, chat_id):
-        event = create_event(self, chat_id=chat_id, entity={"user_auth_key": user_auth_key, "chat_id": chat_id})
+        event = create_event(chat_id=chat_id, entity={"userAuthKey": user_auth_key, "chatId": chat_id})
         self.__send_event(ADD_CHAT_MEMBER, event)
 
     def send_remove_chat_member(self, user_auth_key, chat_id):
-        event = create_event(self, entity={"user_auth_key": user_auth_key, "chat_id": chat_id})
+        event = create_event(entity={"userAuthKey": user_auth_key, "chatId": chat_id})
         self.__send_event(REMOVE_MEMBERS_FROM_CHAT_ENTITY, event)
 
     async def __start_producer(self):
@@ -52,7 +53,7 @@ class EventsProducer:
     def __send_event(self, key, event: dict):
         self.loop.run_until_complete(self.__send_one(key, event))
 
-    def __delivery_report(err, msg):
+    def __delivery_report(self, err, msg):
         """ Called once for each message produced to indicate delivery result.
             Triggered by poll() or flush(). """
         if err is not None:
@@ -61,5 +62,5 @@ class EventsProducer:
             print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
 
     async def __send_one(self, key, event: dict):
-        self.producer.poll(0)
-        self.producer.produce(topic=TOPIC, value=event, key=key, callback=self.__delivery_report)
+        self.producer.produce(topic=TOPIC, value=json.dumps(event), key=key, callback=self.__delivery_report)
+        self.producer.poll(10000)

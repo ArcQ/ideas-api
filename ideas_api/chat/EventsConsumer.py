@@ -1,6 +1,5 @@
-import asyncio
-
 from confluent_kafka import Consumer
+import threading
 
 from core.models import Lab
 from ideas_api import settings
@@ -27,11 +26,15 @@ class EventsConsumer:
 
     def listen(self):
         self.consumer.subscribe(['chatpi-out'])
-        self.consume()
+        t = threading.Thread(target=self.consume, args=(), kwargs={})
+        t.setDaemon(True)
+        t.start()
 
     def consume(self):
+        print("hi")
         while True:
-            msg = self.consumer.poll(1.0)
+            print("polling")
+            msg = self.consumer.poll(20.0)
 
             if msg is None:
                 continue
@@ -45,3 +48,4 @@ class EventsConsumer:
                 Lab.objects.filter(pk=msg.value["referenceId"]).update(chatId=msg.value["chatId"])
 
         self.consumer.close()
+        print("consumer closed")
