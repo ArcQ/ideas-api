@@ -1,17 +1,15 @@
 from confluent_kafka import Consumer
 import threading
+import json
 
 from core.models import Lab
 from ideas_api import settings
 
-TOPIC = "chatpi"
 CREATED_CHAT = "created-chat"
 
 
 class EventsConsumer:
     def __init__(self):
-        # self.loop = asyncio.get_event_loop()
-        # self.loop.run_until_complete(self.__start_consumer())
         self.__start_consumer()
 
     def __start_consumer(self):
@@ -25,13 +23,12 @@ class EventsConsumer:
         })
 
     def listen(self):
-        self.consumer.subscribe(['chatpi-out'])
+        self.consumer.subscribe([settings.TOPIC_CHAT_OUT])
         t = threading.Thread(target=self.consume, args=(), kwargs={})
         t.setDaemon(True)
         t.start()
 
     def consume(self):
-        print("hi")
         while True:
             print("polling")
             msg = self.consumer.poll(20.0)
@@ -41,11 +38,12 @@ class EventsConsumer:
             if msg.error():
                 print("Consumer error: {}".format(msg.error()))
                 continue
+            value_str = msg.value().decode('utf-8')
+            print('Received message: {}'.format(value_str))
 
-            print('Received message: {}'.format(msg.value().decode('utf-8')))
-
-            if msg.key == CREATED_CHAT:
-                Lab.objects.filter(pk=msg.value["referenceId"]).update(chatId=msg.value["chatId"])
+            if msg.key().decode('utf-8') == CREATED_CHAT:
+                entity = json.loads(value_str)["data"]["entity"]
+                Lab.objects.filter(pk=entity["containerReferenceId"]).update(chat_id=entity["chatId"])
 
         self.consumer.close()
         print("consumer closed")

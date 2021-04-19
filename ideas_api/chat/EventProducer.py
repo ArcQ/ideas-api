@@ -5,7 +5,6 @@ from confluent_kafka.cimpl import Producer
 
 from ideas_api import settings
 
-TOPIC = "chatpi"
 UPSERT_CHAT_ENTITY = "upsert-chat-entity"
 DELETE_CHAT_ENTITY = "delete-chat-entity"
 ADD_CHAT_MEMBER = "add-chat-member"
@@ -13,11 +12,11 @@ REMOVE_MEMBERS_FROM_CHAT_ENTITY = "remove-chat-member"
 
 
 def create_event(**kwargs):
-    return {
+    return {"data": {
         "apiKey": settings.CHATPI_API_KEY,
         "apiSecret": settings.CHATPI_API_SECRET,
         **kwargs
-    }
+    }}
 
 
 class EventsProducer:
@@ -25,8 +24,8 @@ class EventsProducer:
         self.loop = asyncio.get_event_loop()
         self.loop.run_until_complete(self.__start_producer())
 
-    def send_upsert_chat_entity(self, members, chat_id):
-        event = create_event(chatId=chat_id, members=members)
+    def send_upsert_chat_entity(self, members, lab_id, chat_id, name):
+        event = create_event(entity={"containerReferenceId": lab_id, "chatId": chat_id, "name": name, "members": members})
         self.__send_event(UPSERT_CHAT_ENTITY, event)
 
     def send_delete_chat_entity(self, chat_id):
@@ -62,5 +61,6 @@ class EventsProducer:
             print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
 
     async def __send_one(self, key, event: dict):
-        self.producer.produce(topic=TOPIC, value=json.dumps(event), key=key, callback=self.__delivery_report)
+        self.producer.produce(topic=settings.TOPIC_CHAT, value=json.dumps(event), key=key,
+                              callback=self.__delivery_report)
         self.producer.poll(10000)

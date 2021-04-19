@@ -13,7 +13,8 @@ events_producer = EventsProducer()
 @receiver(post_save, sender=Lab)
 def create_lab(instance: Lab, created, **kwargs):
     if created:
-        events_producer.send_upsert_chat_entity(members=[instance.created_by.auth_key], chat_id=instance.chat_id)
+        events_producer.send_upsert_chat_entity(members=[{"user": {"authKey": instance.created_by.auth_key}}],
+                                                lab_id=str(instance.id), chat_id=instance.chat_id, name=instance.name)
         admin_group, _member_group = create_lab_group_admin(instance), create_lab_group_member(instance)
         instance.created_by.groups.add(admin_group)
         LabMember.objects.create(role=LabMemberRoles.OWNER.value, user=instance.created_by, lab=instance, is_admin=True)
