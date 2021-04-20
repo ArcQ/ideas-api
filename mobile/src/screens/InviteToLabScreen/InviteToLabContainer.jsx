@@ -1,10 +1,10 @@
 import { Clipboard } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { mockLab } from '../../utils/mockData';
 import InviteToLab from './InviteToLab';
 
+//TODO this is unused
 function InviteToLabContainer(props) {
   const code = 'a1597';
   const _props = {

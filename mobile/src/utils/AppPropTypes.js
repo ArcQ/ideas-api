@@ -25,6 +25,10 @@ export const MessagePropType = PropTypes.shape({
   chat_id: PropTypes.string,
 });
 
+export const NavigationPropType = PropTypes.object; // eslint-ignore-line
+
+export const StylePropType = PropTypes.object; // eslint-ignore-line
+
 const AppPropTypes = {
   navigation: PropTypes.object,
   route: PropTypes.object,
@@ -43,25 +47,21 @@ const AppPropTypes = {
   listData: PropTypes.arrayOf(objectOfString),
   objectOfString,
   idea: PropTypes.shape({
-    title: PropTypes.String,
-    desc: PropTypes.String,
-    notes: PropTypes.String,
+    title: PropTypes.string,
+    desc: PropTypes.string,
+    notes: PropTypes.string,
     createdBy: UserPropType,
   }),
   formInput: {
-    autoCapitalize: PropTypes.String,
+    autoCapitalize: PropTypes.string,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-    placeholderTextColor: PropTypes.String,
+    placeholderTextColor: PropTypes.string,
     style: StylePropType,
     value: PropTypes.any,
     onChangeText: PropTypes.func,
     onSubmitEditing: PropTypes.func,
   },
 };
-
-export const NavigationPropType = PropTypes.object; // eslint-ignore-line
-
-export const StylePropType = PropTypes.object; // eslint-ignore-line
 
 export default AppPropTypes;

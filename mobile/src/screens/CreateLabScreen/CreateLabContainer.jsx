@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import PropTypes from 'prop-types';
 
+import InvitedUsersModalInput from '../../components/Form/InvitedUsersModalInput';
 import { appSelectors } from '../../store/app/ducks';
 import InvitedUsersDisplay from './components/InvitedUsersDisplay';
 import ModalInput from '../../components/Form/ModalInput';
@@ -78,6 +79,7 @@ function CreateLabContainer(props) {
       placeholder: 'Lemonade Stand Company',
       overrideInput: ModalInput,
       InputComponent: InvitedUsersDisplay,
+      ModalComponent: InvitedUsersModalInput,
       label: 'Invite Users',
       validation: {
         required: false,

@@ -5,17 +5,18 @@ import { Auth } from 'aws-amplify';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import suspenseContextWrapper from '../wrappers/suspenseContextWrapper';
-import { QueryContext } from '../context';
-import DrawerContent from './DrawerContent';
 import {
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
   HOME_ROUTE,
   INVITE_TO_LAB_ROUTE,
   JOIN_LAB_ROUTE,
+  LAB_DETAIL_ROUTE,
   PROFILE_ROUTE,
 } from '../constants/routes';
+import suspenseContextWrapper from '../wrappers/suspenseContextWrapper';
+import { QueryContext } from '../context';
+import DrawerContent from './DrawerContent';
 import AppPropTypes from '../utils/AppPropTypes';
 import { threadActions } from '../store/thread/ducks';
 import { appActions, appSelectors } from '../store/app/ducks';
@@ -63,8 +64,8 @@ function DrawerContentContainer(props) {
     onHomePress: () => {
       props.navigation.navigate(HOME_ROUTE);
     },
-    onInviteToLabPress: () => {
-      props.navigation.navigate(INVITE_TO_LAB_ROUTE);
+    onLabDetailsPress: () => {
+      props.navigation.navigate(LAB_DETAIL_ROUTE);
     },
     onFeatureRequestPress: () => {
       props.navigation.navigate(INVITE_TO_LAB_ROUTE);
@@ -80,6 +81,7 @@ function DrawerContentContainer(props) {
     },
     onLabButtonPress: (labNode) => {
       props.navigation.closeDrawer();
+      console.log(labNode);
       props.setCurrentLab(labNode);
       loadIdeasListQuery(
         { lab_Id: labNode.id },

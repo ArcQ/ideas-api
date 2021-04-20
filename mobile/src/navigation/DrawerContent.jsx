@@ -1,4 +1,4 @@
-import { graphql } from 'react-relay';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import {
   AntDesign,
@@ -7,7 +7,6 @@ import {
   Ionicons,
   Octicons,
 } from '@expo/vector-icons';
-import { Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import AppPropTypes from '../utils/AppPropTypes';
@@ -44,7 +43,11 @@ const style = {
     alignSelf: 'flex-start',
   },
   labsHeader: { width: '100%' },
+  scrollView: {
+    backgroundColor: colors.green,
+  },
   drawerContentContainer: {
+    paddingVertical: 70,
     width: '100%',
     alignItems: 'left',
     backgroundColor: colors.green,
@@ -152,117 +155,118 @@ CreateLabsButton.propTypes = {
 
 function DrawerContent(props) {
   return (
-    <View style={style.drawerContentContainer}>
-      <View style={[style.currentLabSection]}>
-        <Text style={style.drawerTitle}>Current Lab</Text>
-        <DrawerLink
-          logo={<Feather name="home" size={20} color="white" />}
-          onPress={() => {
-            props.onHomePress();
-          }}
-          text="Return to Lab"
-          style={style.labButton}
-        />
-        <DrawerLink
-          logo={<Feather name="edit-2" size={20} color="white" />}
-          onPress={() => {
-            props.onEditLabsPress();
-          }}
-          text="Edit Lab"
-          style={style.labButton}
-        />
-        <DrawerLink
-          logo={
-            <Ionicons
-              name="ios-person-add"
-              size={20}
-              style={{ padding: 2 }}
-              color="white"
-            />
-          }
-          onPress={() => {
-            props.onInviteToLabPress();
-          }}
-          text="Invite to Lab"
-          style={style.labButton}
-        />
-      </View>
-      <View style={style.drawerContentBody}>
-        <View style={[gStyle.flexRowSpace, style.labsHeader]}>
-          <Text style={style.drawerTitle}>Labs</Text>
-          <CreateLabsButton
-            onPress={() => {
-              props.onCreateLabPress();
-            }}
-          />
-        </View>
-        <View style={style.contentSection}>
-          {props.myLabs &&
-            props.myLabs.map((lab) => (
-              <DrawerLink
-                key={lab.node.id}
-                logo={<Entypo name="lab-flask" size={24} color="white" />}
-                id={lab.node.id}
-                onPress={() => {
-                  props.onLabButtonPress(lab.node);
-                }}
-                text={lab.node.name}
-                style={style.labButton}
-              />
-            ))}
+    <ScrollView style={style.scrollView}>
+      <View style={style.drawerContentContainer}>
+        <View style={[style.currentLabSection]}>
+          <Text style={style.drawerTitle}>Current Lab</Text>
           <DrawerLink
-            logo={<Ionicons name="ios-add" size={24} color="white" />}
+            logo={<Feather name="home" size={20} color="white" />}
             onPress={() => {
-              props.onJoinLabsPress();
+              props.onHomePress();
             }}
-            text="Join a New Lab"
+            text="Return to Lab"
+            style={style.labButton}
+          />
+          <DrawerLink
+            logo={<Feather name="edit-2" size={20} color="white" />}
+            onPress={() => {
+              props.onEditLabsPress();
+            }}
+            text="Edit Lab"
+            style={style.labButton}
+          />
+          <DrawerLink
+            logo={
+              <Ionicons
+                size={24}
+                name="ios-information-circle-outline"
+                color="white"
+              />
+            }
+            onPress={() => {
+              props.onLabDetailsPress();
+            }}
+            text="About Lab"
             style={style.labButton}
           />
         </View>
-        <Text style={style.drawerTitle}>Profile</Text>
-        <ProfileButton
-          id="profileLink"
-          onPress={() => {
-            props.onProfilePress();
-          }}
-        />
-        <DrawerLink
-          id="featureLink"
-          logo={
-            <Octicons
-              name="request-changes"
-              size={20}
-              style={{ padding: 2 }}
-              color="white"
+        <View style={style.drawerContentBody}>
+          <View style={[gStyle.flexRowSpace, style.labsHeader]}>
+            <Text style={style.drawerTitle}>Labs</Text>
+            <CreateLabsButton
+              onPress={() => {
+                props.onCreateLabPress();
+              }}
             />
-          }
-          onPress={props.onFeatureRequestPress}
-          text="Feature Requests"
-          style={style.labButton}
-        />
-        <DrawerLink
-          id="logoutLink"
-          logo={
-            <AntDesign
-              name="logout"
-              size={20}
-              style={{ padding: 2 }}
-              color="white"
+          </View>
+          <View style={style.contentSection}>
+            {props.myLabs &&
+              props.myLabs.map((lab) => (
+                <DrawerLink
+                  key={lab.node.id}
+                  logo={<Entypo name="lab-flask" size={24} color="white" />}
+                  id={lab.node.id}
+                  onPress={() => {
+                    props.onLabButtonPress(lab.node);
+                  }}
+                  text={lab.node.name}
+                  style={style.labButton}
+                />
+              ))}
+            <DrawerLink
+              logo={<Ionicons name="ios-add" size={24} color="white" />}
+              onPress={() => {
+                props.onJoinLabsPress();
+              }}
+              text="Join a New Lab"
+              style={style.labButton}
             />
-          }
-          onPress={props.onLogoutPress}
-          text="Logout"
-          style={style.labButton}
-        />
+          </View>
+          <Text style={style.drawerTitle}>Profile</Text>
+          <ProfileButton
+            id="profileLink"
+            onPress={() => {
+              props.onProfilePress();
+            }}
+          />
+          <DrawerLink
+            id="featureLink"
+            logo={
+              <Octicons
+                name="request-changes"
+                size={20}
+                style={{ padding: 2 }}
+                color="white"
+              />
+            }
+            onPress={props.onFeatureRequestPress}
+            text="Feature Requests"
+            style={style.labButton}
+          />
+          <DrawerLink
+            id="logoutLink"
+            logo={
+              <AntDesign
+                name="logout"
+                size={20}
+                style={{ padding: 2 }}
+                color="white"
+              />
+            }
+            onPress={props.onLogoutPress}
+            text="Logout"
+            style={style.labButton}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 DrawerContent.propTypes = {
   myLabs: PropTypes.arrayOf(AppPropTypes.lab),
   onHomePress: PropTypes.func,
-  onInviteToLabPress: PropTypes.func,
+  onLabDetailsPress: PropTypes.func,
   onFeatureRequestPress: PropTypes.func,
   onCreateLabPress: PropTypes.func,
   onJoinLabsPress: PropTypes.func,

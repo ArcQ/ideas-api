@@ -5,19 +5,19 @@ import {
 } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import DrawerContentContainer from './DrawerContentContainer';
+import LabDetailContainer from '../screens/LabDetailScreen/LabDetailContainer';
 import {
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
   HOME_ROUTE,
-  INVITE_TO_LAB_ROUTE,
   JOIN_LAB_ROUTE,
+  LAB_DETAIL_ROUTE,
   PROFILE_ROUTE,
 } from '../constants/routes';
+import DrawerContentContainer from './DrawerContentContainer';
 import ProfileContainer from '../screens/ProfileScreen/ProfileContainer';
 import EditLabContainer from '../screens/EditLabScreen/EditLabContainer';
 import CreateLabContainer from '../screens/CreateLabScreen/CreateLabContainer';
-import InviteToLabContainer from '../screens/InviteToLabScreen/InviteToLabContainer';
 import JoinLabContainer from '../screens/JoinLabScreen/JoinLabContainer';
 import MainStackNavigator from './MainStackNavigator';
 import device from '../constants/device';
@@ -86,9 +86,9 @@ export default function MainDrawerNavigator() {
         options={{ headerShown: false, ...createIdeaTransition }}
       />
       <Drawer.Screen
-        name={INVITE_TO_LAB_ROUTE}
-        title="Invite to Lab"
-        component={InviteToLabContainer}
+        name={LAB_DETAIL_ROUTE}
+        title="Lab Detail"
+        component={LabDetailContainer}
         options={{ headerShown: false, ...createIdeaTransition }}
       />
       <Drawer.Screen

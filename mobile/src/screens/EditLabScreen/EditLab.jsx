@@ -2,8 +2,9 @@ import { SafeAreaView, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import AppPropTypes from '../../utils/AppPropTypes';
+import KfForm from '../../components/Form/KfForm';
 import gStyle from '../../constants/gStyle';
-import SelectList from '../../components/SelectList';
 
 const style = {
   container: {
@@ -16,12 +17,13 @@ export default function EditLab(props) {
     <SafeAreaView>
       <View style={style.container}>
         <Text style={[gStyle.title]} ellipsizeMode="tail">
-          Edit Labs
+          Edit Lab
         </Text>
-        <SelectList
-          placeholder="Search for Labs"
-          items={props.labs}
-          onChangeText={(text) => {}}
+        <KfForm
+          title="Create a Lab"
+          formConfig={props.formConfig}
+          submitMsg="Create"
+          onSubmit={props.onSubmit}
         />
       </View>
     </SafeAreaView>
@@ -29,5 +31,8 @@ export default function EditLab(props) {
 }
 
 EditLab.propTypes = {
+  labs: PropTypes.array,
+  formConfig: AppPropTypes.object,
+  onSubmit: PropTypes.func,
   labs: PropTypes.array,
 };

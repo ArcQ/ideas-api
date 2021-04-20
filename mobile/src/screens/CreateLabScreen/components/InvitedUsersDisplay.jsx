@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 
@@ -57,4 +58,5 @@ export default function InvitedUsersDisplay(props) {
 
 InvitedUsersDisplay.propTypes = {
   value: AppPropTypes.array,
+  onItemPress: PropTypes.func,
 };

@@ -1,11 +1,8 @@
 import { compose } from 'redux';
-import React, { useContext } from 'react';
-import { graphql, usePreloadedQuery } from 'react-relay';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import suspenseContextWrapper from '../../wrappers/suspenseContextWrapper';
-import { QueryContext } from '../../context';
 import { appSelectors } from '../../store/app/ducks';
 import {
   CHAT_ROUTE,

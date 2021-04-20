@@ -10,6 +10,6 @@ export const HOME_BOTTOM_NAVIGATOR_ROUTE = 'HomeBottom';
 export const PROFILE_ROUTE = 'Profile';
 export const CREATE_LAB_ROUTE = 'CreateLab';
 export const EDIT_LAB_ROUTE = 'EditLab';
-export const INVITE_TO_LAB_ROUTE = 'InviteToLab';
+export const LAB_DETAIL_ROUTE = 'LabDetail';
 export const JOIN_LAB_ROUTE = 'JoinLab';
 export const MAIN_IDEAS_LIST_ROUTE = 'MainIdeasListScreen';

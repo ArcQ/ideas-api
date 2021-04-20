@@ -36,6 +36,7 @@ const { initialState, selectors } = createSelectorsAndState(threadNamespace, {
   // these are objects for now, but they really should be sets, it's giving unexpected behaviour in immer
   messageSets: {},
   presences: {},
+  users: {},
 });
 
 export const threadSelectors = {
@@ -88,6 +89,7 @@ const threadReducer = produce((state = initialState, action) => {
       state.isSending = false;
       return state;
     case c.RECEIVE_MESSAGES: {
+      console.log(action.payload.user);
       const { chatId } = action.payload;
       if (!state.messages[chatId]) {
         state.messages[chatId] = initialMessages;
@@ -117,6 +119,15 @@ const threadReducer = produce((state = initialState, action) => {
         action.payload.user,
         state,
       );
+      return state;
+    }
+    case c.SET_CURRENT_LAB: {
+      console.log('action', action);
+      state.users = {
+        ...state.users,
+        // id: action.payload.id,
+        // chatId: action.payload.chatId,
+      };
       return state;
     }
     default:

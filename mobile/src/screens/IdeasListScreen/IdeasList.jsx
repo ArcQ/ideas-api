@@ -3,7 +3,6 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import AppPropTypes from '../../utils/AppPropTypes';
 import { SMALL_HIT_SLOP } from '../../constants/hitSlops';
 import AnimatedHeader from './components/AnimatedHeader';
 import SvgLightBulb from '../../components/icons/Svg.LightBulb';
