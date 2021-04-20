@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 import { useQueryLoader } from 'react-relay';
 import { NavigationContainer } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import SuspenseScreen from './screens/SuspenseScreen/SuspenseScreen';
 import { ideasListQuery } from './screens/IdeasListScreen/components/IdeasListComponent';
 import AppPropTypes from './utils/AppPropTypes';
 import { theme } from './components/Styled';
@@ -15,9 +16,11 @@ import { drawerContentContainerQuery } from './navigation/DrawerContentContainer
 
 function MainDrawerNavigatorWrapper(props) {
   return (
-    <QueryContext.Provider value={props}>
-      <MainDrawerNavigator />
-    </QueryContext.Provider>
+    <Suspense fallback={SuspenseScreen}>
+      <QueryContext.Provider value={props}>
+        <MainDrawerNavigator />
+      </QueryContext.Provider>
+    </Suspense>
   );
 }
 

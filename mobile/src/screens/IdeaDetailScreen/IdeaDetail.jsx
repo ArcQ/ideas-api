@@ -1,8 +1,8 @@
+import React, { memo } from 'react';
 import { useFragment } from 'react-relay';
 import { SafeAreaView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import UserFragment from '../../relay/fragments/UserFragment';
 import IdeaFragment from '../../relay/fragments/IdeaFragment';
@@ -55,7 +55,7 @@ const getStyle = () => ({
   }),
 });
 
-export default function IdeaDetail(props) {
+function IdeaDetail(props) {
   const style = getStyle();
   const insets = useSafeAreaInsets();
   const idea = useFragment(IdeaFragment, props.idea);
@@ -105,3 +105,5 @@ IdeaDetail.propTypes = {
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
 };
+
+export default memo(IdeaDetail);

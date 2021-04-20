@@ -33,6 +33,7 @@ function IdeaDetailContainer(props) {
     { ideaId: props.route.params?.ideaId },
     { fetchPolicy: 'store-or-network' },
   );
+
   const [deleteIdea, isInFlight] = useMutation(deleteIdeaMutation);
   const idea = ideaData?.idea;
   const _props = { idea };

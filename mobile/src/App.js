@@ -3,7 +3,7 @@ import { RelayEnvironmentProvider } from 'react-relay';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { LogBox } from 'react-native';
 import PropTypes from 'prop-types';
-import React, { Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { PersistGate } from 'redux-persist/integration/react';

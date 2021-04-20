@@ -1,5 +1,5 @@
+import React, { useContext, useMemo } from 'react';
 import { graphql, usePreloadedQuery } from 'react-relay';
-import React, { useContext } from 'react';
 import { Animated, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -34,43 +34,62 @@ function IdeasListComponent(props) {
   const { ideasListQueryRef } = useContext(QueryContext);
   const data = usePreloadedQuery(ideasListQuery, ideasListQueryRef);
   const ideaList = data?.myIdeas?.edges;
+  const {
+    offset,
+    isEditable,
+    onSwipeableRightOpen,
+    CustomStatusComponent,
+    ideaItemOnPress,
+    shareIdeaInChat,
+  } = props;
 
-  return (
-    <FlatList
-      ListEmptyComponent={<IdeaListEmptyState />}
-      data={ideaList}
-      keyExtractor={(item) => item.node.__id}
-      style={style.flatList}
-      contentContainerStyle={{
-        paddingTop: 150,
-        paddingBottom: 150,
-        paddingHorizontal: 20,
-      }}
-      showsVerticalScrollIndicator={false}
-      scrollEventThrottle={16}
-      onScroll={Animated.event(
-        [{ nativeEvent: { contentOffset: { y: props.offset } } }],
-        { useNativeDriver: false },
-      )}
-      renderItem={({ item }) =>
-        props.isEditable ? (
-          <SwipeableRow onSwipeableRightOpen={props.onSwipeableRightOpen}>
+  return useMemo(
+    () => (
+      <FlatList
+        ListEmptyComponent={<IdeaListEmptyState />}
+        data={ideaList}
+        keyExtractor={(item) => item.node.__id}
+        style={style.flatList}
+        contentContainerStyle={{
+          paddingTop: 150,
+          paddingBottom: 150,
+          paddingHorizontal: 20,
+        }}
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: offset } } }],
+          { useNativeDriver: false },
+        )}
+        renderItem={({ item }) =>
+          isEditable ? (
+            <SwipeableRow onSwipeableRightOpen={onSwipeableRightOpen}>
+              <IdeaItem
+                item={item.node}
+                CustomStatusComponent={CustomStatusComponent}
+                ideaItemOnPress={() => ideaItemOnPress(item.node.id)}
+                shareIdeaInChat={shareIdeaInChat}
+              />
+            </SwipeableRow>
+          ) : (
             <IdeaItem
+              shareIdeaInChat={shareIdeaInChat}
+              ideaItemOnPress={ideaItemOnPress}
               item={item.node}
-              CustomStatusComponent={props.CustomStatusComponent}
-              ideaItemOnPress={() => props.ideaItemOnPress(item.node.id)}
-              shareIdeaInChat={props.shareIdeaInChat}
             />
-          </SwipeableRow>
-        ) : (
-          <IdeaItem
-            shareIdeaInChat={props.shareIdeaInChat}
-            ideaItemOnPress={props.ideaItemOnPress}
-            item={item.node}
-          />
-        )
-      }
-    />
+          )
+        }
+      />
+    ),
+    [
+      ideaList,
+      offset,
+      isEditable,
+      onSwipeableRightOpen,
+      CustomStatusComponent,
+      ideaItemOnPress,
+      shareIdeaInChat,
+    ],
   );
 }
 

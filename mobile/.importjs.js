@@ -16,6 +16,7 @@ module.exports = {
       'all',
     ],
     react: [
+      'memo',
       'Suspense',
       'useState',
       'useEffect',

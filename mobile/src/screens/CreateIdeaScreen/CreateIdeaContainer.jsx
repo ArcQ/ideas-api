@@ -50,9 +50,7 @@ function CreateIdeaContainer(props) {
     },
   };
 
-  const [createIdea, { loading }] = useMutation(createIdeaMutation, {
-    onCompleted: ({ idea }) => {},
-  });
+  const [createIdea, { loading }] = useMutation(createIdeaMutation);
 
   const methods = {
     exit() {
@@ -60,6 +58,7 @@ function CreateIdeaContainer(props) {
       props.navigation.goBack();
     },
     onSubmit: (data) => {
+      console.log(createIdea);
       createIdea({
         variables: {
           input: {
@@ -68,6 +67,10 @@ function CreateIdeaContainer(props) {
             labId: props.currentLab.id,
           },
         },
+        onCompleted(data) {
+          props.navigation.goBack();
+        },
+        onError(error) {},
       });
     },
   };

@@ -1,5 +1,5 @@
+import React, { memo } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
 import {
   AntDesign,
   Entypo,
@@ -276,4 +276,4 @@ DrawerContent.propTypes = {
   onLogoutPress: PropTypes.func,
 };
 
-export default DrawerContent;
+export default memo(DrawerContent);
