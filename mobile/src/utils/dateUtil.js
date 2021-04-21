@@ -14,4 +14,5 @@ export const getFromNow = (dateString) =>
 export const getFormattedDate = (dateString) =>
   dayjs(dateString).format('dddd, MMMM D, YYYY h:mm');
 
-export const isSameDay = (date1, date2) => dayjs(date1).diff(date2, 'day');
+export const isSameDay = (date1, date2) =>
+  dayjs(date1).diff(date2, 'day') === 0;

@@ -1,5 +1,6 @@
 import produce from 'immer';
 
+import { appConstants } from '../app/ducks';
 import {
   createConstantsAndActions,
   createSelectorsAndState,
@@ -53,14 +54,15 @@ const transformMessageResToMessage = ({ messageRes, user }) => ({
   text: messageRes?.text,
   createdAt: messageRes?.inserted_at,
   user: {
-    _id: messageRes?.user_id,
+    _id: user?.authKey,
     name: user?.username,
     avatar: user?.imageUrl,
   },
 });
 
-const pushMessageIfNotFound = (chatId, messageRes, user, state) => {
+const pushMessageIfNotFound = (chatId, messageRes, state) => {
   if (!state.messageSets[chatId][messageRes.id]) {
+    const user = state.users?.[messageRes.user_auth_key];
     state.messageSets[chatId][messageRes.id] = true;
     const message = transformMessageResToMessage({
       messageRes,
@@ -89,7 +91,6 @@ const threadReducer = produce((state = initialState, action) => {
       state.isSending = false;
       return state;
     case c.RECEIVE_MESSAGES: {
-      console.log(action.payload.user);
       const { chatId } = action.payload;
       if (!state.messages[chatId]) {
         state.messages[chatId] = initialMessages;
@@ -98,7 +99,7 @@ const threadReducer = produce((state = initialState, action) => {
         state.messageSets[chatId] = {};
       }
       action.payload.messages.forEach((messageRes) =>
-        pushMessageIfNotFound(chatId, messageRes, action.payload.user, state),
+        pushMessageIfNotFound(chatId, messageRes, state),
       );
       return state;
     }
@@ -113,21 +114,17 @@ const threadReducer = produce((state = initialState, action) => {
         state.messageSets[chatId] = {};
       }
 
-      pushMessageIfNotFound(
-        chatId,
-        action.payload.message,
-        action.payload.user,
-        state,
-      );
+      pushMessageIfNotFound(chatId, action.payload.message, state);
       return state;
     }
-    case c.SET_CURRENT_LAB: {
-      console.log('action', action);
-      state.users = {
-        ...state.users,
-        // id: action.payload.id,
-        // chatId: action.payload.chatId,
-      };
+    case appConstants.SET_CURRENT_LAB: {
+      state.users = action.payload.labmemberSet.edges.reduce(
+        (users, edge) => ({
+          ...users,
+          [edge.node.user.authKey]: edge.node.user,
+        }),
+        state.users,
+      );
       return state;
     }
     default:

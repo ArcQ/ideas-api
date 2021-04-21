@@ -58,7 +58,6 @@ function CreateIdeaContainer(props) {
       props.navigation.goBack();
     },
     onSubmit: (data) => {
-      console.log(createIdea);
       createIdea({
         variables: {
           input: {

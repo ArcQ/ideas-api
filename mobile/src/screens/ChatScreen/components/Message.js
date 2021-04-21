@@ -71,6 +71,8 @@ class Message extends React.Component {
     }
 
     const avatarProps = this.getInnerComponentProps();
+    console.log(currentMessage);
+    console.log(previousMessage);
     return (
       <Avatar
         {...avatarProps}

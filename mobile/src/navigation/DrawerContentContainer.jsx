@@ -39,7 +39,10 @@ export const drawerContentContainerQuery = graphql`
             edges {
               node {
                 user {
+                  id
                   username
+                  imageUrl
+                  authKey
                 }
               }
             }
@@ -81,7 +84,6 @@ function DrawerContentContainer(props) {
     },
     onLabButtonPress: (labNode) => {
       props.navigation.closeDrawer();
-      console.log(labNode);
       props.setCurrentLab(labNode);
       loadIdeasListQuery(
         { lab_Id: labNode.id },

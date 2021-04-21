@@ -26,7 +26,6 @@ export default function ModalInput(props) {
       <TouchableOpacity
         hitSlop={MINI_HIT_SLOP}
         onPress={() => {
-          console.log('hi');
           setIsShowModal(!isShowModal);
         }}
         style={style.itemText}

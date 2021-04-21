@@ -132,7 +132,6 @@ class MessageBubble extends React.Component {
 
   render() {
     const { currentMessage, previousMessage, touchableProps } = this.props;
-
     const isSameThread =
       isSameUser(currentMessage, previousMessage) &&
       isSameDay(currentMessage, previousMessage);

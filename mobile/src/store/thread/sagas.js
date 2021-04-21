@@ -1,4 +1,4 @@
-// import { PURGE } from 'redux-persist';
+import { PURGE } from 'redux-persist';
 import {
   all,
   call,
@@ -195,7 +195,6 @@ export default function* threadSaga() {
   //   key: 'reduxState', // Whatever you chose for the "key" value when initialising redux-persist in the **persistCombineReducers** method - e.g. "root"
   //   result: () => null, // Func expected on the submitted action.
   // });
-  yield fork(catchUpMessagesForBase);
   yield fork(catchUpMessagesForBase);
   yield startChannel();
 }
