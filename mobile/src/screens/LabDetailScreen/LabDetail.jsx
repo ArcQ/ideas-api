@@ -1,8 +1,11 @@
+import { connect } from 'react-redux';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import PropTypes from 'prop-types';
 import React from 'react';
 
+import PostDetails from '../IdeaDetailScreen/components/PostDetails';
+import Loader from '../../components/Loader';
+import { appSelectors } from '../../store/app/ducks';
 import Button from '../../components/buttons/Button';
 import AppPropTypes from '../../utils/AppPropTypes';
 import { MINI_HIT_SLOP } from '../../constants/hitSlops';
@@ -10,69 +13,96 @@ import colors from '../../constants/colors';
 import gStyle from '../../constants/gStyle';
 
 const getStyle = () => ({
-  copiedText: {},
-  code: {
-    ...gStyle.thinEmphasis,
-    ...gStyle.grayBorder,
-    flex: 'none',
-    padding: 10,
-    borderRadius: 15,
-  },
-  codeContainer: {
-    ...gStyle.flexCenter,
-    flex: 'none',
-    padding: 10,
-  },
-  codeSection: {
-    marginBottom: 10,
-    marginTop: 30,
+  title: {
+    fontWeight: '500',
+    marginTop: 50,
+    marginBottom: 20,
+    fontSize: 30,
   },
   desc: {
-    marginTop: 20,
-    marginHorizontal: 30,
+    ...gStyle.textThin,
+    paddingBottom: 10,
   },
-  toast: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    flex: 'none',
+  notes: {
+    ...gStyle.textThin,
+    paddingBottom: 10,
   },
-  toastText: {
-    color: colors.white,
-    display: 'inline-block',
-    padding: 10,
+  listItem: {
+    overflow: 'hidden',
+    borderRadius: 20,
+    paddingRight: 0,
+    marginTop: 14,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: colors.black10,
   },
+  subHeader: {
+    ...gStyle.subHeader,
+  },
+  itemText: {
+    flex: 1,
+    paddingVertical: 16,
+    paddingLeft: 16,
+    paddingRight: 8,
+  },
+  closeButton: ({ topInset }) => ({
+    position: 'absolute',
+    right: 10,
+    top: 10 + topInset,
+    zIndex: 100,
+  }),
 });
 
-export default function LabDetail(props) {
+function LabDetail(props) {
   const style = getStyle();
 
   return (
     <SafeAreaView>
       <View style={gStyle.containerPadding}>
-        <Text style={gStyle.title}>Invite to lab</Text>
-        <View style={[gStyle.flexRowCenter, style.codeSection]}>
-          <View style={style.codeContainer}>
-            <Text style={style.code}>{props.code}</Text>
+        {props.lab ? (
+          <View>
+            <Text
+              style={style.subHeader}
+              numberOfLines={4}
+              ellipsizeMode="tail"
+            >
+              Image
+            </Text>
+            <Text style={style.title} ellipsizeMode="tail">
+              {props.lab.name}
+            </Text>
+            <Text style={style.subHeader}>Description</Text>
+            <Text
+              style={style.subHeader}
+              numberOfLines={4}
+              ellipsizeMode="tail"
+            >
+              Created by
+            </Text>
+            <Text
+              style={style.subHeader}
+              numberOfLines={4}
+              ellipsizeMode="tail"
+            >
+              Users
+            </Text>
           </View>
-          <TouchableOpacity
-            hitSlop={MINI_HIT_SLOP}
-            onPress={props.copyToClipboard}
-            style={style.copyButton}
-          >
-            <FontAwesome5 name="copy" size={20} color={colors.green} />
-          </TouchableOpacity>
-        </View>
-        <Text style={style.desc}>
-          Send this code to your teammates. They can use this code to find your
-          lab.
-        </Text>
-        <Button>Test</Button>
+        ) : (
+          <Loader />
+        )}
       </View>
     </SafeAreaView>
   );
 }
 
 LabDetail.propTypes = {
-  code: PropTypes.string,
   lab: AppPropTypes.lab,
-  copyToClipboard: PropTypes.func,
 };
+
+const mapStateToProps = (state) => ({
+  user: appSelectors.user(state),
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LabDetail);

@@ -207,7 +207,7 @@ const style = {
     marginTop: device.android ? -2 : 0,
   },
   usernameText: {
-    ...gStyle.textLarsBold14,
+    ...gStyle.textBold,
     color: colors.blueBlack,
     marginRight: 8,
   },

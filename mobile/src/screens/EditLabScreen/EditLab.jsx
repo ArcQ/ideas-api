@@ -20,7 +20,7 @@ export default function EditLab(props) {
           Edit Lab
         </Text>
         <KfForm
-          title="Create a Lab"
+          title="Edit Lab"
           formConfig={props.formConfig}
           submitMsg="Create"
           onSubmit={props.onSubmit}
