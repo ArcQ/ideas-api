@@ -1,7 +1,7 @@
 import { graphql } from 'react-relay';
 
 export default graphql`
-  mutation UpsertLabMutation($input: IdeaMutationInput!) {
+  mutation upsertLabMutation($input: IdeaMutationInput!) {
     idea(input: $input) {
       title
       desc

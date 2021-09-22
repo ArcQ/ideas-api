@@ -85,6 +85,7 @@ function DrawerContentContainer(props) {
     onLabButtonPress: (labNode) => {
       props.navigation.closeDrawer();
       props.setCurrentLab(labNode);
+      props.navigation.navigate(HOME_ROUTE);
       loadIdeasListQuery(
         { lab_Id: labNode.id },
         { fetchPolicy: 'store-and-network' },

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { appActions, appSelectors } from '../../store/app/ducks';
 import { threadActions } from '../../store/thread/ducks';
-import upsertLabMutation from '../../relay/mutations/upsertLabMutation';
+import upsertLabMutation from '../../relay/mutations/upsertLab';
 import { QueryContext } from '../../context';
 import { drawerContentContainerQuery } from '../../navigation/DrawerContentContainer';
 import LabDetail from './LabDetail';
