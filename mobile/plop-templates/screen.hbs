@@ -2,9 +2,18 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const style = {};
+const getStyle = () => {
+  cont style = {
+    container: {flex: 1}
+  };
+  if (Platform.OS === 'web') {
+    style.container.maxWidth = '80rem';
+  }
+  .
+};
 
 export default function {{name}}(props) {
+  const style = getStyle();
   return (<View />);
 }
 

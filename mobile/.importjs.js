@@ -28,6 +28,7 @@ module.exports = {
       'useImperativeMethods',
       'useLayoutEffect',
     ],
+    'react-native': ['Platform', 'StatusBar', 'Dimensions'],
     // 'react-relay': [
     //   'RelayEnvironmentProvider',
     //   'useEffect',

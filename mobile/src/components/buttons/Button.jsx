@@ -65,14 +65,24 @@ export default function Button(props) {
   return (
     <TouchableOpacity
       hitSlop={SMALL_HIT_SLOP}
-      style={[buttonStyle[props.type], props.buttonStyle]}
+      style={
+        props.customStyleOnly
+          ? props.style
+          : [buttonStyle[props.type], props.style]
+      }
       onPress={props.onPress}
       activeOpacity={props.type === 'ghost' ? 0.3 : 0.7}
     >
       {!props.isLoading ? (
         <>
           {Icon && <Icon {...iconStyle[props.type]} />}
-          <Text style={[buttonTextStyle[props.type], props.buttonTextStyle]}>
+          <Text
+            style={
+              props.customTextStyleOnly
+                ? props.textStyle
+                : [buttonTextStyle[props.type], props.textStyle]
+            }
+          >
             {props.children}
           </Text>
         </>
@@ -86,9 +96,12 @@ export default function Button(props) {
 Button.propTypes = {
   type: PropTypes.string,
   isLoading: PropTypes.bool,
+  customStyleOnly: PropTypes.bool,
+  customTextStyleOnly: PropTypes.bool,
   children: PropTypes.node,
-  buttonStyle: StylePropType,
-  buttonTextStyle: StylePropType,
+  style: StylePropType,
+  textStyle: StylePropType,
+  text: StylePropType,
   Icon: PropTypes.func,
   onPress: PropTypes.func,
 };

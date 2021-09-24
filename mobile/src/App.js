@@ -1,7 +1,7 @@
+import { LogBox, Platform } from 'react-native';
 import { Provider } from 'react-redux';
 import { RelayEnvironmentProvider } from 'react-relay';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
-import { LogBox } from 'react-native';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
@@ -20,10 +20,12 @@ import apiService from './services/api/apiService';
 import awsService from './services/aws/awsService';
 import getStore from './store/store';
 
-LogBox.ignoreLogs([
-  'No current user',
-  'Warning: Functions are not valid as a React child.',
-]);
+if (Platform.OS !== 'web') {
+  LogBox.ignoreLogs([
+    'No current user',
+    'Warning: Functions are not valid as a React child.',
+  ]);
+}
 enableScreens();
 
 awsService.init();
