@@ -74,7 +74,7 @@ class LabMember(GenericModel):
     role = models.CharField(max_length=255)
     user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     lab = models.ForeignKey(Lab, null=False, on_delete=models.CASCADE)
-    is_admin = models.BooleanField(null=True)
+    is_lab_admin = models.BooleanField(null=True)
 
 
 class Idea(GenericModel):

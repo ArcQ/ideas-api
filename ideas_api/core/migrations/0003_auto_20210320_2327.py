@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='labmember',
-            name='is_admin',
+            name='is_lab_admin',
             field=models.BooleanField(null=True),
         ),
         migrations.AlterField(

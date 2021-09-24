@@ -1,9 +1,11 @@
+import uuid
+
 from django.contrib.auth.models import Group
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import post_save, pre_delete, pre_save
 from django.dispatch import receiver
 
 from chat.EventProducer import EventsProducer
-from core.models import Lab, LabJoin, LabMember, LabMemberRoles, LabJoinStatus
+from core.models import Lab, LabJoin, LabMember, LabMemberRoles, LabJoinStatus, User
 from core.permissions import PermissionResource, create_lab_group_admin, \
     create_lab_group_member, build_group_string, Role, delete_lab_group_admin, delete_lab_group_member
 
@@ -35,4 +37,11 @@ def create_lab_join(instance: LabJoin, created, **kwargs):
         member_group = Group.objects.get(name=build_group_string(PermissionResource.LAB, Role.MEMBER, instance.id))
         instance.created_by.groups.add(member_group)
         LabMember.objects.create(role=LabMemberRoles.OWNER.value, user=instance.created_by, lab=instance.lab,
-                                 is_admin=True)
+                                 is_lab_admin=True)
+
+
+#for django admin user
+@receiver(pre_save, sender=User)
+def create_admin_user(instance: User, **kwargs):
+    if instance.is_superuser is True:
+         instance.auth_key = uuid.uuid4()
