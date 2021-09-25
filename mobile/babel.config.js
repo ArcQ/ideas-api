@@ -19,6 +19,7 @@ module.exports = function (api) {
             'awsconfig.json': './src/awsconfig.json',
             'config.json': './src/config.json',
             'config.production.json': './src/config.production.json',
+            phoenix: './node_modules/phoenix/priv/static/phoenix.esm.js',
           },
         },
       ],

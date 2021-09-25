@@ -201,18 +201,21 @@ function DrawerContent(props) {
           </View>
           <View style={style.contentSection}>
             {props.myLabs &&
-              props.myLabs.map((lab) => (
-                <DrawerLink
-                  key={lab.node.id}
-                  logo={<Entypo name="lab-flask" size={24} color="white" />}
-                  id={lab.node.id}
-                  onPress={() => {
-                    props.onLabButtonPress(lab.node);
-                  }}
-                  text={lab.node.name}
-                  style={style.labButton}
-                />
-              ))}
+              props.myLabs.map(
+                (lab) =>
+                  lab.node && (
+                    <DrawerLink
+                      key={lab.node.id}
+                      logo={<Entypo name="lab-flask" size={24} color="white" />}
+                      id={lab.node.id}
+                      onPress={() => {
+                        props.onLabButtonPress(lab.node);
+                      }}
+                      text={lab.node.name}
+                      style={style.labButton}
+                    />
+                  ),
+              )}
             <DrawerLink
               logo={<Ionicons name="ios-add" size={24} color="white" />}
               onPress={() => {

@@ -15,38 +15,9 @@ import colors from '../../constants/colors';
 import LandingOnboardingLayout from './components/LandingOnboardingLayout';
 
 const style = {
-  button: {
-    backgroundColor: colors.black20,
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    ...gStyle.flexCenter,
-  },
-  nextButton: {
-    paddingRight: 40,
-    marginRight: -60,
-  },
-  prevButton: {
-    paddingLeft: 40,
-    marginLeft: -60,
-  },
-  actionContainer: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
-    margin: 20,
-    marginBottom: 40,
-  },
   teamBackgroundImage: (marginLeft) => ({
     marginLeft,
     top: 40,
-    position: 'absolute',
-    zIndex: -1,
-  }),
-  singleBackgroundImage: (marginLeft, height) => ({
-    marginLeft,
-    top: -100,
     position: 'absolute',
     zIndex: -1,
   }),
@@ -54,28 +25,6 @@ const style = {
     marginTop: 15,
     marginBottom: 10,
     backgroundColor: colors.black40,
-  },
-  continueButton: {
-    marginTop: 20,
-    marginBottom: 30,
-    backgroundColor: colors.black40,
-  },
-};
-
-const iconSize = 30;
-
-const pulse = {
-  0: {
-    opacity: 0.9,
-    scale: 0.9,
-  },
-  0.5: {
-    opacity: 1,
-    scale: 1.2,
-  },
-  1: {
-    opacity: 0.9,
-    scale: 0.9,
   },
 };
 
