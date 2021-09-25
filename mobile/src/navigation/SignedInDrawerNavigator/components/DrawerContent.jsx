@@ -9,10 +9,10 @@ import {
 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
-import AppPropTypes from '../utils/AppPropTypes';
-import { MINI_HIT_SLOP, SMALL_HIT_SLOP } from '../constants/hitSlops';
-import gStyle from '../constants/gStyle';
-import colors from '../constants/colors';
+import AppPropTypes from '../../../utils/AppPropTypes';
+import { MINI_HIT_SLOP, SMALL_HIT_SLOP } from '../../../constants/hitSlops';
+import gStyle from '../../../constants/gStyle';
+import colors from '../../../constants/colors';
 
 const style = {
   currentLabSection: {

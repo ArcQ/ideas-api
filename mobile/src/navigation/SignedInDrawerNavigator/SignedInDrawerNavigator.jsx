@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import LabDetailContainer from '../screens/LabDetailScreen/LabDetailContainer';
+import LabDetailContainer from '../../screens/LabDetailScreen/LabDetailContainer';
 import {
   CREATE_LAB_ROUTE,
   EDIT_LAB_ROUTE,
@@ -13,15 +13,15 @@ import {
   JOIN_LAB_ROUTE,
   LAB_DETAIL_ROUTE,
   PROFILE_ROUTE,
-} from '../constants/routes';
-import DrawerContentContainer from './DrawerContentContainer';
-import ProfileContainer from '../screens/ProfileScreen/ProfileContainer';
-import EditLabContainer from '../screens/EditLabScreen/EditLabContainer';
-import CreateLabContainer from '../screens/CreateLabScreen/CreateLabContainer';
-import JoinLabContainer from '../screens/JoinLabScreen/JoinLabContainer';
-import MainStackNavigator from './MainStackNavigator';
-import device from '../constants/device';
-import colors from '../constants/colors';
+} from '../../constants/routes';
+import DrawerContentContainer from './components/DrawerContentContainer';
+import ProfileContainer from '../../screens/ProfileScreen/ProfileContainer';
+import EditLabContainer from '../../screens/EditLabScreen/EditLabContainer';
+import CreateLabContainer from '../../screens/CreateLabScreen/CreateLabContainer';
+import JoinLabContainer from '../../screens/JoinLabScreen/JoinLabContainer';
+import MainStackNavigator from './MainStackNavigator/MainStackNavigator';
+import device from '../../constants/device';
+import colors from '../../constants/colors';
 
 const Drawer = createDrawerNavigator();
 

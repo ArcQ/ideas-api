@@ -33,7 +33,7 @@ const AppPropTypes = {
   navigation: PropTypes.object,
   route: PropTypes.object,
   queryRef: PropTypes.object,
-  style: PropTypes.object,
+  style: StylePropType,
   errors: PropTypes.object,
   items: PropTypes.arrayOf(
     PropTypes.shape({
@@ -64,7 +64,7 @@ const AppPropTypes = {
   },
   buttonWrapper: {
     onPress: PropTypes.func,
-    style: AppPropTypes.style,
+    style: StylePropType,
     children: PropTypes.node,
   },
 };

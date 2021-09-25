@@ -13,13 +13,13 @@ import {
   JOIN_LAB_ROUTE,
   LAB_DETAIL_ROUTE,
   PROFILE_ROUTE,
-} from '../constants/routes';
-import suspenseContextWrapper from '../wrappers/suspenseContextWrapper';
-import { QueryContext } from '../context';
+} from '../../../constants/routes';
+import suspenseContextWrapper from '../../../wrappers/suspenseContextWrapper';
+import { QueryContext } from '../../../context';
 import DrawerContent from './DrawerContent';
-import AppPropTypes from '../utils/AppPropTypes';
-import { threadActions } from '../store/thread/ducks';
-import { appActions, appSelectors } from '../store/app/ducks';
+import AppPropTypes from '../../../utils/AppPropTypes';
+import { threadActions } from '../../../store/thread/ducks';
+import { appActions, appSelectors } from '../../../store/app/ducks';
 
 export const drawerContentContainerQuery = graphql`
   query DrawerContentContainerQuery {

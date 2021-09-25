@@ -16,7 +16,7 @@
     "lint": "prettier --write '{src,test}/**/*.{js,jsx}' && eslint ./src",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
+    "web": "WEB_PORT=3000 expo start --web",
     "eject": "expo eject",
     "storybook": "start-storybook --ci",
     "prestorybook": "rnstl --searchDir ./src --pattern \"**/*.stories.jsx\" --outputFile ./storybook/storyLoader.js",

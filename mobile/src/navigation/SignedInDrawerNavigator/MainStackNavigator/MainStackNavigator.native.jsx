@@ -8,13 +8,13 @@ import {
   NOTIFICATIONS_ROUTE,
   CHAT_ACTIONS_ROUTE,
   IDEA_DETAIL_ROUTE,
-} from '../constants/routes';
-import CreateIdeaContainer from '../screens/CreateIdeaScreen/CreateIdeaContainer';
-import ChatContainer from '../screens/ChatScreen/ChatContainer';
-import IdeasListContainer from '../screens/IdeasListScreen/IdeasListContainer';
-import Notifications from '../screens/NotificationsScreen';
-import IdeaDetailContainer from '../screens/IdeaDetailScreen/IdeaDetailContainer';
-import ChatActions from '../screens/ChatActionsScreen/ChatActions';
+} from '../../../constants/routes';
+import CreateIdeaContainer from '../../../screens/CreateIdeaScreen/CreateIdeaContainer';
+import ChatContainer from '../../../screens/ChatScreen/ChatContainer';
+import IdeasListContainer from '../../../screens/IdeasListScreen/IdeasListContainer';
+import Notifications from '../../../screens/NotificationsScreen';
+import IdeaDetailContainer from '../../../screens/IdeaDetailScreen/IdeaDetailContainer';
+import ChatActions from '../../../screens/ChatActionsScreen/ChatActions';
 
 const Stack = createNativeStackNavigator();
 
