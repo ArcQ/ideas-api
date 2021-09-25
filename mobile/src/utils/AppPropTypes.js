@@ -62,6 +62,11 @@ const AppPropTypes = {
     onChangeText: PropTypes.func,
     onSubmitEditing: PropTypes.func,
   },
+  buttonWrapper: {
+    onPress: PropTypes.func,
+    style: AppPropTypes.style,
+    children: PropTypes.node,
+  },
 };
 
 export default AppPropTypes;

@@ -1,7 +1,7 @@
 import { compose } from 'redux';
 import React, { useContext } from 'react';
 import { graphql, usePreloadedQuery } from 'react-relay';
-import { Auth } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 

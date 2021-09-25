@@ -1,7 +1,7 @@
 /* @module */
 import { delay, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { Auth } from 'aws-amplify';
+import Auth from '@aws-amplify/auth';
 
 import { ApiException } from '../../utils/exceptions';
 import { errorActions } from '../../store/error/ducks';

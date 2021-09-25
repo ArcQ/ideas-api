@@ -7,7 +7,7 @@ import {
   take,
   takeEvery,
 } from 'redux-saga/effects';
-import { Auth } from 'aws-amplify';
+import Auth from '@aws-amplify/auth';
 import { eventChannel as EventChannel } from 'redux-saga';
 import { Connection } from '@knotfive/chatpi-client-js/dist/chatpi-client.module'; // eslint-ignore-line
 

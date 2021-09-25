@@ -1,4 +1,4 @@
-import { Authenticator } from '@knotfive/aws-amplify-react-native';
+import { Authenticator } from '@knotfive/aws-amplify-react-native/dist/Auth/Authenticator';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SignIn from '@knotfive/aws-amplify-react-native/dist/Auth/SignIn';
@@ -15,9 +15,8 @@ import AmplifyTheme from '../../constants/AmplifyTheme';
 
 const defaultSignInValues = envService.getDefaultValues('signIn');
 const defaultSignUpValues = envService.getDefaultValues('signUp');
-const defaultForgotPasswordValues = envService.getDefaultValues(
-  'forgotPassword',
-);
+const defaultForgotPasswordValues =
+  envService.getDefaultValues('forgotPassword');
 
 const signUpFields = [
   {

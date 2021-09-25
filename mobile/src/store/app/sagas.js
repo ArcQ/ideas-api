@@ -1,4 +1,5 @@
-import { Auth, Hub } from 'aws-amplify';
+import { Hub } from '@aws-amplify/core';
+import Auth from '@aws-amplify/auth';
 import { fork, put, takeEvery } from 'redux-saga/effects';
 import { eventChannel as EventChannel } from 'redux-saga';
 

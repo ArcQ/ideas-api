@@ -14,12 +14,19 @@ module.exports = {
   },
   globals: {},
   settings: {
-    // 'import/resolver': {
-    //   node: {
-    //     extensions: ['', '.js', '.jsx'],
-    //     paths: [path.join(__dirname, './src')],
-    //   },
-    // },
+    'import/resolver': {
+      node: {
+        extensions: [
+          '.js',
+          '.jsx',
+          '.android.js',
+          '.ios.js',
+          '.web.js',
+          '.native.js',
+        ],
+        // paths: [path.join(__dirname, './src')],
+      },
+    },
   },
   rules: {
     'prettier/prettier': 'error',

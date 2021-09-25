@@ -1,4 +1,4 @@
-import { Auth } from 'aws-amplify';
+import Auth from '@aws-amplify/auth';
 import { take, all, fork, cancel } from 'redux-saga/effects';
 
 import envService from '../services/env/envService';
