@@ -1,7 +1,7 @@
 import { Avatar, utils } from 'react-native-gifted-chat';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes } from 'react-native';
+import { View } from 'react-native';
 
 import CustomDay from './CustomGiftedChatComposer/CustomDay';
 import colors from '../../../constants/colors';
@@ -113,8 +113,8 @@ Message.defaultProps = {
 Message.propTypes = {
   currentMessage: PropTypes.object,
   containerStyle: PropTypes.shape({
-    left: ViewPropTypes.style,
-    right: ViewPropTypes.style,
+    left: PropTypes.number,
+    right: PropTypes.number,
   }),
   nextMessage: PropTypes.object,
   previousMessage: PropTypes.object,

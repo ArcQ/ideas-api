@@ -11,10 +11,10 @@ const Stack = createStackNavigator();
 export default function AuthStack() {
   return (
     <Stack.Navigator
-      headerMode="none"
       initialRouteName="Landing"
       screenOptions={{
         headerBackTitleVisible: false,
+        headerShown: false,
       }}
       transitionConfig={ModalRoutes}
     >

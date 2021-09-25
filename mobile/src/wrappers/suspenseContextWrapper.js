@@ -8,7 +8,7 @@ export default function suspenseContextWrapper(contextField) {
   return (Component) => (props) => {
     const contextFields = useContext(QueryContext);
     return (
-      <Suspense fallback={SuspenseScreen}>
+      <Suspense fallback={<SuspenseScreen />}>
         {contextFields[contextField] ? <Component {...props} /> : null}
       </Suspense>
     );
