@@ -33,3 +33,5 @@ function SelectUserItem(props) {
 SelectUserItem.propTypes = {
   item: AppPropTypes.user,
 };
+
+export default SelectUserItem;

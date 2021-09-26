@@ -60,7 +60,7 @@ const createIdeaTransition = {
   }),
 };
 
-export default function MainDrawerNavigator() {
+export default function SignedInDrawerNavigator() {
   return (
     <Drawer.Navigator
       drawerContent={(_props) => <DrawerContentContainer {..._props} />}
@@ -113,4 +113,4 @@ export default function MainDrawerNavigator() {
   );
 }
 
-MainDrawerNavigator.propTypes = {};
+SignedInDrawerNavigator.propTypes = {};

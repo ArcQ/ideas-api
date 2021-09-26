@@ -66,6 +66,8 @@ const AppPropTypes = {
     onPress: PropTypes.func,
     style: StylePropType,
     children: PropTypes.node,
+    activeOpacity: PropTypes.number,
+    isLink: PropTypes.bool,
   },
 };
 

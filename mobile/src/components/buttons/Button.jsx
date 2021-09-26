@@ -66,7 +66,7 @@ export default function Button(props) {
     <TouchableOpacity
       hitSlop={SMALL_HIT_SLOP}
       style={
-        props.customStyleOnly
+        props.isCustomStyleOnly
           ? props.style
           : [buttonStyle[props.type], props.style]
       }
@@ -96,7 +96,8 @@ export default function Button(props) {
 Button.propTypes = {
   type: PropTypes.string,
   isLoading: PropTypes.bool,
-  customStyleOnly: PropTypes.bool,
+  isNavigate: PropTypes.bool,
+  isCustomStyleOnly: PropTypes.bool,
   customTextStyleOnly: PropTypes.bool,
   children: PropTypes.node,
   style: StylePropType,
@@ -108,4 +109,5 @@ Button.propTypes = {
 
 Button.defaultProps = {
   type: 'filled',
+  isNavigate: false,
 };

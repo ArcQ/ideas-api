@@ -10,6 +10,7 @@ export default function ButtonWrapper(props) {
       hitSlop={MINI_HIT_SLOP}
       onPress={props.onPress}
       style={props.style}
+      activeOpacity={props.activeOpacity}
     >
       {props.children}
     </TouchableOpacity>

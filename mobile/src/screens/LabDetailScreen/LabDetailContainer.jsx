@@ -3,11 +3,11 @@ import { useMutation, usePreloadedQuery } from 'react-relay';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import { drawerContentContainerQuery } from '../../navigation/SignedInDrawerNavigator/components/DrawerContentContainer';
 import { appActions, appSelectors } from '../../store/app/ducks';
 import { threadActions } from '../../store/thread/ducks';
 import upsertLabMutation from '../../relay/mutations/upsertLab';
 import { QueryContext } from '../../context';
-import { drawerContentContainerQuery } from '../../navigation/DrawerContentContainer';
 import LabDetail from './LabDetail';
 
 function LabDetailContainer(props) {
